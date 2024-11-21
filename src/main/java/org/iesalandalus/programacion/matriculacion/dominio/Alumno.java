@@ -25,6 +25,7 @@ public class Alumno {
     this.fechaNacimiento=getFechaNacimiento();
     this.nia=getNia();
   }
+  //metodo para eliminar los espacios en blanco
   private void formateaNombre(){
   String nombreNormalizado=nombre.replaceAll("\\s+", " ");
   }
