@@ -18,12 +18,12 @@ public class Alumno {
   private String nia;
 
   public Alumno(){
-    this.nombre=getNombre();
-    this.telefono=getTelefono();
-    this.correo=getCorreo();
-    this.dni=getDni();
-    this.fechaNacimiento=getFechaNacimiento();
-    this.nia=getNia();
+    setNombre(nombre);
+    setTelefono(telefono);
+    setCorreo(correo);
+    setDni(dni);
+    setFechaNacimiento(fechaNacimiento);
+    setNia(nia);
   }
   //metodo para eliminar los espacios en blanco
   private void formateaNombre(){
@@ -32,50 +32,62 @@ public class Alumno {
 
 
   public String getNia() {
+
     return nia;
   }
 
   public void setNia(String nia) {
+
     this.nia = nia;
   }
 
   public String getNombre() {
+
     return nombre;
   }
 
   public void setNombre(String nombre) {
+
     this.nombre = nombre;
   }
 
   public String getTelefono() {
+
     return telefono;
   }
 
   public void setTelefono(String telefono) {
+
     this.telefono = telefono;
   }
 
   public String getCorreo() {
+
     return correo;
   }
 
   public void setCorreo(String correo) {
+
     this.correo = correo;
   }
 
   public String getDni() {
+
     return dni;
   }
 
   public void setDni(String dni) {
+
     this.dni = dni;
   }
 
   public LocalDate getFechaNacimiento() {
+
     return fechaNacimiento;
   }
 
   public void setFechaNacimiento(LocalDate fechaNacimiento) {
+
     this.fechaNacimiento = fechaNacimiento;
   }
 
