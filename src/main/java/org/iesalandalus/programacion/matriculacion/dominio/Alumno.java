@@ -1,6 +1,7 @@
 package org.iesalandalus.programacion.matriculacion.dominio;
 
 import java.time.LocalDate;
+import java.util.regex.*;
 
 public class Alumno {
 
@@ -46,8 +47,38 @@ public class Alumno {
 
 
   }
+  private boolean comprobarLetraDni() {
+    String udni=getDni();
+    boolean resultado = false;
+    int numero;
+    char letra;
+    Pattern patron=Pattern.compile("^(\\d{8})([A-Za-z]{1})$");
+    Matcher comparador=patron.matcher(udni);
+    char[] LETRAS_DNI = {'T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P', 'D', 'X', 'B', 'N', 'J', 'Z', 'S', 'Q', 'V', 'H', 'L', 'C', 'K', 'E'};
+    if (comparador.matches()) {
+      numero = Integer.parseInt(comparador.group(1));
+      letra = comparador.group(2).charAt(0);
+
+    } else {
+
+      return false;
+
+    }
+
+      int numeroDivido=numero/23;
+      int numeroMultiplicado=numeroDivido*23;
+      int posicionLetra=numero-numeroMultiplicado;
+
+      if (letra==LETRAS_DNI[posicionLetra]) {
+        resultado=true;
+
+      }
 
 
+    return resultado;
+  }
+
+//geters y seters
   public String getNia() {
 
     return nia;
