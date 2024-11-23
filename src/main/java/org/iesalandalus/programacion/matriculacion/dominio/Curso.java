@@ -7,15 +7,19 @@ public enum Curso {
     {
         this.cadenaAMostrar=cadenaAMostrar;
     }
-    //Crear cadenaAMostrar//
-    @Override
-    public String toString() {
+    public String imprimir() {
         int digito=0;
         if (cadenaAMostrar == PRIMERO.cadenaAMostrar) {
-         digito=0;
+            digito=0;
         } else {
             digito=1;
         }
         return digito+".-"+cadenaAMostrar;
+    }
+    //Crear cadenaAMostrar//
+
+    @Override
+    public String toString() {
+        return "Curso seleccionado:" + cadenaAMostrar;
     }
 }
