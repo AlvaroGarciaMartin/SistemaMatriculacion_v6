@@ -28,6 +28,7 @@ public class Alumno {
     setFechaNacimiento(fechaNacimiento);
     setNia(nia);
   }
+  
   //metodo para eliminar los espacios en blanco
   private void formateaNombre(){
     String [] nombreNormalizado=nombre.split(" ");
