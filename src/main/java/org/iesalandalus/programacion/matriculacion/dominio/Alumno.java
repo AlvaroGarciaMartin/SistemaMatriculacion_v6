@@ -125,6 +125,12 @@ public class Alumno {
   public void setCorreo(String correo) {
     if (correo == null) {
       throw new NullPointerException("El correo no puede ser nulo");
+    } else if (!correo.contains("@")) {
+      throw new IllegalArgumentException("El correo no contiene '@': " + correo);
+    } else if (!correo.contains(".")) {
+      throw new IllegalArgumentException("El correo no contiene dominio adecuado ");
+    } else if (!(correo.endsWith(".com") || correo.endsWith(".es"))) {
+      throw new IllegalArgumentException("El correo no tiene dominio adecuado");
     }
     this.correo = correo;
   }
@@ -137,6 +143,8 @@ public class Alumno {
   public void setDni(String dni) {
     if (dni == null) {
       throw new NullPointerException("El dni no puede ser nulo");
+    } else if (comprobarLetraDni()==false) {
+      throw new IllegalArgumentException("El dni no es correcto");
     }
     this.dni = dni;
   }
