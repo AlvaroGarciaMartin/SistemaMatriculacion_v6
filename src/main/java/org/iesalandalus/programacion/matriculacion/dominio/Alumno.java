@@ -209,6 +209,16 @@ public class Alumno {
   public int hashCode() {
     return Objects.hash(ER_DNI, dni);
   }
-
+  @Override
+  public String toString() {
+    return "Alumno{" +
+            "nombre='" + nombre + '\'' +
+            ", telefono='" + telefono + '\'' +
+            ", correo='" + correo + '\'' +
+            ", dni='" + dni + '\'' +
+            ", fechaNacimiento=" + fechaNacimiento +
+            ", nia='" + nia + '\'' +
+            '}';
+  }
 
 }
