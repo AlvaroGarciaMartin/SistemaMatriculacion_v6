@@ -31,12 +31,12 @@ public class Alumno {
   }
   //constructor copia de Alumno
   public Alumno(Alumno alumno){
-    this.nombre=alumno.getNombre();
-    this.telefono=alumno.getTelefono();
-    this.correo=alumno.getCorreo();
-    this.dni=alumno.getDni();
-    this.nia=alumno.getNia();
-    this.fechaNacimiento=alumno.getFechaNacimiento();
+    setNombre(nombre);
+    setTelefono(telefono);
+    setCorreo(correo);
+    setDni(dni);
+    setFechaNacimiento(fechaNacimiento);
+    setNia(nia);
   }
 
 
