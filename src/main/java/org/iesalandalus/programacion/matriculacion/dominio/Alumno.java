@@ -2,6 +2,7 @@ package org.iesalandalus.programacion.matriculacion.dominio;
 
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.Objects;
 import java.util.regex.*;
 
 public class Alumno {
@@ -19,7 +20,7 @@ public class Alumno {
   private LocalDate fechaNacimiento;
   private String nia;
 
-
+//constructor Alumno CON PARAMETROS
   public Alumno(String nombre,String telefono,String correo,String dni,LocalDate fechaNacimiento,String nia){
     setNombre(nombre);
     setTelefono(telefono);
@@ -28,6 +29,7 @@ public class Alumno {
     setFechaNacimiento(fechaNacimiento);
     setNia(nia);
   }
+  //constructor copia de Alumno
   public Alumno(Alumno alumno){
     this.nombre=alumno.getNombre();
     this.telefono=alumno.getTelefono();
@@ -36,7 +38,6 @@ public class Alumno {
     this.nia=alumno.getNia();
     this.fechaNacimiento=alumno.getFechaNacimiento();
   }
-
 
 
   //metodo para eliminar los espacios en blanco
@@ -194,6 +195,19 @@ public class Alumno {
       throw new IllegalArgumentException("El Alumno no puede tener menos de 16 años");
     }
     this.fechaNacimiento = fechaNacimiento;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    Alumno alumno = (Alumno) o;
+    return Objects.equals(ER_DNI, alumno.ER_DNI) && Objects.equals(dni, alumno.dni);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(ER_DNI, dni);
   }
 
 
