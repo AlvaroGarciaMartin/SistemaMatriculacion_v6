@@ -77,6 +77,25 @@ public class Alumno {
 
     return resultado;
   }
+  private String[] getIniciales() {
+      String [] iniciales = nombre.split(" ");
+
+
+    // StringBuilder para construir el nombre formateado.
+    StringBuilder inicialesFormateado = new StringBuilder();
+
+    // Recorrer cada palabra.
+    for (String inicial : iniciales) {
+      // Convertir la primera letra a mayúsculas y el resto a minúsculas.
+      if (inicial.length() > 0) {
+        String palabraFormateada = inicial.substring(0, 1).toUpperCase();
+        inicialesFormateado.append(palabraFormateada).append("");
+
+      }
+    }
+
+      return inicialesFormateado.toString().split("");
+  }
 
 //geters y seters
   public String getNia() {
@@ -113,6 +132,9 @@ public class Alumno {
   public void setTelefono(String telefono) {
     if (telefono == null) {
       throw new NullPointerException("El telefono no puede ser nulo");
+    } else if (telefono.length()!=9) {
+      throw new IllegalArgumentException("El telefono no es correcto");
+
     }
     this.telefono = telefono;
   }
