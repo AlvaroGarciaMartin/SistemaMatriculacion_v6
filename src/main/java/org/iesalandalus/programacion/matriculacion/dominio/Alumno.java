@@ -28,7 +28,17 @@ public class Alumno {
     setFechaNacimiento(fechaNacimiento);
     setNia(nia);
   }
-  
+  public Alumno(Alumno alumno){
+    this.nombre=alumno.getNombre();
+    this.telefono=alumno.getTelefono();
+    this.correo=alumno.getCorreo();
+    this.dni=alumno.getDni();
+    this.nia=alumno.getNia();
+    this.fechaNacimiento=alumno.getFechaNacimiento();
+  }
+
+
+
   //metodo para eliminar los espacios en blanco
   private void formateaNombre(){
     String [] nombreNormalizado=nombre.split(" ");
