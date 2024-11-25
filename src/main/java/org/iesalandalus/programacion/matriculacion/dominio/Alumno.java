@@ -111,16 +111,22 @@ public class Alumno {
 
 //geters y seters
   public String getNia() {
-
+    String nNombre;
+    String nDni;
+    nNombre=nombre.substring(0,4);
+    nDni=dni.substring(5,7);
+    nia=nNombre+nDni;
     return nia;
   }
 
   public void setNia(String nia) {
+
     if (nia == null) {
       throw new NullPointerException("El nia no puede ser nulo");
     }  else if (!nia.substring(0,4).equals(nombre.substring(0,4).toLowerCase()) && !nia.substring(5,7).equals(dni.substring(5,7)) ) {
       throw new IllegalArgumentException("El nia no es correcto");
     }
+
     this.nia = nia;
   }
 
