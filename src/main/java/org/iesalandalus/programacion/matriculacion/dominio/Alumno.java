@@ -21,22 +21,20 @@ public class Alumno {
   private String nia;
 
 //constructor Alumno CON PARAMETROS
-  public Alumno(String nombre,String telefono,String correo,String dni,LocalDate fechaNacimiento,String nia){
+  public Alumno(String nombre,String dni,String correo,String telefono,LocalDate fechaNacimiento){
     setNombre(nombre);
-    setTelefono(telefono);
-    setCorreo(correo);
     setDni(dni);
+    setCorreo(correo);
+    setTelefono(telefono);
     setFechaNacimiento(fechaNacimiento);
-    setNia(nia);
   }
   //constructor copia de Alumno
   public Alumno(Alumno alumno){
     setNombre(nombre);
-    setTelefono(telefono);
-    setCorreo(correo);
     setDni(dni);
+    setCorreo(correo);
+    setTelefono(telefono);
     setFechaNacimiento(fechaNacimiento);
-    setNia(nia);
   }
 
 
