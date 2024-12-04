@@ -48,7 +48,6 @@ public class Matricula {
         return resultado;
     }
     private String asignaturasMatricula() {
-       new Asignatura();
 
         return Arrays.toString(coleccionAsignaturas);
     }

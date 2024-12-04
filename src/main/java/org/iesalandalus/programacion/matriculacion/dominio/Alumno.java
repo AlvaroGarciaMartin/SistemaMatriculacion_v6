@@ -14,7 +14,7 @@ public class Alumno {
   private String ER_DNI;
   public String FORMATO_FECHA;
   private String ER_NIA;
-  private int MIN_EDAD_ALUMNADO = 16;
+  private final int MIN_EDAD_ALUMNADO = 16;
   private String nombre;
   private String telefono;
   private String correo;
@@ -118,14 +118,17 @@ public class Alumno {
 
 //geters y seters
   public String getNia() {
-    String nNombre;
-    String nDni;
-    nNombre=nombre.substring(0,4);
-    nDni=dni.substring(5,7);
-    nia=nNombre+nDni;
+
     return nia;
   }
-
+  public String setNia() {
+    String nNombre;
+    String nDni;
+    nNombre=nombre.substring(0,4).toLowerCase();
+    nDni=dni.substring(5,8);
+    nia=nNombre+nDni;
+    return nombre;
+  }
 
   public void setNia(String nia) {
 
@@ -148,8 +151,11 @@ public class Alumno {
       throw new NullPointerException("El nombre no puede ser nulo");
     } else if (nombre.isBlank()) {
       throw new IllegalArgumentException("El nombre no puede estar en blanco");
+    } else if (nombre.isEmpty()) {
+      throw new IllegalArgumentException("El nombre no puede estar vacio");
     }
     this.nombre = nombre;
+    formateaNombre();
   }
 
   public String getTelefono() {
@@ -160,9 +166,12 @@ public class Alumno {
   public void setTelefono(String telefono) {
     if (telefono == null) {
       throw new NullPointerException("El telefono no puede ser nulo");
+    } else if (telefono.isBlank()) {
+      throw new IllegalArgumentException("El telefono no puede estar en blanco");
+    } else if (telefono.isEmpty()) {
+      throw new IllegalArgumentException("El telefono no puede estar vacio");
     } else if (telefono.length()!=9) {
       throw new IllegalArgumentException("El telefono no es correcto");
-
     }
     this.telefono = telefono;
   }
@@ -207,7 +216,7 @@ public class Alumno {
   }
 
   public void setFechaNacimiento(LocalDate fechaNacimiento) {
-    if (fechaNacimiento.getYear() - LocalDate.now().getYear() < MIN_EDAD_ALUMNADO) {
+    if (LocalDate.now().getYear() - fechaNacimiento.getYear()  < MIN_EDAD_ALUMNADO) {
       throw new IllegalArgumentException("El Alumno no puede tener menos de 16 años");
     }
     this.fechaNacimiento = fechaNacimiento;
