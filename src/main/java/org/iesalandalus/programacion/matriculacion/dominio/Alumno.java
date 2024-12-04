@@ -1,9 +1,11 @@
 package org.iesalandalus.programacion.matriculacion.dominio;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
 import java.util.regex.*;
+
 
 public class Alumno {
 
@@ -35,6 +37,11 @@ public class Alumno {
     setCorreo(correo);
     setTelefono(telefono);
     setFechaNacimiento(fechaNacimiento);
+  }
+
+  public String imprimir() {
+
+    return "Nombre: " + getNombre() + "\nDNI: " + getDni() + "\nCorreo: " + getCorreo() + "\nTelefono: " + getTelefono() + "\nFecha Nacimiento: " + getFechaNacimiento();
   }
 
 
@@ -119,6 +126,7 @@ public class Alumno {
     return nia;
   }
 
+
   public void setNia(String nia) {
 
     if (nia == null) {
@@ -138,6 +146,8 @@ public class Alumno {
   public void setNombre(String nombre) {
     if (nombre == null) {
       throw new NullPointerException("El nombre no puede ser nulo");
+    } else if (nombre.isBlank()) {
+      throw new IllegalArgumentException("El nombre no puede estar en blanco");
     }
     this.nombre = nombre;
   }
@@ -164,13 +174,15 @@ public class Alumno {
 
   public void setCorreo(String correo) {
     if (correo == null) {
-      throw new NullPointerException("El correo no puede ser nulo");
+      throw new NullPointerException("ERROR: El correo de un alumno no puede ser nulo.");
     } else if (!correo.contains("@")) {
       throw new IllegalArgumentException("El correo no contiene '@': " + correo);
     } else if (!correo.contains(".")) {
       throw new IllegalArgumentException("El correo no contiene dominio adecuado ");
     } else if (!(correo.endsWith(".com") || correo.endsWith(".es"))) {
       throw new IllegalArgumentException("El correo no tiene dominio adecuado");
+    } else if (correo.isBlank()) {
+      throw new IllegalArgumentException("El correo no puede estar en blanco");
     }
     this.correo = correo;
   }
@@ -213,6 +225,7 @@ public class Alumno {
   public int hashCode() {
     return Objects.hash(ER_DNI, dni);
   }
+
   @Override
   public String toString() {
     return "Alumno{" +
@@ -224,5 +237,6 @@ public class Alumno {
             ", nia='" + nia + '\'' +
             '}';
   }
+
 
 }
