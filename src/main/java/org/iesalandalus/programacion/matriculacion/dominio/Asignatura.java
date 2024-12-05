@@ -1,9 +1,12 @@
 package org.iesalandalus.programacion.matriculacion.dominio;
 
+import java.util.Arrays;
+import java.util.Objects;
+
 public class Asignatura {
   public final int MAX_NUM_HORAS_ANUALES=20;
   public final int MAX_NUM_HORAS_DESDOBLES=10;
-  private String ER_ASIGNATURA;
+  private static String ER_ASIGNATURA;
   private String codigo;
   private String nombre;
   private int horasAnuales;
@@ -11,6 +14,8 @@ public class Asignatura {
   private int horasDesdoble;
   private EspecialidadProfesorado especialidadProfesorado;
   private CicloFormativo cicloFormativo;
+  private String [] coleccionAsignaturas;
+
 
   public Asignatura(String codigo, String nombre, int horasAnuales, Curso curso, int horasDesdoble, EspecialidadProfesorado especialidadProfesorado, CicloFormativo cicloFormativo) {
     setCodigo(codigo);
@@ -20,6 +25,15 @@ public class Asignatura {
     setHorasDesdoble(horasDesdoble);
     setEspecialidadProfesorado(especialidadProfesorado);
     setCicloFormativo(cicloFormativo);
+  }
+  public Asignatura(Asignatura asignatura) {
+      setCodigo(codigo);
+      setNombre(nombre);
+      setHorasAnuales(horasAnuales);
+      setCurso(curso);
+      setHorasDesdoble(horasDesdoble);
+      setEspecialidadProfesorado(especialidadProfesorado);
+      setCicloFormativo(cicloFormativo);
   }
 
     public int getMAX_NUM_HORAS_ANUALES() {
@@ -101,5 +115,37 @@ public class Asignatura {
 
     public void setCicloFormativo(CicloFormativo cicloFormativo) {
         this.cicloFormativo = cicloFormativo;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Asignatura that = (Asignatura) o;
+        return Objects.equals(codigo, that.codigo);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(codigo);
+    }
+
+    @Override
+    public String toString() {
+        return "Asignatura{" +
+                "MAX_NUM_HORAS_ANUALES=" + MAX_NUM_HORAS_ANUALES +
+                ", MAX_NUM_HORAS_DESDOBLES=" + MAX_NUM_HORAS_DESDOBLES +
+                ", codigo='" + codigo + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", horasAnuales=" + horasAnuales +
+                ", curso=" + curso +
+                ", horasDesdoble=" + horasDesdoble +
+                ", especialidadProfesorado=" + especialidadProfesorado +
+                ", cicloFormativo=" + cicloFormativo +
+                ", coleccionAsignaturas=" + Arrays.toString(coleccionAsignaturas) +
+                '}';
+    }
+    public String imprimir() {
+        return codigo + " " + nombre + " " + horasAnuales + " " + curso + " " + horasDesdoble + " " + especialidadProfesorado + " " + cicloFormativo;
     }
 }

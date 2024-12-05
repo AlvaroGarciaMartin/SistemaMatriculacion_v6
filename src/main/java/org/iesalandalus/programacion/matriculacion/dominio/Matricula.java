@@ -7,12 +7,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Matricula {
-    public int MAXIMO_MESES_ANTERIOR_ANULACION;
-    public int MAXIMO_DIAS_ANTERIOR_MATRICULA;
-    public int MAXIMO_NUMERO_HORAS_MATRICULA=2000;
-    public int MAXIMO_NUMERO_ASIGNATURAS_POR_MATRICULA;
-    private String ER_CURSO_ACADEMICO;
-    public String FORMATO_FECHA;
+    public static int MAXIMO_MESES_ANTERIOR_ANULACION=6;
+    public static int MAXIMO_DIAS_ANTERIOR_MATRICULA=15;
+    public static int MAXIMO_NUMERO_HORAS_MATRICULA=1000;
+    public static int MAXIMO_NUMERO_ASIGNATURAS_POR_MATRICULA=10;
+    private static String ER_CURSO_ACADEMICO;
+    public static String FORMATO_FECHA;
     private int idMatricula;
     private String cursoAcademico;
     private LocalDate fechaMatriculacion;
