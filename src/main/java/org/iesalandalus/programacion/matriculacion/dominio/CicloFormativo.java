@@ -5,7 +5,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class CicloFormativo {
-    private final int MAXIMO_NUMERO_HORAS=2000;
+    public static int MAXIMO_NUMERO_HORAS=2000;
     private int codigo;
     private String familiaProfesional;
     private Grado grado;
@@ -19,11 +19,14 @@ public class CicloFormativo {
         setHoras(horas);
     }
     public CicloFormativo(CicloFormativo cicloFormativo) {
-        setCodigo(codigo);
+        if (cicloFormativo == null) {
+            throw new NullPointerException("ERROR: No es posible copiar un ciclo formativo nulo.");
+        }
+        {setCodigo(codigo);
         setFamiliaProfesional(familiaProfesional);
         setGrado(grado);
         setNombre(nombre);
-        setHoras(horas);
+        setHoras(horas);}
     }
 
 
@@ -35,7 +38,7 @@ public class CicloFormativo {
     private void setCodigo(int codigo) {
         if (codigo < 0) {
             throw new IllegalArgumentException("ERROR: El código de un ciclo formativo debe ser mayor que cero.");
-        }else if (codigo > 0 && codigo < 1000) {
+        }else if (codigo > 0 && codigo < 1000 || codigo > 9999) {
             throw new IllegalArgumentException("ERROR: El código de un ciclo formativo debe ser un numero de 4 digitos.");
         }
         this.codigo = codigo;
@@ -46,6 +49,11 @@ public class CicloFormativo {
     }
 
     public void setFamiliaProfesional(String familiaProfesional) {
+        if (familiaProfesional == null) {
+            throw new NullPointerException("ERROR: La familia profesional de un ciclo formativo no puede ser nula.");
+        } else if (familiaProfesional.isBlank()) {
+            throw new IllegalArgumentException("ERROR: La familia profesional no puede estar vacía.");
+        }
         this.familiaProfesional = familiaProfesional;
     }
 
@@ -54,6 +62,9 @@ public class CicloFormativo {
     }
 
     public void setGrado(Grado grado) {
+        if (grado == null) {
+            throw new NullPointerException("ERROR: El grado de un ciclo formativo no puede ser nulo.");
+        }
         this.grado = grado;
     }
 
@@ -62,6 +73,11 @@ public class CicloFormativo {
     }
 
     public void setNombre(String nombre) {
+        if (nombre == null) {
+            throw new NullPointerException("ERROR: El nombre de un ciclo formativo no puede ser nulo.");
+        } else if (nombre.isBlank()) {
+            throw new IllegalArgumentException("ERROR: El nombre de un ciclo formativo no puede estar vacío.");
+        }
         this.nombre = nombre;
     }
 
@@ -70,15 +86,13 @@ public class CicloFormativo {
     }
 
     public void setHoras(int horas) {
-        if (horas > MAXIMO_NUMERO_HORAS) {
-            throw new IllegalArgumentException("ERROR: El numero de horas no puede ser mayor que " + MAXIMO_NUMERO_HORAS);
-        }else if (horas < 0) {
-            throw new IllegalArgumentException("ERROR: El numero de horas no puede ser menor que 0");
+       if (horas <= 0 || horas > MAXIMO_NUMERO_HORAS) {
+            throw new IllegalArgumentException("ERROR: El número de horas de un ciclo formativo no puede ser menor o igual a 0 ni mayor a 2000.");
         }
         this.horas = horas;
     }
     public String imprimir() {
-        return codigo + " " + familiaProfesional + " " + grado + " " + nombre + " " + horas;
+        return "Código ciclo formativo=" + codigo + ", nombre ciclo formativo=" + nombre;
     }
 
     @Override
@@ -96,13 +110,7 @@ public class CicloFormativo {
 
     @Override
     public String toString() {
-        return "CicloFormativo{" +
-                "MAXIMO_NUMERO_HORAS=" + MAXIMO_NUMERO_HORAS +
-                ", codigo=" + codigo +
-                ", familiaProfesional='" + familiaProfesional + '\'' +
-                ", grado=" + grado +
-                ", nombre='" + nombre + '\'' +
-                ", horas=" + horas +
-                '}';
+        return "Código ciclo formativo=" + codigo + ", familia profesional=" + familiaProfesional + ", grado=" + grado + ", nombre ciclo formativo=" + nombre + ", horas=" + horas;
+
     }
 }

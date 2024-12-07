@@ -1,5 +1,6 @@
 package org.iesalandalus.programacion.matriculacion.dominio;
 
+import javax.naming.OperationNotSupportedException;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Objects;
@@ -78,9 +79,9 @@ public class Matricula {
         return MAXIMO_NUMERO_HORAS_MATRICULA;
     }
 
-    public void setMAXIMO_NUMERO_HORAS_MATRICULA(int MAXIMO_NUMERO_HORAS_MATRICULA) {
+    public void setMAXIMO_NUMERO_HORAS_MATRICULA(int MAXIMO_NUMERO_HORAS_MATRICULA) throws OperationNotSupportedException {
         if (MAXIMO_NUMERO_HORAS_MATRICULA > 1000) {
-            throw new RuntimeException("ERROR: No se pueden matricular más de 1000 horas.");
+            throw new OperationNotSupportedException("ERROR: No se pueden matricular más de 1000 horas.");
         }
         this.MAXIMO_NUMERO_HORAS_MATRICULA = MAXIMO_NUMERO_HORAS_MATRICULA;
     }

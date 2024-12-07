@@ -31,7 +31,7 @@ public class Alumno {
     setFechaNacimiento(fechaNacimiento);
   }
   //constructor copia de Alumno
-  public Alumno(Alumno alumno){
+  public Alumno(Alumno otroalumno){
     setNombre(nombre);
     setDni(dni);
     setCorreo(correo);
@@ -46,8 +46,9 @@ public class Alumno {
 
 
   //metodo para eliminar los espacios en blanco
-  private void formateaNombre(){
+  private String formateaNombre(){
     String [] nombreNormalizado=nombre.split(" ");
+
 
     // StringBuilder para construir el nombre formateado.
     StringBuilder nombreFormateado = new StringBuilder();
@@ -62,7 +63,7 @@ public class Alumno {
     }
 
     // Eliminar el último espacio adicional.
-    setNombre(nombreFormateado.toString().trim());
+    return nombreFormateado.toString().trim();
 
 
   }
@@ -148,14 +149,14 @@ public class Alumno {
 
   public void setNombre(String nombre) {
     if (nombre == null) {
-      throw new NullPointerException("El nombre no puede ser nulo");
+      throw new NullPointerException("ERROR: El nombre no puede ser nulo");
     } else if (nombre.isBlank()) {
-      throw new IllegalArgumentException("El nombre no puede estar en blanco");
+      throw new IllegalArgumentException("ERROR: El nombre no puede estar en blanco");
     } else if (nombre.isEmpty()) {
-      throw new IllegalArgumentException("El nombre no puede estar vacio");
+      throw new IllegalArgumentException("ERROR: El nombre no puede estar vacio");
     }
-    this.nombre = nombre;
-    formateaNombre();
+    this.nombre = formateaNombre();
+
   }
 
   public String getTelefono() {
@@ -217,7 +218,7 @@ public class Alumno {
 
   public void setFechaNacimiento(LocalDate fechaNacimiento) {
     if (LocalDate.now().getYear() - fechaNacimiento.getYear()  < MIN_EDAD_ALUMNADO) {
-      throw new IllegalArgumentException("El Alumno no puede tener menos de 16 años");
+      throw new IllegalArgumentException("ERROR: El Alumno no puede tener menos de 16 años");
     }
     this.fechaNacimiento = fechaNacimiento;
   }
