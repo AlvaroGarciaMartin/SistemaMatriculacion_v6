@@ -16,13 +16,13 @@ public class Alumnos {
 
 
 
-   Alumnos(int capacidad) {
+   public Alumnos(int capacidad) {
        if (!(capacidad > 0)) {
            throw new IllegalArgumentException("ERROR: La capacidad debe ser mayor que cero.");
        }
        setCapacidad(capacidad);
        setTamano(tamano);
-       coleccionAlumnos = new Alumno[capacidad];//this.tamano = coleccionAlumnos.length;
+       coleccionAlumnos = new Alumno[capacidad];
    }
    
 
