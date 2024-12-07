@@ -70,7 +70,7 @@ public class Asignaturas {
     private boolean capacidadSuperada(int indice) {
         return indice >= getCapacidad();
     }
-    //buscar ciclo
+    //buscar Asignatura
     public Asignatura buscar(Asignatura asignatura) {
 
         int indice = buscarIndice(asignatura);
@@ -80,7 +80,7 @@ public class Asignaturas {
             return new Asignatura(get()[indice]);
         }
     }
-    //borrar ciclo
+    //borrar Asignatura
     public void borrar (Asignatura asignatura) {
         Objects.requireNonNull(asignatura,"ERROR: No se puede borrar una Asignatura nulo.");
 
