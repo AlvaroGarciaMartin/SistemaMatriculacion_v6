@@ -1,5 +1,4 @@
 package org.iesalandalus.programacion.matriculacion.negocio;
-import org.iesalandalus.programacion.matriculacion.dominio.Alumno;
 import org.iesalandalus.programacion.matriculacion.dominio.CicloFormativo;
 
 import javax.naming.OperationNotSupportedException;
@@ -48,11 +47,11 @@ public class CiclosFormativos {
     }
     //Insertar Ciclo
     public void insertar(CicloFormativo cicloFormativo) throws OperationNotSupportedException {
-        Objects.requireNonNull(cicloFormativo, "ERROR: No se puede insertar un alumno nulo.");
+        Objects.requireNonNull(cicloFormativo, "ERROR: No se puede insertar un Ciclo Formativo nulo.");
 
         int indice = buscarIndice(cicloFormativo);
         if (capacidadSuperada(indice)) {
-            throw new OperationNotSupportedException("ERROR: No se aceptan más alumnos.");
+            throw new OperationNotSupportedException("ERROR: No se aceptan más Ciclos Formativos.");
         }
 
         if (tamanoSuperado(indice)) {
