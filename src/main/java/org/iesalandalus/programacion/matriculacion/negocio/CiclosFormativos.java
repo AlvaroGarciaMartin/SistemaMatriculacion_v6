@@ -107,6 +107,9 @@ public class CiclosFormativos {
     }
 
     public void setCapacidad(int capacidad) {
+        if (capacidad <= 0) {
+            throw new IllegalArgumentException("ERROR: La capacidad debe ser mayor que cero.");
+        }
         this.capacidad = capacidad;
     }
 
@@ -123,6 +126,10 @@ public class CiclosFormativos {
     }
 
     public void setTamano(int tamano) {
+        if (tamano < 0) {
+            throw new IllegalArgumentException("ERROR: El tamaño debe ser mayor que cero.");
+
+        }
         this.tamano = tamano;
     }
 }
