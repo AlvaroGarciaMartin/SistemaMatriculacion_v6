@@ -59,12 +59,12 @@ public class Asignatura {
     private void setCodigo(String codigo) {
         if (codigo == null) {
             throw new NullPointerException("ERROR: El código de una asignatura no puede ser nulo.");
-        }
-        if (codigo.isBlank()) {
+        }else if (codigo.isBlank()) {
             throw new IllegalArgumentException("ERROR: El código de una asignatura no puede estar vacío.");
-        }
-        if (!codigo.matches(ER_ASIGNATURA)) {
+        }else  if (!codigo.matches(ER_ASIGNATURA)) {
             throw new IllegalArgumentException("ERROR: El código de la asignatura no tiene un formato válido.");
+        }else if (codigo.length() != 4) {
+            throw new IllegalArgumentException("ERROR: El código de la asignatura debe ser de 4 caracteres.");
         }
         this.codigo = codigo;
     }
