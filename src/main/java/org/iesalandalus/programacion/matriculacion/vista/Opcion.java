@@ -1,5 +1,5 @@
 package org.iesalandalus.programacion.matriculacion.vista;
-import org.iesalandalus.programacion.matriculacion.dominio.Curso;
+
 public enum Opcion {
     SALIR("Salir"),
     INSERTAR_ALUMNO("Insertar Alumno"),
@@ -21,7 +21,10 @@ public enum Opcion {
     MOSTRAR_MATRICULAS_ALUMNO("Mostrar Matriculas Alumno"),
     MOSTRAR_MATRICULAS_CICLO_FORMATIVO("Mostrar Matriculas Ciclo Formativo"),
     MOSTRAR_MATRICULAS_CURSO_ACADEMICO("Mostrar Matriculas Curso Academico");
+
+
     private String cadenaAMostrar;
+
     private Opcion(String cadenaAMostrar)
     {
         this.cadenaAMostrar=cadenaAMostrar;
