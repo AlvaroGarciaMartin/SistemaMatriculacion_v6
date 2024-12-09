@@ -9,12 +9,12 @@ import java.util.regex.*;
 
 public class Alumno {
 
-  private String ER_TELEFONO;
-  private  String ER_CORREO;
-  private String ER_DNI;
-  public String FORMATO_FECHA;
-  private String ER_NIA;
-  private final int MIN_EDAD_ALUMNADO = 16;
+  private static final String ER_TELEFONO= "^\\d{9}$";
+  private static final String ER_CORREO="^\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$"; ;
+  private static final String ER_DNI="^(\\d{8})([A-Za-z]{1})$";
+  public static final String FORMATO_FECHA="dd/MM/YYYY";
+  private static final String ER_NIA="^([A-Za-z]{4})(\\d{3})$";
+  private static final int MIN_EDAD_ALUMNADO = 16;
   private String nombre;
   private String telefono;
   private String correo;
