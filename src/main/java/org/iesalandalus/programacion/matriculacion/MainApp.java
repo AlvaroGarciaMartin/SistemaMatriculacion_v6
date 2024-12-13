@@ -16,16 +16,17 @@ public class MainApp {
 
 
     public static void main(String[] args) {
-        Opcion opcion= Consola.elegirOpcion(); ;
+        Consola.mostrarMenu();
+        Opcion opcion= Consola.elegirOpcion();
         ejecutarOpcion(opcion);
         System.out.println("Hasta luego!!!!");
     }
 
     private static void ejecutarOpcion(Opcion opcion) {
         switch (opcion) {
-            case SALIR: ;
-                System.exit(0);
+            case SALIR:
                 System.out.println("Hasta luego!!");
+                System.exit(0);
             case INSERTAR_ALUMNO:
                 insertarAlumno();
                 System.out.println("Insertar alumno");
