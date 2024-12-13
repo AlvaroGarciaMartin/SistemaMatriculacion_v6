@@ -19,7 +19,7 @@ public class Consola {
         }
     }
 
-    public Opcion elegirOpcion() {
+    public static Opcion elegirOpcion() {
         int opcion;
        do{
            System.out.print("Elige una opcion del menu: ");
@@ -65,7 +65,7 @@ public class Consola {
     }
 
 
-    public Alumno getAlumnoPorDni() {
+    public static Alumno getAlumnoPorDni() {
         Alumno alumno= null;
         String nombre="ficticio";
         String telefono="111111111";
@@ -97,7 +97,7 @@ public class Consola {
         return fecha;
 
     }
-    public Grado leerGrado() {
+    public static Grado leerGrado() {
         int seleccion;
         do{
             System.out.println("Introduzca un Grado");
@@ -110,7 +110,7 @@ public class Consola {
         while (seleccion<0 || seleccion>3 && seleccion > Grado.values().length);
         return Grado.values()[seleccion];
     }
-    public CicloFormativo leerCicloFormativo(CiclosFormativos ciclosFormativos) {
+    public static CicloFormativo leerCicloFormativo(CiclosFormativos ciclosFormativos) {
         int codigo;
         String familiaProfesional;
         Grado grado;
@@ -148,7 +148,7 @@ public class Consola {
             System.out.println(cicloFormativo);
         }
     }
-    public CicloFormativo getCicloFormativoPorCodigo() {
+    public static CicloFormativo getCicloFormativoPorCodigo() {
         int codigo;
         String familiaProfesional="ficticia";
         Grado grado=Grado.GDCFGB;
@@ -161,7 +161,7 @@ public class Consola {
         } while (codigo < 0);
         return new CicloFormativo(codigo,familiaProfesional,grado,nombre,horas);
     }
-    public Curso leerCurso(){
+    public static Curso leerCurso(){
         int seleccion;
         do{
             System.out.println("Introduzca un Curso");
@@ -174,7 +174,7 @@ public class Consola {
         return Curso.values()[seleccion];
     }
 
-    public EspecialidadProfesorado leerEspecialidadProfesorado() {
+    public static EspecialidadProfesorado leerEspecialidadProfesorado() {
         int seleccion;
         do{
             System.out.println("Introduzca una EspecialidadProfesorado");
@@ -187,7 +187,7 @@ public class Consola {
         return EspecialidadProfesorado.values()[seleccion];
     }
 
-    public Asignatura leerAsignatura(CiclosFormativos ciclosFormativos) {
+    public static Asignatura leerAsignatura(CiclosFormativos ciclosFormativos) {
         String codigo;
         String nombre;
         int horasAnuales;
@@ -228,7 +228,7 @@ public class Consola {
        asignatura=new Asignatura(codigo, nombre, horasAnuales, curso, horasDesdoble, especialidadProfesorado, cicloFormativo);
         return new Asignatura(asignatura);
     }
-    public Asignatura getAsignaturaPorCodigo(){
+    public static Asignatura getAsignaturaPorCodigo(){
         String codigo;
         String nombre="Asignaturaficticia";
         int horasAnuales=13;

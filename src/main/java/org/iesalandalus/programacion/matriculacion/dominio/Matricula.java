@@ -12,8 +12,8 @@ public class Matricula {
     public static int MAXIMO_DIAS_ANTERIOR_MATRICULA=15;
     public static int MAXIMO_NUMERO_HORAS_MATRICULA=1000;
     public static int MAXIMO_NUMERO_ASIGNATURAS_POR_MATRICULA=10;
-    private static String ER_CURSO_ACADEMICO;
-    public static String FORMATO_FECHA;
+    private static final String ER_CURSO_ACADEMICO="\\d{2}-\\d{2}";
+    public static final String FORMATO_FECHA= "dd/MM/YYYY";
     private int idMatricula;
     private String cursoAcademico;
     private LocalDate fechaMatriculacion;
@@ -98,21 +98,15 @@ public class Matricula {
         this.MAXIMO_NUMERO_ASIGNATURAS_POR_MATRICULA = MAXIMO_NUMERO_ASIGNATURAS_POR_MATRICULA;
     }
 
-    public String getER_CURSO_ACADEMICO() {
-        return ER_CURSO_ACADEMICO;
-    }
-
-    public void setER_CURSO_ACADEMICO(String ER_CURSO_ACADEMICO) {
-        this.ER_CURSO_ACADEMICO = ER_CURSO_ACADEMICO;
-    }
 
     public String getFORMATO_FECHA() {
         return FORMATO_FECHA;
     }
 
-    public void setFORMATO_FECHA(String FORMATO_FECHA) {
-        this.FORMATO_FECHA = FORMATO_FECHA;
+    public String getER_CURSO_ACADEMICO() {
+        return ER_CURSO_ACADEMICO;
     }
+
 
     public int getIdMatricula() {
         return idMatricula;
