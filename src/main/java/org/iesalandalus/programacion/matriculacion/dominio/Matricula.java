@@ -8,10 +8,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Matricula {
-    public static int MAXIMO_MESES_ANTERIOR_ANULACION=6;
-    public static int MAXIMO_DIAS_ANTERIOR_MATRICULA=15;
-    public static int MAXIMO_NUMERO_HORAS_MATRICULA=1000;
-    public static int MAXIMO_NUMERO_ASIGNATURAS_POR_MATRICULA=10;
+    public static final int MAXIMO_MESES_ANTERIOR_ANULACION=6;
+    public static final int MAXIMO_DIAS_ANTERIOR_MATRICULA=15;
+    public static final int MAXIMO_NUMERO_HORAS_MATRICULA=1000;
+    public static final int MAXIMO_NUMERO_ASIGNATURAS_POR_MATRICULA=10;
     private static final String ER_CURSO_ACADEMICO="\\d{2}-\\d{2}";
     public static final String FORMATO_FECHA= "dd/MM/YYYY";
     private int idMatricula;
@@ -41,7 +41,7 @@ public class Matricula {
     //metodo para comprobar si la matricula supera el maximo de horas
     private boolean superaMaximoNumeroHorasMatricula(Asignatura[] asignaturasMatricula) {
         boolean resultado=false;
-        if (getMAXIMO_NUMERO_ASIGNATURAS_POR_MATRICULA()<10){
+        if (MAXIMO_NUMERO_ASIGNATURAS_POR_MATRICULA<10){
           resultado=true;
 
         }
@@ -53,50 +53,9 @@ public class Matricula {
         return Arrays.toString(coleccionAsignaturas);
     }
 
-    public int getMAXIMO_MESES_ANTERIOR_ANULACION() {
-        return MAXIMO_MESES_ANTERIOR_ANULACION;
-    }
 
-    public void setMAXIMO_MESES_ANTERIOR_ANULACION(int MAXIMO_MESES_ANTERIOR_ANULACION) {
-        if (MAXIMO_MESES_ANTERIOR_ANULACION > 6) {
-            throw new RuntimeException("ERROR: No se pueden anular en menos de 6 meses.");
-        }
-        this.MAXIMO_MESES_ANTERIOR_ANULACION = MAXIMO_MESES_ANTERIOR_ANULACION;
-    }
 
-    public int getMAXIMO_DIAS_ANTERIOR_MATRICULA() {
-        return MAXIMO_DIAS_ANTERIOR_MATRICULA;
-    }
 
-    public void setMAXIMO_DIAS_ANTERIOR_MATRICULA(int MAXIMO_DIAS_ANTERIOR_MATRICULA) {
-        if (MAXIMO_DIAS_ANTERIOR_MATRICULA > 15) {
-            throw new RuntimeException("ERROR: No se pueden matricular en menos de 15 dias.");
-        }
-        this.MAXIMO_DIAS_ANTERIOR_MATRICULA = MAXIMO_DIAS_ANTERIOR_MATRICULA;
-    }
-
-    public int getMAXIMO_NUMERO_HORAS_MATRICULA() {
-        return MAXIMO_NUMERO_HORAS_MATRICULA;
-    }
-
-    public void setMAXIMO_NUMERO_HORAS_MATRICULA(int MAXIMO_NUMERO_HORAS_MATRICULA) throws OperationNotSupportedException {
-        if (MAXIMO_NUMERO_HORAS_MATRICULA > 1000) {
-            throw new OperationNotSupportedException("ERROR: No se pueden matricular más de 1000 horas.");
-        }
-        this.MAXIMO_NUMERO_HORAS_MATRICULA = MAXIMO_NUMERO_HORAS_MATRICULA;
-    }
-
-    public int getMAXIMO_NUMERO_ASIGNATURAS_POR_MATRICULA() {
-        return MAXIMO_NUMERO_ASIGNATURAS_POR_MATRICULA;
-    }
-
-    public void setMAXIMO_NUMERO_ASIGNATURAS_POR_MATRICULA(int MAXIMO_NUMERO_ASIGNATURAS_POR_MATRICULA) {
-        if (MAXIMO_NUMERO_ASIGNATURAS_POR_MATRICULA > 10) {
-            throw new RuntimeException("ERROR: No se pueden matricular más de 10 asignaturas.");
-
-        }
-        this.MAXIMO_NUMERO_ASIGNATURAS_POR_MATRICULA = MAXIMO_NUMERO_ASIGNATURAS_POR_MATRICULA;
-    }
 
 
     public String getFORMATO_FECHA() {

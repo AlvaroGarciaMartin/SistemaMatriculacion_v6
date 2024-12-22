@@ -20,8 +20,7 @@ public class Alumnos {
        if (!(capacidad > 0)) {
            throw new IllegalArgumentException("ERROR: La capacidad debe ser mayor que cero.");
        }
-       setCapacidad(capacidad);
-       setTamano(tamano);
+       this.capacidad = capacidad;
        coleccionAlumnos = new Alumno[capacidad];
    }
    
@@ -113,25 +112,13 @@ public class Alumnos {
         return capacidad;
     }
 
-    public void setCapacidad(int capacidad) {
-        if (capacidad < 0) {
-            throw new IllegalArgumentException("ERROR: La capacidad debe ser mayor que cero.");
-        }
-       this.capacidad = capacidad;
-    }
+
 
     public int getTamano() {
 
        return tamano;
     }
 
-    public void setTamano(int tamano) {
-        if (tamano < 0) {
-            throw new IllegalArgumentException("ERROR: El tamaño debe ser mayor que cero.");
-
-        }
-        this.tamano = tamano;
-    }
 
 
 }

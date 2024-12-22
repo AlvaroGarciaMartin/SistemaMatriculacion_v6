@@ -16,8 +16,7 @@ public class Asignaturas {
         if (!(capacidad > 0)) {
             throw new IllegalArgumentException("ERROR: La capacidad debe ser mayor que cero.");
         }
-        setCapacidad(capacidad);
-        setTamano(tamano);
+        this.capacidad = capacidad;
         coleccionAsignaturas = new Asignatura[capacidad];
     }
     //copia profunda
@@ -106,23 +105,9 @@ public class Asignaturas {
         return capacidad;
     }
 
-    public void setCapacidad(int capacidad) {
-        this.capacidad = capacidad;
-    }
 
     public int getTamano() {
         return tamano;
     }
 
-    public void setTamano(int tamano) {
-        this.tamano = tamano;
-    }
-
-    public Asignatura[] getColeccionAsignaturas() {
-        return coleccionAsignaturas;
-    }
-
-    public void setColeccionAsignaturas(Asignatura[] coleccionAsignaturas) {
-        this.coleccionAsignaturas = coleccionAsignaturas;
-    }
 }
