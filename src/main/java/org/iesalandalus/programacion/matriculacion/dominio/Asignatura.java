@@ -4,9 +4,9 @@ import java.util.Arrays;
 import java.util.Objects;
 
 public class Asignatura {
-  public final int MAX_NUM_HORAS_ANUALES=20;
-  public final int MAX_NUM_HORAS_DESDOBLES=10;
-  private static String ER_ASIGNATURA;
+  public static final int MAX_NUM_HORAS_ANUALES=20;
+  public static final int MAX_NUM_HORAS_DESDOBLES=10;
+  private static final String ER_CODIGO="^\\d{4}$";
   private String codigo;
   private String nombre;
   private int horasAnuales;
@@ -14,7 +14,7 @@ public class Asignatura {
   private int horasDesdoble;
   private EspecialidadProfesorado especialidadProfesorado;
   private CicloFormativo cicloFormativo;
-  private String [] coleccionAsignaturas;
+
 
 
   public Asignatura(String codigo, String nombre, int horasAnuales, Curso curso, int horasDesdoble, EspecialidadProfesorado especialidadProfesorado, CicloFormativo cicloFormativo) {
@@ -36,21 +36,6 @@ public class Asignatura {
       setCicloFormativo(cicloFormativo);
   }
 
-    public int getMAX_NUM_HORAS_ANUALES() {
-        return MAX_NUM_HORAS_ANUALES;
-    }
-
-    public int getMAX_NUM_HORAS_DESDOBLES() {
-        return MAX_NUM_HORAS_DESDOBLES;
-    }
-
-    public String getER_ASIGNATURA() {
-        return ER_ASIGNATURA;
-    }
-
-    public void setER_ASIGNATURA(String ER_ASIGNATURA) {
-        this.ER_ASIGNATURA = ER_ASIGNATURA;
-    }
 
     public String getCodigo() {
         return codigo;
@@ -61,8 +46,6 @@ public class Asignatura {
             throw new NullPointerException("ERROR: El código de una asignatura no puede ser nulo.");
         }else if (codigo.isBlank()) {
             throw new IllegalArgumentException("ERROR: El código de una asignatura no puede estar vacío.");
-        }else  if (!codigo.matches(ER_ASIGNATURA)) {
-            throw new IllegalArgumentException("ERROR: El código de la asignatura no tiene un formato válido.");
         }else if (codigo.length() != 4) {
             throw new IllegalArgumentException("ERROR: El código de la asignatura debe ser de 4 caracteres.");
         }
@@ -142,7 +125,6 @@ public class Asignatura {
                 ", horasDesdoble=" + horasDesdoble +
                 ", especialidadProfesorado=" + especialidadProfesorado +
                 ", cicloFormativo=" + cicloFormativo +
-                ", coleccionAsignaturas=" + Arrays.toString(coleccionAsignaturas) +
                 '}';
     }
     public String imprimir() {

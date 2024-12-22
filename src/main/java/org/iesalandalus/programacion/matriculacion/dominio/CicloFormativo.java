@@ -5,7 +5,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class CicloFormativo {
-    public static int MAXIMO_NUMERO_HORAS=2000;
+    public static final int MAXIMO_NUMERO_HORAS=2000;
     private int codigo;
     private String familiaProfesional;
     private Grado grado;
