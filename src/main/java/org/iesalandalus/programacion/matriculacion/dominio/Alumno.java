@@ -29,6 +29,7 @@ public class Alumno {
     setCorreo(correo);
     setTelefono(telefono);
     setFechaNacimiento(fechaNacimiento);
+    setNia(nia);
   }
   //constructor copia de Alumno
   public Alumno(Alumno otroalumno){
@@ -37,6 +38,7 @@ public class Alumno {
     setCorreo(correo);
     setTelefono(telefono);
     setFechaNacimiento(fechaNacimiento);
+    setNia(nia);
   }
 
   public String imprimir() {
@@ -122,7 +124,7 @@ public class Alumno {
 
     return nia;
   }
-  public String setNia() {
+  private String setNia() {
     String nNombre;
     String nDni;
     nNombre=nombre.substring(0,4).toLowerCase();
@@ -131,7 +133,7 @@ public class Alumno {
     return nombre;
   }
 
-  public void setNia(String nia) {
+  private void setNia(String nia) {
 
     if (nia == null) {
       throw new NullPointerException("El nia no puede ser nulo");
@@ -202,7 +204,7 @@ public class Alumno {
     return dni;
   }
 
-  public void setDni(String dni) {
+  private void setDni(String dni) {
     if (dni == null) {
       throw new NullPointerException("El dni no puede ser nulo");
     } else if (comprobarLetraDni()==false) {
@@ -216,7 +218,7 @@ public class Alumno {
     return fechaNacimiento;
   }
 
-  public void setFechaNacimiento(LocalDate fechaNacimiento) {
+  private void setFechaNacimiento(LocalDate fechaNacimiento) {
     if (LocalDate.now().getYear() - fechaNacimiento.getYear()  < MIN_EDAD_ALUMNADO) {
       throw new IllegalArgumentException("ERROR: El Alumno no puede tener menos de 16 años");
     }
