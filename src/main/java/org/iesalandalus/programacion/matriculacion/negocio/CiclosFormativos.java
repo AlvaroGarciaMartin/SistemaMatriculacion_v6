@@ -14,8 +14,7 @@ public class CiclosFormativos {
         if (!(capacidad > 0)) {
             throw new IllegalArgumentException("ERROR: La capacidad debe ser mayor que cero.");
         }
-        setCapacidad(capacidad);
-        setTamano(tamano);
+        this.capacidad = capacidad;
         coleccionCiclosFormativos = new CicloFormativo[capacidad];
     }
 
@@ -105,30 +104,9 @@ public class CiclosFormativos {
         return capacidad;
     }
 
-    public void setCapacidad(int capacidad) {
-        if (capacidad <= 0) {
-            throw new IllegalArgumentException("ERROR: La capacidad debe ser mayor que cero.");
-        }
-        this.capacidad = capacidad;
-    }
-
-    public CicloFormativo[] getColeccionCiclosFormativos() {
-        return coleccionCiclosFormativos;
-    }
-
-    public void setColeccionCiclosFormativos(CicloFormativo[] coleccionCiclosFormativos) {
-        this.coleccionCiclosFormativos = coleccionCiclosFormativos;
-    }
 
     public int getTamano() {
         return tamano;
     }
 
-    public void setTamano(int tamano) {
-        if (tamano < 0) {
-            throw new IllegalArgumentException("ERROR: El tamaño debe ser mayor que cero.");
-
-        }
-        this.tamano = tamano;
-    }
 }
