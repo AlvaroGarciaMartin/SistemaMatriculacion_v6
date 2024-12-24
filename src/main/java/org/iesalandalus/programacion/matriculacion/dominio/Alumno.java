@@ -1,6 +1,7 @@
 package org.iesalandalus.programacion.matriculacion.dominio;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
@@ -12,7 +13,7 @@ public class Alumno {
   private static final String ER_TELEFONO= "^\\d{9}$";
   private static final String ER_CORREO="^\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$"; ;
   private static final String ER_DNI="^(\\d{8})([A-Za-z]{1})$";
-  public static final String FORMATO_FECHA="dd/MM/YYYY";
+  public static final String FORMATO_FECHA="dd/MM/yyyy";
   private static final String ER_NIA="^([A-Za-z]{4})(\\d{3})$";
   private static final int MIN_EDAD_ALUMNADO = 16;
   private String nombre;
@@ -33,6 +34,9 @@ public class Alumno {
   }
   //constructor copia de Alumno
   public Alumno(Alumno otroalumno){
+    if (otroalumno == null) {
+      throw new NullPointerException("El alumno no puede ser nulo");
+    }
     setNombre(nombre);
     setDni(dni);
     setCorreo(correo);
@@ -40,12 +44,6 @@ public class Alumno {
     setFechaNacimiento(fechaNacimiento);
     setNia(nia);
   }
-
-  public String imprimir() {
-
-    return "Nombre: " + getNombre() + "\nDNI: " + getDni() + "\nCorreo: " + getCorreo() + "\nTelefono: " + getTelefono() + "\nFecha Nacimiento: " + getFechaNacimiento();
-  }
-
 
   //metodo para eliminar los espacios en blanco
   private String formateaNombre(){
@@ -135,7 +133,9 @@ public class Alumno {
 
   private void setNia(String nia) {
 
-    if (nia == null) {
+    if (!nia.matches(ER_NIA)) {
+      throw new IllegalArgumentException("Nia incorrecto.");
+    } else if (nia == null) {
       throw new NullPointerException("El nia no puede ser nulo");
     }  else if (!nia.substring(0,4).equals(nombre.substring(0,4).toLowerCase()) && !nia.substring(5,7).equals(dni.substring(5,7)) ) {
       throw new IllegalArgumentException("El nia no es correcto");
@@ -167,7 +167,9 @@ public class Alumno {
   }
 
   public void setTelefono(String telefono) {
-    if (telefono == null) {
+    if (!telefono.matches(ER_TELEFONO)) {
+      throw new IllegalArgumentException("ERROR: El teléfono del alumno no tiene un formato válido.");
+    }else if (telefono == null) {
       throw new NullPointerException("El telefono no puede ser nulo");
     } else if (telefono.isBlank()) {
       throw new IllegalArgumentException("El telefono no puede estar en blanco");
@@ -185,7 +187,9 @@ public class Alumno {
   }
 
   public void setCorreo(String correo) {
-    if (correo == null) {
+    if (!correo.matches(ER_CORREO)) {
+      throw new IllegalArgumentException("ERROR: El correo del alumno no tiene un formato válido.");
+    }else if (correo == null) {
       throw new NullPointerException("ERROR: El correo de un alumno no puede ser nulo.");
     } else if (!correo.contains("@")) {
       throw new IllegalArgumentException("El correo no contiene '@': " + correo);
@@ -219,7 +223,9 @@ public class Alumno {
   }
 
   private void setFechaNacimiento(LocalDate fechaNacimiento) {
-    if (LocalDate.now().getYear() - fechaNacimiento.getYear()  < MIN_EDAD_ALUMNADO) {
+    if (fechaNacimiento == null) {
+      throw new NullPointerException("ERROR: La fecha de nacimiento no puede ser nula");
+    }else if (LocalDate.now().getYear() - fechaNacimiento.getYear()  < MIN_EDAD_ALUMNADO) {
       throw new IllegalArgumentException("ERROR: El Alumno no puede tener menos de 16 años");
     }
     this.fechaNacimiento = fechaNacimiento;
@@ -238,16 +244,14 @@ public class Alumno {
     return Objects.hash(ER_DNI, dni);
   }
 
+  public String imprimir(){
+    return String.format("nombre=%s (%s), DNI=%s, correo=%s, teléfono=%s, fecha nacimiento=%s",this.getNombre(), this.getIniciales(), this.getDni(), this.getCorreo(), this.getTelefono(), this.getFechaNacimiento().format(DateTimeFormatter.ofPattern(FORMATO_FECHA)));
+  }
+
   @Override
   public String toString() {
-    return "Alumno{" +
-            "nombre='" + nombre + '\'' +
-            ", telefono='" + telefono + '\'' +
-            ", correo='" + correo + '\'' +
-            ", dni='" + dni + '\'' +
-            ", fechaNacimiento=" + fechaNacimiento +
-            ", nia='" + nia + '\'' +
-            '}';
+
+    return String.format("Número de Identificación del Alumnado (NIA)=%s " + "nombre=%s (%s), DNI=%s, correo=%s, teléfono=%s, fecha nacimiento=%s", this.getNia(), imprimir());
   }
 
 

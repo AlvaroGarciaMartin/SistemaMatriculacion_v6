@@ -86,7 +86,9 @@ public class Matricula {
         String regex = "^(\\d{2})-(\\d{2})$";
         Pattern patron = Pattern.compile(regex);
         Matcher coincidencia = patron.matcher(cursoAcademico);
-        if (!coincidencia.matches()) {
+        if (!cursoAcademico.matches(ER_CURSO_ACADEMICO)){
+            throw new RuntimeException("ERROR: El curso académico introducido no tiene un formato adecuado.");
+        } else if (!coincidencia.matches()) {
             throw new RuntimeException("ERROR: El curso académico introducido no es correcto.");
         }
         this.cursoAcademico = cursoAcademico;

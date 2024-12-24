@@ -105,30 +105,9 @@ private Matricula[] coleccionMatriculas;
         return capacidad;
     }
 
-    public void setCapacidad(int capacidad) {
-        if (capacidad <= 0) {
-            throw new IllegalArgumentException("ERROR: La capacidad debe ser mayor que cero.");
-
-        }
-        this.capacidad = capacidad;
-    }
 
     public int getTamano() {
         return tamano;
     }
 
-    public void setTamano(int tamano) {
-        if (capacidad <= 0) {
-            throw new IllegalArgumentException("ERROR: La capacidad debe ser mayor que cero.");
-        }
-        this.tamano = tamano;
-    }
-
-    public Matricula[] getColeccionMatriculas() {
-        return coleccionMatriculas;
-    }
-
-    public void setColeccionMatriculas(Matricula[] coleccionMatriculas) {
-        this.coleccionMatriculas = coleccionMatriculas;
-    }
 }
