@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Objects;
 
 public class Asignatura {
-  public static final int MAX_NUM_HORAS_ANUALES=20;
+  public static final int MAX_NUM_HORAS_ANUALES=300;
   public static final int MAX_NUM_HORAS_DESDOBLES=10;
   private static final String ER_CODIGO="^\\d{4}$";
   private String codigo;
@@ -27,6 +27,9 @@ public class Asignatura {
     setCicloFormativo(cicloFormativo);
   }
   public Asignatura(Asignatura asignatura) {
+      if (asignatura==null){
+          throw new NullPointerException("ERROR: No es posible copiar una asignatura nula.");
+      }
       setCodigo(codigo);
       setNombre(nombre);
       setHorasAnuales(horasAnuales);
@@ -42,13 +45,16 @@ public class Asignatura {
     }
 
     private void setCodigo(String codigo) {
-        if (codigo == null) {
+        if(codigo==null){
             throw new NullPointerException("ERROR: El código de una asignatura no puede ser nulo.");
-        }else if (codigo.isBlank()) {
-            throw new IllegalArgumentException("ERROR: El código de una asignatura no puede estar vacío.");
-        }else if (codigo.length() != 4) {
-            throw new IllegalArgumentException("ERROR: El código de la asignatura debe ser de 4 caracteres.");
         }
+        if(codigo.isBlank()||codigo.isEmpty()){
+            throw new IllegalArgumentException("ERROR: El código de una asignatura no puede estar vacío.");
+        }
+        if (!codigo.matches(ER_CODIGO)){
+            throw new IllegalArgumentException("ERROR: El código de la asignatura no tiene un formato válido.");
+        }
+
         this.codigo = codigo;
     }
 
@@ -57,6 +63,13 @@ public class Asignatura {
     }
 
     public void setNombre(String nombre) {
+        if (nombre == null) {
+            throw new NullPointerException("ERROR: El nombre de una asignatura no puede ser nulo.");
+        } else if (nombre.isBlank()) {
+            throw new IllegalArgumentException("ERROR: El nombre de una asignatura no puede estar vacío.");
+        }else if (nombre.isEmpty()) {
+            throw new IllegalArgumentException("ERROR: El nombre de una asignatura no puede estar vacío.");
+        }
         this.nombre = nombre;
     }
 
@@ -65,6 +78,9 @@ public class Asignatura {
     }
 
     public void setHorasAnuales(int horasAnuales) {
+        if(horasAnuales<=0||horasAnuales>MAX_NUM_HORAS_ANUALES){
+            throw new IllegalArgumentException("ERROR: El número de horas de una asignatura no puede ser menor o igual a 0 ni mayor a 300.");
+        }
         this.horasAnuales = horasAnuales;
     }
 
@@ -73,6 +89,11 @@ public class Asignatura {
     }
 
     public void setCurso(Curso curso) {
+        if (curso == null) {
+            throw new NullPointerException("ERROR: El curso de una asignatura no puede ser nulo.");
+        }else if (curso != Curso.PRIMERO && curso != Curso.SEGUNDO) {
+            throw new IllegalArgumentException("ERROR: El curso de una asignatura debe ser Primero o Segundo.");
+        }
         this.curso = curso;
     }
 
@@ -81,6 +102,9 @@ public class Asignatura {
     }
 
     public void setHorasDesdoble(int horasDesdoble) {
+        if (horasDesdoble<0||horasDesdoble>MAX_NUM_HORAS_DESDOBLES){
+            throw new IllegalArgumentException("ERROR: El número de horas de desdoble de una asignatura no puede ser menor a 0 ni mayor a 10.");
+        }
         this.horasDesdoble = horasDesdoble;
     }
 
@@ -89,6 +113,9 @@ public class Asignatura {
     }
 
     public void setEspecialidadProfesorado(EspecialidadProfesorado especialidadProfesorado) {
+        if (especialidadProfesorado == null) {
+            throw new NullPointerException("ERROR: La especialidadProfesorado de una asignatura no puede ser nulo.");
+        }
         this.especialidadProfesorado = especialidadProfesorado;
     }
 
@@ -115,19 +142,12 @@ public class Asignatura {
 
     @Override
     public String toString() {
-        return "Asignatura{" +
-                "MAX_NUM_HORAS_ANUALES=" + MAX_NUM_HORAS_ANUALES +
-                ", MAX_NUM_HORAS_DESDOBLES=" + MAX_NUM_HORAS_DESDOBLES +
-                ", codigo='" + codigo + '\'' +
-                ", nombre='" + nombre + '\'' +
-                ", horasAnuales=" + horasAnuales +
-                ", curso=" + curso +
-                ", horasDesdoble=" + horasDesdoble +
-                ", especialidadProfesorado=" + especialidadProfesorado +
-                ", cicloFormativo=" + cicloFormativo +
-                '}';
+        return
+                "Código=" + codigo +", nombre=" + nombre + ", horas anuales=" + horasAnuales +", curso=" + curso +
+                        ", horas desdoble=" + horasDesdoble + ", ciclo formativo=Código ciclo formativo=" +cicloFormativo.getCodigo()+ ", nombre ciclo formativo="+ cicloFormativo.getNombre()+
+                        ", especialidad profesorado=" + especialidadProfesorado;
     }
-    public String imprimir() {
-        return codigo + " " + nombre + " " + horasAnuales + " " + curso + " " + horasDesdoble + " " + especialidadProfesorado + " " + cicloFormativo;
+    public String imprimir(){
+        return "Código asignatura="+codigo+", nombre asignatura="+nombre+", ciclo formativo=Código ciclo formativo="+cicloFormativo.getCodigo()+ ", nombre ciclo formativo="+cicloFormativo.getNombre();
     }
 }
