@@ -5,7 +5,13 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
-import java.util.regex.*;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class Alumno {
@@ -30,23 +36,23 @@ public class Alumno {
     setCorreo(correo);
     setTelefono(telefono);
     setFechaNacimiento(fechaNacimiento);
-    setNia(nia);
+    setNia();
   }
   //constructor copia de Alumno
-  public Alumno(Alumno otroalumno){
-    if (otroalumno == null) {
-      throw new NullPointerException("El alumno no puede ser nulo");
+  public Alumno(Alumno alumno){
+    if (alumno==null){
+      throw new NullPointerException("ERROR: No es posible copiar un alumno nulo.");
     }
-    setNombre(nombre);
-    setDni(dni);
-    setCorreo(correo);
-    setTelefono(telefono);
-    setFechaNacimiento(fechaNacimiento);
-    setNia(nia);
+    setNombre(alumno.getNombre());
+    setDni(alumno.getDni());
+    setCorreo(alumno.getCorreo());
+    setTelefono(alumno.getTelefono());
+    setFechaNacimiento(alumno.getFechaNacimiento());
+    setNia(alumno.getNia());
   }
 
   //metodo para eliminar los espacios en blanco
-  private String formateaNombre(){
+  private String formateaNombre(String nombre) {
     String [] nombreNormalizado=nombre.split(" ");
 
 
@@ -150,15 +156,14 @@ public class Alumno {
   }
 
   public void setNombre(String nombre) {
-    if (nombre == null) {
-      throw new NullPointerException("ERROR: El nombre no puede ser nulo");
-    } else if (nombre.isBlank()) {
-      throw new IllegalArgumentException("ERROR: El nombre no puede estar en blanco");
-    } else if (nombre.isEmpty()) {
-      throw new IllegalArgumentException("ERROR: El nombre no puede estar vacio");
+    if (nombre==null){
+      throw new NullPointerException("ERROR: El nombre de un alumno no puede ser nulo.");
     }
-    this.nombre = formateaNombre();
+    if (nombre.isEmpty() || nombre.isBlank()){
+      throw new IllegalArgumentException("ERROR: El nombre de un alumno no puede estar vacío.");
+    }
 
+    this.nombre = formateaNombre(nombre);
   }
 
   public String getTelefono() {
@@ -181,24 +186,21 @@ public class Alumno {
     this.telefono = telefono;
   }
 
+
   public String getCorreo() {
 
     return correo;
   }
 
   public void setCorreo(String correo) {
-    if (!correo.matches(ER_CORREO)) {
-      throw new IllegalArgumentException("ERROR: El correo del alumno no tiene un formato válido.");
-    }else if (correo == null) {
+    if (correo==null){
       throw new NullPointerException("ERROR: El correo de un alumno no puede ser nulo.");
-    } else if (!correo.contains("@")) {
-      throw new IllegalArgumentException("El correo no contiene '@': " + correo);
-    } else if (!correo.contains(".")) {
-      throw new IllegalArgumentException("El correo no contiene dominio adecuado ");
-    } else if (!(correo.endsWith(".com") || correo.endsWith(".es"))) {
-      throw new IllegalArgumentException("El correo no tiene dominio adecuado");
-    } else if (correo.isBlank()) {
-      throw new IllegalArgumentException("El correo no puede estar en blanco");
+    }
+    if (correo.isEmpty() || correo.isBlank()){
+      throw new IllegalArgumentException("ERROR: El correo del alumno no tiene un formato válido.");
+    }
+    if (!correo.matches(ER_CORREO)){
+      throw new IllegalArgumentException("ERROR: El correo del alumno no tiene un formato válido.");
     }
     this.correo = correo;
   }
@@ -210,9 +212,9 @@ public class Alumno {
 
   private void setDni(String dni) {
     if (dni == null) {
-      throw new NullPointerException("El dni no puede ser nulo");
+      throw new NullPointerException("ERROR: El dni de un alumno no puede ser nulo.");
     } else if (comprobarLetraDni()==false) {
-      throw new IllegalArgumentException("El dni no es correcto");
+      throw new IllegalArgumentException("ERROR: El dni no es correcto");
     }
     this.dni = dni;
   }
