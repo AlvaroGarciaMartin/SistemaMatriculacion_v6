@@ -9,7 +9,7 @@ import java.util.*;
 
 public class Asignaturas {
     private int capacidad;
-    private int tamano;
+    private int tamano=0;
     private Asignatura[] coleccionAsignaturas;
 
     public Asignaturas(int capacidad){
@@ -33,6 +33,9 @@ public class Asignaturas {
     }
     //Buscar indice
     private int buscarIndice(Asignatura asignatura) {
+        if (asignatura == null) {
+            throw new NullPointerException("ERROR: No se puede buscar una Asignatura nula.");
+        }
 
         int indice = 0;
         boolean asignaturaEncontrado = false;
@@ -71,7 +74,9 @@ public class Asignaturas {
     }
     //buscar Asignatura
     public Asignatura buscar(Asignatura asignatura) {
-
+        if (asignatura == null) {
+            throw new NullPointerException("ERROR: No se puede buscar una Asignatura nula.");
+        }
         int indice = buscarIndice(asignatura);
         if (tamanoSuperado(indice)) {
             return null;
@@ -80,12 +85,12 @@ public class Asignaturas {
         }
     }
     //borrar Asignatura
-    public void borrar (Asignatura asignatura) {
+    public void borrar (Asignatura asignatura) throws OperationNotSupportedException {
         Objects.requireNonNull(asignatura,"ERROR: No se puede borrar una Asignatura nulo.");
 
         int indice = buscarIndice(asignatura);
         if (tamanoSuperado(indice)){
-            throw new IllegalArgumentException("ERROR: No existe ningúna Asignatura como la indicada.");
+            throw new OperationNotSupportedException("ERROR: No existe ningúna Asignatura como la indicada.");
         }
         else{
             desplazarUnaPosicionHaciaIzquierda(indice);

@@ -10,7 +10,7 @@ import java.util.*;
 public class Alumnos {
 
     private int capacidad;
-    private int tamano;
+    private int tamano=0;
     private Alumno[] coleccionAlumnos;
 
 
@@ -40,6 +40,9 @@ public class Alumnos {
     }
 
     private int buscarIndice(Alumno alumno) {
+        if (alumno == null) {
+            throw new NullPointerException("ERROR: No se puede buscar un alumno nulo.");
+        }
 
         int indice = 0;
         boolean alumnoEncontrado = false;
@@ -77,7 +80,9 @@ public class Alumnos {
     }
     //buscar alumno
     public Alumno buscar(Alumno alumno) {
-
+        if (alumno == null) {
+            throw new NullPointerException("ERROR: No se puede buscar un alumno nulo.");
+        }
         int indice = buscarIndice(alumno);
         if (tamanoSuperado(indice)) {
             return null;
@@ -86,12 +91,12 @@ public class Alumnos {
         }
     }
     //borrar alumno
-    public void borrar (Alumno alumno) {
+    public void borrar (Alumno alumno) throws OperationNotSupportedException {
         Objects.requireNonNull(alumno,"ERROR: No se puede borrar un alumno nulo.");
 
         int indice = buscarIndice(alumno);
         if (tamanoSuperado(indice)){
-            throw new IllegalArgumentException("ERROR: No existe ningún alumno como el indicado.");
+            throw new OperationNotSupportedException("ERROR: No existe ningún alumno como el indicado.");
         }
         else{
             desplazarUnaPosicionHaciaIzquierda(indice);
