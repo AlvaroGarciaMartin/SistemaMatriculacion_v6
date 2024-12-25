@@ -7,7 +7,7 @@ import java.util.*;
 
 public class CiclosFormativos {
     private int capacidad;
-    private int tamano;
+    private int tamano=0;
     private CicloFormativo[] coleccionCiclosFormativos;
 
     public CiclosFormativos(int capacidad) {
@@ -32,6 +32,9 @@ public class CiclosFormativos {
     }
     //Buscar indice
     private int buscarIndice(CicloFormativo cicloFormativo) {
+        if (cicloFormativo == null) {
+            throw new IllegalArgumentException("ERROR: No se puede buscar un Ciclo Formativo nulo.");
+        }
 
         int indice = 0;
         boolean cicloFormativoEncontrado = false;
@@ -70,6 +73,9 @@ public class CiclosFormativos {
     }
     //buscar ciclo
     public CicloFormativo buscar(CicloFormativo cicloFormativo) {
+        if (cicloFormativo == null) {
+            throw new NullPointerException("ERROR: No se puede buscar un Ciclo Formativo nulo.");
+        }
 
         int indice = buscarIndice(cicloFormativo);
         if (tamanoSuperado(indice)) {
@@ -79,12 +85,12 @@ public class CiclosFormativos {
         }
     }
     //borrar ciclo
-    public void borrar (CicloFormativo cicloFormativo) {
+    public void borrar (CicloFormativo cicloFormativo) throws OperationNotSupportedException {
         Objects.requireNonNull(cicloFormativo,"ERROR: No se puede borrar un Ciclo Formativo nulo.");
 
         int indice = buscarIndice(cicloFormativo);
         if (tamanoSuperado(indice)){
-            throw new IllegalArgumentException("ERROR: No existe ningún Ciclo Formativo como el indicado.");
+            throw new OperationNotSupportedException("ERROR: No existe ningún Ciclo Formativo como el indicado.");
         }
         else{
             desplazarUnaPosicionHaciaIzquierda(indice);

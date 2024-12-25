@@ -8,7 +8,7 @@ import java.util.Objects;
 
 public class Matriculas {
 private int capacidad;
-private int tamano;
+private int tamano=0;
 private Matricula[] coleccionMatriculas;
 
     public Matriculas(int capacidad) {
@@ -33,6 +33,9 @@ private Matricula[] coleccionMatriculas;
     }
     //Buscar indice
     private int buscarIndice(Matricula matricula) {
+        if (matricula == null) {
+            throw new IllegalArgumentException("ERROR: No se puede buscar una Matricula nula.");
+        }
 
         int indice = 0;
         boolean matriculaEncontrado = false;
@@ -71,6 +74,9 @@ private Matricula[] coleccionMatriculas;
     }
     //buscar Matricula
     public Matricula buscar(Matricula matricula) {
+        if (matricula == null) {
+            throw new NullPointerException("ERROR: No se puede buscar una Matricula nula.");
+        }
 
         int indice = buscarIndice(matricula);
         if (tamanoSuperado(indice)) {
@@ -80,12 +86,12 @@ private Matricula[] coleccionMatriculas;
         }
     }
     //borrar Matricula
-    public void borrar (Matricula matricula) {
+    public void borrar (Matricula matricula) throws OperationNotSupportedException {
         Objects.requireNonNull(matricula,"ERROR: No se puede borrar una Matricula nulo.");
 
         int indice = buscarIndice(matricula);
         if (tamanoSuperado(indice)){
-            throw new IllegalArgumentException("ERROR: No existe ningúna Matricula como la indicada.");
+            throw new OperationNotSupportedException("ERROR: No existe ningúna Matricula como la indicada.");
         }
         else{
             desplazarUnaPosicionHaciaIzquierda(indice);

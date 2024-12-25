@@ -257,6 +257,8 @@ public class MainApp {
             System.out.println("ERROR: No se puede borrar un ciclo formativo nulo.");
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
+        } catch (OperationNotSupportedException e) {
+            throw new RuntimeException(e);
         }
     }
     //mostrar CicloFormativo
