@@ -54,7 +54,6 @@ public class Consola {
             dni = Entrada.cadena();
         }while (dni.isBlank()||dni.isEmpty());
        do {
-           System.out.println("\nIntroduce la fecha de nacimiento del alumno: ");
             String mensaje = "Introduce la fecha de nacimiento del alumno:";
            fechaNacimiento = leerFecha(mensaje);
        }while (fechaNacimiento == null);

@@ -7,18 +7,23 @@ import javax.naming.OperationNotSupportedException;
 import java.time.LocalDate;
 
 
+
 public class MainApp {
     public static final int CAPACIDAD=3;
-    private static CiclosFormativos ciclosFormativos;
+    private static CiclosFormativos ciclosFormativos = new CiclosFormativos(CAPACIDAD);
     private static Alumnos alumnos = new Alumnos(CAPACIDAD);
     private static Asignaturas asignaturas= new Asignaturas(CAPACIDAD);
     private static Matriculas matriculas= new Matriculas(CAPACIDAD);
 
 
     public static void main(String[] args) {
-        Consola.mostrarMenu();
-        Opcion opcion= Consola.elegirOpcion();
-        ejecutarOpcion(opcion);
+        Opcion opcion;
+        do {
+            Consola.mostrarMenu();
+            opcion= Consola.elegirOpcion();
+            ejecutarOpcion(opcion);
+        }while(opcion!=Opcion.SALIR);
+
         System.out.println("Hasta luego!!!!");
     }
 

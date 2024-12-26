@@ -99,6 +99,9 @@ public class Alumno {
         resultado=true;
 
       }
+    if (letra != LETRAS_DNI[posicionLetra]) {
+      throw new IllegalArgumentException("ERROR: La letra del dni del alumno no es correcta.");
+    }
 
 
     return resultado;
@@ -134,7 +137,7 @@ public class Alumno {
     nNombre=nombre.substring(0,4).toLowerCase();
     nDni=dni.substring(5,8);
     nia=nNombre+nDni;
-    return nombre;
+    return nia;
   }
 
   private void setNia(String nia) {
@@ -176,12 +179,8 @@ public class Alumno {
       throw new IllegalArgumentException("ERROR: El teléfono del alumno no tiene un formato válido.");
     }else if (telefono == null) {
       throw new NullPointerException("El telefono no puede ser nulo");
-    } else if (telefono.isBlank()) {
+    } else if (telefono.isBlank() || telefono.isEmpty()) {
       throw new IllegalArgumentException("El telefono no puede estar en blanco");
-    } else if (telefono.isEmpty()) {
-      throw new IllegalArgumentException("El telefono no puede estar vacio");
-    } else if (telefono.length()!=9) {
-      throw new IllegalArgumentException("El telefono no es correcto");
     }
     this.telefono = telefono;
   }
@@ -195,13 +194,12 @@ public class Alumno {
   public void setCorreo(String correo) {
     if (correo==null){
       throw new NullPointerException("ERROR: El correo de un alumno no puede ser nulo.");
-    }
-    if (correo.isEmpty() || correo.isBlank()){
+    }else if (!correo.matches(ER_CORREO)){
+      throw new IllegalArgumentException("ERROR: El correo del alumno no tiene un formato válido.");
+    }else if (correo.isEmpty() || correo.isBlank()){
       throw new IllegalArgumentException("ERROR: El correo del alumno no tiene un formato válido.");
     }
-    if (!correo.matches(ER_CORREO)){
-      throw new IllegalArgumentException("ERROR: El correo del alumno no tiene un formato válido.");
-    }
+
     this.correo = correo;
   }
 
