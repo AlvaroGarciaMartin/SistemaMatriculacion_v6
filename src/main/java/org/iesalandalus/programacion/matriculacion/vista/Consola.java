@@ -29,7 +29,6 @@ public class Consola {
     }
 
     public static Alumno leerAlumno() {
-        Alumno alumno= null;
         String nombre;
         String telefono;
         String correo;
@@ -81,7 +80,7 @@ public class Consola {
     }
 
     public static LocalDate leerFecha(String mensaje) {
-        LocalDate fecha = null;
+        LocalDate fecha = Alumno.getFechaNacimiento();
         boolean fechaCorrecta = false;
         do{
             try {

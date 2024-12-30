@@ -57,7 +57,9 @@ public class Alumnos {
     }
     //Insertar Alumno
     public void insertar(Alumno alumno) throws OperationNotSupportedException {
-        Objects.requireNonNull(alumno, "ERROR: No se puede insertar un alumno nulo.");
+        if (alumno == null) {
+          throw new NullPointerException("ERROR: No se puede insertar un alumno nulo.");
+        }
 
         int indice = buscarIndice(alumno);
         if (capacidadSuperada(indice)) {

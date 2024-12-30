@@ -26,15 +26,15 @@ public class Alumno {
   private String telefono;
   private String correo;
   private String dni;
-  private LocalDate fechaNacimiento;
+  private static LocalDate fechaNacimiento;
   private String nia;
 
 //constructor Alumno CON PARAMETROS
-  public Alumno(String nombre,String dni,String correo,String telefono,LocalDate fechaNacimiento){
+  public Alumno(String nombre,String telefono,String correo,String dni,LocalDate fechaNacimiento){
     setNombre(nombre);
-    setDni(dni);
-    setCorreo(correo);
     setTelefono(telefono);
+    setCorreo(correo);
+    setDni(dni);
     setFechaNacimiento(fechaNacimiento);
     setNia();
   }
@@ -217,15 +217,15 @@ public class Alumno {
     this.dni = dni;
   }
 
-  public LocalDate getFechaNacimiento() {
+  public static LocalDate getFechaNacimiento() {
 
     return fechaNacimiento;
   }
 
   private void setFechaNacimiento(LocalDate fechaNacimiento) {
     if (fechaNacimiento == null) {
-      throw new NullPointerException("ERROR: La fecha de nacimiento no puede ser nula");
-    }else if (LocalDate.now().getYear() - fechaNacimiento.getYear()  < MIN_EDAD_ALUMNADO) {
+      throw new IllegalArgumentException("ERROR: La fecha de nacimiento no puede ser nula");
+    }else if ((LocalDate.now().getYear() - fechaNacimiento.getYear()) < MIN_EDAD_ALUMNADO) {
       throw new IllegalArgumentException("ERROR: El Alumno no puede tener menos de 16 años");
     }
     this.fechaNacimiento = fechaNacimiento;
