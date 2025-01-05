@@ -2,9 +2,7 @@ package org.iesalandalus.programacion.matriculacion.dominio;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Objects;
+import java.util.*;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
@@ -73,13 +71,12 @@ public class Alumno {
 
 
   }
-  private boolean comprobarLetraDni() {
-    String udni=getDni();
+  private boolean comprobarLetraDni( String dni) {
     boolean resultado = false;
     int numero;
     char letra;
     Pattern patron=Pattern.compile("^(\\d{8})([A-Za-z]{1})$");
-    Matcher comparador=patron.matcher(udni);
+    Matcher comparador=patron.matcher(dni);
     char[] LETRAS_DNI = {'T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P', 'D', 'X', 'B', 'N', 'J', 'Z', 'S', 'Q', 'V', 'H', 'L', 'C', 'K', 'E'};
     if (comparador.matches()) {
       numero = Integer.parseInt(comparador.group(1));
@@ -211,7 +208,7 @@ public class Alumno {
   private void setDni(String dni) {
     if (dni == null) {
       throw new NullPointerException("ERROR: El dni de un alumno no puede ser nulo.");
-    } else if (comprobarLetraDni()==false) {
+    } else if (comprobarLetraDni(dni)==false) {
       throw new IllegalArgumentException("ERROR: El dni no es correcto");
     }
     this.dni = dni;
@@ -250,8 +247,8 @@ public class Alumno {
 
   @Override
   public String toString() {
-
-    return String.format("Número de Identificación del Alumnado (NIA)=%s " + "nombre=%s (%s), DNI=%s, correo=%s, teléfono=%s, fecha nacimiento=%s", this.getNia(), imprimir());
+    // return String.format("Número de Identificación del Alumnado (NIA)=%s " + "nombre=%s (%s) , DNI=%s, correo=%s, teléfono=%s, fecha nacimiento=%s", this.getNia(), imprimir());
+    return String.format("Número de Identificación del Alumnado (NIA)=%s " + "nombre=%s (%s), DNI=%s, correo=%s, teléfono=%s, fecha nacimiento=%s",this.getNia(), this.getNombre(), Arrays.toString(this.getIniciales()), this.getDni(), this.getCorreo(), this.getTelefono(),this.getFechaNacimiento().format(DateTimeFormatter.ofPattern(FORMATO_FECHA)));
   }
 
 

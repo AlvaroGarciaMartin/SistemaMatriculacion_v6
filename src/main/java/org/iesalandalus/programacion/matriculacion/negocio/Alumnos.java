@@ -41,7 +41,7 @@ public class Alumnos {
 
     private int buscarIndice(Alumno alumno) {
         if (alumno == null) {
-            throw new NullPointerException("ERROR: No se puede buscar un alumno nulo.");
+            throw new NullPointerException("ERROR: 1.No se puede buscar un alumno nulo.");
         }
 
         int indice = 0;
@@ -83,7 +83,7 @@ public class Alumnos {
     //buscar alumno
     public Alumno buscar(Alumno alumno) {
         if (alumno == null) {
-            throw new NullPointerException("ERROR: No se puede buscar un alumno nulo.");
+            throw new NullPointerException("ERROR: 2.No se puede buscar un alumno nulo.");
         }
         int indice = buscarIndice(alumno);
         if (tamanoSuperado(indice)) {

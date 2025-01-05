@@ -134,7 +134,7 @@ public class MainApp {
                 System.out.println("No existe ningun alumno con tales datos.");
             }
         } catch (NullPointerException e) {
-            System.out.println("ERROR: No se puede buscar un Alumno nulo.");
+            System.out.println("ERROR: 3.No se puede buscar un Alumno nulo.");
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
@@ -229,9 +229,9 @@ public class MainApp {
         try {
             CicloFormativo ciclosFormativo = Consola.leerCicloFormativo(ciclosFormativos);
             ciclosFormativos.insertar(ciclosFormativo);
-            System.out.println("Asignatura insertada correctamente.");
+            System.out.println("Ciclo formativo insertada correctamente.");
         } catch (NullPointerException e) {
-            System.out.println("ERROR: No se puede insertar una Asignatura nula.");
+            System.out.println("ERROR: No se puede insertar Ciclo Formativo nulo.");
         } catch (OperationNotSupportedException e) {
             System.out.println(e.getMessage());
         }

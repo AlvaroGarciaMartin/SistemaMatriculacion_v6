@@ -30,13 +30,13 @@ public class Asignatura {
       if (asignatura==null){
           throw new NullPointerException("ERROR: No es posible copiar una asignatura nula.");
       }
-      setCodigo(codigo);
-      setNombre(nombre);
-      setHorasAnuales(horasAnuales);
-      setCurso(curso);
-      setHorasDesdoble(horasDesdoble);
-      setEspecialidadProfesorado(especialidadProfesorado);
-      setCicloFormativo(cicloFormativo);
+      setCodigo(asignatura.codigo);
+      setNombre(asignatura.nombre);
+      setHorasAnuales(asignatura.horasAnuales);
+      setCurso(asignatura.curso);
+      setHorasDesdoble(asignatura.horasDesdoble);
+      setEspecialidadProfesorado(asignatura.especialidadProfesorado);
+      setCicloFormativo(asignatura.cicloFormativo);
   }
 
 

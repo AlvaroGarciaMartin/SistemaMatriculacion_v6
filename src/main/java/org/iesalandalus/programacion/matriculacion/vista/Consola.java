@@ -69,13 +69,14 @@ public class Consola {
         String telefono="111111111";
         String correo="ficticio@inventado.es";
         String dni="00000000A";
-        LocalDate fechaNacimiento= LocalDate.now();
+        LocalDate fechaNacimiento= LocalDate.of(1991, 12, 12);
 
         do {
             System.out.println("\nIntroduce el DNI del alumno: ");
             dni = Entrada.cadena();
         }while (dni.trim().isBlank()||dni.trim().isEmpty());
         alumno= new Alumno(nombre, telefono, correo, dni, fechaNacimiento);
+
         return new Alumno(alumno);
     }
 
@@ -99,7 +100,7 @@ public class Consola {
         int seleccion;
         do{
             System.out.println("Introduzca un Grado");
-
+            System.out.println("1.GDCFGB\n2.GDCFGM\n3.GDCFGS");
             for (Grado grado: Grado.values()){
                 grado.imprimir();
             }
@@ -163,6 +164,7 @@ public class Consola {
         int seleccion;
         do{
             System.out.println("Introduzca un Curso");
+            System.out.println("1.Curso 1\n2.Curso 2");
             for (Curso curso: Curso.values()){
                 curso.imprimir();
             }
@@ -216,6 +218,7 @@ public class Consola {
         } while (horasDesdoble < 0);
         do {
             System.out.println("\nIntroduce la especialidad profesorada de la asignatura: ");
+            System.out.println("1.INFORMATICA\n2.SISTEMAS\n3.FOL");
             especialidadProfesorado = leerEspecialidadProfesorado();
         } while (especialidadProfesorado == null);
         do {

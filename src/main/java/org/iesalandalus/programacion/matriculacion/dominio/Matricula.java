@@ -27,7 +27,8 @@ public class Matricula {
         setIdMatricula(idMatricula);
         setCursoAcademico(cursoAcademico);
         setFechaMatriculacion(fechaMatriculacion);
-        this.fechaAnulacion = null;
+        //this.fechaAnulacion = null;
+        setFechaAnulacion(LocalDate.of(0001, 01, 01));
         setAlumno(alumno);
         setColeccionAsignaturas(coleccionAsignaturas);
     }
@@ -39,7 +40,7 @@ public class Matricula {
         setIdMatricula(matricula.getIdMatricula());
         setCursoAcademico(matricula.getCursoAcademico());
         setFechaMatriculacion(matricula.getFechaMatriculacion());
-        this.fechaAnulacion = matricula.getFechaAnulacion(); // Copiar fecha de anulación, puede ser nula
+        setFechaAnulacion(matricula.getFechaAnulacion()); // Copiar fecha de anulación, puede ser nula
         setAlumno(matricula.getAlumno());
         setColeccionAsignaturas(matricula.getColeccionAsignaturas());
     }
