@@ -133,6 +133,7 @@ public class Consola {
         } while (nombre.trim().isBlank() || nombre.trim().isEmpty());
         do {
             System.out.println("\nIntroduce las horas del ciclo formativo: ");
+            System.out.println("El maximo numero de horas es " + CicloFormativo.MAXIMO_NUMERO_HORAS);
             horas = Entrada.entero();
         } while (horas < 0);
         if (horas > CicloFormativo.MAXIMO_NUMERO_HORAS) {
@@ -164,7 +165,7 @@ public class Consola {
         int seleccion;
         do{
             System.out.println("Introduzca un Curso");
-            System.out.println("1.Curso 1\n2.Curso 2");
+            System.out.println("1.PRIMERO\n2.SEGUNDO");
             for (Curso curso: Curso.values()){
                 curso.imprimir();
             }
@@ -178,6 +179,7 @@ public class Consola {
         int seleccion;
         do{
             System.out.println("Introduzca una EspecialidadProfesorado");
+            System.out.println("1.INFORMATICA\n2.SISTEMAS\n3.FOL");
             for (EspecialidadProfesorado especialidadProfesorado: EspecialidadProfesorado.values()){
                 especialidadProfesorado.imprimir();
             }
@@ -218,7 +220,6 @@ public class Consola {
         } while (horasDesdoble < 0);
         do {
             System.out.println("\nIntroduce la especialidad profesorada de la asignatura: ");
-            System.out.println("1.INFORMATICA\n2.SISTEMAS\n3.FOL");
             especialidadProfesorado = leerEspecialidadProfesorado();
         } while (especialidadProfesorado == null);
         do {
@@ -281,9 +282,11 @@ public class Consola {
         idMatricula = Entrada.entero();
 
         System.out.println("Introduzca el Curso Académico.");
+        System.out.println("El curso academico tiene que tener el formato 24-25");
         cursoAcademico = Entrada.cadena();
 
         String mensaje= "Introduzca la Fecha de matriculación.";
+        System.out.println("La fecha de matriculación como maximo puede ser de 15 días anterior al día actual");
         fechaMatriculacion = leerFecha(mensaje);
 
         alumno= leerAlumno();

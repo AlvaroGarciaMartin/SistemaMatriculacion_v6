@@ -85,7 +85,7 @@ public class MainApp {
                 System.out.println("Insertar matricula");
                 break;
             case BUSCAR_MATRICULA:
-                buscarAsignatura();
+                buscarMatricula();
                 System.out.println("Buscar matricula");
                 break;
             case ANULAR_MATRICULA:
@@ -312,14 +312,14 @@ public class MainApp {
     private static void anularMatricula() {
         try{
             Alumno alumno = Consola.getAlumnoPorDni();
-            Matricula matrioculaAnular = matriculas.buscar(Consola.getMatriculaPorIdentificador());
-            if (matrioculaAnular != null && matrioculaAnular.getAlumno().equals(alumno)) {
-                matriculas.borrar(matrioculaAnular);
+            Matricula matriculaAnular = matriculas.buscar(Consola.getMatriculaPorIdentificador());
+            if (matriculaAnular != null && matriculaAnular.getAlumno().equals(alumno)) {
+                matriculas.borrar(matriculaAnular);
                 System.out.println("indique la fecha de anulación:");
                 String fechaAnulacion = (Entrada.cadena());
                 LocalDate fechaAnular;
                 fechaAnular = LocalDate.parse(fechaAnulacion);
-                matrioculaAnular.setFechaAnulacion(fechaAnular);
+                matriculaAnular.setFechaAnulacion(fechaAnular);
                 System.out.println("Matricula anulada correctamente.");
             } else {
                 System.out.println("No se ha encontrado la matricula o no corresponde al alumno indicado.");

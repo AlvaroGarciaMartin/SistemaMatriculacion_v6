@@ -3,6 +3,7 @@ package org.iesalandalus.programacion.matriculacion.dominio;
 import javax.naming.OperationNotSupportedException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.regex.Matcher;
@@ -28,7 +29,7 @@ public class Matricula {
         setCursoAcademico(cursoAcademico);
         setFechaMatriculacion(fechaMatriculacion);
         //this.fechaAnulacion = null;
-        setFechaAnulacion(LocalDate.of(0001, 01, 01));
+        //setFechaAnulacion(LocalDate.of(0001, 01, 01));
         setAlumno(alumno);
         setColeccionAsignaturas(coleccionAsignaturas);
     }
@@ -40,7 +41,7 @@ public class Matricula {
         setIdMatricula(matricula.getIdMatricula());
         setCursoAcademico(matricula.getCursoAcademico());
         setFechaMatriculacion(matricula.getFechaMatriculacion());
-        setFechaAnulacion(matricula.getFechaAnulacion()); // Copiar fecha de anulación, puede ser nula
+        //setFechaAnulacion(matricula.getFechaAnulacion()); // Copiar fecha de anulación, puede ser nula
         setAlumno(matricula.getAlumno());
         setColeccionAsignaturas(matricula.getColeccionAsignaturas());
     }
@@ -144,7 +145,7 @@ public class Matricula {
         if (fechaAnulacion.isAfter(LocalDate.now())){
             throw new IllegalArgumentException("ERROR: La fecha de anulación de una matrícula no puede ser posterior a hoy.");
         }
-        if(fechaAnulacion.isAfter(getFechaMatriculacion().plusMonths(MAXIMO_MESES_ANTERIOR_ANULACION))){
+        if(fechaAnulacion.isBefore(getFechaMatriculacion().minus(MAXIMO_MESES_ANTERIOR_ANULACION, ChronoUnit.MONTHS))){
             throw new IllegalArgumentException("ERROR: La fecha de anulación no puede ser anterior a la fecha de matriculación.");
         }
         if(fechaAnulacion.isBefore(getFechaMatriculacion())){
