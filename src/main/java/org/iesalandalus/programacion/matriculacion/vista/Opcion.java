@@ -13,7 +13,7 @@ public enum Opcion {
     INSERTAR_ASIGNATURA("Insertar Asignatura"),
     BUSCAR_ASIGNATURA("Buscar Asignatura"),
     BORRAR_ASIGNATURA("Borrar Asignatura"),
-    MOSTRAR_ASIGNATURAS("Mostrar Asignaturasq"),
+    MOSTRAR_ASIGNATURAS("Mostrar Asignaturas"),
     INSERTAR_MATRICULA("Insertar Matricula"),
     BUSCAR_MATRICULA("Buscar Matricula"),
     ANULAR_MATRICULA("Anular Matricula"),

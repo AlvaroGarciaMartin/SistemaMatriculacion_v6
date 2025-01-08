@@ -77,7 +77,7 @@ public class MainApp {
                 System.out.println("Borrar asignatura");
                 break;
             case MOSTRAR_ASIGNATURAS:
-                mostrarAasignaturas();
+                mostrarAsignaturas();
                 System.out.println("Mostrar asignaturas");
                 break;
             case INSERTAR_MATRICULA:
@@ -192,8 +192,6 @@ public class MainApp {
             }
         } catch (NullPointerException e) {
             System.out.println("ERROR: No se puede buscar una asignatura nula.");
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
         }
     }
     //borrar Asignatura
@@ -211,7 +209,7 @@ public class MainApp {
         }
     }
     //mostrar Asignatura
-    private static void mostrarAasignaturas() {
+    private static void mostrarAsignaturas() {
         Asignatura [] arrayAsignatura = asignaturas.get();
         if (arrayAsignatura.length >0) {
             for (Asignatura asignatura : arrayAsignatura) {

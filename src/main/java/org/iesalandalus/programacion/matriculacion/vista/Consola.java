@@ -153,7 +153,7 @@ public class Consola {
         String familiaProfesional="ficticia";
         Grado grado=Grado.GDCFGB;
         String nombre="ficticio";
-        int horas=0;
+        int horas=1;
         do {
             System.out.println("\nIntroduce el codigo del ciclo formativo: ");
             codigo = Entrada.entero();
@@ -200,6 +200,7 @@ public class Consola {
         Asignatura asignatura;
         do {
             System.out.println("\nIntroduce el codigo de la asignatura: ");
+            System.out.println("El codigo debe tener un formato de 4 digitos.");
             codigo = Entrada.cadena();
         } while (codigo.trim().isBlank() || codigo.trim().isEmpty());
         do {
@@ -208,6 +209,7 @@ public class Consola {
         } while (nombre.trim().isBlank() || nombre.trim().isEmpty());
         do {
             System.out.println("\nIntroduce las horas anuales de la asignatura: ");
+            System.out.println("El numero de horas tiene que ser entre 0 y 300.");
             horasAnuales = Entrada.entero();
         } while (horasAnuales < 0);
         do {
@@ -216,6 +218,7 @@ public class Consola {
         } while (curso == null);
         do {
             System.out.println("\nIntroduce las horas desdoble de la asignatura: ");
+            System.out.println("El numero de horas de desdoble tiene que ser entre 0 y 10");
             horasDesdoble = Entrada.entero();
         } while (horasDesdoble < 0);
         do {
@@ -237,7 +240,7 @@ public class Consola {
         Curso curso=Curso.PRIMERO;
         int horasDesdoble=10;
         EspecialidadProfesorado especialidadProfesorado= EspecialidadProfesorado.SISTEMAS;
-        CicloFormativo cicloFormativo= new CicloFormativo(1, "ficticio", Grado.GDCFGB, "ficticio", 0);
+        CicloFormativo cicloFormativo= new CicloFormativo(1234, "ficticio", Grado.GDCFGB, "ficticio", 0);
         Asignatura asignatura;
         do {
             System.out.println("\nIntroduce el codigo de la asignatura: ");
