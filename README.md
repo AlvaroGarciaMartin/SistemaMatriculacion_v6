@@ -22,7 +22,7 @@ Cuando a través de la aplicación se realice la matrícula de un alumno/a no so
 la matrícula del alumno/a, también se deberá guardar el **identificador** de la matrícula, una cadena que represente el **curso académico** (debe 
 tener formato dd-dd, por ejemplo, 23-24), la **fecha** en la que se realiza la matrícula, y en caso de que en un futuro se anule la matrícula, 
 deberá quedar almacenada la **fecha de su anulación**.
-
+ 
 He subido a GitHub un esqueleto de proyecto gradle que ya lleva incluidos todos los test necesarios que el programa debe pasar. La URL del repositorio 
 es la siguiente: [repositorio GitHub con el esqueleto del proyecto](https://github.com/andresrubiodelrio/SistemaMatriculacion_v0).
 
