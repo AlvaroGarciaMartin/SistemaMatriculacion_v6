@@ -58,7 +58,7 @@ public class Consola {
        }while (fechaNacimiento == null);
 
 
-        return new Alumno(nombre, telefono, correo, dni, fechaNacimiento);
+        return new Alumno(nombre, dni, correo, telefono, fechaNacimiento);
 
     }
 
@@ -240,7 +240,7 @@ public class Consola {
         Curso curso=Curso.PRIMERO;
         int horasDesdoble=10;
         EspecialidadProfesorado especialidadProfesorado= EspecialidadProfesorado.SISTEMAS;
-        CicloFormativo cicloFormativo= new CicloFormativo(1234, "ficticio", Grado.GDCFGB, "ficticio", 0);
+        CicloFormativo cicloFormativo= new CicloFormativo(9999, "ficticio", Grado.GDCFGB, "ficticio", 200);
         Asignatura asignatura;
         do {
             System.out.println("\nIntroduce el codigo de la asignatura: ");
@@ -289,6 +289,7 @@ public class Consola {
         cursoAcademico = Entrada.cadena();
 
         String mensaje= "Introduzca la Fecha de matriculación.";
+
         System.out.println("La fecha de matriculación como maximo puede ser de 15 días anterior al día actual");
         fechaMatriculacion = leerFecha(mensaje);
 

@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
 
 public class Alumno {
 
-  private static final String ER_TELEFONO= "^\\d{9}$";
+  private static final String ER_TELEFONO= "\\d{9}";
   private static final String ER_CORREO="^\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$"; ;
   private static final String ER_DNI="^(\\d{8})([A-Za-z]{1})$";
   public static final String FORMATO_FECHA="dd/MM/yyyy";
@@ -28,14 +28,23 @@ public class Alumno {
   private String nia;
 
 //constructor Alumno CON PARAMETROS
-  public Alumno(String nombre,String telefono,String correo,String dni,LocalDate fechaNacimiento){
+ /* public Alumno(String nombre,String dni,String telefono,String correo,LocalDate fechaNacimiento){
     setNombre(nombre);
+    setDni(dni);
     setTelefono(telefono);
     setCorreo(correo);
-    setDni(dni);
     setFechaNacimiento(fechaNacimiento);
     setNia();
-  }
+  }*/
+public Alumno(String nombre, String dni, String correo, String telefono, LocalDate fechaNacimiento) {
+  setNombre(nombre);
+  setDni(dni);
+  setCorreo(correo);
+  setTelefono(telefono);
+  setFechaNacimiento(fechaNacimiento);
+  setNia();
+}
+
   //constructor copia de Alumno
   public Alumno(Alumno alumno){
     if (alumno==null){
@@ -48,6 +57,8 @@ public class Alumno {
     setFechaNacimiento(alumno.getFechaNacimiento());
     setNia(alumno.getNia());
   }
+
+
 
   //metodo para eliminar los espacios en blanco
   private String formateaNombre(String nombre) {
@@ -103,7 +114,7 @@ public class Alumno {
 
     return resultado;
   }
-  private String[] getIniciales() {
+  private String getIniciales() {
       String [] iniciales = nombre.split(" ");
 
 
@@ -115,12 +126,12 @@ public class Alumno {
       // Convertir la primera letra a mayúsculas y el resto a minúsculas.
       if (inicial.length() > 0) {
         String palabraFormateada = inicial.substring(0, 1).toUpperCase();
-        inicialesFormateado.append(palabraFormateada).append("");
+        inicialesFormateado.append(palabraFormateada);
 
       }
     }
 
-      return inicialesFormateado.toString().split("");
+      return inicialesFormateado.toString();
   }
 
 //geters y seters
@@ -248,7 +259,7 @@ public class Alumno {
   @Override
   public String toString() {
     // return String.format("Número de Identificación del Alumnado (NIA)=%s " + "nombre=%s (%s) , DNI=%s, correo=%s, teléfono=%s, fecha nacimiento=%s", this.getNia(), imprimir());
-    return String.format("Número de Identificación del Alumnado (NIA)=%s " + "nombre=%s (%s), DNI=%s, correo=%s, teléfono=%s, fecha nacimiento=%s",this.getNia(), this.getNombre(), Arrays.toString(this.getIniciales()), this.getDni(), this.getCorreo(), this.getTelefono(),this.getFechaNacimiento().format(DateTimeFormatter.ofPattern(FORMATO_FECHA)));
+    return String.format("Número de Identificación del Alumnado (NIA)=%s " + "nombre=%s (%s), DNI=%s, correo=%s, teléfono=%s, fecha nacimiento=%s",this.getNia(), this.getNombre(), this.getIniciales(), this.getDni(), this.getCorreo(), this.getTelefono(),this.getFechaNacimiento().format(DateTimeFormatter.ofPattern(FORMATO_FECHA)));
   }
 
 

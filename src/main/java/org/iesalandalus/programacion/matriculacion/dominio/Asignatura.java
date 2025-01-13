@@ -5,7 +5,7 @@ import java.util.Objects;
 
 public class Asignatura {
   public static final int MAX_NUM_HORAS_ANUALES=300;
-  public static final int MAX_NUM_HORAS_DESDOBLES=10;
+  public static final int MAX_NUM_HORAS_DESDOBLES=6;
   private static final String ER_CODIGO="^\\d{4}$";
   private String codigo;
   private String nombre;
@@ -103,7 +103,7 @@ public class Asignatura {
 
     public void setHorasDesdoble(int horasDesdoble) {
         if (horasDesdoble<0||horasDesdoble>MAX_NUM_HORAS_DESDOBLES){
-            throw new IllegalArgumentException("ERROR: El número de horas de desdoble de una asignatura no puede ser menor a 0 ni mayor a 10.");
+            throw new IllegalArgumentException("ERROR: El número de horas de desdoble de una asignatura no puede ser menor a 0 ni mayor a 6.");
         }
         this.horasDesdoble = horasDesdoble;
     }
@@ -114,7 +114,7 @@ public class Asignatura {
 
     public void setEspecialidadProfesorado(EspecialidadProfesorado especialidadProfesorado) {
         if (especialidadProfesorado == null) {
-            throw new NullPointerException("ERROR: La especialidadProfesorado de una asignatura no puede ser nulo.");
+            throw new NullPointerException("ERROR: La especialidad del profesorado de una asignatura no puede ser nula.");
         }
         this.especialidadProfesorado = especialidadProfesorado;
     }
@@ -124,6 +124,9 @@ public class Asignatura {
     }
 
     public void setCicloFormativo(CicloFormativo cicloFormativo) {
+        if (cicloFormativo == null) {
+            throw new NullPointerException("ERROR: El ciclo formativo de una asignatura no puede ser nulo.");
+        }
         this.cicloFormativo = cicloFormativo;
     }
 

@@ -1,6 +1,4 @@
-/*
 package org.iesalandalus.programacion.matriculacion.dominio;
-
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -87,16 +85,16 @@ public class MatriculaTest {
     @BeforeAll
     public static void asignarValoresAtributos() {
         alumno=new Alumno(NOMBRE_JRJR, DNI_JRJR, CORREO_JRJR, TELEFONO_JRJR, FECHA_NACIMIENTO_JRJR);
-        cf1 =new CicloFormativo(CODIGO_CF_1);
-        cf2 = new CicloFormativo(CODIGO_CF_2);
-        cf3 = new CicloFormativo(CODIGO_CF_3);
+        cf1 =new CicloFormativo(CODIGO_CF_1, FAMILIA_PROFESIONAL_CF, GRADO_CF, NOMBRE_CICLO_FORMATIVO, HORAS_CICLO_FORMATIVO);
+        cf2 = new CicloFormativo(CODIGO_CF_2, FAMILIA_PROFESIONAL_CF, GRADO_CF, NOMBRE_CICLO_FORMATIVO_2, HORAS_CICLO_FORMATIVO);
+        cf3 = new CicloFormativo(CODIGO_CF_3, FAMILIA_PROFESIONAL_CF, GRADO_CF, NOMBRE_CICLO_FORMATIVO_3, HORAS_CICLO_FORMATIVO);
 
-        asignatura1 = new Asignatura(CODIGO_ASIGNATURA);
-        asignatura2 = new Asignatura(CODIGO_ASIGNATURA_2);
-        asignatura3= new Asignatura(CODIGO_ASIGNATURA_3);
-        asignatura4= new Asignatura(CODIGO_ASIGNATURA_3);
-        asignatura5 = new Asignatura(CODIGO_ASIGNATURA);
-        asignatura6 = new Asignatura(CODIGO_ASIGNATURA);
+        asignatura1 = new Asignatura(CODIGO_ASIGNATURA, NOMBRE_ASIGNATURA,HORAS_ASIGNATURA,CURSO_ASIGNATURA,HORAS_DESDOBLE_ASIGNATURA,ESPECIALIDAD_PROFESORADO_ASIGNATURA,cf1);
+        asignatura2 = new Asignatura(CODIGO_ASIGNATURA_2,NOMBRE_ASIGNATURA_2,HORAS_ASIGNATURA_2,CURSO_ASIGNATURA,HORAS_DESDOBLE_ASIGNATURA_2,ESPECIALIDAD_PROFESORADO_ASIGNATURA,cf2);
+        asignatura3= new Asignatura(CODIGO_ASIGNATURA_3, NOMBRE_ASIGNATURA_3,HORAS_ASIGNATURA_3,CURSO_ASIGNATURA_3,HORAS_DESDOBLE_ASIGNATURA_3,ESPECIALIDAD_PROFESORADO_ASIGNATURA_2,cf3);
+        asignatura4= new Asignatura(CODIGO_ASIGNATURA_3, NOMBRE_ASIGNATURA_3,HORAS_ASIGNATURA_3,CURSO_ASIGNATURA_3,HORAS_DESDOBLE_ASIGNATURA_3,ESPECIALIDAD_PROFESORADO_ASIGNATURA_2,cf3);
+        asignatura5 = new Asignatura(CODIGO_ASIGNATURA, NOMBRE_ASIGNATURA,HORAS_ASIGNATURA,CURSO_ASIGNATURA,HORAS_DESDOBLE_ASIGNATURA,ESPECIALIDAD_PROFESORADO_ASIGNATURA,cf1);
+        asignatura6 = new Asignatura(CODIGO_ASIGNATURA, NOMBRE_ASIGNATURA,HORAS_ASIGNATURA,CURSO_ASIGNATURA,HORAS_DESDOBLE_ASIGNATURA,ESPECIALIDAD_PROFESORADO_ASIGNATURA,cf1);
 
         Asignatura[] coleccionAsignaturas=new Asignatura[5];
         coleccionAsignaturas[0]=asignatura1;
@@ -129,7 +127,7 @@ public class MatriculaTest {
         try {
             Matricula matricula = new Matricula(ID_MATRICULA, CURSO_ACADEMICO, FECHA_MATRICULACION, alumno, coleccionAsignaturas);
 
-            matricula1 = new Matricula(matricula, asignatura);
+            matricula1 = new Matricula(matricula);
             assertEquals(ID_MATRICULA, matricula1.getIdMatricula());
             assertEquals(CURSO_ACADEMICO, matricula1.getCursoAcademico());
             assertEquals(FECHA_MATRICULACION, matricula1.getFechaMatriculacion());
@@ -319,7 +317,7 @@ public class MatriculaTest {
     public void constructorMatriculaNulaLanzaExcepcion() {
         Matricula matricula = null;
         try {
-            matricula = new Matricula(null, asignatura);
+            matricula = new Matricula(null);
             fail(MATRICULA_NULA);
         } catch (NullPointerException e) {
             assertEquals(ERROR_COPIAR_MATRICULA_NULA, e.getMessage(), MENSAJE_EXCEPCION_NO_CORRECTO);
@@ -444,4 +442,3 @@ public class MatriculaTest {
     }
 
 }
-*/

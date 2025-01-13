@@ -24,7 +24,7 @@ public class Matricula {
     private Asignatura[] coleccionAsignaturas;
 
     //constructor con parametros
-    public Matricula(int idMatricula, String cursoAcademico, LocalDate fechaMatriculacion, Alumno alumno, Asignatura[] coleccionAsignaturas) {
+    public Matricula(int idMatricula, String cursoAcademico, LocalDate fechaMatriculacion, Alumno alumno, Asignatura[] coleccionAsignaturas) throws OperationNotSupportedException {
         setIdMatricula(idMatricula);
         setCursoAcademico(cursoAcademico);
         setFechaMatriculacion(fechaMatriculacion);
@@ -34,9 +34,9 @@ public class Matricula {
         setColeccionAsignaturas(coleccionAsignaturas);
     }
     //constructor copia
-    public Matricula(Matricula matricula) {
+    public Matricula(Matricula matricula) throws OperationNotSupportedException {
         if (matricula == null) {
-            throw new NullPointerException("ERROR: No se puede copiar una matricula nula.");
+            throw new NullPointerException("ERROR: No es posible copiar una matrícula nula.");
         }
         setIdMatricula(matricula.getIdMatricula());
         setCursoAcademico(matricula.getCursoAcademico());
@@ -48,13 +48,15 @@ public class Matricula {
 
     //metodo para comprobar si la matricula supera el maximo de horas
     private boolean superaMaximoNumeroHorasMatricula(Asignatura[] asignaturasMatricula) {
-        boolean resultado=false;
-        if (MAXIMO_NUMERO_ASIGNATURAS_POR_MATRICULA<10){
-          resultado=true;
 
-        }
+        int horasMatricula = 0;
+       for (Asignatura asignatura : asignaturasMatricula) {
+           if (asignatura != null) {
+               horasMatricula += asignatura.getHorasAnuales();
+           }
+       }
 
-        return resultado;
+        return horasMatricula > MAXIMO_NUMERO_HORAS_MATRICULA;
     }
 
     private String asignaturasMatricula(){
@@ -91,10 +93,8 @@ public class Matricula {
     }
 
     public void setIdMatricula(int idMatricula) {
-        if (idMatricula < 0) {
-            throw new RuntimeException("ERROR: El identificador de una matricula no puede ser negativo.");
-        }else if (idMatricula == 0) {
-            throw new RuntimeException("ERROR: El identificador de una matricula no puede ser 0.");
+        if (idMatricula <= 0) {
+            throw new IllegalArgumentException("ERROR: El identificador de una matrícula no puede ser menor o igual a 0.");
         }
         this.idMatricula = idMatricula;
     }
@@ -104,13 +104,15 @@ public class Matricula {
     }
 
     public void setCursoAcademico(String cursoAcademico) {
-        String regex = "^(\\d{2})-(\\d{2})$";
-        Pattern patron = Pattern.compile(regex);
-        Matcher coincidencia = patron.matcher(cursoAcademico);
+        if (cursoAcademico == null) {
+            throw new NullPointerException("ERROR: El curso académico de una matrícula no puede ser nulo.");
+        }
+        if (cursoAcademico.isBlank() || cursoAcademico.isEmpty()) {
+            throw new IllegalArgumentException("ERROR: El curso académico de una matrícula no puede estar vacío.");
+
+        }
         if (!cursoAcademico.matches(ER_CURSO_ACADEMICO)){
-            throw new RuntimeException("ERROR: El curso académico introducido no tiene un formato adecuado.");
-        } else if (!coincidencia.matches()) {
-            throw new RuntimeException("ERROR: El curso académico introducido no es correcto.");
+            throw new IllegalArgumentException("ERROR: El formato del curso académico no es correcto.");
         }
         this.cursoAcademico = cursoAcademico;
     }
@@ -171,13 +173,13 @@ public class Matricula {
         return coleccionAsignaturas;
     }
 
-    public void setColeccionAsignaturas (Asignatura[] coleccionAsignaturas)  {
+    public void setColeccionAsignaturas (Asignatura[] coleccionAsignaturas) throws OperationNotSupportedException {
         if (coleccionAsignaturas == null) {
             throw new NullPointerException("ERROR: La lista de asignaturas de una matrícula no puede ser nula.");
         }
         //Comprobar que las horas totales de todas las asignaturas de la colección no sea > 1000
         if (superaMaximoNumeroHorasMatricula(coleccionAsignaturas)){
-            throw new IllegalArgumentException("ERROR: No se puede realizar la matrícula ya que supera el máximo de horas permitidas (" + Matricula.MAXIMO_NUMERO_HORAS_MATRICULA + " horas).");
+            throw new OperationNotSupportedException("ERROR: No se puede realizar la matrícula ya que supera el máximo de horas permitidas (" + Matricula.MAXIMO_NUMERO_HORAS_MATRICULA + " horas).");
         }
 
         this.coleccionAsignaturas = coleccionAsignaturas;
@@ -202,6 +204,8 @@ public class Matricula {
                 "curso académico=" + getCursoAcademico() + ", " +
                 "fecha matriculación=" + getFechaMatriculacion().format(DateTimeFormatter.ofPattern(FORMATO_FECHA)) + ", " +
                 "alumno=" + "{" + getAlumno().imprimir() + "}";
+
+
     }
 
     public String toString() {

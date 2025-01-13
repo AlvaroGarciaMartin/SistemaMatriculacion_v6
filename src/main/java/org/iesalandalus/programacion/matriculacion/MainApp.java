@@ -16,7 +16,7 @@ public class MainApp {
     private static Matriculas matriculas= new Matriculas(CAPACIDAD);
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args)  {
         Opcion opcion;
         do {
             Consola.mostrarMenu();
@@ -330,59 +330,79 @@ public class MainApp {
     }
     //mostrar Matriculas
     private static void mostrarMatriculas() {
-        Matricula[] arrayMatriculas = matriculas.get();
-        if (arrayMatriculas.length > 0) {
-            for (Matricula matricula: arrayMatriculas) {
-                System.out.println(matricula);
-            }
-        } else if (alumnos.getTamano() == 0) {
-            System.out.println("No existen Matriculas.");
+       try {
+           Matricula[] arrayMatriculas = matriculas.get();
+           if (arrayMatriculas.length > 0) {
+               for (Matricula matricula: arrayMatriculas) {
+                   System.out.println(matricula);
+               }
+           } else if (alumnos.getTamano() == 0) {
+               System.out.println("No existen Matriculas.");
 
-        }
+           }
+       }catch (OperationNotSupportedException e) {
+           System.out.println("ERROR: No se pudo mostrar matriculas.");
+       }
     }
     //mostrar Matricula por Alumno
-    private static void mostrarMatriculasPorAlumno() {
-        Alumno alumno = Consola.getAlumnoPorDni();
-        Matricula[] arrayMatricula = matriculas.get();
-        for (Matricula matricula : arrayMatricula) {
-            if (matricula.getAlumno().equals(alumno)) {
-                System.out.println(matricula);
-            }else {
-                System.out.println("No existen matriculas para el alumno indicado.");
+    private static void mostrarMatriculasPorAlumno()  {
+        try {
+            Alumno alumno = Consola.getAlumnoPorDni();
+            Matricula[] arrayMatricula = matriculas.get();
+            for (Matricula matricula : arrayMatricula) {
+                if (matricula.getAlumno().equals(alumno)) {
+                    System.out.println(matricula);
+                }else {
+                    System.out.println("No existen matriculas para el alumno indicado.");
+                }
             }
+        }catch (OperationNotSupportedException e){
+            System.out.println("ERROR: No se pueden mostrar matriculas por alumno");
         }
     }
     //mostrar Matricula por CicloFormativo
     private static void mostrarMatriculasPorCicloFormativo() {
-     Consola.mostrarCiclosFormativos(ciclosFormativos);
-     int codigo=Entrada.entero();
-     CicloFormativo[] CicloFormativo=ciclosFormativos.get();
-        if (codigo == CicloFormativo[0].getCodigo()) {
-            System.out.println(matriculas.get().equals(CicloFormativo[0]));
+        try {
+            Consola.mostrarCiclosFormativos(ciclosFormativos);
+            int codigo = Entrada.entero();
+            CicloFormativo[] CicloFormativo = ciclosFormativos.get();
+            if (codigo == CicloFormativo[0].getCodigo()) {
+                System.out.println(matriculas.get().equals(CicloFormativo[0]));
+            }
+            if (ciclosFormativos == null) {
+                System.out.println("No existen matriculas para el ciclo formativo indicado.");
+            }
+        } catch (OperationNotSupportedException e) {
+            System.out.println("ERROR: No se pueden mostrar matriculas por ciclo formativo");
         }
-        if (ciclosFormativos == null) {
-            System.out.println("No existen matriculas para el ciclo formativo indicado.");
-        }
-
     }
-    //mostrar Matricula por curso academico
-    private static void mostrarMatriculasPorCursoAcademico() {
-        Matricula[] arrayMatriculas = matriculas.get();
+        //mostrar Matricula por curso academico
+        private static void mostrarMatriculasPorCursoAcademico() {
+            try {
+                System.out.println("indique el curso academico:");
+                System.out.println("El formato del curso es YY-YY");
+                String cursoAcademico = Entrada.cadena();
+                Matricula[] arrayMatriculas = matriculas.get();
 
-        for (Matricula matricula : arrayMatriculas) {
-            if (matricula == null) {
-                System.out.println("No existen matriculas para el curso academico indicado.");
+                for (Matricula matricula : arrayMatriculas) {
+                    if (matricula == null) {
+                        System.out.println("No existen matriculas para el curso academico indicado.");
 
-            }else if(matricula.getCursoAcademico().equals(LocalDate.now().getYear())) {
-                System.out.println(matricula);
-            }else {
-                System.out.println("No existen matriculas para el curso academico indicado.");
+                    } else if (matricula.getCursoAcademico().equals(LocalDate.now().getYear())) {
+                        System.out.println(matricula);
+                    } else if (matricula.getCursoAcademico().equals(cursoAcademico)) {
+                        System.out.println(matricula);
+                    } else {
+                        System.out.println("No existen matriculas para el curso academico indicado.");
+                    }
+
+                }
+            } catch (OperationNotSupportedException e) {
+                System.out.println("ERROR: No se pudo mostrar matriculas por curso academico.");
             }
 
         }
-
     }
 
 
 
-}

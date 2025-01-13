@@ -49,18 +49,18 @@ public class CiclosFormativos {
     }
     //Insertar Ciclo
     public void insertar(CicloFormativo cicloFormativo) throws OperationNotSupportedException {
-        Objects.requireNonNull(cicloFormativo, "ERROR: No se puede insertar un Ciclo Formativo nulo.");
+        Objects.requireNonNull(cicloFormativo, "ERROR: No se puede insertar un ciclo formativo nulo.");
 
         int indice = buscarIndice(cicloFormativo);
         if (capacidadSuperada(indice)) {
-            throw new OperationNotSupportedException("ERROR: No se aceptan más Ciclos Formativos.");
+            throw new OperationNotSupportedException("ERROR: No se aceptan más ciclos formativos.");
         }
 
         if (tamanoSuperado(indice)) {
             coleccionCiclosFormativos[indice] = new CicloFormativo(cicloFormativo);
             tamano++;
         } else {
-            throw new OperationNotSupportedException("ERROR: Ya existe un Ciclo Formativo con ese codigo.");
+            throw new OperationNotSupportedException("ERROR: Ya existe un ciclo formativo con ese código.");
         }
     }
     //Tamaño superado
@@ -86,11 +86,13 @@ public class CiclosFormativos {
     }
     //borrar ciclo
     public void borrar (CicloFormativo cicloFormativo) throws OperationNotSupportedException {
-        Objects.requireNonNull(cicloFormativo,"ERROR: No se puede borrar un Ciclo Formativo nulo.");
-
+        //Objects.requireNonNull(cicloFormativo,"ERROR: No se puede borrar un ciclo formativo nulo.");
+        if (cicloFormativo == null) {
+            throw new NullPointerException("ERROR: No se puede borrar un ciclo formativo nulo.");
+        }
         int indice = buscarIndice(cicloFormativo);
         if (tamanoSuperado(indice)){
-            throw new OperationNotSupportedException("ERROR: No existe ningún Ciclo Formativo como el indicado.");
+            throw new OperationNotSupportedException("ERROR: No existe ningún ciclo formativo como el indicado.");
         }
         else{
             desplazarUnaPosicionHaciaIzquierda(indice);
@@ -98,11 +100,14 @@ public class CiclosFormativos {
     }
     //desplazar posicion a la izquierda
     private void desplazarUnaPosicionHaciaIzquierda (int indice){
+        coleccionCiclosFormativos[indice]= null;
         int i;
         for (i=indice; !tamanoSuperado(i);i++){
-            coleccionCiclosFormativos[i] = coleccionCiclosFormativos [i+1];
+            if (i<getCapacidad()-1) {
+                coleccionCiclosFormativos[i] = coleccionCiclosFormativos [i+1];
+            }
         }
-        coleccionCiclosFormativos[i]= null;
+
         tamano--;
     }
 

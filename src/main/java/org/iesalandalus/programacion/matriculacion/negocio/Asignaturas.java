@@ -61,7 +61,7 @@ public class Asignaturas {
             coleccionAsignaturas[indice] = new Asignatura(asignatura);
             tamano++;
         } else {
-            throw new OperationNotSupportedException("ERROR: Ya existe una Asignatura con ese codigo.");
+            throw new OperationNotSupportedException("ERROR: Ya existe una asignatura con ese código.");
         }
     }
     //Tamaño superado
@@ -75,7 +75,7 @@ public class Asignaturas {
     //buscar Asignatura
     public Asignatura buscar(Asignatura asignatura) {
         if (asignatura == null) {
-            throw new NullPointerException("ERROR: No se puede buscar una Asignatura nula.");
+            throw new NullPointerException("ERROR: No se puede buscar una asignatura nula.");
         }
         int indice = buscarIndice(asignatura);
         if (tamanoSuperado(indice)) {
@@ -86,11 +86,11 @@ public class Asignaturas {
     }
     //borrar Asignatura
     public void borrar (Asignatura asignatura) throws OperationNotSupportedException {
-        Objects.requireNonNull(asignatura,"ERROR: No se puede borrar una Asignatura nulo.");
+        Objects.requireNonNull(asignatura,"ERROR: No se puede borrar una asignatura nula.");
 
         int indice = buscarIndice(asignatura);
         if (tamanoSuperado(indice)){
-            throw new OperationNotSupportedException("ERROR: No existe ningúna Asignatura como la indicada.");
+            throw new OperationNotSupportedException("ERROR: No existe ninguna asignatura como la indicada.");
         }
         else{
             desplazarUnaPosicionHaciaIzquierda(indice);
@@ -98,11 +98,14 @@ public class Asignaturas {
     }
     //desplazar posicion a la izquierda
     private void desplazarUnaPosicionHaciaIzquierda (int indice){
+        coleccionAsignaturas[indice] = null;
         int i;
         for (i=indice; !tamanoSuperado(i);i++){
-            coleccionAsignaturas[i] = coleccionAsignaturas [i+1];
+            if (i<getCapacidad()-1) {
+                coleccionAsignaturas[i] = coleccionAsignaturas [i+1];
+            }
         }
-        coleccionAsignaturas[i]= null;
+
         tamano--;
     }
 
