@@ -1,6 +1,5 @@
-package org.iesalandalus.programacion.matriculacion.dominio;
+package org.iesalandalus.programacion.matriculacion.modelo.dominio;
 
-import java.util.Arrays;
 import java.util.Objects;
 
 public class Asignatura {

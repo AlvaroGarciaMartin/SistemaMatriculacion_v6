@@ -1,12 +1,7 @@
-package org.iesalandalus.programacion.matriculacion.dominio;
+package org.iesalandalus.programacion.matriculacion.modelo.dominio;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
-import java.time.LocalDate;
-import java.time.Period;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -55,7 +50,7 @@ public Alumno(String nombre, String dni, String correo, String telefono, LocalDa
     setCorreo(alumno.getCorreo());
     setTelefono(alumno.getTelefono());
     setFechaNacimiento(alumno.getFechaNacimiento());
-    setNia(alumno.getNia());
+    setNia();
   }
 
 

@@ -1,10 +1,8 @@
-package org.iesalandalus.programacion.matriculacion.negocio;
+package org.iesalandalus.programacion.matriculacion.modelo.negocio;
 
-import org.iesalandalus.programacion.matriculacion.dominio.Alumno;
-import org.iesalandalus.programacion.matriculacion.dominio.Asignatura;
+import org.iesalandalus.programacion.matriculacion.modelo.dominio.Alumno;
 
 import javax.naming.OperationNotSupportedException;
-import java.util.*;
 
 
 public class Alumnos {
@@ -16,14 +14,14 @@ public class Alumnos {
 
 
 
-   public Alumnos(int capacidad) {
-       if (!(capacidad > 0)) {
-           throw new IllegalArgumentException("ERROR: La capacidad debe ser mayor que cero.");
-       }
-       this.capacidad = capacidad;
-       coleccionAlumnos = new Alumno[capacidad];
-   }
-   
+    public Alumnos(int capacidad) {
+        if (!(capacidad > 0)) {
+            throw new IllegalArgumentException("ERROR: La capacidad debe ser mayor que cero.");
+        }
+        this.capacidad = capacidad;
+        coleccionAlumnos = new Alumno[capacidad];
+    }
+
 
 
     public Alumno[] get() {
@@ -58,7 +56,7 @@ public class Alumnos {
     //Insertar Alumno
     public void insertar(Alumno alumno) throws OperationNotSupportedException {
         if (alumno == null) {
-          throw new NullPointerException("ERROR: No se puede insertar un alumno nulo.");
+            throw new NullPointerException("ERROR: No se puede insertar un alumno nulo.");
         }
 
         int indice = buscarIndice(alumno);
@@ -94,8 +92,10 @@ public class Alumnos {
     }
     //borrar alumno
     public void borrar (Alumno alumno) throws OperationNotSupportedException {
-        Objects.requireNonNull(alumno,"ERROR: No se puede borrar un alumno nulo.");
-
+        // Objects.requireNonNull(alumno,"ERROR: No se puede borrar un alumno nulo.");
+        if (alumno == null) {
+            throw new NullPointerException("ERROR: No se puede borrar un alumno nulo.");
+        }
         int indice = buscarIndice(alumno);
         if (tamanoSuperado(indice)){
             throw new OperationNotSupportedException("ERROR: No existe ningún alumno como el indicado.");
@@ -106,11 +106,14 @@ public class Alumnos {
     }
     //desplazar posicion a la izquierda
     private void desplazarUnaPosicionHaciaIzquierda (int indice){
+        coleccionAlumnos[indice]= null;
         int i;
         for (i=indice; !tamanoSuperado(i);i++){
-            coleccionAlumnos[i] = coleccionAlumnos [i+1];
+            if (i<getCapacidad()-1) {
+                coleccionAlumnos[i] = coleccionAlumnos [i+1];
+            }
         }
-        coleccionAlumnos[i]= null;
+
         tamano--;
     }
 
@@ -123,7 +126,7 @@ public class Alumnos {
 
     public int getTamano() {
 
-       return tamano;
+        return tamano;
     }
 
 

@@ -1,7 +1,9 @@
-package org.iesalandalus.programacion.matriculacion.negocio;
+package org.iesalandalus.programacion.matriculacion.modelo.negocio;
 
-import org.iesalandalus.programacion.matriculacion.dominio.Asignatura;
-import org.iesalandalus.programacion.matriculacion.dominio.Matricula;
+import org.iesalandalus.programacion.matriculacion.modelo.dominio.Alumno;
+import org.iesalandalus.programacion.matriculacion.modelo.dominio.Asignatura;
+import org.iesalandalus.programacion.matriculacion.modelo.dominio.CicloFormativo;
+import org.iesalandalus.programacion.matriculacion.modelo.dominio.Matricula;
 
 import javax.naming.OperationNotSupportedException;
 import java.util.Objects;
@@ -118,5 +120,95 @@ private Matricula[] coleccionMatriculas;
     public int getTamano() {
         return tamano;
     }
+
+    public Matricula[] get(Alumno alumno){
+
+        int contador = 0;
+
+        //Contar cuántas coincidencias del alumno hay en matrículas:
+        //Recorre las matrículas
+        for (Matricula matricula : coleccionMatriculas) {
+            //Si en la matricula actual, su alumno = al alumno pasado...
+            if (matricula.getAlumno().equals(alumno)) {
+                contador++;
+            }
+        }
+
+        //Crear array con el número de coincidencias del alumno en las matrículas:
+        Matricula[] coleccionMatriculasAlumn = new Matricula[contador];
+
+        int i = 0;
+        //Para asignar las matrículas con coincidencias al nuevo array:
+        for (Matricula matriculaAlumno : coleccionMatriculas){
+            if (matriculaAlumno.getAlumno().equals(alumno)){
+                coleccionMatriculasAlumn[i] = matriculaAlumno;
+                i++;
+            }
+        }
+        return coleccionMatriculasAlumn;
+    }
+
+
+    public Matricula[] get(String cursoAcademico){
+
+        int contador = 0;
+
+        for (Matricula matricula : coleccionMatriculas) {
+            if (matricula.getCursoAcademico().equals(cursoAcademico)) {
+                contador++;
+            }
+        }
+
+        Matricula[] coleccionMatriculasCurso = new Matricula[contador];
+
+        int i = 0;
+
+        for (Matricula matriculaCurso : coleccionMatriculas) {
+
+            if (matriculaCurso.getCursoAcademico().equals(cursoAcademico)){
+                coleccionMatriculasCurso[i] = matriculaCurso;
+                i++;
+            }
+        }
+        return coleccionMatriculasCurso;
+    }
+
+
+    public Matricula[] get(CicloFormativo cicloFormativo) {
+        int contador = 0;
+
+        for (Matricula matricula : coleccionMatriculas) {
+            for (Asignatura asignatura : matricula.getColeccionAsignaturas()) {
+
+                if (asignatura.getCicloFormativo().equals(cicloFormativo)) {
+                    contador++;
+                    break;
+                }
+            }
+        }
+
+        Matricula[] coleccionMatriculasCiclo = new Matricula[contador];
+
+        int i = 0;
+
+        // Recorre las matrículas
+        for (Matricula matricula : coleccionMatriculas) {
+            //Dentro de una matrícula, recorre sus asignaturas
+            for (Asignatura asignatura : matricula.getColeccionAsignaturas()) {
+
+                // Si una asignatura específica de las recorridas tiene ciclo = al ciclo pasado...
+                if (asignatura.getCicloFormativo().equals(cicloFormativo)) {
+                    coleccionMatriculasCiclo[i] = matricula;
+                    i++;
+
+                    // break para evitar procesar más asignaturas una vez que se encuentra una
+                    // coincidencia dentro de la matrícula
+                    break;
+                }
+            }
+        }
+        return coleccionMatriculasCiclo;
+    }
+
 
 }

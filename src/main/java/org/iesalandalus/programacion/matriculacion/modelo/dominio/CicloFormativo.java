@@ -1,8 +1,6 @@
-package org.iesalandalus.programacion.matriculacion.dominio;
+package org.iesalandalus.programacion.matriculacion.modelo.dominio;
 
 import java.util.Objects;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class CicloFormativo {
     public static final int MAXIMO_NUMERO_HORAS=2000;
