@@ -145,10 +145,20 @@ public class Consola {
 
         return new CicloFormativo(codigo, familiaProfesional, grado, nombre, horas);
     }
-    public static void mostrarCiclosFormativos (CiclosFormativos ciclosFormativos){
+    //mostrarCiclosFormativos_v0
+   /* public static void mostrarCiclosFormativos (CiclosFormativos ciclosFormativos){
         CicloFormativo [] listaCiclosFormativos = ciclosFormativos.get();
         for (CicloFormativo cicloFormativo : listaCiclosFormativos) {
             System.out.println(cicloFormativo);
+        }
+    }
+    */
+    public static void mostrarCiclosFormativos (CicloFormativo[] ciclosFormativos){
+        System.out.println("Lista de ciclos formativos disponibles:");
+        for (CicloFormativo cicloFormativo : ciclosFormativos) {
+            if (cicloFormativo != null) {
+                System.out.println(cicloFormativo);
+            }
         }
     }
     public static CicloFormativo getCicloFormativoPorCodigo() {
@@ -254,7 +264,7 @@ public class Consola {
         return new Asignatura(asignatura);
     }
 
-    private static void mostrarAsignaturas(Asignaturas asignaturas){
+   /* private static void mostrarAsignaturas(Asignaturas asignaturas){
        Asignatura [] listaAsignaturas = asignaturas.get();
 
        for (Asignatura asignatura :  listaAsignaturas) {
@@ -262,6 +272,58 @@ public class Consola {
 
        }
 
+    }*/
+
+    public static void mostrarAsignaturas(Asignatura[] asignaturas){
+        System.out.println("Listado de Asignaturas disponibles:");
+        for (Asignatura asignatura : asignaturas) {
+            if (asignatura != null) {
+                System.out.println(asignatura);
+            }
+
+        }
+    }
+    public Asignatura[] elegirAsignaturasMatricula(Asignatura[] asignaturas) throws OperationNotSupportedException {
+
+        Asignatura[] asignaturasMatricula = new Asignatura[asignaturas.length];
+        int opcion;
+        //Comprobar si la asignatura ya existe
+        for (int i = 0; i < asignaturasMatricula.length; i++) {
+            System.out.println("Introduzca el codigo de la asignatura que desea matricular.");
+            asignaturasMatricula[i] = leerAsignatura(null);
+            while (asignaturaYaMatriculada(asignaturasMatricula, asignaturasMatricula[i])) {
+                System.out.println("La asignatura ya esta matriculada");
+                asignaturasMatricula[i] = leerAsignatura(null);
+            }
+        }
+        do {
+            mostrarAsignaturas(asignaturas);
+            Asignatura asignatura = getAsignaturaPorCodigo();
+            asignatura= Asignaturas.buscar(asignatura);
+
+            int indice = -1;
+            boolean encontrado = false;
+            for (int i = 0; i < asignaturasMatricula.length && !encontrado; i++) {
+                if (asignaturasMatricula[i] == null||asignaturasMatricula[i].equals(asignatura)) {
+                    indice = i;
+                    encontrado = true;
+                }
+            }
+            if (indice != -1) {
+                asignaturasMatricula[indice] = new Asignatura(asignatura);
+                if (asignaturaYaMatriculada(asignaturasMatricula, asignatura)) {
+                    System.out.println("La asignatura ya esta añadida");
+                    System.out.print("¿quieres añadir otra asignatura? (n/s): ");
+                    System.out.println("0.- No \n1.- Si");
+                    opcion = Entrada.entero();
+                }else {
+                    throw new OperationNotSupportedException("ERROR: La asignatura ya esta matriculada.");
+                }
+            }else {
+                throw new OperationNotSupportedException("ERROR: No se aceptan mas asignaturas.");
+            }
+        }while (opcion == 1);
+        return asignaturasMatricula;
     }
     //comparar si la asignatura ya esta matriculada
     private static boolean asignaturaYaMatriculada(Asignatura [] asignaturasMatricula, Asignatura asignatura){
@@ -276,6 +338,8 @@ public class Consola {
         }
        return false;
     }
+    //Leer Matricula_v0
+    /*
     public static Matricula leerMatricula (Alumnos alumnos, Asignaturas asignaturas) throws OperationNotSupportedException {
 
         int idMatricula;
@@ -300,6 +364,43 @@ public class Consola {
         Alumno alumnoBuscado=alumnos.buscar(alumno);
 
         matricula = new Matricula (idMatricula, cursoAcademico, fechaMatriculacion, alumno, asignaturas.get());
+
+        return new Matricula (matricula);
+    }*/
+    public static Matricula leerMatricula (Alumno alumno, Asignatura[] asignaturas) throws OperationNotSupportedException {
+
+        if (alumno == null) {
+            throw new NullPointerException("ERROR: El alumno de una matrícula no puede ser nulo.");
+        }
+        if (asignaturas == null || asignaturas.length == 0) {
+            throw new NullPointerException("ERROR: Las asignaturas de una matrícula no pueden ser nulas.");
+        }
+
+        int idMatricula;
+        String cursoAcademico;
+        LocalDate fechaMatriculacion;
+        //Alumno alumno;
+        Matricula matricula;
+
+        System.out.println("Introduzca el Id de la Matrícula.");
+        idMatricula = Entrada.entero();
+
+        System.out.println("Introduzca el Curso Académico.");
+        System.out.println("El curso academico tiene que tener el formato 24-25");
+        cursoAcademico = Entrada.cadena();
+
+        String mensaje= "Introduzca la Fecha de matriculación.";
+
+        System.out.println("La fecha de matriculación como maximo puede ser de 15 días anterior al día actual");
+        fechaMatriculacion = leerFecha(mensaje);
+
+        alumno= leerAlumno();
+        Alumno alumnoBuscado=Alumnos.buscar(alumno);
+      /*  if (alumnoBuscado == alumno) {
+            throw new OperationNotSupportedException("ERROR: El alumno ya esta matriculado.");
+        }*/
+
+        matricula = new Matricula (idMatricula, cursoAcademico, fechaMatriculacion, alumno, asignaturas);
 
         return new Matricula (matricula);
     }

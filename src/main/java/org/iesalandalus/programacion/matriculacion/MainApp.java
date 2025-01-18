@@ -369,7 +369,7 @@ public class MainApp {
     //mostrar Matricula por CicloFormativo
     private static void mostrarMatriculasPorCicloFormativo() {
         try {
-            Consola.mostrarCiclosFormativos(ciclosFormativos);
+            Consola.mostrarCiclosFormativos(ciclosFormativos.get());
             int codigo = Entrada.entero();
             CicloFormativo[] CicloFormativo = ciclosFormativos.get();
             if (codigo == CicloFormativo[0].getCodigo()) {

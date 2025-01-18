@@ -72,7 +72,7 @@ public class Asignaturas {
         return indice >= getCapacidad();
     }
     //buscar Asignatura
-    public Asignatura buscar(Asignatura asignatura) {
+    public static Asignatura buscar(Asignatura asignatura) {
         if (asignatura == null) {
             throw new NullPointerException("ERROR: No se puede buscar una asignatura nula.");
         }
