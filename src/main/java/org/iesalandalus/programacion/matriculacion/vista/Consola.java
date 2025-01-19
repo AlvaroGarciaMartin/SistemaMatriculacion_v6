@@ -283,7 +283,7 @@ public class Consola {
 
         }
     }
-    public Asignatura[] elegirAsignaturasMatricula(Asignatura[] asignaturas) throws OperationNotSupportedException {
+    public static Asignatura[] elegirAsignaturasMatricula(Asignatura[] asignaturas) throws OperationNotSupportedException {
 
         Asignatura[] asignaturasMatricula = new Asignatura[asignaturas.length];
         int opcion;

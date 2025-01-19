@@ -7,7 +7,7 @@ import org.iesalandalus.programacion.matriculacion.vista.*;
 import javax.naming.OperationNotSupportedException;
 
 public class Controlador {
-    private Modelo modelo;
+    private static Modelo modelo;
     private Vista vista;
 
     public Controlador(Modelo modelo, Vista vista) {
@@ -55,7 +55,7 @@ public class Controlador {
     public void borrar(Asignatura asignatura) throws OperationNotSupportedException {
         modelo.borrar(asignatura);
     }
-    public Asignatura[] getAsignaturas(){
+    public static Asignatura[] getAsignaturas(){
         return modelo.getAsignaturas();
     }
     //CICLO FORMATIVO
@@ -87,14 +87,14 @@ public class Controlador {
         return modelo.getMatriculas();
     }
 
-    public Matricula[] getMatriculas(Alumno alumno){
+    public Matricula[] getMatriculas(Alumno alumno) throws OperationNotSupportedException {
       return modelo.getMatriculas(alumno);
     }
 
     public Matricula[] getMatriculas(CicloFormativo cicloFormativo){
        return modelo.getMatriculas(cicloFormativo);
     }
-    public Matricula[] getMatriculas(String cursoAcademico){
+    public Matricula[] getMatriculas(String cursoAcademico) throws OperationNotSupportedException {
         return modelo.getMatriculas(cursoAcademico);
     }
 

@@ -92,7 +92,7 @@ public class Modelo {
       return matriculas.get();
       //return new Matricula[0];
    }
-   public Matricula[] getMatriculas(Alumno alumno) {
+   public Matricula[] getMatriculas(Alumno alumno) throws OperationNotSupportedException {
       //this.matriculas.get(alumno);
       return matriculas.get(alumno);
    }

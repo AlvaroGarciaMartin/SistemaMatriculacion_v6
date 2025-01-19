@@ -4,6 +4,7 @@ package org.iesalandalus.programacion.matriculacion.negocio;
 import org.iesalandalus.programacion.matriculacion.MainApp;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.*;
 import org.iesalandalus.programacion.matriculacion.modelo.negocio.Asignaturas;
+import org.iesalandalus.programacion.matriculacion.vista.Vista;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -82,9 +83,9 @@ public class AsignaturasTest {
 
     @Test
     public void constructorCapacidadValidaCreaAsignaturasCorrectamente() {
-        Asignaturas asignaturas = new Asignaturas(MainApp.CAPACIDAD);
+        Asignaturas asignaturas = new Asignaturas(Vista.CAPACIDAD);
         assertNotEquals(null, asignaturas, ASIGNATURAS_NO_CREADAS);
-        assertEquals(MainApp.CAPACIDAD, asignaturas.getCapacidad(), CAPACIDAD_NO_ESPERADA);
+        assertEquals(Vista.CAPACIDAD, asignaturas.getCapacidad(), CAPACIDAD_NO_ESPERADA);
         assertEquals(0, asignaturas.getTamano(), TAMANO_NO_ESPERADO);
     }
 

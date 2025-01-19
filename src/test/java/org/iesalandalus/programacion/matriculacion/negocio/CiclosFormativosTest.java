@@ -4,6 +4,7 @@ import org.iesalandalus.programacion.matriculacion.MainApp;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.CicloFormativo;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.Grado;
 import org.iesalandalus.programacion.matriculacion.modelo.negocio.CiclosFormativos;
+import org.iesalandalus.programacion.matriculacion.vista.Vista;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -63,9 +64,9 @@ public class CiclosFormativosTest {
 
     @Test
     public void constructorCapacidadValidaCreaCiclosFormativosCorrectamente() {
-        CiclosFormativos ciclosFormativos = new CiclosFormativos(MainApp.CAPACIDAD);
+        CiclosFormativos ciclosFormativos = new CiclosFormativos(Vista.CAPACIDAD);
         assertNotEquals(null, ciclosFormativos, CICLOS_FORMATIVOS_NO_CREADOS);
-        assertEquals(MainApp.CAPACIDAD, ciclosFormativos.getCapacidad(), CAPACIDAD_NO_ESPERADA);
+        assertEquals(Vista.CAPACIDAD, ciclosFormativos.getCapacidad(), CAPACIDAD_NO_ESPERADA);
         assertEquals(0, ciclosFormativos.getTamano(), TAMANO_NO_ESPERADO);
     }
 

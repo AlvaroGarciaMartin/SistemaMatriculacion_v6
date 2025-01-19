@@ -3,11 +3,13 @@ package org.iesalandalus.programacion.matriculacion.negocio;
 import org.iesalandalus.programacion.matriculacion.MainApp;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.*;
 import org.iesalandalus.programacion.matriculacion.modelo.negocio.Matriculas;
+import org.iesalandalus.programacion.matriculacion.vista.Vista;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import javax.naming.OperationNotSupportedException;
 
+import java.nio.charset.MalformedInputException;
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -133,9 +135,9 @@ public class MatriculasTest {
 
     @Test
     public void constructorCapacidadValidaCreaAsignaturasCorrectamente() {
-        Matriculas matriculas = new Matriculas(MainApp.CAPACIDAD);
+        Matriculas matriculas = new Matriculas(Vista.CAPACIDAD);
         assertNotEquals(null, matriculas, MATRICULAS_NO_CREADAS);
-        assertEquals(MainApp.CAPACIDAD, matriculas.getCapacidad(), CAPACIDAD_NO_ESPERADA);
+        assertEquals(Vista.CAPACIDAD, matriculas.getCapacidad(), CAPACIDAD_NO_ESPERADA);
         assertEquals(0, matriculas.getTamano(), TAMANO_NO_ESPERADO);
     }
 
