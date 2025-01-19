@@ -79,7 +79,7 @@ public class Alumnos {
         return indice >= getCapacidad();
     }
     //buscar alumno
-    public static Alumno buscar(Alumno alumno) {
+    public Alumno buscar(Alumno alumno) {
         if (alumno == null) {
             throw new NullPointerException("ERROR: 2.No se puede buscar un alumno nulo.");
         }
