@@ -56,7 +56,7 @@ Para ello te muestro un diagrama de clases para el mismo y poco a poco te iré e
 3. Crea el **constructor** con la visibilidad adecuada, que almacenará en el atributo anterior el dato pasado por parámetro.
 4. Crea el método `imprimir` indicado en el diagrama de clases que deberá devolver una cadena con el formato `dígito.-cadenaAMostrar`, para que se use en las opciones de menú. (0.-Primero y 1.-Segundo).
 5. Crea el método **toString** que devuelva la cadena que esperan los tests.
-6. Comprueba que la **clase pasa los test** para la misma y cuando lo haga realiza un **commit**.
+6. Comprueba que la **clase pasa los test** para la misma y cuando lo haga realiza un **commit**. 
 
 #### Grado
 1. Crea el enumerado `Grado` teniendo en cuenta que sus posibles valores son los indicados con anterioridad.
