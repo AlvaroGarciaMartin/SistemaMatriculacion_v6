@@ -155,9 +155,13 @@ public class Consola {
     */
     public static void mostrarCiclosFormativos (CicloFormativo[] ciclosFormativos){
         System.out.println("Lista de ciclos formativos disponibles:");
-        for (CicloFormativo cicloFormativo : ciclosFormativos) {
-            if (cicloFormativo != null) {
-                System.out.println(cicloFormativo);
+        if (ciclosFormativos.length == 0) {
+            System.out.println("No hay ciclos formativos disponibles.");
+        }else{
+            for (CicloFormativo cicloFormativo : ciclosFormativos) {
+                if (cicloFormativo != null) {
+                 System.out.println(cicloFormativo);
+                }
             }
         }
     }
@@ -299,7 +303,7 @@ public class Consola {
         do {
             mostrarAsignaturas(asignaturas);
             Asignatura asignatura = getAsignaturaPorCodigo();
-            asignatura= Asignaturas.buscar(asignatura);
+            //asignatura= Asignaturas.buscar(asignatura);
 
             int indice = -1;
             boolean encontrado = false;
@@ -394,8 +398,8 @@ public class Consola {
         System.out.println("La fecha de matriculación como maximo puede ser de 15 días anterior al día actual");
         fechaMatriculacion = leerFecha(mensaje);
 
-        alumno= leerAlumno();
-        Alumno alumnoBuscado=Alumnos.buscar(alumno);
+        //alumno= leerAlumno();
+        //Alumno alumnoBuscado=Alumnos.buscar(alumno);
       /*  if (alumnoBuscado == alumno) {
             throw new OperationNotSupportedException("ERROR: El alumno ya esta matriculado.");
         }*/
