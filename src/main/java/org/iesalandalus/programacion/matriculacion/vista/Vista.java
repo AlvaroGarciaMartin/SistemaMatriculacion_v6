@@ -23,7 +23,7 @@ public class Vista {
     private static Matriculas matriculas= new Matriculas(CAPACIDAD);
 
 
-    public static void main(String[] args)  {
+   /* public static void main(String[] args)  {
         Opcion opcion;
         do {
             Consola.mostrarMenu();
@@ -32,7 +32,7 @@ public class Vista {
         }while(opcion!=Opcion.SALIR);
 
         System.out.println("Hasta luego!!!!");
-    }
+    }*/
     public void comenzar() {
         Opcion opcion;
         do {
