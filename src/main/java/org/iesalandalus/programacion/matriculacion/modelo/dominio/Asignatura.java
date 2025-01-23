@@ -90,9 +90,9 @@ public class Asignatura {
     public void setCurso(Curso curso) {
         if (curso == null) {
             throw new NullPointerException("ERROR: El curso de una asignatura no puede ser nulo.");
-        }else if (curso != Curso.PRIMERO && curso != Curso.SEGUNDO) {
+        }/*else if (curso != Curso.PRIMERO && curso != Curso.SEGUNDO) {
             throw new IllegalArgumentException("ERROR: El curso de una asignatura debe ser Primero o Segundo.");
-        }
+        }*/
         this.curso = curso;
     }
 
