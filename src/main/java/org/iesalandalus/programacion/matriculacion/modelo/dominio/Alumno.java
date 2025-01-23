@@ -178,10 +178,11 @@ public Alumno(String nombre, String dni, String correo, String telefono, LocalDa
   }
 
   public void setTelefono(String telefono) {
-    if (!telefono.matches(ER_TELEFONO)) {
-      throw new IllegalArgumentException("ERROR: El teléfono del alumno no tiene un formato válido.");
-    }else if (telefono == null) {
+
+    if (telefono == null) {
       throw new NullPointerException("El telefono no puede ser nulo");
+    } else if (!telefono.matches(ER_TELEFONO)) {
+      throw new IllegalArgumentException("ERROR: El teléfono del alumno no tiene un formato válido.");
     } else if (telefono.isBlank() || telefono.isEmpty()) {
       throw new IllegalArgumentException("El telefono no puede estar en blanco");
     }
