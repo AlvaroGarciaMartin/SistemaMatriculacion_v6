@@ -10,11 +10,11 @@ public enum Grado {
     public String imprimir() {
         int digito=0;
         if (cadenaAMostrar == GDCFGB.cadenaAMostrar) {
-            digito=0;
-        } else if (cadenaAMostrar == GDCFGM.cadenaAMostrar){
             digito=1;
-        } else {
+        } else if (cadenaAMostrar == GDCFGM.cadenaAMostrar){
             digito=2;
+        } else {
+            digito=3;
         }
         return digito+".-"+cadenaAMostrar;
     }
