@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 public class Alumno {
 
   private static final String ER_TELEFONO= "\\d{9}";
-  private static final String ER_CORREO="^\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$"; ;
+  private static final String ER_CORREO="^\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$";
   private static final String ER_DNI="^(\\d{8})([A-Za-z]{1})$";
   public static final String FORMATO_FECHA="dd/MM/yyyy";
   private static final String ER_NIA="^([A-Za-z]{4})(\\d{3})$";
