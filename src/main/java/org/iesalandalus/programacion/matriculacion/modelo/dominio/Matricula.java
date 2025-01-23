@@ -72,19 +72,6 @@ public class Matricula {
     }
 
 
-
-
-
-
-    public String getFORMATO_FECHA() {
-        return FORMATO_FECHA;
-    }
-
-    public String getER_CURSO_ACADEMICO() {
-        return ER_CURSO_ACADEMICO;
-    }
-
-
     public int getIdMatricula() {
         return idMatricula;
     }
