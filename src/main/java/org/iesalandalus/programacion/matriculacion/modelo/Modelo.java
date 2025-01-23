@@ -12,7 +12,7 @@ import org.iesalandalus.programacion.matriculacion.modelo.negocio.Matriculas;
 import javax.naming.OperationNotSupportedException;
 
 public class Modelo {
-   public final static int CAPACIDAD=10;
+   public final static int CAPACIDAD=1;
    private Alumnos alumnos;
    private Matriculas matriculas;
    private Asignaturas asignaturas;

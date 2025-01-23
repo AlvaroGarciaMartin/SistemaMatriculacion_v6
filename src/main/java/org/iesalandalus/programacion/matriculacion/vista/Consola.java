@@ -235,7 +235,7 @@ public class Consola {
         } while (curso == null);
         do {
             System.out.println("\nIntroduce las horas desdoble de la asignatura: ");
-            System.out.println("El numero de horas de desdoble tiene que ser entre 0 y 10");
+            System.out.println("El numero de horas de desdoble tiene que ser entre 0 y 6");
             horasDesdoble = Entrada.entero();
         } while (horasDesdoble < 0);
         do {
@@ -255,7 +255,7 @@ public class Consola {
         String nombre="Asignaturaficticia";
         int horasAnuales=13;
         Curso curso=Curso.PRIMERO;
-        int horasDesdoble=10;
+        int horasDesdoble=5;
         EspecialidadProfesorado especialidadProfesorado= EspecialidadProfesorado.SISTEMAS;
         CicloFormativo cicloFormativo= new CicloFormativo(9999, "ficticio", Grado.GDCFGB, "ficticio", 200);
         Asignatura asignatura;
@@ -295,11 +295,12 @@ public class Consola {
         for (int i = 0; i < asignaturasMatricula.length; i++) {
             System.out.println("Introduzca el codigo de la asignatura que desea matricular.");
             asignaturasMatricula[i] = leerAsignatura(null);
-            while (asignaturaYaMatriculada(asignaturasMatricula, asignaturasMatricula[i])) {
+           /* while (asignaturaYaMatriculada(asignaturasMatricula, asignaturasMatricula[i])) {
                 System.out.println("La asignatura ya esta matriculada");
                 asignaturasMatricula[i] = leerAsignatura(null);
-            }
+            }*/
         }
+
         do {
             mostrarAsignaturas(asignaturas);
             Asignatura asignatura = getAsignaturaPorCodigo();
@@ -327,6 +328,8 @@ public class Consola {
                 throw new OperationNotSupportedException("ERROR: No se aceptan mas asignaturas.");
             }
         }while (opcion == 1);
+
+
         return asignaturasMatricula;
     }
     //comparar si la asignatura ya esta matriculada
@@ -397,6 +400,8 @@ public class Consola {
 
         System.out.println("La fecha de matriculación como maximo puede ser de 15 días anterior al día actual");
         fechaMatriculacion = leerFecha(mensaje);
+
+
 
         //alumno= leerAlumno();
         //Alumno alumnoBuscado=Alumnos.buscar(alumno);
