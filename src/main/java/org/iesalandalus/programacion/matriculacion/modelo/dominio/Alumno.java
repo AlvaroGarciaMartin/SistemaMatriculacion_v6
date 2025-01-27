@@ -180,7 +180,7 @@ public Alumno(String nombre, String dni, String correo, String telefono, LocalDa
   public void setTelefono(String telefono) {
 
     if (telefono == null) {
-      throw new NullPointerException("El telefono no puede ser nulo");
+      throw new NullPointerException("ERROR: El teléfono de un alumno no puede ser nulo.");
     } else if (!telefono.matches(ER_TELEFONO)) {
       throw new IllegalArgumentException("ERROR: El teléfono del alumno no tiene un formato válido.");
     } else if (telefono.isBlank() || telefono.isEmpty()) {

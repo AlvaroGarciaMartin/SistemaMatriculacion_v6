@@ -71,7 +71,7 @@ public class Consola {
         String nombre="ficticio";
         String telefono="111111111";
         String correo="ficticio@inventado.es";
-        String dni="00000000A";
+        String dni="00000000T";
         LocalDate fechaNacimiento= LocalDate.of(1991, 12, 12);
 
         do {
