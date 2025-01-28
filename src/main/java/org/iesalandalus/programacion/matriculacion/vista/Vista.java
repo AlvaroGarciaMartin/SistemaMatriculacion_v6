@@ -152,10 +152,13 @@ public class Vista {
     //buscar Alumno
     private static void buscarAlumno() {
         try {
-            //Alumno alumnoBuscado = alumnos.buscar(Consola.getAlumnoPorDni());
+           //Alumno alumnoBuscado = alumnos.buscar(Consola.getAlumnoPorDni());
             //Alumno encontrado = alumnos.buscar(alumnoBuscado);
             Alumno alumnoBuscado = controlador.buscar(Consola.getAlumnoPorDni());
             Alumno encontrado = controlador.buscar(alumnoBuscado);
+            if (alumnoBuscado != null) {
+                System.out.printf("Los datos del alumno solicitado son: %s", alumnoBuscado);
+            }
             if (encontrado != null) {
                 System.out.printf("Los datos del alumno solicitado son: %s", alumnoBuscado);
             } else {

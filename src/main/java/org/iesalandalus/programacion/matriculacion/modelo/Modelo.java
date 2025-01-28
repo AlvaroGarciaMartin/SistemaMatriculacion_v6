@@ -33,8 +33,10 @@ public class Modelo {
       this.alumnos.insertar(alumno);
    };
    public Alumno buscar(Alumno alumno){
-      this.alumnos.buscar(alumno);
-       return alumno;
+      return this.alumnos.buscar(alumno);
+       //this.alumnos.buscar(alumno);
+      //alumnos.buscar(alumno);
+       //return alumno;
    };
    public void borrar(Alumno alumno) throws OperationNotSupportedException {
       this.alumnos.borrar(alumno);

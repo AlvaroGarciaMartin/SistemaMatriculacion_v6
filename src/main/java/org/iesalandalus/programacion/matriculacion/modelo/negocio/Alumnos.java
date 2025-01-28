@@ -3,6 +3,7 @@ package org.iesalandalus.programacion.matriculacion.modelo.negocio;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.Alumno;
 
 import javax.naming.OperationNotSupportedException;
+import java.util.Objects;
 
 
 public class Alumnos {
@@ -30,6 +31,7 @@ public class Alumnos {
 
     private Alumno[] copiaProfundaAlumnos() {
 
+        //Alumno[] copiaAlumnos = new Alumno[capacidad];
         Alumno[] copiaAlumnos = new Alumno[capacidad];
         for (int i = 0; !tamanoSuperado(i); i++) {
             copiaAlumnos[i] = new Alumno(coleccionAlumnos[i]);
@@ -53,6 +55,7 @@ public class Alumnos {
         }
         return indice;
     }
+
     //Insertar Alumno
     public void insertar(Alumno alumno) throws OperationNotSupportedException {
         if (alumno == null) {
@@ -88,6 +91,8 @@ public class Alumnos {
             return null;
         } else {
             return new Alumno(get()[indice]);
+            //return coleccionAlumnos[indice];
+            //return alumno;
         }
     }
     //borrar alumno

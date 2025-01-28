@@ -35,8 +35,9 @@ public class Controlador {
         modelo.insertar(alumno);
     }
     public Alumno buscar(Alumno alumno){
-        modelo.buscar(alumno);
-        return alumno;
+        return modelo.buscar(alumno);
+        //modelo.buscar(alumno);
+        //return alumno;
     }
     public void borrar(Alumno alumno) throws OperationNotSupportedException {
         modelo.borrar(alumno);

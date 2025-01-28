@@ -61,7 +61,7 @@ public class Consola {
        }while (fechaNacimiento == null);
 
 
-        return new Alumno(nombre, dni, correo, telefono, fechaNacimiento);
+        return new Alumno(nombre, telefono, correo, dni, fechaNacimiento);
 
     }
 

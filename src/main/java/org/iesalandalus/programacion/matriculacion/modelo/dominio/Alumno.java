@@ -31,11 +31,13 @@ public class Alumno {
     setFechaNacimiento(fechaNacimiento);
     setNia();
   }*/
-public Alumno(String nombre, String dni, String correo, String telefono, LocalDate fechaNacimiento) {
+public Alumno(String nombre, String telefono, String correo, String dni, LocalDate fechaNacimiento) {
   setNombre(nombre);
-  setDni(dni);
-  setCorreo(correo);
   setTelefono(telefono);
+  //setDni(dni);
+  setCorreo(correo);
+  //setTelefono(telefono);
+  setDni(dni);
   setFechaNacimiento(fechaNacimiento);
   setNia();
 }
@@ -46,9 +48,11 @@ public Alumno(String nombre, String dni, String correo, String telefono, LocalDa
       throw new NullPointerException("ERROR: No es posible copiar un alumno nulo.");
     }
     setNombre(alumno.getNombre());
-    setDni(alumno.getDni());
-    setCorreo(alumno.getCorreo());
+    //setDni(alumno.getDni());
     setTelefono(alumno.getTelefono());
+    setCorreo(alumno.getCorreo());
+    //setTelefono(alumno.getTelefono());
+    setDni(alumno.getDni());
     setFechaNacimiento(alumno.getFechaNacimiento());
     setNia();
   }
