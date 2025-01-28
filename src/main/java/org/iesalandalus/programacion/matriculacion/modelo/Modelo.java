@@ -67,8 +67,9 @@ public class Modelo {
       this.ciclosFormativos.insertar(cicloFormativo);
    };
    public CicloFormativo buscar(CicloFormativo cicloFormativo){
-      this.ciclosFormativos.buscar(cicloFormativo);
-      return cicloFormativo;
+     return this.ciclosFormativos.buscar(cicloFormativo);
+      //this.ciclosFormativos.buscar(cicloFormativo);
+      //return cicloFormativo;
    };
    public void borrar(CicloFormativo cicloFormativo) throws OperationNotSupportedException {
       this.ciclosFormativos.borrar(cicloFormativo);
@@ -83,8 +84,9 @@ public class Modelo {
       this.matriculas.insertar(matricula);
    };
    public Matricula buscar(Matricula matricula) throws OperationNotSupportedException {
-      this.matriculas.buscar(matricula);
-      return matricula;
+      return this.matriculas.buscar(matricula);
+      //this.matriculas.buscar(matricula);
+     // return matricula;
    };
    public void borrar(Matricula matricula) throws OperationNotSupportedException {
       this.matriculas.borrar(matricula);

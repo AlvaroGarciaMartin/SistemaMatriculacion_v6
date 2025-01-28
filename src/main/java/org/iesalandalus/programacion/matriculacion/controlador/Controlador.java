@@ -50,8 +50,9 @@ public class Controlador {
         modelo.insertar(asignatura);
     }
     public Asignatura buscar(Asignatura asignatura){
-        modelo.buscar(asignatura);
-        return asignatura;
+        return modelo.buscar(asignatura);
+        //modelo.buscar(asignatura);
+        //return asignatura;
     }
     public void borrar(Asignatura asignatura) throws OperationNotSupportedException {
         modelo.borrar(asignatura);
@@ -64,8 +65,9 @@ public class Controlador {
         modelo.insertar(cicloFormativo);
     }
     public CicloFormativo buscar(CicloFormativo cicloFormativo){
-        modelo.buscar(cicloFormativo);
-        return cicloFormativo;
+        return modelo.buscar(cicloFormativo);
+        //modelo.buscar(cicloFormativo);
+        //return cicloFormativo;
     }
     public void borrar(CicloFormativo cicloFormativo) throws OperationNotSupportedException {
         modelo.borrar(cicloFormativo);
@@ -78,8 +80,9 @@ public class Controlador {
         modelo.insertar(matricula);
     }
     public Matricula buscar(Matricula matricula) throws OperationNotSupportedException {
-        modelo.buscar(matricula);
-        return matricula;
+        return modelo.buscar(matricula);
+        //modelo.buscar(matricula);
+        //return matricula;
     }
     public void borrar(Matricula matricula) throws OperationNotSupportedException {
         modelo.borrar(matricula);
