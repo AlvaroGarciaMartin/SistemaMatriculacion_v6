@@ -82,7 +82,7 @@ public class Controlador {
     public Matricula buscar(Matricula matricula) throws OperationNotSupportedException {
         return modelo.buscar(matricula);
         //modelo.buscar(matricula);
-        //return matricula;
+        //return matricula; 
     }
     public void borrar(Matricula matricula) throws OperationNotSupportedException {
         modelo.borrar(matricula);
