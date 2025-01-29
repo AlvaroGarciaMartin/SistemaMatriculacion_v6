@@ -59,7 +59,7 @@ public class Matricula {
 
     private String asignaturasMatricula(){
 
-        StringBuilder asignaturas = new StringBuilder();
+        /*StringBuilder asignaturas = new StringBuilder();
         for (Asignatura asignatura : coleccionAsignaturas) {
             if (asignatura != null) {
                 asignaturas.append(asignatura.getNombre()).append(", ");
@@ -68,7 +68,17 @@ public class Matricula {
         if (!asignaturas.isEmpty()) {
             asignaturas.setLength(asignaturas.length() - 2);
         }
-        return asignaturas.toString();
+        return asignaturas.toString();*/
+        String s = "";
+        for(int i=0;i<coleccionAsignaturas.size();i++){
+            if (coleccionAsignaturas.get(i) != null) {
+                s+=coleccionAsignaturas.get(i).getNombre();
+                if(i<coleccionAsignaturas.size()-1){
+                    s+=", ";
+                }
+            }
+        }
+        return s;
 
     }
 
