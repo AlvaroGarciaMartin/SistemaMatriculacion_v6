@@ -3,24 +3,21 @@ package org.iesalandalus.programacion.matriculacion.modelo.negocio;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.Alumno;
 
 import javax.naming.OperationNotSupportedException;
+import java.util.ArrayList;
 import java.util.Objects;
 
 
 public class Alumnos {
 
-    private int capacidad;
-    private int tamano=0;
-    private Alumno[] coleccionAlumnos;
+    //private int capacidad;
+    //private int tamano=0;
+    private ArrayList<Alumno> coleccionAlumnos;
 
 
 
 
-    public Alumnos(int capacidad) {
-        if (!(capacidad > 0)) {
-            throw new IllegalArgumentException("ERROR: La capacidad debe ser mayor que cero.");
-        }
-        this.capacidad = capacidad;
-        coleccionAlumnos = new Alumno[capacidad];
+    public Alumnos() {
+        this.coleccionAlumnos = new ArrayList<>();
     }
 
 
@@ -32,29 +29,13 @@ public class Alumnos {
     private Alumno[] copiaProfundaAlumnos() {
 
         //Alumno[] copiaAlumnos = new Alumno[capacidad];
-        Alumno[] copiaAlumnos = new Alumno[capacidad];
-        for (int i = 0; !tamanoSuperado(i); i++) {
-            copiaAlumnos[i] = new Alumno(coleccionAlumnos[i]);
+        Alumno[] copiaAlumnos = new Alumno[this.coleccionAlumnos.size()];
+        for (int i = 0; i<coleccionAlumnos.size(); i++) {
+            copiaAlumnos[i] = new Alumno(coleccionAlumnos.get(i));
         }
         return copiaAlumnos;
     }
 
-    private int buscarIndice(Alumno alumno) {
-        if (alumno == null) {
-            throw new NullPointerException("ERROR: 1.No se puede buscar un alumno nulo.");
-        }
-
-        int indice = 0;
-        boolean alumnoEncontrado = false;
-        while (!tamanoSuperado(indice) && !alumnoEncontrado) {
-            if (get()[indice].equals(alumno)) {
-                alumnoEncontrado = true;
-            } else {
-                indice++;
-            }
-        }
-        return indice;
-    }
 
     //Insertar Alumno
     public void insertar(Alumno alumno) throws OperationNotSupportedException {
@@ -62,76 +43,47 @@ public class Alumnos {
             throw new NullPointerException("ERROR: No se puede insertar un alumno nulo.");
         }
 
-        int indice = buscarIndice(alumno);
-        if (capacidadSuperada(indice)) {
-            throw new OperationNotSupportedException("ERROR: No se aceptan más alumnos.");
-        }
+        int indice = this.coleccionAlumnos.indexOf(alumno);
 
-        if (tamanoSuperado(indice)) {
-            coleccionAlumnos[indice] = new Alumno(alumno);
-            tamano++;
+        if (indice==-1) {
+            this.coleccionAlumnos.add(new Alumno(alumno));
         } else {
             throw new OperationNotSupportedException("ERROR: Ya existe un alumno con ese dni.");
         }
     }
-    private boolean tamanoSuperado(int indice) {
-        return indice >= getTamano();
+    //Buscar Alumno
+    public Alumno buscar(Alumno alumno){
+       Objects.requireNonNull(alumno, "ERROR: No se puede buscar un alumno nulo.");
+        int indice = this.coleccionAlumnos.indexOf(alumno);
+        if (indice==-1) {
+            return null;
+        }
+        return new Alumno(this.coleccionAlumnos.get(indice));
     }
 
-    private boolean capacidadSuperada(int indice) {
-        return indice >= getCapacidad();
-    }
-    //buscar alumno
-    public Alumno buscar(Alumno alumno) {
-        if (alumno == null) {
-            throw new NullPointerException("ERROR: 2.No se puede buscar un alumno nulo.");
-        }
-        int indice = buscarIndice(alumno);
-        if (tamanoSuperado(indice)) {
-            return null;
-        } else {
-            return new Alumno(get()[indice]);
-            //return coleccionAlumnos[indice];
-            //return alumno;
-        }
-    }
+
+
     //borrar alumno
     public void borrar (Alumno alumno) throws OperationNotSupportedException {
         // Objects.requireNonNull(alumno,"ERROR: No se puede borrar un alumno nulo.");
         if (alumno == null) {
             throw new NullPointerException("ERROR: No se puede borrar un alumno nulo.");
         }
-        int indice = buscarIndice(alumno);
-        if (tamanoSuperado(indice)){
+        int indice = this.coleccionAlumnos.indexOf(alumno);
+        if (indice==-1) {
             throw new OperationNotSupportedException("ERROR: No existe ningún alumno como el indicado.");
         }
         else{
-            desplazarUnaPosicionHaciaIzquierda(indice);
+            this.coleccionAlumnos.remove(indice);
         }
     }
-    //desplazar posicion a la izquierda
-    private void desplazarUnaPosicionHaciaIzquierda (int indice){
-        coleccionAlumnos[indice]= null;
-        int i;
-        for (i=indice; !tamanoSuperado(i);i++){
-            if (i<getCapacidad()-1) {
-                coleccionAlumnos[i] = coleccionAlumnos [i+1];
-            }
-        }
 
-        tamano--;
-    }
-
-
-    public int getCapacidad() {
-        return capacidad;
-    }
 
 
 
     public int getTamano() {
 
-        return tamano;
+        return this.coleccionAlumnos.size();
     }
 
 
