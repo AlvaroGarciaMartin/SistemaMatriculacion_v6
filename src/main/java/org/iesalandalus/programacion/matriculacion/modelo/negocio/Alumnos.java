@@ -73,9 +73,9 @@ public class Alumnos {
         if (indice==-1) {
             throw new OperationNotSupportedException("ERROR: No existe ningún alumno como el indicado.");
         }
-        else{
+
             this.coleccionAlumnos.remove(indice);
-        }
+
     }
 
 
