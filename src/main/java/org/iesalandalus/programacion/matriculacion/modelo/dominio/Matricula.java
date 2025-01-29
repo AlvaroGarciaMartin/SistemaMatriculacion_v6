@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.Objects;
+import java.util.ArrayList;
 
 public class Matricula {
     public static final int MAXIMO_MESES_ANTERIOR_ANULACION=6;
@@ -18,7 +19,7 @@ public class Matricula {
     private LocalDate fechaMatriculacion;
     private LocalDate fechaAnulacion;
     private Alumno alumno;
-    private Asignatura[] coleccionAsignaturas;
+    private ArrayList<Asignatura> coleccionAsignaturas;
 
     //constructor con parametros
     public Matricula(int idMatricula, String cursoAcademico, LocalDate fechaMatriculacion, Alumno alumno, Asignatura[] coleccionAsignaturas) throws OperationNotSupportedException {
@@ -154,7 +155,8 @@ public class Matricula {
     }
 
     public Asignatura[] getColeccionAsignaturas() {
-        return coleccionAsignaturas;
+        Asignatura[] copiaAsignatura= new Asignatura[coleccionAsignaturas.size()];
+        return coleccionAsignaturas.toArray(copiaAsignatura);
     }
 
     public void setColeccionAsignaturas (Asignatura[] coleccionAsignaturas) throws OperationNotSupportedException {
@@ -166,7 +168,12 @@ public class Matricula {
             throw new OperationNotSupportedException("ERROR: No se puede realizar la matrícula ya que supera el máximo de horas permitidas (" + Matricula.MAXIMO_NUMERO_HORAS_MATRICULA + " horas).");
         }
 
-        this.coleccionAsignaturas = coleccionAsignaturas;
+        this.coleccionAsignaturas = new ArrayList<>();
+        for (Asignatura asignatura : coleccionAsignaturas) {
+            if (asignatura != null) continue;
+                this.coleccionAsignaturas.add(new Asignatura(asignatura));
+
+        }
     }
 
     @Override
