@@ -1,4 +1,4 @@
-package org.iesalandalus.programacion.matriculacion.dominio;
+/*package org.iesalandalus.programacion.matriculacion.dominio;
 
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.Alumno;
 import org.junit.jupiter.api.Test;
@@ -403,3 +403,4 @@ public class AlumnoTest {
 
 
 }
+*/

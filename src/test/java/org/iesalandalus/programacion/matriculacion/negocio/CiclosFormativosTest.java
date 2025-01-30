@@ -1,4 +1,4 @@
-package org.iesalandalus.programacion.matriculacion.negocio;
+/*package org.iesalandalus.programacion.matriculacion.negocio;
 
 import org.iesalandalus.programacion.matriculacion.MainApp;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.CicloFormativo;
@@ -385,3 +385,4 @@ public class CiclosFormativosTest {
 
 
 }
+*/

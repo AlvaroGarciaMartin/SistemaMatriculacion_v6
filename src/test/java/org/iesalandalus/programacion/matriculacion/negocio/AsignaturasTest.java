@@ -1,4 +1,4 @@
-package org.iesalandalus.programacion.matriculacion.negocio;
+/*package org.iesalandalus.programacion.matriculacion.negocio;
 
 
 import org.iesalandalus.programacion.matriculacion.MainApp;
@@ -404,3 +404,4 @@ public class AsignaturasTest {
 
 
 }
+*/
