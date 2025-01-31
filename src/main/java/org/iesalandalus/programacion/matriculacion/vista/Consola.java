@@ -213,7 +213,6 @@ public class Consola {
         Curso curso;
         int horasDesdoble;
         EspecialidadProfesorado especialidadProfesorado;
-        CicloFormativo cicloFormativo;
         Asignatura asignatura;
         do {
             System.out.println("\nIntroduce el codigo de la asignatura: ");
@@ -242,12 +241,8 @@ public class Consola {
             System.out.println("\nIntroduce la especialidad profesorada de la asignatura: ");
             especialidadProfesorado = leerEspecialidadProfesorado();
         } while (especialidadProfesorado == null);
-        do {
-            System.out.println("\nIntroduce el ciclo formativo de la asignatura: ");
-            cicloFormativo = leerCicloFormativo(ciclosFormativos);
-        } while (cicloFormativo == null);
 
-       asignatura=new Asignatura(codigo, nombre, horasAnuales, curso, horasDesdoble, especialidadProfesorado, cicloFormativo);
+       asignatura=new Asignatura(codigo, nombre, horasAnuales, curso, horasDesdoble, especialidadProfesorado, ciclosFormativos);
         return new Asignatura(asignatura);
     }
     public static Asignatura getAsignaturaPorCodigo(){
@@ -426,16 +421,16 @@ public class Consola {
         Asignatura asignatura2 = new Asignatura("4321", "asignatura2", 260, Curso.PRIMERO, 2, EspecialidadProfesorado.INFORMATICA, cicloFormativo);
         Asignatura asignatura3 = new Asignatura("5555", "asignatura3", 100, Curso.PRIMERO, 3, EspecialidadProfesorado.FOL, cicloFormativo);
 
-        Asignaturas coleccionAsignaturas = new Asignaturas(2);
-        coleccionAsignaturas.insertar(asignatura);
-        coleccionAsignaturas.insertar(asignatura2);
+        //Asignaturas coleccionAsignaturas = new Asignaturas(2);
+        //coleccionAsignaturas.insertar(asignatura);
+        //coleccionAsignaturas.insertar(asignatura2);
 
         Matricula matricula;
 
         System.out.println("Introduzca el id de la Matrícula.");
         idMatricula = Entrada.entero();
 
-        matricula = new Matricula(idMatricula, cursoAcademico, fechaMatriculacion, alumno, coleccionAsignaturas.get());
+        matricula = new Matricula(idMatricula, cursoAcademico, fechaMatriculacion, alumno, new Asignaturas().get());
 
         return new Matricula(matricula);
     }
