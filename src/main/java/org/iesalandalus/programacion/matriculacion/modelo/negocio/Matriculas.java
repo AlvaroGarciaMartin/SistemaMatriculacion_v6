@@ -73,13 +73,21 @@ private ArrayList<Matricula> coleccionMatriculas;
         return this.coleccionMatriculas.size();
     }
 
-    public Matricula[] get(Alumno alumno){
+    public Matricula[] get(Alumno alumno) throws OperationNotSupportedException {
+        ArrayList<Matricula> auxiliar = new ArrayList<>();
+        for (Matricula matricula:coleccionMatriculas) {
+            if (matricula != null && matricula.getAlumno().equals(alumno)) {
+                auxiliar.add(new Matricula(matricula));
 
-        int contador = 0;
+            }
+        }
+        Matricula[] matriculasAlumno = new Matricula[auxiliar.size()];
+        return auxiliar.toArray(matriculasAlumno);
+        //int contador = 0;
 
         //Contar cuántas coincidencias del alumno hay en matrículas:
         //Recorre las matrículas
-        for (Matricula matricula : coleccionMatriculas) {
+       /* for (Matricula matricula : coleccionMatriculas) {
             //Si en la matricula actual, su alumno = al alumno pasado...
             if (matricula.getAlumno().equals(alumno)) {
                 contador++;
@@ -97,13 +105,22 @@ private ArrayList<Matricula> coleccionMatriculas;
                 i++;
             }
         }
-        return coleccionMatriculasAlumn;
+        return coleccionMatriculasAlumn;*/
+        //return auxiliar.toArray(new Matricula[0]);
     }
 
 
-    public Matricula[] get(String cursoAcademico){
+    public Matricula[] get(String cursoAcademico) throws OperationNotSupportedException {
+        ArrayList<Matricula> auxiliar = new ArrayList<>();
+        for (Matricula matricula:coleccionMatriculas) {
+            if (matricula != null && matricula.getCursoAcademico().equals(cursoAcademico)) {
+                auxiliar.add(new Matricula(matricula));
 
-        int contador = 0;
+            }
+        }
+        Matricula[] matriculasCurso = new Matricula[auxiliar.size()];
+        return auxiliar.toArray(matriculasCurso);
+        /*int contador = 0;
 
         for (Matricula matricula : coleccionMatriculas) {
             if (matricula.getCursoAcademico().equals(cursoAcademico)) {
@@ -122,44 +139,27 @@ private ArrayList<Matricula> coleccionMatriculas;
                 i++;
             }
         }
-        return coleccionMatriculasCurso;
+        return coleccionMatriculasCurso;*/
     }
 
 
-    public Matricula[] get(CicloFormativo cicloFormativo) {
-        int contador = 0;
+    public Matricula[] get(CicloFormativo cicloFormativo) throws OperationNotSupportedException {
+        ArrayList<Matricula> auxiliar = new ArrayList<>();
+        for (Matricula matricula:coleccionMatriculas) {
+            if (matricula != null ) {
+                for (Asignatura asignatura : matricula.getColeccionAsignaturas()) {
 
-        for (Matricula matricula : coleccionMatriculas) {
-            for (Asignatura asignatura : matricula.getColeccionAsignaturas()) {
+                    if (asignatura != null && asignatura.getCicloFormativo().equals(cicloFormativo)) {
+                        auxiliar.add(new Matricula(matricula));
+                        break;
+                    }
 
-                if (asignatura.getCicloFormativo().equals(cicloFormativo)) {
-                    contador++;
-                    break;
                 }
             }
         }
+        Matricula[] matriculasCiclo = new Matricula[auxiliar.size()];
+        return auxiliar.toArray(matriculasCiclo);
 
-        Matricula[] coleccionMatriculasCiclo = new Matricula[contador];
-
-        int i = 0;
-
-        // Recorre las matrículas
-        for (Matricula matricula : coleccionMatriculas) {
-            //Dentro de una matrícula, recorre sus asignaturas
-            for (Asignatura asignatura : matricula.getColeccionAsignaturas()) {
-
-                // Si una asignatura específica de las recorridas tiene ciclo = al ciclo pasado...
-                if (asignatura.getCicloFormativo().equals(cicloFormativo)) {
-                    coleccionMatriculasCiclo[i] = matricula;
-                    i++;
-
-                    // break para evitar procesar más asignaturas una vez que se encuentra una
-                    // coincidencia dentro de la matrícula
-                    break;
-                }
-            }
-        }
-        return coleccionMatriculasCiclo;
     }
 
 
