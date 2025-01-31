@@ -95,7 +95,7 @@ public class Controlador {
       return modelo.getMatriculas(alumno);
     }
 
-    public Matricula[] getMatriculas(CicloFormativo cicloFormativo){
+    public Matricula[] getMatriculas(CicloFormativo cicloFormativo) throws OperationNotSupportedException {
        return modelo.getMatriculas(cicloFormativo);
     }
     public Matricula[] getMatriculas(String cursoAcademico) throws OperationNotSupportedException {

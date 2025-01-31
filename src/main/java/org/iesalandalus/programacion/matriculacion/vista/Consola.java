@@ -112,7 +112,7 @@ public class Consola {
         while (seleccion<0 || seleccion>3 && seleccion > Grado.values().length);
         return Grado.values()[seleccion];
     }
-    public static CicloFormativo leerCicloFormativo(CiclosFormativos ciclosFormativos) {
+    public static CicloFormativo leerCicloFormativo() {
         int codigo;
         String familiaProfesional;
         Grado grado;
@@ -206,7 +206,7 @@ public class Consola {
         return EspecialidadProfesorado.values()[seleccion];
     }
 
-    public static Asignatura leerAsignatura(CiclosFormativos ciclosFormativos) {
+    public static Asignatura leerAsignatura(CicloFormativo ciclosFormativos) {
         String codigo;
         String nombre;
         int horasAnuales;
