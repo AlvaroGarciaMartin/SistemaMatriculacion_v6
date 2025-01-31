@@ -510,6 +510,16 @@ public class Vista {
             String cursoAcademico = Entrada.cadena();
             //Matricula[] arrayMatriculas = matriculas.get();
             Matricula[] arrayMatriculas = controlador.getMatriculas(cursoAcademico);
+            Arrays.sort(arrayMatriculas, new Comparator<Matricula>(){
+                @Override
+                public int compare(Matricula m1, Matricula m2) {
+                    int comp = - m1.getFechaMatriculacion().compareTo(m2.getFechaMatriculacion());
+                    if (comp==0) {
+                        comp = m1.getAlumno().getNombre().compareTo(m2.getAlumno().getNombre());
+                    }
+                    return comp;
+                }
+            });
 
             for (Matricula matricula : arrayMatriculas) {
                 if (matricula == null) {
