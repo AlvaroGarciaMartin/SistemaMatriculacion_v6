@@ -4,6 +4,7 @@ import javax.naming.OperationNotSupportedException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.util.Arrays;
 import java.util.Objects;
 import java.util.ArrayList;
 
@@ -22,7 +23,7 @@ public class Matricula {
     private ArrayList<Asignatura> coleccionAsignaturas;
 
     //constructor con parametros
-    public Matricula(int idMatricula, String cursoAcademico, LocalDate fechaMatriculacion, Alumno alumno, Asignatura[] coleccionAsignaturas) throws OperationNotSupportedException {
+    public Matricula(int idMatricula, String cursoAcademico, LocalDate fechaMatriculacion, Alumno alumno, ArrayList<Asignatura> coleccionAsignaturas) throws OperationNotSupportedException {
         setIdMatricula(idMatricula);
         setCursoAcademico(cursoAcademico);
         setFechaMatriculacion(fechaMatriculacion);
@@ -45,7 +46,7 @@ public class Matricula {
     }
 
     //metodo para comprobar si la matricula supera el maximo de horas
-    private boolean superaMaximoNumeroHorasMatricula(Asignatura[] asignaturasMatricula) {
+    private boolean superaMaximoNumeroHorasMatricula(ArrayList<Asignatura> asignaturasMatricula) {
 
         int horasMatricula = 0;
        for (Asignatura asignatura : asignaturasMatricula) {
@@ -164,12 +165,11 @@ public class Matricula {
         this.alumno = alumno;
     }
 
-    public Asignatura[] getColeccionAsignaturas() {
-        Asignatura[] copiaAsignatura= new Asignatura[coleccionAsignaturas.size()];
-        return coleccionAsignaturas.toArray(copiaAsignatura);
+    public ArrayList<Asignatura> getColeccionAsignaturas() {
+        return new ArrayList<>(this.coleccionAsignaturas);
     }
 
-    public void setColeccionAsignaturas (Asignatura[] coleccionAsignaturas) throws OperationNotSupportedException {
+    public void setColeccionAsignaturas (ArrayList<Asignatura> coleccionAsignaturas) throws OperationNotSupportedException {
         if (coleccionAsignaturas == null) {
             throw new NullPointerException("ERROR: La lista de asignaturas de una matrícula no puede ser nula.");
         }

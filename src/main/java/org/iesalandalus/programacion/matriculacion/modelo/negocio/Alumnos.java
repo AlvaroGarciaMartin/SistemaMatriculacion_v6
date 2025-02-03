@@ -22,16 +22,16 @@ public class Alumnos {
 
 
 
-    public Alumno[] get() {
+    public ArrayList<Alumno> get() {
         return copiaProfundaAlumnos();
     }
 
-    private Alumno[] copiaProfundaAlumnos() {
+    private ArrayList<Alumno> copiaProfundaAlumnos() {
 
         //Alumno[] copiaAlumnos = new Alumno[capacidad];
-        Alumno[] copiaAlumnos = new Alumno[this.coleccionAlumnos.size()];
-        for (int i = 0; i<coleccionAlumnos.size(); i++) {
-            copiaAlumnos[i] = new Alumno(coleccionAlumnos.get(i));
+        ArrayList<Alumno> copiaAlumnos = new ArrayList<>();
+        for (Alumno alumno:coleccionAlumnos) {
+            copiaAlumnos.add(new Alumno(alumno));
         }
         return copiaAlumnos;
     }

@@ -10,6 +10,7 @@ import org.iesalandalus.programacion.matriculacion.modelo.negocio.CiclosFormativ
 import org.iesalandalus.programacion.matriculacion.modelo.negocio.Matriculas;
 
 import javax.naming.OperationNotSupportedException;
+import java.util.ArrayList;
 
 public class Modelo {
 
@@ -40,7 +41,7 @@ public class Modelo {
       this.alumnos.borrar(alumno);
    }
 
-   public Alumno[] getAlumnos() {
+   public ArrayList<Alumno> getAlumnos() {
       return alumnos.get();
       //return new Alumno[0];
    }
@@ -56,7 +57,7 @@ public class Modelo {
       this.asignaturas.borrar(asignatura);
    }
 
-   public Asignatura[] getAsignaturas() {
+   public ArrayList<Asignatura> getAsignaturas() {
       return asignaturas.get();
       //return new Asignatura[0];
    }
@@ -72,7 +73,7 @@ public class Modelo {
       this.ciclosFormativos.borrar(cicloFormativo);
    }
 
-   public CicloFormativo[] getCiclosFormativos() {
+   public ArrayList<CicloFormativo> getCiclosFormativos() {
       return ciclosFormativos.get();
       //return new CicloFormativo[0];
    }
@@ -88,19 +89,19 @@ public class Modelo {
       this.matriculas.borrar(matricula);
    }
 
-   public Matricula[] getMatriculas() throws OperationNotSupportedException {
+   public ArrayList<Matricula> getMatriculas() throws OperationNotSupportedException {
       return matriculas.get();
       //return new Matricula[0];
    }
-   public Matricula[] getMatriculas(Alumno alumno) throws OperationNotSupportedException {
+   public ArrayList<Matricula> getMatriculas(Alumno alumno) throws OperationNotSupportedException {
       //this.matriculas.get(alumno);
       return matriculas.get(alumno);
    }
-   public Matricula[] getMatriculas(CicloFormativo cicloFormativo) throws OperationNotSupportedException {
+   public ArrayList<Matricula> getMatriculas(CicloFormativo cicloFormativo) throws OperationNotSupportedException {
       //this.matriculas.get(cicloFormativo);
       return matriculas.get(cicloFormativo);
    }
-   public Matricula[] getMatriculas(String cursoAcademico) throws OperationNotSupportedException {
+   public ArrayList<Matricula> getMatriculas(String cursoAcademico) throws OperationNotSupportedException {
       //this.matriculas.get(cursoAcademico);
       return matriculas.get(cursoAcademico);
    }

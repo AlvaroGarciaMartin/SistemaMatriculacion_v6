@@ -8,7 +8,7 @@ public enum Grado {
         this.cadenaAMostrar=cadenaAMostrar;
     }
     public String imprimir() {
-        int digito=0;
+        int digito;
         if (cadenaAMostrar == GDCFGB.cadenaAMostrar) {
             digito=1;
         } else if (cadenaAMostrar == GDCFGM.cadenaAMostrar){

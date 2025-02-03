@@ -4,6 +4,7 @@ package org.iesalandalus.programacion.matriculacion.modelo.negocio;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.Asignatura;
 
 import javax.naming.OperationNotSupportedException;
+import java.sql.Array;
 import java.util.*;
 
 public class Asignaturas {
@@ -14,14 +15,14 @@ public class Asignaturas {
         coleccionAsignaturas = new ArrayList<>();
     }
     //copia profunda
-    public Asignatura[] get() {
+    public ArrayList<Asignatura> get() {
         return copiaProfundaAsignaturas();
     }
 
-    private Asignatura[] copiaProfundaAsignaturas() {
-        Asignatura[] copiaAsignaturas = new Asignatura[this.coleccionAsignaturas.size()];
-        for (int i = 0; i<this.coleccionAsignaturas.size(); i++) {
-            copiaAsignaturas[i] = new Asignatura(this.coleccionAsignaturas.get(i));
+    private ArrayList<Asignatura> copiaProfundaAsignaturas() {
+        ArrayList<Asignatura> copiaAsignaturas = new ArrayList<>();
+        for (Asignatura asignatura : coleccionAsignaturas) {
+            copiaAsignaturas.add(new Asignatura(asignatura));
         }
         return copiaAsignaturas;
     }
