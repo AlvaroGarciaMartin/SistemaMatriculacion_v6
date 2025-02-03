@@ -11,6 +11,8 @@ import javax.naming.OperationNotSupportedException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Consola {
     private Consola() {
@@ -273,7 +275,7 @@ public class Consola {
 
     }*/
 
-    public static void mostrarAsignaturas(Asignatura[] asignaturas){
+    public static void mostrarAsignaturas(ArrayList<Asignatura> asignaturas){
         System.out.println("Listado de Asignaturas disponibles:");
         for (Asignatura asignatura : asignaturas) {
             if (asignatura != null) {
@@ -282,18 +284,22 @@ public class Consola {
 
         }
     }
-    public static Asignatura[] elegirAsignaturasMatricula(Asignatura[] asignaturas) throws OperationNotSupportedException {
+    /*public static ArrayList<Asignatura> elegirAsignaturasMatricula(ArrayList<Asignatura> asignaturas) throws OperationNotSupportedException {
 
-        Asignatura[] asignaturasMatricula = new Asignatura[asignaturas.length];
+        if (asignaturas == null || asignaturas.size() == 0) {
+            throw new OperationNotSupportedException("No hay asignaturas disponibles.");
+
+        }
+        ArrayList<Asignatura> asignaturasMatricula = new ArrayList<>();
         int opcion;
         //Comprobar si la asignatura ya existe
-        for (int i = 0; i < asignaturasMatricula.length; i++) {
+        for (int i = 0; i < asignaturasMatricula.size(); i++) {
             System.out.println("Introduzca el codigo de la asignatura que desea matricular.");
-            asignaturasMatricula[i] = leerAsignatura(null);
+            asignaturasMatricula.get(i) = leerAsignatura(null);
            /* while (asignaturaYaMatriculada(asignaturasMatricula, asignaturasMatricula[i])) {
                 System.out.println("La asignatura ya esta matriculada");
                 asignaturasMatricula[i] = leerAsignatura(null);
-            }*/
+            }
         }
 
         do {
@@ -303,8 +309,8 @@ public class Consola {
 
             int indice = -1;
             boolean encontrado = false;
-            for (int i = 0; i < asignaturasMatricula.length && !encontrado; i++) {
-                if (asignaturasMatricula[i] == null||asignaturasMatricula[i].equals(asignatura)) {
+            for (int i = 0; i < asignaturasMatricula.size() && !encontrado; i++) {
+                if (asignaturasMatricula.get(i) == null||asignaturasMatricula.get(i).equals(asignatura)) {
                     indice = i;
                     encontrado = true;
                 }
@@ -326,13 +332,62 @@ public class Consola {
 
 
         return asignaturasMatricula;
+    }*/
+    public static ArrayList<Asignatura> elegirAsignaturasMatricula(ArrayList<Asignatura> asignaturas)
+            throws OperationNotSupportedException {
+        if (asignaturas == null || asignaturas.size() == 0) {
+            throw new IllegalArgumentException("ERROR: No hay asignaturas disponibles para seleccionar.");
+        }
+
+        ArrayList<Asignatura> asignaturasMatricula = new ArrayList<>();
+        int opcion = 0;
+
+        do {
+            mostrarAsignaturas(asignaturas); // Muestra las asignaturas disponibles
+
+            // Obtener la asignatura por código
+            System.out.print("Introduzca el código de la asignatura: ");
+            String codigo = Entrada.cadena();
+            Asignatura asignatura = null;
+
+            // Validar si el código corresponde a una asignatura válida
+            for (Asignatura a : asignaturas) {
+                if (a != null && a.getCodigo().equals(codigo)) {
+                    asignatura = a;
+                    break;
+                }
+            }
+
+            if (asignatura == null) {
+                System.out.println("ERROR: La asignatura seleccionada no es válida.");
+                continue; // Volver a solicitar la asignatura
+            }
+
+            // Verificar si ya está matriculada
+            if (asignaturaYaMatriculada(asignaturasMatricula, asignatura)) {
+                System.out.println("La asignatura ya está seleccionada.");
+            } else {
+                // Añadir asignatura al array
+                asignaturasMatricula.add(asignatura);
+                System.out.println("Asignatura añadida correctamente.");
+            }
+
+            // Preguntar si desea añadir otra asignatura
+            System.out.print("¿Desea añadir otra asignatura? (0 = No, 1 = Sí): ");
+            opcion = Entrada.entero();
+        } while (opcion == 1 && asignaturasMatricula.size() < asignaturas.size());
+
+        // Crear un nuevo array con las asignaturas seleccionadas
+        return asignaturasMatricula;
     }
+
+
     //comparar si la asignatura ya esta matriculada
-    private static boolean asignaturaYaMatriculada(Asignatura [] asignaturasMatricula, Asignatura asignatura){
+    private static boolean asignaturaYaMatriculada(ArrayList<Asignatura> asignaturasMatricula, Asignatura asignatura){
 
         if (asignaturasMatricula != null) {
-            for (int i = 0; i < asignaturasMatricula.length; i++) {
-                if (asignaturasMatricula[i].equals(asignatura)) {
+            for (int i = 0; i < asignaturasMatricula.size(); i++) {
+                if (asignaturasMatricula.get(i).equals(asignatura)) {
                     return true;
 
                 }
@@ -369,12 +424,12 @@ public class Consola {
 
         return new Matricula (matricula);
     }*/
-    public static Matricula leerMatricula (Alumno alumno, Asignatura[] asignaturas) throws OperationNotSupportedException {
+    public static Matricula leerMatricula (Alumno alumno, ArrayList<Asignatura> asignaturas) throws OperationNotSupportedException {
 
         if (alumno == null) {
             throw new NullPointerException("ERROR: El alumno de una matrícula no puede ser nulo.");
         }
-        if (asignaturas == null || asignaturas.length == 0) {
+        if (asignaturas == null || asignaturas.size() == 0) {
             throw new NullPointerException("ERROR: Las asignaturas de una matrícula no pueden ser nulas.");
         }
 

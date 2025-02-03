@@ -13,6 +13,7 @@ import org.iesalandalus.programacion.utilidades.Entrada;
 
 import javax.naming.OperationNotSupportedException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 
@@ -186,22 +187,18 @@ public class Vista {
     }
     //mostrar Alumnos
     private static void mostrarAlumnos() {
-        Alumno [] arrayAlumnos = controlador.getAlumnos();
-        if (arrayAlumnos.length >0) {
-            for (Alumno alumno : arrayAlumnos) {
-                System.out.println(alumno);
-            }
-        } else if (arrayAlumnos.length > 0) {
-            Arrays.sort(arrayAlumnos, new Comparator<Alumno>(){
+        ArrayList<Alumno> arrayAlumnos = controlador.getAlumnos();
+        if (arrayAlumnos.size()==0) {
+            System.out.println("No existen alumnos.");
+        } else {
+            arrayAlumnos.sort( new Comparator<Alumno>(){
                 @Override
                 public int compare(Alumno o1, Alumno o2) {
                     return o1.getNombre().compareTo(o2.getNombre());
                 }
             });
         }
-        else{
-            System.out.println("No existen alumnos.");
-        }
+
 
 
     }
@@ -259,21 +256,16 @@ public class Vista {
     //mostrar Asignatura
     private static void mostrarAsignaturas() {
         //Asignatura [] arrayAsignatura = asignaturas.get();
-        Asignatura [] arrayAsignatura = controlador.getAsignaturas();
-        if (arrayAsignatura.length >0) {
-            for (Asignatura asignatura : arrayAsignatura) {
-                System.out.println(asignatura);
-            }
-        } else if (arrayAsignatura.length>0) {
-            Arrays.sort(arrayAsignatura, new Comparator<Asignatura>(){
+        ArrayList<Asignatura> arrayAsignatura = controlador.getAsignaturas();
+        if (arrayAsignatura.size()==0) {
+            System.out.println("No existen asignaturas.");
+        } else{
+            arrayAsignatura.sort(new Comparator<Asignatura>(){
                 @Override
                 public int compare(Asignatura o1, Asignatura o2) {
                     return o1.getNombre().compareTo(o2.getNombre());
                 }
             });
-        } else {
-            System.out.println("No existen asignaturas.");
-
         }
     }
     //insertar CicloFormativo
@@ -325,22 +317,17 @@ public class Vista {
     //mostrar CicloFormativo
     private static void mostrarCicloFormativos() {
         //CicloFormativo[] arrayCicloFormativo = ciclosFormativos.get();
-        CicloFormativo[] arrayCicloFormativo = controlador.getCicloFormativos();
-        if (arrayCicloFormativo.length > 0) {
-            for (CicloFormativo cicloFormativo : arrayCicloFormativo) {
-                System.out.println(cicloFormativo);
-            }
+        ArrayList<CicloFormativo> arrayCicloFormativo = controlador.getCicloFormativos();
+        if (arrayCicloFormativo.size() == 0) {
+            System.out.println("No existen ciclos formativos.");
         }
-        else if (arrayCicloFormativo.length > 0) {
-            Arrays.sort(arrayCicloFormativo, new Comparator<CicloFormativo>(){
+        else{
+            arrayCicloFormativo.sort(new Comparator<CicloFormativo>(){
                 @Override
                 public int compare(CicloFormativo o1, CicloFormativo o2) {
                     return o1.getNombre().compareTo(o2.getNombre());
                 }
             });
-        } else {
-            System.out.println("No existen ciclos formativos.");
-
         }
     }
     //insertar Matricula
@@ -356,7 +343,7 @@ public class Vista {
             System.out.println("Datos del alumno:");
             Alumno alumno = Consola.leerAlumno();
             System.out.println("Asignaturas de la matricula:");
-            Asignatura[] matriculaAsignaturas = Consola.elegirAsignaturasMatricula(Controlador.getAsignaturas());
+            ArrayList<Asignatura> matriculaAsignaturas = Consola.elegirAsignaturasMatricula(Controlador.getAsignaturas());
             System.out.println("Datos de la matricula:");
             Matricula matricula = Consola.leerMatricula(alumno, matriculaAsignaturas);
             controlador.insertar(matricula);
@@ -414,13 +401,11 @@ public class Vista {
     private static void mostrarMatriculas() {
         try {
             //Matricula[] arrayMatriculas = matriculas.get();
-            Matricula[] arrayMatriculas = controlador.getMatriculas();
-            if (arrayMatriculas.length > 0) {
-                for (Matricula matricula: arrayMatriculas) {
-                    System.out.println(matricula);
-                }
-            } else if (arrayMatriculas.length > 0) {
-                Arrays.sort(arrayMatriculas, new Comparator<Matricula>(){
+            ArrayList<Matricula> arrayMatriculas = controlador.getMatriculas();
+            if (arrayMatriculas.size()== 0) {
+                System.out.println("No existen Matriculas.");
+            } else{
+                arrayMatriculas.sort( new Comparator<Matricula>(){
                     @Override
                     public int compare(Matricula m1, Matricula m2) {
                         int comp = - m1.getFechaMatriculacion().compareTo(m2.getFechaMatriculacion());
@@ -432,10 +417,7 @@ public class Vista {
 
                 });
             }
-            else {
-                System.out.println("No existen Matriculas.");
 
-            }
         }catch (OperationNotSupportedException e) {
             System.out.println("ERROR: No se pudo mostrar matriculas.");
         }
@@ -446,8 +428,8 @@ public class Vista {
 
             Alumno alumno = Consola.getAlumnoPorDni();
             //Matricula[] arrayMatricula = matriculas.get();
-            Matricula[] arrayMatricula = controlador.getMatriculas(alumno);
-            Arrays.sort(arrayMatricula, new Comparator<Matricula>(){
+            ArrayList<Matricula> arrayMatricula = controlador.getMatriculas(alumno);
+            arrayMatricula.sort(new Comparator<Matricula>(){
                 @Override
                 public int compare(Matricula m1, Matricula m2) {
                     int comp = - m1.getFechaMatriculacion().compareTo(m2.getFechaMatriculacion());
@@ -476,14 +458,14 @@ public class Vista {
         //Consola.mostrarCiclosFormativos(ciclosFormativos.get());
         //int codigo = Entrada.entero();
         //CicloFormativo[] CicloFormativo = ciclosFormativos.get();
-        Matricula[] matriculaCiclo;
+        ArrayList<Matricula> matriculaCiclo;
         try{
             matriculaCiclo = controlador.getMatriculas(cicloFormativo);
-            if (matriculaCiclo.length == 0) {
+            if (matriculaCiclo.size() == 0) {
                 System.out.println("No existen matriculas para el ciclo formativo indicado.");
             }
             System.out.println("Matriculas del ciclo formativo indicado"+cicloFormativo.getCodigo()+":");
-            Arrays.sort(matriculaCiclo, new Comparator<Matricula>(){
+            matriculaCiclo.sort(new Comparator<Matricula>(){
                 @Override
                 public int compare(Matricula m1, Matricula m2) {
                     int comp = - m1.getFechaMatriculacion().compareTo(m2.getFechaMatriculacion());
@@ -509,8 +491,8 @@ public class Vista {
             System.out.println("El formato del curso es YY-YY");
             String cursoAcademico = Entrada.cadena();
             //Matricula[] arrayMatriculas = matriculas.get();
-            Matricula[] arrayMatriculas = controlador.getMatriculas(cursoAcademico);
-            Arrays.sort(arrayMatriculas, new Comparator<Matricula>(){
+            ArrayList<Matricula> arrayMatriculas = controlador.getMatriculas(cursoAcademico);
+            arrayMatriculas.sort(new Comparator<Matricula>(){
                 @Override
                 public int compare(Matricula m1, Matricula m2) {
                     int comp = - m1.getFechaMatriculacion().compareTo(m2.getFechaMatriculacion());
