@@ -110,6 +110,13 @@ public class Consola {
                 grado.imprimir();
             }
             seleccion=Entrada.entero();
+            if (seleccion == 1) {
+                seleccion = 0;
+            }else if (seleccion == 2) {
+               seleccion = 1;
+            }else if (seleccion == 3) {
+                seleccion = 2;
+            }
         }
         while (seleccion<0 || seleccion>3 && seleccion > Grado.values().length);
         return Grado.values()[seleccion];
@@ -189,6 +196,11 @@ public class Consola {
                 curso.imprimir();
             }
             seleccion=Entrada.entero();
+            if (seleccion == 1) {
+                seleccion = 0;
+            }else if (seleccion == 2) {
+                seleccion = 1;
+            }
         }
         while (seleccion<0 || seleccion>1 && seleccion > Curso.values().length);
         return Curso.values()[seleccion];
@@ -203,6 +215,13 @@ public class Consola {
                 especialidadProfesorado.imprimir();
             }
             seleccion=Entrada.entero();
+            if (seleccion == 1) {
+                seleccion = 0;
+            }else if (seleccion == 2) {
+                seleccion = 1;
+            }else if (seleccion == 3) {
+                seleccion = 2;
+            }
         }
         while (seleccion<0 || seleccion>2 && seleccion > EspecialidadProfesorado.values().length);
         return EspecialidadProfesorado.values()[seleccion];

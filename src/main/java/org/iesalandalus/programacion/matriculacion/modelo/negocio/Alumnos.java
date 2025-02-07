@@ -9,8 +9,6 @@ import java.util.Objects;
 
 public class Alumnos {
 
-    //private int capacidad;
-    //private int tamano=0;
     private ArrayList<Alumno> coleccionAlumnos;
 
 

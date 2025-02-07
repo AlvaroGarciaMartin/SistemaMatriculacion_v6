@@ -32,6 +32,7 @@ public class CiclosFormativos {
         int indice =this.coleccionCiclosFormativos.indexOf(cicloFormativo);
         if (indice==-1) {
             coleccionCiclosFormativos.add(new CicloFormativo(cicloFormativo));
+            return ;
         }
             throw new OperationNotSupportedException("ERROR: Ya existe un ciclo formativo con ese código.");
 

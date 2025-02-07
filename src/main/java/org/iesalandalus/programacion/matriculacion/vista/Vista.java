@@ -16,6 +16,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Optional;
 
 public class Vista {
     private static Controlador controlador;
@@ -197,6 +198,9 @@ public class Vista {
                     return o1.getNombre().compareTo(o2.getNombre());
                 }
             });
+            for(Alumno a : arrayAlumnos){
+                System.out.println(a);
+            }
         }
 
 
@@ -267,6 +271,9 @@ public class Vista {
                 }
             });
         }
+        for(Asignatura asig : arrayAsignatura){
+            System.out.println(asig);
+        }
     }
     //insertar CicloFormativo
     private static void insertarCicloFormativo() {
@@ -328,6 +335,9 @@ public class Vista {
                     return o1.getNombre().compareTo(o2.getNombre());
                 }
             });
+        }
+        for(CicloFormativo c : arrayCicloFormativo){
+            System.out.println(c);
         }
     }
     //insertar Matricula
@@ -417,6 +427,9 @@ public class Vista {
 
                 });
             }
+            for(Matricula m : arrayMatriculas){
+                System.out.println(m);
+            }
 
         }catch (OperationNotSupportedException e) {
             System.out.println("ERROR: No se pudo mostrar matriculas.");
@@ -441,11 +454,8 @@ public class Vista {
 
             });
             for (Matricula matricula : arrayMatricula) {
-                if (matricula.getAlumno().equals(alumno)) {
                     System.out.println(matricula);
-                }else {
-                    System.out.println("No existen matriculas para el alumno indicado.");
-                }
+
             }
         }catch (OperationNotSupportedException e){
             System.out.println("ERROR: No se pueden mostrar matriculas por alumno");
