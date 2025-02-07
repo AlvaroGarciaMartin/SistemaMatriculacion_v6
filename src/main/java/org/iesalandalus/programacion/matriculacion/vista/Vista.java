@@ -465,6 +465,8 @@ public class Vista {
     private static void mostrarMatriculasPorCicloFormativo(){
         CicloFormativo cicloFormativo = Consola.getCicloFormativoPorCodigo();
         cicloFormativo = controlador.buscar(cicloFormativo);
+        System.out.println("prueba");
+        System.out.println(cicloFormativo);
         //Consola.mostrarCiclosFormativos(ciclosFormativos.get());
         //int codigo = Entrada.entero();
         //CicloFormativo[] CicloFormativo = ciclosFormativos.get();
@@ -473,21 +475,23 @@ public class Vista {
             matriculaCiclo = controlador.getMatriculas(cicloFormativo);
             if (matriculaCiclo.size() == 0) {
                 System.out.println("No existen matriculas para el ciclo formativo indicado.");
-            }
-            System.out.println("Matriculas del ciclo formativo indicado"+cicloFormativo.getCodigo()+":");
-            matriculaCiclo.sort(new Comparator<Matricula>(){
-                @Override
-                public int compare(Matricula m1, Matricula m2) {
-                    int comp = - m1.getFechaMatriculacion().compareTo(m2.getFechaMatriculacion());
-                    if (comp==0) {
-                        comp = m1.getAlumno().getNombre().compareTo(m2.getAlumno().getNombre());
+            }else {
+                System.out.println("Matriculas del ciclo formativo indicado" + cicloFormativo.getCodigo() + ":");
+                matriculaCiclo.sort(new Comparator<Matricula>() {
+                    @Override
+                    public int compare(Matricula m1, Matricula m2) {
+                        int comp = -m1.getFechaMatriculacion().compareTo(m2.getFechaMatriculacion());
+                        if (comp == 0) {
+                            comp = m1.getAlumno().getNombre().compareTo(m2.getAlumno().getNombre());
+                        }
+                        return comp;
                     }
-                    return comp;
+                });
+                for (Matricula matricula : matriculaCiclo) {
+                    System.out.println(matricula);
                 }
-            });
-            for (Matricula matricula : matriculaCiclo) {
-                System.out.println(matricula);
             }
+
         } catch (OperationNotSupportedException e) {
             System.out.println(e.getMessage());
         }

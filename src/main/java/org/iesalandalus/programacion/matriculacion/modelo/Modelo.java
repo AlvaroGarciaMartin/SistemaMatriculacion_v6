@@ -23,6 +23,7 @@ public class Modelo {
       this.asignaturas = new Asignaturas();
       this.ciclosFormativos = new CiclosFormativos();
       this.matriculas = new Matriculas();
+
    }
    public void terminar() {
       System.out.println("Aplicacion terminada.");
