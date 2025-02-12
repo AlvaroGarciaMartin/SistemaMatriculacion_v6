@@ -1,27 +1,39 @@
 package org.iesalandalus.programacion.matriculacion.modelo.dominio;
 
-public enum Grado {
-    GDCFGB("GDCFGB"),GDCFGM("GDCFGM"),GDCFGS("GDCFGS");
-    private String cadenaAMostrar;
-    private Grado(String cadenaAMostrar)
-    {
-        this.cadenaAMostrar=cadenaAMostrar;
+public abstract class Grado {
+    protected String nombre;
+    protected String iniciales;
+    protected int numAnios;
+    public Grado (String nombre){
+        setNombre(nombre);
     }
-    public String imprimir() {
-        int digito;
-        if (cadenaAMostrar == GDCFGB.cadenaAMostrar) {
-            digito=1;
-        } else if (cadenaAMostrar == GDCFGM.cadenaAMostrar){
-            digito=2;
-        } else {
-            digito=3;
-        }
-        return digito+".-"+cadenaAMostrar;
-    }
-    //Crear cadenaAMostrar//
 
-    @Override
-    public String toString() {
-        return "Grado seleccionado:"  + cadenaAMostrar;
+    public String getNombre(){
+        return nombre;
+    }
+
+    protected void setNombre(String nombre){
+        if (nombre == null){
+            throw new NullPointerException("ERROR: El nombre de un grado no puede ser nulo.");
+        }
+        if (nombre.isBlank()){
+            throw new IllegalArgumentException("ERROR: El nombre de un grado no puede estar vacío.");
+        }
+        this.nombre = nombre;
+        setIniciales();
+    }
+
+    private void setIniciales(){
+        String[] palabras = this.nombre.split("[ ]+");
+        String iniciales = "";
+        for (String palabra : palabras){
+            iniciales += palabra.charAt(0);
+        }
+        this.iniciales = iniciales.toString().toUpperCase();
+    }
+    public abstract void setNumAnios(int numAnios);
+
+    public String toString(){
+        return "(" + iniciales + ") - " + nombre;
     }
 }
