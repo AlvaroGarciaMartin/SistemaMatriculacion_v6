@@ -24,7 +24,7 @@ public Vista(){
         do {
             Consola.mostrarMenu();
             opcion= Consola.elegirOpcion();
-            ejecutarOpcion(opcion);
+            opcion.ejecutar();
         }while(opcion!=Opcion.SALIR);
     }
     public void terminar() {
@@ -38,90 +38,7 @@ public Vista(){
         this.controlador = controlador;
     }
 
-    private void ejecutarOpcion(Opcion opcion) {
-        switch (opcion) {
-            case SALIR:
-                System.out.println("Hasta luego!!");
-                System.exit(0);
-            case INSERTAR_ALUMNO:
-                insertarAlumno();
-                System.out.println("Insertar alumno");
-                break;
-            case BUSCAR_ALUMNO:
-                buscarAlumno();
-                System.out.println("Buscar alumno");
-                break;
-            case BORRAR_ALUMNO:
-                borrarAlumno();
-                System.out.println("Borrar alumno");
-                break;
-            case MOSTRAR_ALUMNOS:
-                mostrarAlumnos();
-                System.out.println("Mostrar alumnos");
-                break;
-            case INSERTAR_CICLO_FORMATIVO:
-                insertarCicloFormativo();
-                System.out.println("Insertar ciclo formativo");
-                break;
-            case BUSCAR_CICLO_FORMATIVO:
-                buscarCicloFormativo();
-                System.out.println("Buscar ciclo formativo");
-                break;
-            case BORRAR_CICLO_FORMATIVO:
-                borrarCicloFormativo();
-                System.out.println("Borrar ciclo formativo");
-                break;
-            case MOSTRAR_CICLOS_FORMATIVOS:
-                mostrarCicloFormativos();
-                System.out.println("Mostrar ciclos formativos");
-                break;
-            case INSERTAR_ASIGNATURA:
-                insertarAsignatura();
-                System.out.println("Insertar asignatura");
-                break;
-            case BUSCAR_ASIGNATURA:
-                buscarAsignatura();
-                System.out.println("Buscar asignatura");
-                break;
-            case BORRAR_ASIGNATURA:
-                borrarAsignatura();
-                System.out.println("Borrar asignatura");
-                break;
-            case MOSTRAR_ASIGNATURAS:
-                mostrarAsignaturas();
-                System.out.println("Mostrar asignaturas");
-                break;
-            case INSERTAR_MATRICULA:
-                System.out.println("Insertar matricula");
-                insertarMatricula();
-                break;
-            case BUSCAR_MATRICULA:
-                System.out.println("Buscar matricula");
-                buscarMatricula();
-                break;
-            case ANULAR_MATRICULA:
-                System.out.println("Borrar matricula");
-                anularMatricula();
-                break;
-            case MOSTRAR_MATRICULAS:
-                System.out.println("Mostrar matriculas");
-                mostrarMatriculas();
-                break;
-            case MOSTRAR_MATRICULAS_ALUMNO:
-                System.out.println("Mostrar matriculas alumno");
-                mostrarMatriculasPorAlumno();
-                break;
-            case MOSTRAR_MATRICULAS_CICLO_FORMATIVO:
-                System.out.println("Mostrar matriculas ciclo formativo");
-                mostrarMatriculasPorCicloFormativo();
-                break;
-            case MOSTRAR_MATRICULAS_CURSO_ACADEMICO:
-                System.out.println("Mostrar matriculas curso academico");
-                mostrarMatriculasPorCursoAcademico();
-                break;
 
-        }
-    }
     //insertar alumno
     public void insertarAlumno() {
         try {
@@ -378,7 +295,7 @@ public Vista(){
             //Matricula matriculaAnular = matriculas.buscar(Consola.getMatriculaPorIdentificador());
             Matricula matriculaAnular = controlador.buscar(Consola.getMatriculaPorIdentificador());
             if (matriculaAnular != null && matriculaAnular.getAlumno().equals(alumno)) {
-                controlador.borrar(matriculaAnular);
+                //controlador.borrar(matriculaAnular);
                 System.out.println("indique la fecha de anulación:");
                 String fechaAnulacion = (Entrada.cadena());
                 LocalDate fechaAnular;

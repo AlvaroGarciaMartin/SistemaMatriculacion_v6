@@ -15,6 +15,7 @@ public class Alumno {
   public static final String FORMATO_FECHA="dd/MM/yyyy";
   private static final String ER_NIA="^([A-Za-z]{4})(\\d{3})$";
   private static final int MIN_EDAD_ALUMNADO = 16;
+
   private String nombre;
   private String telefono;
   private String correo;

@@ -7,7 +7,6 @@ import org.iesalandalus.programacion.matriculacion.modelo.negocio.CiclosFormativ
 import org.iesalandalus.programacion.matriculacion.modelo.negocio.Matriculas;
 
 import javax.naming.OperationNotSupportedException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Modelo {

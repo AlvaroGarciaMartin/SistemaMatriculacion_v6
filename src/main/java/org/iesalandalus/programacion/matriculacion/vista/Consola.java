@@ -1,19 +1,13 @@
 package org.iesalandalus.programacion.matriculacion.vista;
-
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.*;
-import org.iesalandalus.programacion.matriculacion.modelo.negocio.Alumnos;
 import org.iesalandalus.programacion.matriculacion.modelo.negocio.Asignaturas;
-import org.iesalandalus.programacion.matriculacion.modelo.negocio.CiclosFormativos;
 import org.iesalandalus.programacion.utilidades.Entrada;
-
-
 import javax.naming.OperationNotSupportedException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+
 
 public class Consola {
     private Consola() {
@@ -211,7 +205,7 @@ public class Consola {
         }
 
     }
-    public static void mostrarCiclosFormativos (List<CicloFormativo> ciclosFormativos){
+    public static void mostrarCiclosFormativos (ArrayList<CicloFormativo> ciclosFormativos){
         System.out.println("Lista de ciclos formativos disponibles:");
         if (ciclosFormativos.size() == 0) {
             System.out.println("No hay ciclos formativos disponibles.");
@@ -344,7 +338,7 @@ public class Consola {
 
     }*/
 
-    public static void mostrarAsignaturas(ArrayList<Asignatura> asignaturas){
+    private static void mostrarAsignaturas(ArrayList<Asignatura> asignaturas){
         System.out.println("Listado de Asignaturas disponibles:");
         for (Asignatura asignatura : asignaturas) {
             if (asignatura != null) {
