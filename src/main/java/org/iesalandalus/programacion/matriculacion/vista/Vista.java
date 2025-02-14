@@ -5,18 +5,12 @@ import org.iesalandalus.programacion.matriculacion.modelo.dominio.Alumno;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.Asignatura;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.CicloFormativo;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.Matricula;
-import org.iesalandalus.programacion.matriculacion.modelo.negocio.Alumnos;
-import org.iesalandalus.programacion.matriculacion.modelo.negocio.Asignaturas;
-import org.iesalandalus.programacion.matriculacion.modelo.negocio.CiclosFormativos;
-import org.iesalandalus.programacion.matriculacion.modelo.negocio.Matriculas;
 import org.iesalandalus.programacion.utilidades.Entrada;
 
 import javax.naming.OperationNotSupportedException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Comparator;
-import java.util.Optional;
 
 public class Vista {
     private static Controlador controlador;
@@ -44,7 +38,7 @@ public Vista(){
         this.controlador = controlador;
     }
 
-    private static void ejecutarOpcion(Opcion opcion) {
+    private void ejecutarOpcion(Opcion opcion) {
         switch (opcion) {
             case SALIR:
                 System.out.println("Hasta luego!!");
@@ -181,22 +175,23 @@ public Vista(){
     //mostrar Alumnos
     public void mostrarAlumnos() {
         ArrayList<Alumno> arrayAlumnos = controlador.getAlumnos();
-        if (arrayAlumnos.size()==0) {
+        if (arrayAlumnos.size() == 0) {
             System.out.println("No existen alumnos.");
-        } else {
+        }
+        /*else {
             arrayAlumnos.sort( new Comparator<Alumno>(){
                 @Override
                 public int compare(Alumno o1, Alumno o2) {
                     return o1.getNombre().compareTo(o2.getNombre());
                 }
-            });
-            for(Alumno a : arrayAlumnos){
+            });*/
+        else {
+            arrayAlumnos.sort(Comparator.comparing(Alumno::getNombre));
+
+            for (Alumno a : arrayAlumnos) {
                 System.out.println(a);
             }
         }
-
-
-
     }
     //insertar Asignatura
     public void insertarAsignatura() {
@@ -406,7 +401,7 @@ public Vista(){
             ArrayList<Matricula> arrayMatriculas = controlador.getMatriculas();
             if (arrayMatriculas.size()== 0) {
                 System.out.println("No existen Matriculas.");
-            } else{
+            } /*else{
                 arrayMatriculas.sort( new Comparator<Matricula>(){
                     @Override
                     public int compare(Matricula m1, Matricula m2) {
@@ -418,6 +413,9 @@ public Vista(){
                     }
 
                 });
+            }*/
+            else{
+                arrayMatriculas.sort(Comparator.comparing(Matricula::getFechaMatriculacion).reversed().thenComparing(matricula -> matricula.getAlumno().getNombre()));
             }
             for(Matricula m : arrayMatriculas){
                 System.out.println(m);

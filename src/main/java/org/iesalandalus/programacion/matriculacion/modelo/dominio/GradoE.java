@@ -4,7 +4,7 @@ public class GradoE extends Grado{
 
     private int numEdiciones;
 
-    public GradoE(String nombre, int numAnios, Modalidad modalidad) {
+    public GradoE(String nombre, int numAnios, int numEdiciones) {
         super(nombre);
         setNumAnios(numAnios);
         setNumEdiciones(numEdiciones);
