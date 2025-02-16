@@ -18,17 +18,11 @@ import java.time.LocalDate;
 
 public class MainApp {
     public static void main(String[] args) {
-      /*  Opcion opcion;
-        do {
-            Consola.mostrarMenu();
-            opcion= Consola.elegirOpcion();
-            ejecutarOpcion(opcion);
-        }while(opcion!=Opcion.SALIR);
-
-        System.out.println("Hasta luego!!!!");
-    }*/
+        //crear modelo
         Modelo modelo = new Modelo();
+        //crear vista
         Vista vista = new Vista();
+        //crear controlador
         Controlador controlador = new Controlador(modelo, vista);
         //comienza el programa
         controlador.comenzar();
