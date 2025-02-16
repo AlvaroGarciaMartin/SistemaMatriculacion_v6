@@ -14,7 +14,7 @@ import java.util.Comparator;
 
 
 public class Vista {
-    private static Controlador controlador;
+    private Controlador controlador;
 
 public Vista(){
     Opcion.setVista(this);
@@ -44,7 +44,6 @@ public Vista(){
     public void insertarAlumno() {
         try {
             Alumno alumno = Consola.leerAlumno();
-            //alumnos.insertar(alumno);
             controlador.insertar(alumno);
             System.out.println("Alumno insertado correctamente.");
         } catch (NullPointerException e) {
@@ -247,20 +246,18 @@ public Vista(){
     }
     //insertar Matricula
     public void insertarMatricula() {
-        // insertarMatricula_v0
-       /* try {
-            Matricula matricula = Consola.leerMatricula(alumnos, asignaturas);
-            matriculas.insertar(matricula);
-            System.out.println("Matricula insertada correctamente.");
-
-        */
-        try{
+        try {
             System.out.println("Datos del alumno:");
-            Alumno alumno = Consola.leerAlumno();
+            Alumno alumno = Consola.getAlumnoPorDni();
+            Alumno a = controlador.buscar(alumno);
+            if (a == null) {
+                System.out.println("No existe el alumno indicado.");
+                return;
+            }
             System.out.println("Asignaturas de la matricula:");
-            ArrayList<Asignatura> matriculaAsignaturas = Consola.elegirAsignaturasMatricula(Controlador.getAsignaturas());
+            ArrayList<Asignatura> matriculaAsignaturas = Consola.elegirAsignaturasMatricula(controlador.getAsignaturas());
             System.out.println("Datos de la matricula:");
-            Matricula matricula = Consola.leerMatricula(alumno, matriculaAsignaturas);
+            Matricula matricula = Consola.leerMatricula(a, matriculaAsignaturas);
             controlador.insertar(matricula);
             System.out.println("Matricula insertada correctamente.");
         } catch (NullPointerException e) {
