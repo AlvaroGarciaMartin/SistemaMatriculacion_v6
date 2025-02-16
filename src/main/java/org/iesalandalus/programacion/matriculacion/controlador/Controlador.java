@@ -8,7 +8,7 @@ import javax.naming.OperationNotSupportedException;
 import java.util.ArrayList;
 
 public class Controlador {
-    private static Modelo modelo;
+    private Modelo modelo;
     private Vista vista;
 
     public Controlador(Modelo modelo, Vista vista) {
@@ -20,7 +20,6 @@ public class Controlador {
         }
         this.modelo = modelo;
         this.vista = vista;
-        //Instanciar vista, llamar metodo setControlador
         this.vista.setControlador(this);
     }
     public void comenzar() {
@@ -29,7 +28,7 @@ public class Controlador {
     }
     public void terminar() {
         modelo.terminar();
-        vista.terminar();
+        //vista.terminar();
     }
     //ALUMNO
     public void insertar(Alumno alumno) throws OperationNotSupportedException {
@@ -37,8 +36,7 @@ public class Controlador {
     }
     public Alumno buscar(Alumno alumno){
         return modelo.buscar(alumno);
-        //modelo.buscar(alumno);
-        //return alumno;
+
     }
     public void borrar(Alumno alumno) throws OperationNotSupportedException {
         modelo.borrar(alumno);
@@ -52,13 +50,12 @@ public class Controlador {
     }
     public Asignatura buscar(Asignatura asignatura){
         return modelo.buscar(asignatura);
-        //modelo.buscar(asignatura);
-        //return asignatura;
+
     }
     public void borrar(Asignatura asignatura) throws OperationNotSupportedException {
         modelo.borrar(asignatura);
     }
-    public static ArrayList<Asignatura> getAsignaturas(){
+    public ArrayList<Asignatura> getAsignaturas(){
         return modelo.getAsignaturas();
     }
     //CICLO FORMATIVO
@@ -67,8 +64,6 @@ public class Controlador {
     }
     public CicloFormativo buscar(CicloFormativo cicloFormativo){
         return modelo.buscar(cicloFormativo);
-        //modelo.buscar(cicloFormativo);
-        //return cicloFormativo;
     }
     public void borrar(CicloFormativo cicloFormativo) throws OperationNotSupportedException {
         modelo.borrar(cicloFormativo);
@@ -82,8 +77,6 @@ public class Controlador {
     }
     public Matricula buscar(Matricula matricula) throws OperationNotSupportedException {
         return modelo.buscar(matricula);
-        //modelo.buscar(matricula);
-        //return matricula;
     }
     public void borrar(Matricula matricula) throws OperationNotSupportedException {
         modelo.borrar(matricula);
