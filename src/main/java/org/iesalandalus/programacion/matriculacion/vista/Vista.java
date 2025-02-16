@@ -12,6 +12,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
 
+
 public class Vista {
     private static Controlador controlador;
 
