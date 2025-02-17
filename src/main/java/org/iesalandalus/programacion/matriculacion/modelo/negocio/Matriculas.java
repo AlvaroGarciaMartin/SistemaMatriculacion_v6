@@ -23,7 +23,7 @@ private ArrayList<Matricula> coleccionMatriculas;
 
     private ArrayList<Matricula> copiaProfundaMatriculas() throws OperationNotSupportedException {
         ArrayList<Matricula> copiaMatriculas = new ArrayList<>();
-        for (Matricula matricula : this.coleccionMatriculas) {
+        for (Matricula matricula : coleccionMatriculas) {
             copiaMatriculas.add(new Matricula(matricula));
         }
         return copiaMatriculas;
@@ -63,6 +63,7 @@ private ArrayList<Matricula> coleccionMatriculas;
         if (indice == -1) {
             throw new OperationNotSupportedException("ERROR: No existe ninguna matrícula como la indicada.");
         }
+        this.coleccionMatriculas.remove(indice);
     }
 
 

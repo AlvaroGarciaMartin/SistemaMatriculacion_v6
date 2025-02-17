@@ -62,7 +62,7 @@ public class CiclosFormativos {
         if (indice==-1) {
             throw new OperationNotSupportedException("ERROR: No existe ningún ciclo formativo como el indicado.");
         }
-
+        this.coleccionCiclosFormativos.remove(indice);
     }
 
 
