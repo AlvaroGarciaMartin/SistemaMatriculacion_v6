@@ -59,7 +59,7 @@ public class Asignaturas {
         if (indice==-1) {
             throw new OperationNotSupportedException("ERROR: No existe ninguna asignatura como la indicada.");
         }
-
+        this.coleccionAsignaturas.remove(indice);
     }
 
     public int getTamano() {
