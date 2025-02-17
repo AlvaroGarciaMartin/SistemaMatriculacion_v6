@@ -4,7 +4,6 @@ package org.iesalandalus.programacion.matriculacion.modelo.negocio;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.Asignatura;
 
 import javax.naming.OperationNotSupportedException;
-import java.sql.Array;
 import java.util.*;
 
 public class Asignaturas {

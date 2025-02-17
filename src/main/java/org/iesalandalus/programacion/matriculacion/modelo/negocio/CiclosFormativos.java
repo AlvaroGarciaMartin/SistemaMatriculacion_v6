@@ -19,7 +19,7 @@ public class CiclosFormativos {
 
     private ArrayList<CicloFormativo> copiaProfundaCiclosFormativos() {
         ArrayList<CicloFormativo> copiaCiclosFormativos = new ArrayList<>();
-        for (CicloFormativo cicloFormativo : this.coleccionCiclosFormativos) {
+        for (CicloFormativo cicloFormativo : coleccionCiclosFormativos) {
             copiaCiclosFormativos.add(new CicloFormativo(cicloFormativo));
         }
         return copiaCiclosFormativos;
