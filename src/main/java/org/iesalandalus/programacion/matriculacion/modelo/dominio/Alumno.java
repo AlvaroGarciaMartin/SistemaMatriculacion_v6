@@ -136,8 +136,7 @@ public Alumno(String nombre, String telefono, String correo, String dni, LocalDa
 
 //geters y seters
   public String getNia() {
-
-    return nia;
+    return this.nia;
   }
   private String setNia() {
     String nNombre;
@@ -147,14 +146,17 @@ public Alumno(String nombre, String telefono, String correo, String dni, LocalDa
     nia=nNombre+nDni;
     return nia;
   }
+  /*private void setNia() {
+    setNia(this.nombre.substring(0, 4).toLowerCase() + dni.substring(5, 8));
+  }*/
 
   private void setNia(String nia) {
 
-    if (!nia.matches(ER_NIA)) {
-      throw new IllegalArgumentException("Nia incorrecto.");
-    } else if (nia == null) {
+    if (nia == null) {
       throw new NullPointerException("El nia no puede ser nulo");
-    }  else if (!nia.substring(0,4).equals(nombre.substring(0,4).toLowerCase()) && !nia.substring(5,7).equals(dni.substring(5,7)) ) {
+    }else if (!nia.matches(ER_NIA)) {
+      throw new IllegalArgumentException("Nia incorrecto.");
+    } else if (!nia.substring(0,4).equals(nombre.substring(0,4).toLowerCase()) && !nia.substring(5,7).equals(dni.substring(5,7)) ) {
       throw new IllegalArgumentException("El nia no es correcto");
     }
 
@@ -175,6 +177,7 @@ public Alumno(String nombre, String telefono, String correo, String dni, LocalDa
     }
 
     this.nombre = formateaNombre(nombre);
+    //setNia();
   }
 
   public String getTelefono() {
@@ -223,7 +226,7 @@ public Alumno(String nombre, String telefono, String correo, String dni, LocalDa
     } else if (comprobarLetraDni(dni)==false) {
       throw new IllegalArgumentException("ERROR: El dni no es correcto");
     }
-    this.dni = dni;
+    this.dni = dni.toUpperCase();
   }
 
   public static LocalDate getFechaNacimiento() {
