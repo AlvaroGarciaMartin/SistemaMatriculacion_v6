@@ -50,6 +50,8 @@ public Vista(){
             System.out.println("ERROR: No se puede insertar un Alumno nulo.");
         } catch (OperationNotSupportedException e) {
             System.out.println(e.getMessage());
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
         }
     }
     //buscar Alumno
@@ -117,6 +119,8 @@ public Vista(){
         } catch (NullPointerException e) {
             System.out.println("ERROR: No se puede insertar una Asignatura nula.");
         } catch (OperationNotSupportedException e) {
+            System.out.println(e.getMessage());
+        } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
     }
@@ -188,6 +192,8 @@ public Vista(){
             System.out.println("ERROR: No se puede insertar Ciclo Formativo nulo.");
         } catch (OperationNotSupportedException e) {
             System.out.println(e.getMessage());
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
         }
     }
     //buscar CicloFormativo
@@ -220,7 +226,7 @@ public Vista(){
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         } catch (OperationNotSupportedException e) {
-            throw new RuntimeException(e);
+            System.out.println(e.getMessage());
         }
     }
     //mostrar CicloFormativo
@@ -267,6 +273,8 @@ public Vista(){
         } catch (NullPointerException e) {
             System.out.println("ERROR: No se puede insertar una Matricula nula.");
         } catch (OperationNotSupportedException e) {
+            System.out.println(e.getMessage());
+        } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
     }
