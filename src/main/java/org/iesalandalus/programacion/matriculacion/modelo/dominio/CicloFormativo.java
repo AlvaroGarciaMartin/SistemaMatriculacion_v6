@@ -35,9 +35,9 @@ public class CicloFormativo {
     }
 
     private void setCodigo(int codigo) {
-        if (codigo < 0) {
+        /*if (codigo < 0) {
             throw new IllegalArgumentException("ERROR: El código de un ciclo formativo debe ser mayor que cero.");
-        }else if (codigo > 0 && codigo < 1000 || codigo > 9999) {
+        }else*/ if (codigo > 0 && codigo < 1000 || codigo > 9999) {
             throw new IllegalArgumentException("ERROR: El código de un ciclo formativo debe ser un numero de 4 digitos.");
         }
         this.codigo = codigo;
