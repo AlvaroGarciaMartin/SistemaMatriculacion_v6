@@ -119,13 +119,11 @@ public class Consola {
                 //tiposGrado.imprimir();
             }
             seleccion=Entrada.entero();
-            /*if (seleccion == 1) {
+            if (seleccion == 1) {
                 seleccion = 0;
             }else if (seleccion == 2) {
                seleccion = 1;
-            }else if (seleccion == 3) {
-                seleccion = 2;
-            }*/
+            }
         }
         while (seleccion<0 || seleccion >= TiposGrado.values().length);
         return TiposGrado.values()[seleccion];
@@ -140,13 +138,11 @@ public class Consola {
                 //modalidad.imprimir();
             }
             seleccion=Entrada.entero();
-           /* if (seleccion == 1) {
+            if (seleccion == 1) {
                 seleccion = 0;
             }else if (seleccion == 2) {
                 seleccion = 1;
-            }else if (seleccion == 3) {
-                seleccion = 2;
-            }*/
+            }
         }
         while (seleccion<0 || seleccion >= Modalidad.values().length);
         return Modalidad.values()[seleccion];

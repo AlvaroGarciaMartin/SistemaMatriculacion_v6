@@ -82,7 +82,7 @@ public Vista(){
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         } catch (OperationNotSupportedException e) {
-            throw new RuntimeException(e);
+            System.out.println(e.getMessage());
         }
 
     }
