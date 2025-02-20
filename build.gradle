@@ -17,7 +17,7 @@ dependencies {
     // Entrada para que el repositorio jitpack.io sepa acceder a la localización de librería entrada
     implementation 'com.github.JRJimenezReyes:entrada:1.0.3'
     // MySQL
-    implementation 'mysql:mysql-connector-java:8.0.33' // Usa la última versión disponible
+    implementation 'mysql:mysql-connector-java:8.0.28' // Usa la última versión disponible
 }
 
 test {
