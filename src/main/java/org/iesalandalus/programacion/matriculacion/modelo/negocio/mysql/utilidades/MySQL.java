@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class MySQL {
     // Constantes para la configuración de la base de datos
-    private static final String HOST = "URL DEL SERVIDOR"; //poner url de AWS
+    private static final String HOST = "infothot.ddns.net" /*"URL DEL SERVIDOR"*/; //poner url de AWS
     private static final String ESQUEMA = "sistemamatriculacion";
     private static final String USUARIO = "sistemamatriculacion"; //cambiar a admin
     private static final String CONTRASENA = "sistemamatriculacion-2025";

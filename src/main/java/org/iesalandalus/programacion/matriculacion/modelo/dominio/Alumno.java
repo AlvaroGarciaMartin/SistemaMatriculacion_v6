@@ -35,9 +35,7 @@ public class Alumno {
 public Alumno(String nombre, String telefono, String correo, String dni, LocalDate fechaNacimiento) {
   setNombre(nombre);
   setTelefono(telefono);
-  //setDni(dni);
   setCorreo(correo);
-  //setTelefono(telefono);
   setDni(dni);
   setFechaNacimiento(fechaNacimiento);
   setNia();
