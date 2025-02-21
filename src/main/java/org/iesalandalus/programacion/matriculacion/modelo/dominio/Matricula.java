@@ -179,7 +179,7 @@ public class Matricula {
 
         this.coleccionAsignaturas = new ArrayList<>();
         for (Asignatura asignatura : coleccionAsignaturas) {
-            if (asignatura != null) continue;
+            if (asignatura == null) continue;
                 this.coleccionAsignaturas.add(new Asignatura(asignatura));
 
         }
