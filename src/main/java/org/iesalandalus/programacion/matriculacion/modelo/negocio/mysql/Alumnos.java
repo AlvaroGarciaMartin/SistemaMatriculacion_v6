@@ -1,14 +1,23 @@
 package org.iesalandalus.programacion.matriculacion.modelo.negocio.mysql;
 
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.Alumno;
+import org.iesalandalus.programacion.matriculacion.modelo.negocio.IAlumnos;
+import org.iesalandalus.programacion.matriculacion.modelo.negocio.mysql.utilidades.MySQL;
 
 import javax.naming.OperationNotSupportedException;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Objects;
 
 
-public class Alumnos {
+public class Alumnos implements IAlumnos {
 
+
+    private Connection conexion;
+    private static Alumnos instancia= null;
     private ArrayList<Alumno> coleccionAlumnos;
 
 
@@ -16,15 +25,54 @@ public class Alumnos {
 
     public Alumnos() {
         this.coleccionAlumnos = new ArrayList<>();
+        comenzar();
+    }
+    public static Alumnos getInstancia() {
+        if (instancia ==null) {
+            instancia = new Alumnos();
+        }
+        return instancia;
     }
 
-
-
-    public ArrayList<Alumno> get() {
-        return copiaProfundaAlumnos();
+    @Override
+    public void comenzar() {
+        conexion= MySQL.establecerConexion();
     }
 
-    private ArrayList<Alumno> copiaProfundaAlumnos() {
+    @Override
+    public void terminar() {
+        MySQL.cerrarConexion();
+    }
+
+    public ArrayList<Alumno> get() throws SQLException {
+        ArrayList<Alumno> auxiliar = new ArrayList<>();
+        String consulta = """
+                SELECT nombre
+                 , telefono
+                 , correo
+                 , dni
+                 , fechaNacimiento 
+                 FROM alumnos""";
+
+        Statement sentencia = conexion.createStatement();
+        ResultSet resultado = sentencia.executeQuery(consulta);
+
+        while (resultado.next()) {
+            Alumno a = new Alumno(
+                    resultado.getString("nombre"),
+                    resultado.getString("telefono"),
+                    resultado.getString("correo"),
+                    resultado.getString("dni"),
+                    resultado.getDate("fechaNacimiento").toLocalDate()
+            );
+            auxiliar.add(a);
+        }
+        //return copiaProfundaAlumnos();
+
+        return auxiliar;
+    }
+
+    /*private ArrayList<Alumno> copiaProfundaAlumnos() {
 
         //Alumno[] copiaAlumnos = new Alumno[capacidad];
         ArrayList<Alumno> copiaAlumnos = new ArrayList<>();
@@ -32,7 +80,7 @@ public class Alumnos {
             copiaAlumnos.add(new Alumno(alumno));
         }
         return copiaAlumnos;
-    }
+    }*/
 
 
     //Insertar Alumno
