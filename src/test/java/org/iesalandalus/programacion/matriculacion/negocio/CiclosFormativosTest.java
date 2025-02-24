@@ -3,7 +3,7 @@
 import org.iesalandalus.programacion.matriculacion.MainApp;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.CicloFormativo;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.Grado;
-import org.iesalandalus.programacion.matriculacion.modelo.negocio.CiclosFormativos;
+import org.iesalandalus.programacion.matriculacion.modelo.negocio.mysql.CiclosFormativos;
 import org.iesalandalus.programacion.matriculacion.vista.Vista;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;

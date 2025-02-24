@@ -1,15 +1,28 @@
-package org.iesalandalus.programacion.matriculacion.modelo.negocio;
+package org.iesalandalus.programacion.matriculacion.modelo.negocio.memoria;
+
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.CicloFormativo;
+import org.iesalandalus.programacion.matriculacion.modelo.negocio.ICiclosFormativos;
 
 import javax.naming.OperationNotSupportedException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Objects;
 
 
-public class CiclosFormativos {
+public class CiclosFormativos implements ICiclosFormativos {
     private ArrayList<CicloFormativo> coleccionCiclosFormativos;
 
     public CiclosFormativos() {
         this.coleccionCiclosFormativos = new ArrayList<>();
+    }
+
+    @Override
+    public void comenzar() {
+
+    }
+
+    @Override
+    public void terminar() {
+
     }
 
     //copia profunda
@@ -24,6 +37,7 @@ public class CiclosFormativos {
         }
         return copiaCiclosFormativos;
     }
+
 
     //Insertar Ciclo
     public void insertar(CicloFormativo cicloFormativo) throws OperationNotSupportedException {

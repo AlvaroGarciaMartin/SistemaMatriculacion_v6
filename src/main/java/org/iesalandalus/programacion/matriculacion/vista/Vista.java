@@ -106,6 +106,7 @@ public Vista(){
     public void insertarAsignatura() {
 
         try {
+
             CicloFormativo cicloFormativo = Consola.getCicloFormativoPorCodigo();
             CicloFormativo ciclo = controlador.buscar(cicloFormativo);
             if (ciclo == null) {

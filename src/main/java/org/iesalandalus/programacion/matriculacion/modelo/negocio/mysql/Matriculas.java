@@ -1,4 +1,4 @@
-package org.iesalandalus.programacion.matriculacion.modelo.negocio;
+package org.iesalandalus.programacion.matriculacion.modelo.negocio.mysql;
 
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.Alumno;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.Asignatura;
