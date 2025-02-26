@@ -10,6 +10,7 @@ import org.iesalandalus.programacion.matriculacion.modelo.negocio.mysql.CiclosFo
 import org.iesalandalus.programacion.matriculacion.modelo.negocio.mysql.Matriculas;
 
 import javax.naming.OperationNotSupportedException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Modelo {

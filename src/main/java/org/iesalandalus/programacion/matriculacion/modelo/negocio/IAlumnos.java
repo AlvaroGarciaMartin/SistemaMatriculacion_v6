@@ -8,8 +8,8 @@ public interface IAlumnos {
     public void comenzar();
     public void terminar();
     public ArrayList<Alumno> get() throws SQLException;
-    public int getTamano();
-    public void insertar(Alumno alumno) throws OperationNotSupportedException;
-    public Alumno buscar(Alumno alumno);
-    public void borrar(Alumno alumno) throws OperationNotSupportedException;
+    public int getTamano() throws SQLException;
+    public void insertar(Alumno alumno) throws OperationNotSupportedException, SQLException;
+    public Alumno buscar(Alumno alumno) throws SQLException;
+    public void borrar(Alumno alumno) throws OperationNotSupportedException, SQLException;
 }
