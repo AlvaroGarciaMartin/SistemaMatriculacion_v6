@@ -23,6 +23,7 @@ public abstract class Grado {
         setIniciales();
     }
 
+
     private void setIniciales(){
         String[] palabras = this.nombre.split("[ ]+");
         String iniciales = "";
@@ -31,6 +32,11 @@ public abstract class Grado {
         }
         this.iniciales = iniciales.toString().toUpperCase();
     }
+
+    public int getNumAnios() {
+        return numAnios;
+    }
+
     public abstract void setNumAnios(int numAnios);
 
     public String toString(){

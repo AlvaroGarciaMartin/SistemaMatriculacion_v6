@@ -30,6 +30,7 @@ public class CicloFormativo {
 
 
 
+
     public int getCodigo() {
         return codigo;
     }
