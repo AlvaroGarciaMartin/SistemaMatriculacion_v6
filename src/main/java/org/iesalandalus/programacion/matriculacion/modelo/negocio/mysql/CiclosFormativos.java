@@ -1,21 +1,45 @@
 package org.iesalandalus.programacion.matriculacion.modelo.negocio.mysql;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.CicloFormativo;
+import org.iesalandalus.programacion.matriculacion.modelo.negocio.ICiclosFormativos;
+import org.iesalandalus.programacion.matriculacion.modelo.negocio.mysql.utilidades.MySQL;
 
 import javax.naming.OperationNotSupportedException;
+import java.sql.Connection;
 import java.util.*;
 
 
-public class CiclosFormativos {
+public class CiclosFormativos implements ICiclosFormativos {
     private ArrayList<CicloFormativo> coleccionCiclosFormativos;
+    private Connection conexion;
+    private static CiclosFormativos instancia = null;
+
 
     public CiclosFormativos() {
         this.coleccionCiclosFormativos = new ArrayList<>();
+        comenzar();
+    }
+
+    public static CiclosFormativos getInstancia(){
+        if (instancia == null) {
+            instancia = new CiclosFormativos();
+        }
+    }
+
+    @Override
+    public void comenzar() {
+        conexion = MySQL.establecerConexion();
+    }
+
+    @Override
+    public void terminar() {
+
     }
 
     //copia profunda
     public ArrayList<CicloFormativo> get() {
         return copiaProfundaCiclosFormativos();
     }
+    
 
     private ArrayList<CicloFormativo> copiaProfundaCiclosFormativos() {
         ArrayList<CicloFormativo> copiaCiclosFormativos = new ArrayList<>();
