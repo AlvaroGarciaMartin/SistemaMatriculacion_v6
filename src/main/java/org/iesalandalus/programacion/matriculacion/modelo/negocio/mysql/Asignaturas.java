@@ -18,13 +18,13 @@ import java.util.*;
 
 
 public class Asignaturas implements IAsignaturas {
-    private ArrayList<Asignatura> coleccionAsignaturas;
+
     private Connection conexion;
     private static Asignaturas instancia= null;
 
     public Asignaturas(){
         comenzar();
-        //coleccionAsignaturas = new ArrayList<>();
+
 
     }
 
@@ -49,14 +49,16 @@ public class Asignaturas implements IAsignaturas {
         //return copiaProfundaAsignaturas();
         ArrayList<Asignatura> copiaAsignaturas = new ArrayList<>();
         String consulta = """
-                SELECT codigo
-                 , nombre
-                 , horasAnuales
-                 , curso
-                 , horasDesdoble
-                 , especialidadProfesorado
-                 , codigoCiclo
-                 FROM asignaturas""";
+                SELECT a.codigo
+                 , a.nombre
+                 , a.horasAnuales
+                 , a.curso
+                 , a.horasDesdoble
+                 , a.especialidadProfesorado
+                 , a.codigoCiclo
+                 FROM asignaturas a
+                 ORDER BY a.nombre
+                """;
 
         Statement sentencia = conexion.createStatement();
         ResultSet resultado = sentencia.executeQuery(consulta);

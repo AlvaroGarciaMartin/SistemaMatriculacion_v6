@@ -27,11 +27,10 @@ public class Matriculas implements IMatriculas {
 
     private static Matriculas instancia = null;
 
-    private ArrayList<Matricula> coleccionMatriculas;
+
 
     public Matriculas() {
 
-        coleccionMatriculas = new ArrayList<>();
         comenzar();
     }
 
@@ -67,17 +66,10 @@ public class Matriculas implements IMatriculas {
             copiaMatriculas.add(matricula);
         }
         return copiaMatriculas;
-        // return copiaProfundaMatriculas();
+
     }
 
-    /*private ArrayList<Matricula> copiaProfundaMatriculas() throws OperationNotSupportedException, SQLException {
 
-        for (Matricula matricula : coleccionMatriculas) {
-            copiaMatriculas.add(new Matricula(matricula));
-        }
-
-        return copiaMatriculas;
-    }*/
 
     private ArrayList<Asignatura> getAsignaturasMatricula(int idMatricula) throws SQLException {
         String consulta = """
@@ -138,14 +130,7 @@ public class Matriculas implements IMatriculas {
         pstmt.setString(5, matricula.getAlumno().getDni());
         pstmt.executeUpdate();
 
-       /* int indice = this.coleccionMatriculas.indexOf(matricula);
 
-        if (indice == -1) {
-            this.coleccionMatriculas.add(new Matricula(matricula));
-
-        } else {
-            throw new OperationNotSupportedException("ERROR: Ya existe una matrícula con ese identificador.");
-        }*/
     }
 
     //insertarAsignaturasMatricula
@@ -196,14 +181,6 @@ public class Matriculas implements IMatriculas {
 
         return null;
 
-
-
-        /*int indice = this.coleccionMatriculas.indexOf(matricula);
-        if (indice == -1) {
-            return null;
-        } else {
-            return new Matricula(this.coleccionMatriculas.get(indice));
-        }*/
     }
 
     //borrar Matricula
@@ -221,11 +198,7 @@ public class Matriculas implements IMatriculas {
         pstmt.setInt(1, matricula.getIdMatricula());
         pstmt.executeUpdate();
 
-       /* int indice = this.coleccionMatriculas.indexOf(matricula);
-        if (indice == -1) {
-            throw new OperationNotSupportedException("ERROR: No existe ninguna matrícula como la indicada.");
-        }
-        this.coleccionMatriculas.remove(indice);*/
+
     }
 
 
@@ -286,52 +259,42 @@ public class Matriculas implements IMatriculas {
             copiaMatriculas.add(matricula);
         }
         return copiaMatriculas;
-        /*for (Matricula matricula:coleccionMatriculas) {
-            if (matricula != null && matricula.getCursoAcademico().equals(cursoAcademico)) {
-                auxiliar.add(new Matricula(matricula));
 
-            }
-        }
-        return auxiliar;
-        /*int contador = 0;
-
-        for (Matricula matricula : coleccionMatriculas) {
-            if (matricula.getCursoAcademico().equals(cursoAcademico)) {
-                contador++;
-            }
-        }
-
-        Matricula[] coleccionMatriculasCurso = new Matricula[contador];
-
-        int i = 0;
-
-        for (Matricula matriculaCurso : coleccionMatriculas) {
-
-            if (matriculaCurso.getCursoAcademico().equals(cursoAcademico)){
-                coleccionMatriculasCurso[i] = matriculaCurso;
-                i++;
-            }
-        }
-        return coleccionMatriculasCurso;*/
     }
 
 
-    public ArrayList<Matricula> get(CicloFormativo cicloFormativo) throws OperationNotSupportedException {
-        ArrayList<Matricula> auxiliar = new ArrayList<>();
-        for (Matricula matricula:coleccionMatriculas) {
-            if (matricula != null ) {
-                for (Asignatura asignatura : matricula.getColeccionAsignaturas()) {
+    public ArrayList<Matricula> get(CicloFormativo cicloFormativo) throws OperationNotSupportedException, SQLException {
+        ArrayList<Matricula> copiaMatriculas = new ArrayList<>();
 
-                    if (asignatura != null && asignatura.getCicloFormativo().equals(cicloFormativo)) {
-                        auxiliar.add(new Matricula(matricula));
-                        break;
-                    }
+        String consulta = """
+                SELECT m.idMatricula
+                , m.cursoAcademico
+                , m.fechaMatriculacion
+                , m.fechaAnulacion
+                , m.dni
+                FROM matricula m
+                LEFT JOIN asignaturasmatricula am ON m.idMatricula = am.idMatricula
+                LEFT JOIN asignatura a ON am.codigo = a.codigo
+                LEFT JOIN alumno al ON m.dni = al.dni
+                WHERE a.cicloFormativo = ?
+                ORDER BY m.fechaMatriculacion DESC, a.nombre
+                """;
 
-                }
-            }
+        PreparedStatement pstmt = conexion.prepareStatement(consulta);
+        pstmt.setString(1, cicloFormativo.toString());
+        ResultSet rs = pstmt.executeQuery();
+        while (rs.next()) {
+            Alumno alumno = Alumnos.getInstancia().buscar(new Alumno("ficticio", rs.getString("dni"), "ficticio@ficticio.com", "666554433", LocalDate.of(2000, 1, 1)));
+            Matricula matricula = new Matricula(rs.getInt("idMatricula"),
+                    rs.getString("cursoAcademico"),
+                    rs.getDate("fechaMatriculacion").toLocalDate(),
+                    alumno,
+                    getAsignaturasMatricula(rs.getInt("idMatricula")));
+            copiaMatriculas.add(matricula);
         }
+        return copiaMatriculas;
 
-        return auxiliar;
+
 
     }
     public int getTamano() throws SQLException {

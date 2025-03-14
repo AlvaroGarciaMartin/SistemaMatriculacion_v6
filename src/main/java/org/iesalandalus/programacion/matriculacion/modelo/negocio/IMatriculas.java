@@ -18,5 +18,5 @@ public interface IMatriculas {
     public void borrar(Matricula matricula) throws OperationNotSupportedException, SQLException;
     public ArrayList<Matricula> get(Alumno alumno) throws OperationNotSupportedException, SQLException;
     public ArrayList<Matricula> get(String cursoAcademico) throws OperationNotSupportedException, SQLException;
-    public ArrayList<Matricula> get(CicloFormativo cicloFormativo) throws OperationNotSupportedException;
+    public ArrayList<Matricula> get(CicloFormativo cicloFormativo) throws OperationNotSupportedException, SQLException;
 }

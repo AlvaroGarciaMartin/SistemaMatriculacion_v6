@@ -24,12 +24,11 @@ public class CiclosFormativos implements ICiclosFormativos {
 
     private static CiclosFormativos instancia = null;
 
-    private ArrayList<CicloFormativo> coleccionCiclosFormativos;
+
 
 
 
     public CiclosFormativos() {
-        this.coleccionCiclosFormativos = new ArrayList<>();
         comenzar();
     }
 
@@ -41,8 +40,9 @@ public class CiclosFormativos implements ICiclosFormativos {
     }
     public Grado getGrado(String tipoGrado, String nombreGrado, int numAniosGrado, String modalidad, int numEdiciones) {
         Grado grado = null;
-        Modalidad modalidadGrado = Modalidad.valueOf(modalidad.toUpperCase());
+
         if (tipoGrado.equals("gradod")) {
+            Modalidad modalidadGrado = Modalidad.valueOf(modalidad.toUpperCase());
             grado = new GradoD(nombreGrado, numAniosGrado, modalidadGrado);
         }else {
             grado = new GradoE(nombreGrado, numAniosGrado, numEdiciones);
@@ -56,17 +56,17 @@ public class CiclosFormativos implements ICiclosFormativos {
         //return copiaProfundaCiclosFormativos();
         ArrayList<CicloFormativo> copiaCiclos = new ArrayList<>();
         String consulta = """
-                SELECT codigo
-                , familiaProfesional
-                , grado
-                , nombre
-                , horas
-                , nombreGrado
-                , numAniosGrado
-                , modalidad
-                , numEdiciones
-                FROM cicloFormativo
-                ORDER BY nombre
+                SELECT c.codigo
+                , c.familiaProfesional
+                , c.grado
+                , c.nombre
+                , c.horas
+                , c.nombreGrado
+                , c.numAniosGrado
+                , c.modalidad
+                , c.numEdiciones
+                FROM cicloFormativo c
+                ORDER BY c.nombre
                 """;
 
         Statement sentencia = conexion.createStatement();
@@ -211,7 +211,7 @@ public class CiclosFormativos implements ICiclosFormativos {
     public int getTamano() throws SQLException {
         //return this.coleccionCiclosFormativos.size();
         String consulta = """
-                SELECT COUNT(codigo)
+                SELECT COUNT(1) as cont
                 FROM cicloformativo
                 """;
         Statement sentencia = conexion.createStatement();
