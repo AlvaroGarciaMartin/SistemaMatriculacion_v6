@@ -4,10 +4,7 @@ import org.iesalandalus.programacion.matriculacion.modelo.dominio.Alumno;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.Asignatura;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.CicloFormativo;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.Matricula;
-import org.iesalandalus.programacion.matriculacion.modelo.negocio.mysql.Alumnos;
-import org.iesalandalus.programacion.matriculacion.modelo.negocio.mysql.Asignaturas;
-import org.iesalandalus.programacion.matriculacion.modelo.negocio.mysql.CiclosFormativos;
-import org.iesalandalus.programacion.matriculacion.modelo.negocio.mysql.Matriculas;
+import org.iesalandalus.programacion.matriculacion.modelo.negocio.*;
 
 import javax.naming.OperationNotSupportedException;
 import java.sql.SQLException;
@@ -15,20 +12,34 @@ import java.util.ArrayList;
 
 public class Modelo {
 
-   private Alumnos alumnos;
-   private Matriculas matriculas;
-   private Asignaturas asignaturas;
-   private CiclosFormativos ciclosFormativos;
+   private IAlumnos alumnos;
+   private IMatriculas matriculas;
+   private IAsignaturas asignaturas;
+   private ICiclosFormativos ciclosFormativos;
+
+
+   public Modelo(FactoriaFuenteDatos factoriaFuenteDatos) {
+       setFuenteDatos(factoriaFuenteDatos.crear());
+   }
+   private void setFuenteDatos(IFuenteDatos fuenteDatos) {
+      this.fuenteDatos = fuenteDatos;
+   }
+
+   private IFuenteDatos fuenteDatos;
 
 
    public void comenzar() {
-      this.alumnos = new Alumnos();
-      this.asignaturas = new Asignaturas();
-      this.ciclosFormativos = new CiclosFormativos();
-      this.matriculas = new Matriculas();
+      this.alumnos = fuenteDatos.crearAlumnos();
+      this.asignaturas = fuenteDatos.crearAsignaturas();
+      this.ciclosFormativos = fuenteDatos.crearCiclosFormativos();
+      this.matriculas = fuenteDatos.crearMatriculas();
 
    }
    public void terminar() {
+      this.alumnos.terminar();
+      this.asignaturas.terminar();
+      this.ciclosFormativos.terminar();
+      this.matriculas.terminar();
       System.out.println("Aplicacion terminada.");
    }
    //ALUMNOS

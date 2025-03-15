@@ -55,8 +55,8 @@ public class Asignaturas implements IAsignaturas {
                  , a.curso
                  , a.horasDesdoble
                  , a.especialidadProfesorado
-                 , a.codigoCiclo
-                 FROM asignaturas a
+                 , a.codigoCicloFormativo
+                 FROM asignatura a
                  ORDER BY a.nombre
                 """;
 
@@ -64,7 +64,7 @@ public class Asignaturas implements IAsignaturas {
         ResultSet resultado = sentencia.executeQuery(consulta);
 
         while (resultado.next()) {
-            CicloFormativo cicloFormativo = CiclosFormativos.getInstancia().buscar(new CicloFormativo(resultado.getInt("codigoCiclo"), "ficticio", new GradoE("gradoe", 1, 1), "ficiticio",1));
+            CicloFormativo cicloFormativo = CiclosFormativos.getInstancia().buscar(new CicloFormativo(resultado.getInt("codigoCicloFormativo"), "ficticio", new GradoE("gradoe", 1, 1), "ficiticio",1));
             Asignatura a = new Asignatura(
                     resultado.getString("codigo"),
                     resultado.getString("nombre"),
@@ -99,10 +99,10 @@ public class Asignaturas implements IAsignaturas {
                 (codigo,
                 nombre,
                 horasAnuales,
-                cuso,
+                curso,
                 horasDesdoble,
                 especialidadProfesorado,
-                codigoCiclo)
+                codigoCicloFormativo)
                 Values
                 (?, ?, ?, ?, ?, ?, ?)
                 """;
@@ -144,7 +144,7 @@ public class Asignaturas implements IAsignaturas {
                 , a.curso
                 , a.horasDesdoble
                 , a.especialidadProfesorado
-                , a.codigoCiclo
+                , a.codigoCicloFormativo
                 FROM asignatura a
                 where a.codigo = ?
                 """;
@@ -152,7 +152,7 @@ public class Asignaturas implements IAsignaturas {
         pstmt.setString(1, asignatura.getCodigo());
         ResultSet resultado = pstmt.executeQuery();
         if (resultado.next()){
-            CicloFormativo cicloFormativo = CiclosFormativos.getInstancia().buscar(new CicloFormativo(resultado.getInt("codigoCiclo"), "ficticio", new GradoE("gradoe", 1, 1), "ficticio", 1));
+            CicloFormativo cicloFormativo = CiclosFormativos.getInstancia().buscar(new CicloFormativo(resultado.getInt("codigoCicloFormativo"), "ficticio", new GradoE("gradoe", 1, 1), "ficticio", 1));
             return new Asignatura(
                     resultado.getString("codigo"),
                     resultado.getString("nombre"),

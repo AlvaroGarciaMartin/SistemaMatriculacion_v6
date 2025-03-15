@@ -117,7 +117,7 @@ public class CiclosFormativos implements ICiclosFormativos {
         pstmt.setString(3, cicloFormativo.getGrado().getClass().getSimpleName().toLowerCase());
         pstmt.setString(4, cicloFormativo.getNombre());
         pstmt.setInt(5, cicloFormativo.getHoras());
-        pstmt.setString(6, cicloFormativo.getGrado().getNombre());
+        pstmt.setString(6, cicloFormativo.getGrado().getNombre().toLowerCase());
         pstmt.setInt(7, cicloFormativo.getGrado().getNumAnios());
         if(cicloFormativo.getGrado() instanceof GradoD) {
             pstmt.setString(8, ((GradoD)cicloFormativo.getGrado()).getModalidad().toString());

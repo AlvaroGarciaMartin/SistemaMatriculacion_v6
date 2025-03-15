@@ -5,6 +5,7 @@ import org.iesalandalus.programacion.matriculacion.modelo.negocio.mysql.Asignatu
 import org.iesalandalus.programacion.utilidades.Entrada;
 
 import javax.naming.OperationNotSupportedException;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -155,6 +156,7 @@ public class Consola {
         int horas;
         do {
             System.out.println("\nIntroduce el codigo del ciclo formativo: ");
+            System.out.println("\nEl codigo debe ser un numero de 4 digitos.");
             codigo = Entrada.entero();
         } while (codigo < 0);
         do {
@@ -195,6 +197,7 @@ public class Consola {
         int numAnios = -1;
         do {
             System.out.println("\nIntroduce el numero de años del grado: ");
+            System.out.println("\nSi el grado seleccionado es gradoD solo puede ser 2 o 3 y si es gradoE solo puede ser 1");
             numAnios = Entrada.entero();
         } while (tipoGrado == TiposGrado.GRADOD && (numAnios < 2 || numAnios > 3) || tipoGrado == TiposGrado.GRADOE && numAnios != 1);
 
@@ -206,6 +209,7 @@ public class Consola {
             int numEdiciones = -1;
             do {
                 System.out.println("\nIntroduce el numero de ediciones del grado: ");
+                System.out.println("\nel valor de numero de ediciones solo puede ser 1 ");
                 numEdiciones = Entrada.entero();
             } while (numEdiciones < 1);
             return new GradoE(nombre, numAnios, numEdiciones);
@@ -424,6 +428,7 @@ public class Consola {
 
             // Obtener la asignatura por código
             System.out.print("Introduzca el código de la asignatura: ");
+            System.out.print("debe ser un codigo de 4 digitos: ");
             String codigo = Entrada.cadena();
             Asignatura asignatura = null;
 
@@ -514,7 +519,7 @@ public class Consola {
         System.out.println("Introduzca el id de la Matrícula.");
         idMatricula = Entrada.entero();
 
-        Matricula matricula = new Matricula(idMatricula, cursoAcademico, fechaMatriculacion, alumno, new Asignaturas().get());
+        Matricula matricula = new Matricula(idMatricula, cursoAcademico, fechaMatriculacion, alumno, new ArrayList<>());
 
         return matricula;
     }

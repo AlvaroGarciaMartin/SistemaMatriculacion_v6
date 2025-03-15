@@ -52,8 +52,6 @@ public class Vista {
             System.out.println("ERROR: No se puede insertar un Alumno nulo.");
         } catch (OperationNotSupportedException e) {
             System.out.println(e.getMessage());
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -88,8 +86,6 @@ public class Vista {
             System.out.println("Alumno borrado correctamente.");
         } catch (NullPointerException e) {
             System.out.println("ERROR: No se puede borrar un Alumno nulo.");
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
         } catch (OperationNotSupportedException e) {
             System.out.println(e.getMessage());
         } catch (SQLException e) {
@@ -134,8 +130,6 @@ public class Vista {
         } catch (NullPointerException e) {
             System.out.println("ERROR: No se puede insertar una Asignatura nula.");
         } catch (OperationNotSupportedException e) {
-            System.out.println(e.getMessage());
-        } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -421,13 +415,14 @@ public class Vista {
 
     //mostrar Matricula por CicloFormativo
     public void mostrarMatriculasPorCicloFormativo() {
-        CicloFormativo cicloFormativo = Consola.getCicloFormativoPorCodigo();
-        cicloFormativo = controlador.buscar(cicloFormativo);
-        if (cicloFormativo == null) {
-            System.out.println("No existe ningun ciclo formativo con tales datos.");
-        }
-        ArrayList<Matricula> matriculaCiclo;
+
         try {
+            CicloFormativo cicloFormativo = Consola.getCicloFormativoPorCodigo();
+            cicloFormativo = controlador.buscar(cicloFormativo);
+            if (cicloFormativo == null) {
+                System.out.println("No existe ningun ciclo formativo con tales datos.");
+            }
+            ArrayList<Matricula> matriculaCiclo;
             matriculaCiclo = controlador.getMatriculas(cicloFormativo);
             if (matriculaCiclo.size() == 0) {
                 System.out.println("No existen matriculas para el ciclo formativo indicado.");

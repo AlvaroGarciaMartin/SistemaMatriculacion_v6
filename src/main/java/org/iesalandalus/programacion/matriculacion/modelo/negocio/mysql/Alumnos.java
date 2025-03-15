@@ -48,7 +48,7 @@ public class Alumnos implements IAlumnos {
                  , correo
                  , dni
                  , fechaNacimiento 
-                 FROM alumnos""";
+                 FROM alumno""";
 
         Statement sentencia = conexion.createStatement();
         ResultSet resultado = sentencia.executeQuery(consulta);
@@ -88,7 +88,7 @@ if (buscar(alumno) != null) {
     throw new OperationNotSupportedException("ERROR: Ya existe un alumno con ese dni.");
 } else {
     String consulta = """
-            INSERT INTO alumnos (nombre
+            INSERT INTO alumno (nombre
             ,telefono
             ,correo
             ,dni
@@ -124,7 +124,7 @@ if (buscar(alumno) != null) {
                  , correo
                  , dni
                  , fechaNacimiento 
-                 FROM alumnos
+                 FROM alumno
                  WHERE dni = ?
                  """;
         PreparedStatement sentencia = conexion.prepareStatement(consulta);
@@ -133,7 +133,7 @@ if (buscar(alumno) != null) {
 
         if (!resultado.next()) return null;
 
-        if (resultado.next()) {
+
             return new Alumno(
                     resultado.getString("nombre"),
                     resultado.getString("telefono"),
@@ -142,8 +142,8 @@ if (buscar(alumno) != null) {
                     resultado.getDate("fechaNacimiento").toLocalDate()
             );
 
-        }
-        return null;
+
+
     }
 
 
@@ -160,7 +160,7 @@ if (buscar(alumno) != null) {
             throw new OperationNotSupportedException("ERROR: No existe ningun alumno como el indicado.");
         }
         String consulta = """
-                DELETE FROM alumnos
+                DELETE FROM alumno
                 WHERE dni = ?
                 """;
         PreparedStatement sentencia = conexion.prepareStatement(consulta);
@@ -182,7 +182,7 @@ if (buscar(alumno) != null) {
     public int getTamano() throws SQLException {
 String query = """
         SELECT count(1) AS cont
-        FROM alumnos""";
+        FROM alumno""";
 
 Statement sentencia = conexion.createStatement();
 ResultSet resultado = sentencia.executeQuery(query);

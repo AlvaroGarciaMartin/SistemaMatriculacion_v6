@@ -24,6 +24,6 @@ public enum Modalidad {
 
     @Override
     public String toString() {
-        return "Modalidad seleccionada:"  + cadenaAMostrar;
+        return cadenaAMostrar;
     }
 }

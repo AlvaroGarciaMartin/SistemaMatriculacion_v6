@@ -79,7 +79,7 @@ public class Matriculas implements IMatriculas {
                 	, a.curso
                 	, a.horasDesdoble
                 	, a.especialidadProfesorado
-                	, a.codigoCiclo
+                	, a.codigoCicloFormativo
                 FROM asignaturasmatricula am
                 LEFT JOIN asignatura a ON am.codigo = a.codigo
                 WHERE am.idMatricula = ?
@@ -90,7 +90,7 @@ public class Matriculas implements IMatriculas {
         ArrayList<Asignatura> asignaturas = new ArrayList<>();
         while (resultado.next()) {
             CicloFormativo cicloFormativo = CiclosFormativos.getInstancia().buscar(new CicloFormativo(
-                    resultado.getInt("codigoCiclo"), "ficticio", new GradoE("gradoe", 1, 1), "ficticio", 1));
+                    resultado.getInt("codigoCicloFormativo"), "ficticio", new GradoE("gradoe", 1, 1), "ficticio", 1));
             Asignatura asignatura = new Asignatura(
                     resultado.getString("codigo"),
                     resultado.getString("nombre"),
@@ -111,7 +111,7 @@ public class Matriculas implements IMatriculas {
         String consulta = """
                 INSERT INTO matricula
                 (idMatricula
-                , cursoAcademicoç
+                , cursoAcademico
                 , fechaMatriculacion
                 , fechaAnulacion
                 , dni)
