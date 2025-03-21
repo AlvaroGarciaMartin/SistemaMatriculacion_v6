@@ -513,8 +513,8 @@ public class Consola {
         int idMatricula;
         String cursoAcademico = "24-25";
         LocalDate fechaMatriculacion = LocalDate.now();
-        Alumno alumno = new Alumno("ficticio apellidoficticio", "00000000B", "ficticio@ficticio.es", "444444444",
-                LocalDate.of(2013, 8, 21));
+        Alumno alumno = new Alumno("ficticio apellidoficticio","444444444", "ficticio@ficticio.es", "00000000T",
+                LocalDate.of(2003, 8, 21));
 
         System.out.println("Introduzca el id de la Matrícula.");
         idMatricula = Entrada.entero();
@@ -523,31 +523,5 @@ public class Consola {
 
         return matricula;
     }
-    /*public static Matricula getMatriculaPorIdentificador() throws OperationNotSupportedException {
-        int idMatricula;
-        String cursoAcademico = "24-25";
-        LocalDate fechaMatriculacion = LocalDate.now();
-        Grado grado= new GradoD("Grado Ficticio", 2, Modalidad.PRESENCIAL);
-        Alumno alumno = new Alumno("ficticio apellidoficticio", "00000000B", "ficticio@ficticio.es", "444444444", LocalDate.of(2013, 8, 21));
-
-        CicloFormativo cicloFormativo = new CicloFormativo(4444, "familiaficticia", grado, "nombreFiciticio", 1500);
-
-        Asignatura asignatura = new Asignatura("1234", "asignatura1", 180, Curso.PRIMERO, 5, EspecialidadProfesorado.SISTEMAS, cicloFormativo);
-        Asignatura asignatura2 = new Asignatura("4321", "asignatura2", 260, Curso.PRIMERO, 2, EspecialidadProfesorado.INFORMATICA, cicloFormativo);
-        Asignatura asignatura3 = new Asignatura("5555", "asignatura3", 100, Curso.PRIMERO, 3, EspecialidadProfesorado.FOL, cicloFormativo);
-
-        //Asignaturas coleccionAsignaturas = new Asignaturas(2);
-        //coleccionAsignaturas.insertar(asignatura);
-        //coleccionAsignaturas.insertar(asignatura2);
-
-        Matricula matricula;
-
-        System.out.println("Introduzca el id de la Matrícula.");
-        idMatricula = Entrada.entero();
-
-        matricula = new Matricula(idMatricula, cursoAcademico, fechaMatriculacion, alumno, new Asignaturas().get());
-
-        return new Matricula(matricula);
-    }*/
 
 }

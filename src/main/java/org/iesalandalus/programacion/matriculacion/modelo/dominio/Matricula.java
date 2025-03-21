@@ -39,7 +39,7 @@ public class Matricula {
         setIdMatricula(matricula.getIdMatricula());
         setCursoAcademico(matricula.getCursoAcademico());
         setFechaMatriculacion(matricula.getFechaMatriculacion());
-        //setFechaAnulacion(matricula.getFechaAnulacion()); // Copiar fecha de anulación, puede ser nula
+        setFechaAnulacion(matricula.getFechaAnulacion()); // Copiar fecha de anulación, puede ser nula
         setAlumno(matricula.getAlumno());
         setColeccionAsignaturas(matricula.getColeccionAsignaturas());
     }

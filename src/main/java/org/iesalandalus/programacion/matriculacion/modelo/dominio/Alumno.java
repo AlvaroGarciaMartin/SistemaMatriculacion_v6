@@ -81,36 +81,38 @@ public Alumno(String nombre, String telefono, String correo, String dni, LocalDa
 
   }
   private boolean comprobarLetraDni( String dni) {
-    boolean resultado = false;
-    int numero;
-    char letra;
-    Pattern patron=Pattern.compile("^(\\d{8})([A-Za-z]{1})$");
-    Matcher comparador=patron.matcher(dni);
-    char[] LETRAS_DNI = {'T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P', 'D', 'X', 'B', 'N', 'J', 'Z', 'S', 'Q', 'V', 'H', 'L', 'C', 'K', 'E'};
-    if (comparador.matches()) {
-      numero = Integer.parseInt(comparador.group(1));
-      letra = comparador.group(2).charAt(0);
 
-    } else {
+      boolean resultado = false;
+      int numero;
+      char letra;
+      Pattern patron = Pattern.compile("^(\\d{8})([A-Za-z]{1})$");
+      Matcher comparador = patron.matcher(dni);
+      char[] LETRAS_DNI = {'T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P', 'D', 'X', 'B', 'N', 'J', 'Z', 'S', 'Q', 'V', 'H', 'L', 'C', 'K', 'E'};
+      if (comparador.matches()) {
+        numero = Integer.parseInt(comparador.group(1));
+        letra = comparador.group(2).charAt(0);
 
-      return false;
+      } else {
 
-    }
-
-      int numeroDivido=numero/23;
-      int numeroMultiplicado=numeroDivido*23;
-      int posicionLetra=numero-numeroMultiplicado;
-
-      if (letra==LETRAS_DNI[posicionLetra]) {
-        resultado=true;
+        return false;
 
       }
-    if (letra != LETRAS_DNI[posicionLetra]) {
-      throw new IllegalArgumentException("ERROR: La letra del dni del alumno no es correcta.");
-    }
+
+      int numeroDivido = numero / 23;
+      int numeroMultiplicado = numeroDivido * 23;
+      int posicionLetra = numero - numeroMultiplicado;
+
+      if (letra == LETRAS_DNI[posicionLetra]) {
+        resultado = true;
+
+      }
+      if (letra != LETRAS_DNI[posicionLetra]) {
+        throw new IllegalArgumentException("ERROR: La letra del dni del alumno no es correcta.");
+      }
 
 
     return resultado;
+
   }
   private String getIniciales() {
       String [] iniciales = nombre.split(" ");
@@ -219,12 +221,16 @@ public Alumno(String nombre, String telefono, String correo, String dni, LocalDa
   }
 
   private void setDni(String dni) {
+    try {
     if (dni == null) {
       throw new NullPointerException("ERROR: El dni de un alumno no puede ser nulo.");
     } else if (comprobarLetraDni(dni)==false) {
       throw new IllegalArgumentException("ERROR: El dni no es correcto");
     }
     this.dni = dni.toUpperCase();
+    } catch (IllegalArgumentException | NullPointerException e) {
+      System.out.println(e.getMessage());
+    }
   }
 
   public static LocalDate getFechaNacimiento() {

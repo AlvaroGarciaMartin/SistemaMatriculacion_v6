@@ -10,6 +10,7 @@ import org.iesalandalus.programacion.utilidades.Entrada;
 import javax.naming.OperationNotSupportedException;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Comparator;
 
@@ -313,12 +314,12 @@ public class Vista {
             Matricula matriculaBuscar = controlador.buscar(Consola.getMatriculaPorIdentificador());
             Matricula encontrada = controlador.buscar(matriculaBuscar);
             if (encontrada != null) {
-                System.out.printf("Los datos del ciclo formativo solicitado son: %s", matriculaBuscar);
+                System.out.printf("Los datos de la matricula solicitada son: %s", matriculaBuscar);
             } else {
-                System.out.println("No existe ningun ciclo formativo con tales datos.");
+                System.out.println("No existe ninguna matricula con tales datos.");
             }
         } catch (NullPointerException e) {
-            System.out.println("ERROR: No se puede buscar un ciclo formativo nulo.");
+            System.out.println("ERROR: No se puede buscar una Matricula nula.");
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         } catch (OperationNotSupportedException e) {
@@ -339,8 +340,9 @@ public class Vista {
                 System.out.println("indique la fecha de anulación:");
                 String fechaAnulacion = (Entrada.cadena());
                 LocalDate fechaAnular;
-                fechaAnular = LocalDate.parse(fechaAnulacion);
+                fechaAnular = LocalDate.parse(fechaAnulacion, DateTimeFormatter.ofPattern(Alumno.FORMATO_FECHA));
                 matriculaAnular.setFechaAnulacion(fechaAnular);
+                controlador.borrar(matriculaAnular);
                 System.out.println("Matricula anulada correctamente.");
             } else {
                 System.out.println("No se ha encontrado la matricula o no corresponde al alumno indicado.");
@@ -410,6 +412,8 @@ public class Vista {
             System.out.println("ERROR: No se pueden mostrar matriculas por alumno");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+        } catch (NullPointerException e) {
+            System.out.println("ERROR: No existe ningun alumno con tales datos.");
         }
     }
 
@@ -417,6 +421,8 @@ public class Vista {
     public void mostrarMatriculasPorCicloFormativo() {
 
         try {
+            System.out.println("Indique uno de los siguientes ciclos formativos:");
+            mostrarCicloFormativos();
             CicloFormativo cicloFormativo = Consola.getCicloFormativoPorCodigo();
             cicloFormativo = controlador.buscar(cicloFormativo);
             if (cicloFormativo == null) {
@@ -440,6 +446,8 @@ public class Vista {
             System.out.println(e.getMessage());
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+        } catch (NullPointerException e) {
+            System.out.println("ERROR: No existe ningun ciclo como el indicado.");
         }
 
 

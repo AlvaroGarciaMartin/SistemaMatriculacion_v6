@@ -52,7 +52,7 @@ public class Matriculas implements IMatriculas {
                 m.fechaAnulacion,
                 m.dni
                 FROM matricula m
-                LEFT JOIN alumnoa a ON m.dni = a.dni
+                LEFT JOIN alumno a ON m.dni = a.dni
                 ORDER BY m.fechaMatriculacion DESC, a.nombre
                 """;
 
@@ -60,9 +60,11 @@ public class Matriculas implements IMatriculas {
         ResultSet resultado = sentencia.executeQuery(consulta);
 
         while (resultado.next()) {
-            Alumno alumno = Alumnos.getInstancia().buscar(new Alumno("ficticio", resultado.getString("dni"), "ficticio@ficticio.es", "666555444", LocalDate.of(1999, 1, 2)));
+            Alumno alumno = Alumnos.getInstancia().buscar(new Alumno("ficticio","666555444", "ficticio@ficticio.es", resultado.getString("dni"),  LocalDate.of(1999, 1, 2)));
             Matricula matricula = new Matricula(resultado.getInt("idMatricula"), resultado.getString("cursoAcademico"), resultado.getDate("fechaMatriculacion").toLocalDate(), alumno, getAsignaturasMatricula(resultado.getInt("idMatricula")));
-
+        if (resultado.getDate("fechaAnulacion") != null) {
+            matricula.setFechaAnulacion(resultado.getDate("fechaAnulacion").toLocalDate());
+        }
             copiaMatriculas.add(matricula);
         }
         return copiaMatriculas;
@@ -80,7 +82,7 @@ public class Matriculas implements IMatriculas {
                 	, a.horasDesdoble
                 	, a.especialidadProfesorado
                 	, a.codigoCicloFormativo
-                FROM asignaturasmatricula am
+                FROM asignaturasMatricula am
                 LEFT JOIN asignatura a ON am.codigo = a.codigo
                 WHERE am.idMatricula = ?
                 """;
@@ -129,6 +131,7 @@ public class Matriculas implements IMatriculas {
 
         pstmt.setString(5, matricula.getAlumno().getDni());
         pstmt.executeUpdate();
+        insertarAsignaturasMatricula(matricula.getIdMatricula(), matricula.getColeccionAsignaturas());
 
 
     }
@@ -136,7 +139,7 @@ public class Matriculas implements IMatriculas {
     //insertarAsignaturasMatricula
     private void insertarAsignaturasMatricula(int idMatricula, ArrayList<Asignatura> coleccionAsigntauras) throws SQLException {
         String query = """
-                			INSERT INTO asignaturasmatricula
+                			INSERT INTO asignaturasMatricula
                 	(idMatricula
                     ,codigo)
                 VALUES 
@@ -170,12 +173,15 @@ public class Matriculas implements IMatriculas {
         ResultSet resultado = pstmt.executeQuery();
 
         if (resultado.next()) {
-            Alumno alumno = Alumnos.getInstancia().buscar(new Alumno("ficticio", resultado.getString("dni"), "ficticio@fake.com", "666554433", LocalDate.of(2000, 1, 1)));
+            Alumno alumno = Alumnos.getInstancia().buscar(new Alumno("ficticio", "666554433", "ficticio@fake.com", resultado.getString("dni"), LocalDate.of(2000, 1, 1)));
             Matricula matriculaEncontrada = new Matricula(resultado.getInt("idMatricula"),
                     resultado.getString("cursoAcademico"),
                     resultado.getDate("fechaMatriculacion").toLocalDate(),
                     alumno,
                     getAsignaturasMatricula(resultado.getInt("idMatricula")));
+            if(resultado.getDate("fechaAnulacion") != null){
+                matriculaEncontrada.setFechaAnulacion(resultado.getDate("fechaAnulacion").toLocalDate());
+            }
             return matriculaEncontrada;
         }
 
@@ -191,11 +197,13 @@ public class Matriculas implements IMatriculas {
             throw new OperationNotSupportedException("ERROR: no existe ninguna matricula como la indicada.");
         }
         String consulta = """
-                DELETE FROM matricula
+                UPDATE matricula
+                SET fechaAnulacion = ?
                 WHERE idMatricula = ?
                 """;
         PreparedStatement pstmt = conexion.prepareStatement(consulta);
-        pstmt.setInt(1, matricula.getIdMatricula());
+        pstmt.setDate(1, java.sql.Date.valueOf(matricula.getFechaAnulacion()));
+        pstmt.setInt(2, matricula.getIdMatricula());
         pstmt.executeUpdate();
 
 
@@ -210,6 +218,10 @@ public class Matriculas implements IMatriculas {
                 , m.fechaMatriculacion
                 , m.fechaAnulacion
                 , m.dni
+                , a.nombre
+                , a.correo
+                , a.telefono
+                , a.fechaNacimiento
                 FROM matricula m
                 LEFT JOIN alumno a ON m.dni = a.dni
                 WHERE a.dni = ?
@@ -221,11 +233,15 @@ public class Matriculas implements IMatriculas {
         ResultSet resultado = pstmt.executeQuery();
 
         while (resultado.next()) {
+            Alumno a = new Alumno (resultado.getString("nombre"),resultado.getString("telefono"),resultado.getString("correo"),resultado.getString("dni"),resultado.getDate("fechaNacimiento").toLocalDate());
             Matricula matricula = new Matricula(resultado.getInt("idMatricula"),
                     resultado.getString("cursoAcademico"),
                     resultado.getDate("fechaMatriculacion").toLocalDate(),
-                    alumno,
+                    a,
                     getAsignaturasMatricula(resultado.getInt("idMatricula")));
+            if (resultado.getDate("fechaAnulacion") != null) {
+                matricula.setFechaAnulacion(resultado.getDate("fechaAnulacion").toLocalDate());
+            }
             auxiliar.add(matricula);
         }
         return auxiliar;
@@ -241,6 +257,10 @@ public class Matriculas implements IMatriculas {
                 , m.fechaMatriculacion
                 , m.fechaAnulacion
                 , m.dni
+                , a.nombre
+                , a.correo
+                , a.telefono
+                , a.fechaNacimiento
                 FROM matricula m
                 LEFT JOIN alumno a ON m.dni = a.dni
                 WHERE m.cursoAcademico = ?
@@ -250,12 +270,16 @@ public class Matriculas implements IMatriculas {
         pstmt.setString(1, cursoAcademico);
         ResultSet rs = pstmt.executeQuery();
         while (rs.next()) {
-            Alumno alumno = Alumnos.getInstancia().buscar(new Alumno("ficticio", rs.getString("dni"), "ficticio@fake.com", "666554433", LocalDate.of(2000, 1, 1)));
+            Alumno a = new Alumno (rs.getString("nombre"),rs.getString("telefono"),rs.getString("correo"),rs.getString("dni"),rs.getDate("fechaNacimiento").toLocalDate());
+            //Alumno alumno = Alumnos.getInstancia().buscar(new Alumno("ficticio","666554433", "ficticio@fake.com", rs.getString("dni"), LocalDate.of(2000, 1, 1)));
             Matricula matricula = new Matricula(rs.getInt("idMatricula"),
                     rs.getString("cursoAcademico"),
                     rs.getDate("fechaMatriculacion").toLocalDate(),
-                    alumno,
+                    a,
                     getAsignaturasMatricula(rs.getInt("idMatricula")));
+            if (rs.getDate("fechaAnulacion") != null) {
+                matricula.setFechaAnulacion(rs.getDate("fechaAnulacion").toLocalDate());
+            }
             copiaMatriculas.add(matricula);
         }
         return copiaMatriculas;
@@ -273,23 +297,27 @@ public class Matriculas implements IMatriculas {
                 , m.fechaAnulacion
                 , m.dni
                 FROM matricula m
-                LEFT JOIN asignaturasmatricula am ON m.idMatricula = am.idMatricula
+                LEFT JOIN asignaturasMatricula am ON m.idMatricula = am.idMatricula
                 LEFT JOIN asignatura a ON am.codigo = a.codigo
                 LEFT JOIN alumno al ON m.dni = al.dni
-                WHERE a.cicloFormativo = ?
-                ORDER BY m.fechaMatriculacion DESC, a.nombre
+                WHERE a.codigoCicloFormativo = ?
+                ORDER BY m.fechaMatriculacion DESC, al.nombre
                 """;
 
         PreparedStatement pstmt = conexion.prepareStatement(consulta);
-        pstmt.setString(1, cicloFormativo.toString());
+        pstmt.setInt(1, cicloFormativo.getCodigo());
         ResultSet rs = pstmt.executeQuery();
         while (rs.next()) {
-            Alumno alumno = Alumnos.getInstancia().buscar(new Alumno("ficticio", rs.getString("dni"), "ficticio@ficticio.com", "666554433", LocalDate.of(2000, 1, 1)));
+            //Alumno a = new Alumno (rs.getString("nombre"),rs.getString("telefono"),rs.getString("correo"),rs.getString("dni"),rs.getDate("fechaNacimiento").toLocalDate());
+            Alumno alumno = Alumnos.getInstancia().buscar(new Alumno("ficticio","666554433",  "ficticio@ficticio.com", rs.getString("dni"), LocalDate.of(2000, 1, 1)));
             Matricula matricula = new Matricula(rs.getInt("idMatricula"),
                     rs.getString("cursoAcademico"),
                     rs.getDate("fechaMatriculacion").toLocalDate(),
                     alumno,
                     getAsignaturasMatricula(rs.getInt("idMatricula")));
+            if (rs.getDate("fechaAnulacion") != null) {
+                matricula.setFechaAnulacion(rs.getDate("fechaAnulacion").toLocalDate());
+            }
             copiaMatriculas.add(matricula);
         }
         return copiaMatriculas;
