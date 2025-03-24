@@ -8,8 +8,7 @@ import org.iesalandalus.programacion.matriculacion.vista.*;
 public class MainApp {
     public static void main(String[] args) {
 
-        //BORRAR DESDE AQUI HASTA
-        args = new String[] {"-fdmysql"};
+
         //crear modelo
         Modelo modelo = procesarArgumentosFuenteDatos(args);
         //crear vista
