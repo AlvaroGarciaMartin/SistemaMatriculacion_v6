@@ -186,15 +186,18 @@ public Alumno(String nombre, String telefono, String correo, String dni, LocalDa
   }
 
   public void setTelefono(String telefono) {
-
-    if (telefono == null) {
-      throw new NullPointerException("ERROR: El teléfono de un alumno no puede ser nulo.");
-    } else if (!telefono.matches(ER_TELEFONO)) {
-      throw new IllegalArgumentException("ERROR: El teléfono del alumno no tiene un formato válido.");
-    } else if (telefono.isBlank() || telefono.isEmpty()) {
-      throw new IllegalArgumentException("El telefono no puede estar en blanco");
+    try {
+      if (telefono == null) {
+        throw new NullPointerException("ERROR: El teléfono de un alumno no puede ser nulo.");
+      } else if (!telefono.matches(ER_TELEFONO)) {
+        throw new IllegalArgumentException("ERROR: El teléfono del alumno no tiene un formato válido.");
+      } else if (telefono.isBlank() || telefono.isEmpty()) {
+        throw new IllegalArgumentException("El telefono no puede estar en blanco");
+      }
+      this.telefono = telefono;
+    }catch (IllegalArgumentException | NullPointerException e) {
+        System.out.println(e.getMessage());
     }
-    this.telefono = telefono;
   }
 
 
@@ -204,15 +207,19 @@ public Alumno(String nombre, String telefono, String correo, String dni, LocalDa
   }
 
   public void setCorreo(String correo) {
-    if (correo==null){
-      throw new NullPointerException("ERROR: El correo de un alumno no puede ser nulo.");
-    }else if (!correo.matches(ER_CORREO)){
-      throw new IllegalArgumentException("ERROR: El correo del alumno no tiene un formato válido.");
-    }else if (correo.isEmpty() || correo.isBlank()){
-      throw new IllegalArgumentException("ERROR: El correo del alumno no tiene un formato válido.");
-    }
+    try {
+      if (correo == null) {
+        throw new NullPointerException("ERROR: El correo de un alumno no puede ser nulo.");
+      } else if (!correo.matches(ER_CORREO)) {
+        throw new IllegalArgumentException("ERROR: El correo del alumno no tiene un formato válido.");
+      } else if (correo.isEmpty() || correo.isBlank()) {
+        throw new IllegalArgumentException("ERROR: El correo del alumno no tiene un formato válido.");
+      }
 
-    this.correo = correo;
+      this.correo = correo;
+    }catch (IllegalArgumentException | NullPointerException e) {
+      System.out.println(e.getMessage());
+    }
   }
 
   public String getDni() {
@@ -239,12 +246,16 @@ public Alumno(String nombre, String telefono, String correo, String dni, LocalDa
   }
 
   private void setFechaNacimiento(LocalDate fechaNacimiento) {
-    if (fechaNacimiento == null) {
-      throw new IllegalArgumentException("ERROR: La fecha de nacimiento no puede ser nula");
-    }else if ((LocalDate.now().getYear() - fechaNacimiento.getYear()) < MIN_EDAD_ALUMNADO) {
-      throw new IllegalArgumentException("ERROR: El Alumno no puede tener menos de 16 años");
+    try {
+      if (fechaNacimiento == null) {
+        throw new IllegalArgumentException("ERROR: La fecha de nacimiento no puede ser nula");
+      } else if ((LocalDate.now().getYear() - fechaNacimiento.getYear()) < MIN_EDAD_ALUMNADO) {
+        throw new IllegalArgumentException("ERROR: El Alumno no puede tener menos de 16 años");
+      }
+      this.fechaNacimiento = fechaNacimiento;
+    }catch (IllegalArgumentException e) {
+      System.out.println(e.getMessage());
     }
-    this.fechaNacimiento = fechaNacimiento;
   }
 
   @Override
