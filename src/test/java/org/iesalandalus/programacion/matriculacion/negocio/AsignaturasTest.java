@@ -4,7 +4,7 @@
 import org.iesalandalus.programacion.matriculacion.MainApp;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.*;
 import org.iesalandalus.programacion.matriculacion.modelo.negocio.mysql.Asignaturas;
-import org.iesalandalus.programacion.matriculacion.vista.Vista;
+import org.iesalandalus.programacion.matriculacion.vista.texto.Vista;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 

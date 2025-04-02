@@ -1,4 +1,4 @@
-package org.iesalandalus.programacion.matriculacion.vista;
+package org.iesalandalus.programacion.matriculacion.vista.texto;
 
 import org.iesalandalus.programacion.matriculacion.controlador.Controlador;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.Alumno;
@@ -15,10 +15,10 @@ import java.util.ArrayList;
 import java.util.Comparator;
 
 
-public class Vista {
+public class VistaTexto {
     private Controlador controlador;
 
-    public Vista() {
+    public VistaTexto() {
         Opcion.setVista(this);
     }
 
