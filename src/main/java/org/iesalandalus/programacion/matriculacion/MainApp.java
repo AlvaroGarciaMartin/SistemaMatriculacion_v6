@@ -12,7 +12,7 @@ import org.iesalandalus.programacion.matriculacion.vista.grafica.recursos.Locali
 
 public class MainApp {
     public static void main(String[] args) {
-        LanzadoraVentanaPrincipal.main(args);
+        LanzadoraVentanaPrincipal.comenzar();
 
         //crear modelo
         Modelo modelo = procesarArgumentosFuenteDatos(args);

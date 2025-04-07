@@ -1,6 +1,5 @@
 package org.iesalandalus.programacion.matriculacion.vista.texto;
 
-import org.iesalandalus.programacion.matriculacion.controlador.Controlador;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.Alumno;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.Asignatura;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.CicloFormativo;
@@ -55,8 +54,7 @@ public class VistaTexto extends Vista {
     //buscar Alumno
     public void buscarAlumno() {
         try {
-            //Alumno alumnoBuscado = alumnos.buscar(Consola.getAlumnoPorDni());
-            //Alumno encontrado = alumnos.buscar(alumnoBuscado);
+
             Alumno alumnoBuscado = getControlador().buscar(Consola.getAlumnoPorDni());
             if (alumnoBuscado != null) {
                 System.out.printf("Los datos del alumno solicitado son: %s", alumnoBuscado);
@@ -75,8 +73,7 @@ public class VistaTexto extends Vista {
     //borrar Alumno
     public void borrarAlumno() {
         try {
-            //Alumno alumnoBorrar = Consola.getAlumnoPorDni();
-            //alumnos.borrar(alumnoBorrar);
+
             getControlador().borrar(Consola.getAlumnoPorDni());
             System.out.println("Alumno borrado correctamente.");
         } catch (NullPointerException e) {
@@ -134,8 +131,7 @@ public class VistaTexto extends Vista {
     //buscar Asignatura
     public void buscarAsignatura() {
         try {
-            //Asignatura asignaturaBuscar = asignaturas.buscar(Consola.getAsignaturaPorCodigo());
-            //Asignatura encontrada = asignaturas.buscar(asignaturaBuscar);
+
             Asignatura asignaturaBuscar = getControlador().buscar(Consola.getAsignaturaPorCodigo());
             Asignatura encontrada = getControlador().buscar(asignaturaBuscar);
             if (encontrada != null) {
@@ -219,8 +215,7 @@ public class VistaTexto extends Vista {
     //buscar CicloFormativo
     public void buscarCicloFormativo() {
         try {
-            //CicloFormativo cicloFormativoBuscar = ciclosFormativos.buscar(Consola.getCicloFormativoPorCodigo());
-            //CicloFormativo encontrada = ciclosFormativos.buscar(cicloFormativoBuscar);
+
             CicloFormativo cicloFormativoBuscar = getControlador().buscar(Consola.getCicloFormativoPorCodigo());
             CicloFormativo encontrada = getControlador().buscar(cicloFormativoBuscar);
             if (encontrada != null) {
@@ -303,8 +298,7 @@ public class VistaTexto extends Vista {
     //buscar Matricula
     public void buscarMatricula() {
         try {
-            //Matricula matriculaBuscar = matriculas.buscar(Consola.getMatriculaPorIdentificador());
-            //Matricula encontrada =matriculas.buscar(matriculaBuscar);
+
             Matricula matriculaBuscar = getControlador().buscar(Consola.getMatriculaPorIdentificador());
             Matricula encontrada = getControlador().buscar(matriculaBuscar);
             if (encontrada != null) {
