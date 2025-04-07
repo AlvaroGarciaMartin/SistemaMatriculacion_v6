@@ -2,6 +2,7 @@ package org.iesalandalus.programacion.matriculacion.controlador;
 
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.*;
 import org.iesalandalus.programacion.matriculacion.modelo.Modelo;
+import org.iesalandalus.programacion.matriculacion.vista.Vista;
 import org.iesalandalus.programacion.matriculacion.vista.texto.VistaTexto;
 
 import javax.naming.OperationNotSupportedException;
@@ -10,22 +11,22 @@ import java.util.ArrayList;
 
 public class Controlador {
     private Modelo modelo;
-    private VistaTexto vistaTexto;
+    private Vista vista;
 
-    public Controlador(Modelo modelo, VistaTexto vistaTexto) {
+    public Controlador(Modelo modelo, Vista vista) {
         if (modelo == null) {
             throw new NullPointerException("ERROR: El modelo no puede ser nulo");
         }
-        if (vistaTexto == null) {
+        if (vista == null) {
             throw new NullPointerException("ERROR: La vista no puede ser nula");
         }
         this.modelo = modelo;
-        this.vistaTexto = vistaTexto;
-        this.vistaTexto.setControlador(this);
+        this.vista = vista;
+        this.vista.setControlador(this);
     }
     public void comenzar() {
         modelo.comenzar();
-        vistaTexto.comenzar();
+        vista.comenzar();
     }
     public void terminar() {
         modelo.terminar();
