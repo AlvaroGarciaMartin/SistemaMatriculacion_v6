@@ -5,13 +5,14 @@ import javafx.stage.Stage;
 import org.iesalandalus.programacion.matriculacion.controlador.Controlador;
 import org.iesalandalus.programacion.matriculacion.modelo.FactoriaFuenteDatos;
 import org.iesalandalus.programacion.matriculacion.modelo.Modelo;
+import org.iesalandalus.programacion.matriculacion.vista.grafica.LanzadoraVentanaPrincipal;
 import org.iesalandalus.programacion.matriculacion.vista.texto.VistaTexto;
 import org.iesalandalus.programacion.matriculacion.vista.grafica.recursos.LocalizadorRecursos;
 
 
-public class MainApp extends Application {
+public class MainApp {
     public static void main(String[] args) {
-        launch(args);
+        LanzadoraVentanaPrincipal.main(args);
 
         //crear modelo
         Modelo modelo = procesarArgumentosFuenteDatos(args);
@@ -43,15 +44,7 @@ public class MainApp extends Application {
         }
 
     }
-
-    @Override
-    public void start(Stage escenarioPrincipal ) throws Exception {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(LocalizadorRecursos.class.getResource("vistas/VentanaPrincipal.fxml"));
-        }catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+    
 }
 
 

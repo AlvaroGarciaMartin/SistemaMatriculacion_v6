@@ -5,6 +5,7 @@ import org.iesalandalus.programacion.matriculacion.modelo.dominio.Alumno;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.Asignatura;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.CicloFormativo;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.Matricula;
+import org.iesalandalus.programacion.matriculacion.vista.Vista;
 import org.iesalandalus.programacion.utilidades.Entrada;
 
 import javax.naming.OperationNotSupportedException;
@@ -15,8 +16,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 
 
-public class VistaTexto {
-    private Controlador controlador;
+public class VistaTexto extends Vista {
 
     public VistaTexto() {
         Opcion.setVista(this);
@@ -32,22 +32,16 @@ public class VistaTexto {
     }
 
     public void terminar() {
-        controlador.terminar();
+        getControlador().terminar();
     }
 
-    public void setControlador(Controlador controlador) {
-        if (controlador == null) {
-            throw new NullPointerException("ERROR: El controlador no puede ser nulo");
-        }
-        this.controlador = controlador;
-    }
 
 
     //insertar alumno
     public void insertarAlumno() {
         try {
             Alumno alumno = Consola.leerAlumno();
-            controlador.insertar(alumno);
+            getControlador().insertar(alumno);
             System.out.println("Alumno insertado correctamente.");
         } catch (NullPointerException e) {
             System.out.println("ERROR: No se puede insertar un Alumno nulo.");
@@ -63,7 +57,7 @@ public class VistaTexto {
         try {
             //Alumno alumnoBuscado = alumnos.buscar(Consola.getAlumnoPorDni());
             //Alumno encontrado = alumnos.buscar(alumnoBuscado);
-            Alumno alumnoBuscado = controlador.buscar(Consola.getAlumnoPorDni());
+            Alumno alumnoBuscado = getControlador().buscar(Consola.getAlumnoPorDni());
             if (alumnoBuscado != null) {
                 System.out.printf("Los datos del alumno solicitado son: %s", alumnoBuscado);
             } else {
@@ -83,7 +77,7 @@ public class VistaTexto {
         try {
             //Alumno alumnoBorrar = Consola.getAlumnoPorDni();
             //alumnos.borrar(alumnoBorrar);
-            controlador.borrar(Consola.getAlumnoPorDni());
+            getControlador().borrar(Consola.getAlumnoPorDni());
             System.out.println("Alumno borrado correctamente.");
         } catch (NullPointerException e) {
             System.out.println("ERROR: No se puede borrar un Alumno nulo.");
@@ -98,7 +92,7 @@ public class VistaTexto {
     //mostrar Alumnos
     public void mostrarAlumnos() {
         try {
-            ArrayList<Alumno> arrayAlumnos = controlador.getAlumnos();
+            ArrayList<Alumno> arrayAlumnos = getControlador().getAlumnos();
             if (arrayAlumnos.size() == 0) {
                 System.out.println("No existen alumnos.");
             } else {
@@ -119,14 +113,14 @@ public class VistaTexto {
         try {
             mostrarCicloFormativos();
             CicloFormativo cicloFormativo = Consola.getCicloFormativoPorCodigo();
-            CicloFormativo ciclo = controlador.buscar(cicloFormativo);
+            CicloFormativo ciclo = getControlador().buscar(cicloFormativo);
             if (ciclo == null) {
                 System.out.println("No existe el ciclo formativo indicado.");
                 return;
             }
             Asignatura asignatura = Consola.leerAsignatura(ciclo);
             //asignaturas.insertar(asignatura);
-            controlador.insertar(asignatura);
+            getControlador().insertar(asignatura);
             System.out.println("Asignatura insertada correctamente.");
         } catch (NullPointerException e) {
             System.out.println("ERROR: No se puede insertar una Asignatura nula.");
@@ -142,8 +136,8 @@ public class VistaTexto {
         try {
             //Asignatura asignaturaBuscar = asignaturas.buscar(Consola.getAsignaturaPorCodigo());
             //Asignatura encontrada = asignaturas.buscar(asignaturaBuscar);
-            Asignatura asignaturaBuscar = controlador.buscar(Consola.getAsignaturaPorCodigo());
-            Asignatura encontrada = controlador.buscar(asignaturaBuscar);
+            Asignatura asignaturaBuscar = getControlador().buscar(Consola.getAsignaturaPorCodigo());
+            Asignatura encontrada = getControlador().buscar(asignaturaBuscar);
             if (encontrada != null) {
                 System.out.printf("Los datos de la asignatura solicitada son: %s", asignaturaBuscar);
             } else {
@@ -161,7 +155,7 @@ public class VistaTexto {
         try {
             Asignatura asignaturaBorrar = Consola.getAsignaturaPorCodigo();
             //asignaturas.borrar(asignaturaBorrar);
-            controlador.borrar(asignaturaBorrar);
+            getControlador().borrar(asignaturaBorrar);
             System.out.println("Asignatura borrada correctamente.");
         } catch (NullPointerException e) {
             System.out.println("ERROR: No se puede borrar una asignatura nula.");
@@ -178,7 +172,7 @@ public class VistaTexto {
     public void mostrarAsignaturas() {
         try {
             //Asignatura [] arrayAsignatura = asignaturas.get();
-            ArrayList<Asignatura> arrayAsignatura = controlador.getAsignaturas();
+            ArrayList<Asignatura> arrayAsignatura = getControlador().getAsignaturas();
             if (arrayAsignatura.size() == 0) {
                 System.out.println("No existen asignaturas.");
             }/* else{
@@ -208,7 +202,7 @@ public class VistaTexto {
     public void insertarCicloFormativo() {
         try {
             CicloFormativo ciclosFormativo = Consola.leerCicloFormativo();
-            controlador.insertar(ciclosFormativo);
+            getControlador().insertar(ciclosFormativo);
             //ciclosFormativos.insertar(ciclosFormativo);
             System.out.println("Ciclo formativo insertada correctamente.");
         } catch (NullPointerException e) {
@@ -227,8 +221,8 @@ public class VistaTexto {
         try {
             //CicloFormativo cicloFormativoBuscar = ciclosFormativos.buscar(Consola.getCicloFormativoPorCodigo());
             //CicloFormativo encontrada = ciclosFormativos.buscar(cicloFormativoBuscar);
-            CicloFormativo cicloFormativoBuscar = controlador.buscar(Consola.getCicloFormativoPorCodigo());
-            CicloFormativo encontrada = controlador.buscar(cicloFormativoBuscar);
+            CicloFormativo cicloFormativoBuscar = getControlador().buscar(Consola.getCicloFormativoPorCodigo());
+            CicloFormativo encontrada = getControlador().buscar(cicloFormativoBuscar);
             if (encontrada != null) {
                 System.out.printf("Los datos del ciclo formativo solicitado son: %s", cicloFormativoBuscar);
             } else {
@@ -248,7 +242,7 @@ public class VistaTexto {
         try {
             CicloFormativo cicloFormativoBorrar = Consola.getCicloFormativoPorCodigo();
             //ciclosFormativos.borrar(cicloFormativoBorrar);
-            controlador.borrar(cicloFormativoBorrar);
+            getControlador().borrar(cicloFormativoBorrar);
             System.out.println("Ciclo formativo borrada correctamente.");
         } catch (NullPointerException e) {
             System.out.println("ERROR: No se puede borrar un ciclo formativo nulo.");
@@ -265,7 +259,7 @@ public class VistaTexto {
     public void mostrarCicloFormativos() {
         try {
             //CicloFormativo[] arrayCicloFormativo = ciclosFormativos.get();
-            ArrayList<CicloFormativo> arrayCicloFormativo = controlador.getCicloFormativos();
+            ArrayList<CicloFormativo> arrayCicloFormativo = getControlador().getCicloFormativos();
             if (arrayCicloFormativo.size() == 0) {
                 System.out.println("No existen ciclos formativos.");
             } else {
@@ -284,16 +278,16 @@ public class VistaTexto {
         try {
             System.out.println("Datos del alumno:");
             Alumno alumno = Consola.getAlumnoPorDni();
-            Alumno a = controlador.buscar(alumno);
+            Alumno a = getControlador().buscar(alumno);
             if (a == null) {
                 System.out.println("No existe el alumno indicado.");
                 return;
             }
             System.out.println("Asignaturas de la matricula:");
-            ArrayList<Asignatura> matriculaAsignaturas = Consola.elegirAsignaturasMatricula(controlador.getAsignaturas());
+            ArrayList<Asignatura> matriculaAsignaturas = Consola.elegirAsignaturasMatricula(getControlador().getAsignaturas());
             System.out.println("Datos de la matricula:");
             Matricula matricula = Consola.leerMatricula(a, matriculaAsignaturas);
-            controlador.insertar(matricula);
+            getControlador().insertar(matricula);
             System.out.println("Matricula insertada correctamente.");
         } catch (NullPointerException e) {
             System.out.println("ERROR: No se puede insertar una Matricula nula.");
@@ -311,8 +305,8 @@ public class VistaTexto {
         try {
             //Matricula matriculaBuscar = matriculas.buscar(Consola.getMatriculaPorIdentificador());
             //Matricula encontrada =matriculas.buscar(matriculaBuscar);
-            Matricula matriculaBuscar = controlador.buscar(Consola.getMatriculaPorIdentificador());
-            Matricula encontrada = controlador.buscar(matriculaBuscar);
+            Matricula matriculaBuscar = getControlador().buscar(Consola.getMatriculaPorIdentificador());
+            Matricula encontrada = getControlador().buscar(matriculaBuscar);
             if (encontrada != null) {
                 System.out.printf("Los datos de la matricula solicitada son: %s", matriculaBuscar);
             } else {
@@ -334,7 +328,7 @@ public class VistaTexto {
         try {
             Alumno alumno = Consola.getAlumnoPorDni();
             //Matricula matriculaAnular = matriculas.buscar(Consola.getMatriculaPorIdentificador());
-            Matricula matriculaAnular = controlador.buscar(Consola.getMatriculaPorIdentificador());
+            Matricula matriculaAnular = getControlador().buscar(Consola.getMatriculaPorIdentificador());
             if (matriculaAnular != null && matriculaAnular.getAlumno().equals(alumno)) {
                 //controlador.borrar(matriculaAnular);
                 System.out.println("indique la fecha de anulación:");
@@ -342,7 +336,7 @@ public class VistaTexto {
                 LocalDate fechaAnular;
                 fechaAnular = LocalDate.parse(fechaAnulacion, DateTimeFormatter.ofPattern(Alumno.FORMATO_FECHA));
                 matriculaAnular.setFechaAnulacion(fechaAnular);
-                controlador.borrar(matriculaAnular);
+                getControlador().borrar(matriculaAnular);
                 System.out.println("Matricula anulada correctamente.");
             } else {
                 System.out.println("No se ha encontrado la matricula o no corresponde al alumno indicado.");
@@ -360,7 +354,7 @@ public class VistaTexto {
     public void mostrarMatriculas() {
         try {
             //Matricula[] arrayMatriculas = matriculas.get();
-            ArrayList<Matricula> arrayMatriculas = controlador.getMatriculas();
+            ArrayList<Matricula> arrayMatriculas = getControlador().getMatriculas();
             if (arrayMatriculas.size() == 0) {
                 System.out.println("No existen Matriculas.");
             } /*else{
@@ -395,7 +389,7 @@ public class VistaTexto {
 
             Alumno alumno = Consola.getAlumnoPorDni();
             //Matricula[] arrayMatricula = matriculas.get();
-            ArrayList<Matricula> arrayMatricula = controlador.getMatriculas(alumno);
+            ArrayList<Matricula> arrayMatricula = getControlador().getMatriculas(alumno);
             if (arrayMatricula.size() == 0) {
                 System.out.println("No existen matriculas para el alumno indicado.");
             } else {
@@ -424,12 +418,12 @@ public class VistaTexto {
             System.out.println("Indique uno de los siguientes ciclos formativos:");
             mostrarCicloFormativos();
             CicloFormativo cicloFormativo = Consola.getCicloFormativoPorCodigo();
-            cicloFormativo = controlador.buscar(cicloFormativo);
+            cicloFormativo = getControlador().buscar(cicloFormativo);
             if (cicloFormativo == null) {
                 System.out.println("No existe ningun ciclo formativo con tales datos.");
             }
             ArrayList<Matricula> matriculaCiclo;
-            matriculaCiclo = controlador.getMatriculas(cicloFormativo);
+            matriculaCiclo = getControlador().getMatriculas(cicloFormativo);
             if (matriculaCiclo.size() == 0) {
                 System.out.println("No existen matriculas para el ciclo formativo indicado.");
             }
@@ -459,7 +453,7 @@ public class VistaTexto {
             System.out.println("indique el curso academico:");
             System.out.println("El formato del curso es YY-YY");
             String cursoAcademico = Entrada.cadena();
-            ArrayList<Matricula> arrayMatriculas = controlador.getMatriculas(cursoAcademico);
+            ArrayList<Matricula> arrayMatriculas = getControlador().getMatriculas(cursoAcademico);
 
             if (arrayMatriculas.size() == 0) {
                 System.out.println("No existen matrículas para el curso académico indicado.");
