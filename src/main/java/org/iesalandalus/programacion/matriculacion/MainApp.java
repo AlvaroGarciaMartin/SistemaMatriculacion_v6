@@ -20,9 +20,9 @@ public class MainApp {
         //crear modelo
         Modelo modelo = procesarArgumentosFuenteDatos(args);
         //crear vista
-        Vista vistaTexto = procesarArgumentosVista(args);
+        Vista vista = procesarArgumentosVista(args);
         //crear controlador
-        Controlador controlador = new Controlador(modelo, vistaTexto);
+        Controlador controlador = new Controlador(modelo, vista);
         //comienza el programa
         controlador.comenzar();
         //termina el programa
