@@ -166,7 +166,7 @@ public class Asignaturas implements IAsignaturas {
     }
     //borrar Asignatura
     public void borrar (Asignatura asignatura) throws OperationNotSupportedException, SQLException {
-        Objects.requireNonNull(asignatura,"ERROR: No se puede borrar una asignatura nula.");
+        //Objects.requireNonNull(asignatura,"ERROR: No se puede borrar una asignatura nula.");
         if (buscar(asignatura)==null){
             throw new OperationNotSupportedException("ERROR: No existe ninguna asignatura como la indicada");
         }
@@ -177,7 +177,8 @@ public class Asignaturas implements IAsignaturas {
 
         PreparedStatement pstmt = conexion.prepareStatement(consulta);
         pstmt.setString(1,asignatura.getCodigo());
-        pstmt.executeQuery();
+        pstmt.executeUpdate();
+        //pstmt.executeQuery();
 
         /*int indice = this.coleccionAsignaturas.indexOf(asignatura);
         if (indice==-1) {

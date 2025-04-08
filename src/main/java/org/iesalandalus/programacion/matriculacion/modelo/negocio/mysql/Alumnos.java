@@ -126,6 +126,7 @@ if (buscar(alumno) != null) {
                  , fechaNacimiento 
                  FROM alumno
                  WHERE dni = ?
+                 ORDER BY nombre DESC
                  """;
         PreparedStatement sentencia = conexion.prepareStatement(consulta);
         sentencia.setString(1, alumno.getDni());

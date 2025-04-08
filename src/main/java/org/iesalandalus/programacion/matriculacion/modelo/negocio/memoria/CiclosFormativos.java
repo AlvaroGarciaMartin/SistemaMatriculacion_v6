@@ -55,16 +55,18 @@ public class CiclosFormativos implements ICiclosFormativos {
 
     //buscar ciclo
     public CicloFormativo buscar(CicloFormativo cicloFormativo) {
-        if (cicloFormativo == null) {
-            throw new NullPointerException("ERROR: No se puede buscar un Ciclo Formativo nulo.");
-        }
 
-        int indice = this.coleccionCiclosFormativos.indexOf(cicloFormativo);
-        if (indice==-1) {
-            return null;
-        } else {
-            return new CicloFormativo(this.coleccionCiclosFormativos.get(indice));
-        }
+            if (cicloFormativo == null) {
+                throw new NullPointerException("ERROR: No se puede buscar un Ciclo Formativo nulo.");
+            }
+
+            int indice = this.coleccionCiclosFormativos.indexOf(cicloFormativo);
+            if (indice == -1) {
+                return null;
+            } else {
+                return new CicloFormativo(this.coleccionCiclosFormativos.get(indice));
+            }
+
     }
     //borrar ciclo
     public void borrar (CicloFormativo cicloFormativo) throws OperationNotSupportedException {
