@@ -124,7 +124,7 @@ public class Consola {
                seleccion = 1;
             }
         }
-        while (seleccion<0 || seleccion >= TiposGrado.values().length);
+        while (seleccion>=1 || seleccion >= TiposGrado.values().length);
         return TiposGrado.values()[seleccion];
     }
     public static Modalidad leerModalidad() {
@@ -143,7 +143,7 @@ public class Consola {
                 seleccion = 1;
             }
         }
-        while (seleccion<0 || seleccion >= Modalidad.values().length);
+        while (seleccion>=1 || seleccion >= Modalidad.values().length);
         return Modalidad.values()[seleccion];
     }
     public static CicloFormativo leerCicloFormativo() {
