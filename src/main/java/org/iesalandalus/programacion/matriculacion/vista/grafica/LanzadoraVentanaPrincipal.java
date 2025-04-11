@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import org.iesalandalus.programacion.matriculacion.vista.Vista;
 import org.iesalandalus.programacion.matriculacion.vista.grafica.recursos.LocalizadorRecursos;
 import org.iesalandalus.programacion.matriculacion.vista.grafica.utilidades.Dialogos;
 
@@ -34,6 +35,7 @@ public class LanzadoraVentanaPrincipal extends Application {
     private void confirmarSalida( Stage escenarioPrincipal,WindowEvent e) {
         if (Dialogos.mostrarDialogoConfirmacion("Ventana Principal", "¿Realmente quieres salir de la aplicación?"))
         {
+            VistaGrafica.getInstancia().terminar();
             escenarioPrincipal.close();
         }
         else

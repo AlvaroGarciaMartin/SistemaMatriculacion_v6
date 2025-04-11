@@ -5,6 +5,7 @@ import javafx.stage.Stage;
 import org.iesalandalus.programacion.matriculacion.controlador.Controlador;
 import org.iesalandalus.programacion.matriculacion.modelo.FactoriaFuenteDatos;
 import org.iesalandalus.programacion.matriculacion.modelo.Modelo;
+import org.iesalandalus.programacion.matriculacion.vista.FactoriaVista;
 import org.iesalandalus.programacion.matriculacion.vista.Vista;
 import org.iesalandalus.programacion.matriculacion.vista.grafica.LanzadoraVentanaPrincipal;
 import org.iesalandalus.programacion.matriculacion.vista.grafica.VistaGrafica;
@@ -29,7 +30,19 @@ public class MainApp {
         controlador.terminar();
     }
     private static Modelo procesarArgumentosFuenteDatos(String[] args){
-        if (args.length == 0) {
+
+
+        for (String arg : args) {
+            if (arg.equalsIgnoreCase("-fdmysql")) {
+                return new Modelo(FactoriaFuenteDatos.MYSQL);
+            } else if (arg.equalsIgnoreCase("-fdmemoria")) {
+                return new Modelo(FactoriaFuenteDatos.MEMORIA);
+            }
+        }
+        System.out.println("Fuente de datos no reconocida, Usando memoria por defecto.");
+        return new Modelo(FactoriaFuenteDatos.MEMORIA);
+
+        /*if (args.length == 0) {
             return new Modelo(FactoriaFuenteDatos.MEMORIA);
         }else{
             if (args[0].equalsIgnoreCase("-fdmysql")) {
@@ -44,11 +57,23 @@ public class MainApp {
                 return new Modelo(FactoriaFuenteDatos.MEMORIA);
             }
 
-        }
+        }*/
 
     }
     private static Vista procesarArgumentosVista(String[] args) {
-        if (args.length <= 1) {
+        for (String arg : args) {
+            if (arg.equalsIgnoreCase("-vgrafica")) {
+                System.out.println("Vista: GRAFICA");
+                return FactoriaVista.GRAFICA.crear();
+            } else if (arg.equalsIgnoreCase("-vtexto")) {
+                System.out.println("Vista: TEXTO");
+                return FactoriaVista.TEXTO.crear();
+            }
+        }
+        System.out.println("Vista no reconocida, Usando Texto por defecto.");
+        return FactoriaVista.TEXTO.crear();
+
+        /*if (args.length <= 1) {
             System.out.println("Vista por defecto: Texto");
             return new VistaTexto();
         } else {
@@ -63,7 +88,7 @@ public class MainApp {
                 System.out.println("Vista no reconocida, Usando Texto por defecto.");
                 return new VistaTexto();
             }
-        }
+        }*/
     }
 }
 

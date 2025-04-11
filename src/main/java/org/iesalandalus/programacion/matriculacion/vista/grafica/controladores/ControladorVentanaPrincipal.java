@@ -112,6 +112,7 @@ public class ControladorVentanaPrincipal {
         escenarioAlumnos.setScene(escena);
         escenarioAlumnos.initModality(Modality.APPLICATION_MODAL);
         escenarioAlumnos.setOnCloseRequest(e->confirmaCierreAlumnos(escenarioAlumnos,e));
+        escenarioAlumnos.setResizable(false);
         escenarioAlumnos.showAndWait();
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -126,6 +127,7 @@ public class ControladorVentanaPrincipal {
         else
             e.consume();
     }
+
 
 }
 

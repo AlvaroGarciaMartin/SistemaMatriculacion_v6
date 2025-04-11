@@ -90,6 +90,9 @@
          <children>
             <ComboBox fx:id="cbSelectorBusqueda" prefWidth="150.0" />
          </children>
+         <BorderPane.margin>
+            <Insets left="10.0" />
+         </BorderPane.margin>
       </VBox>
    </left>
 </BorderPane>

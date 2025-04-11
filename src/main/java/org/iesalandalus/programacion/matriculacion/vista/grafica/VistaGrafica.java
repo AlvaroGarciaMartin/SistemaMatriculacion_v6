@@ -22,6 +22,7 @@ public class VistaGrafica extends Vista {
 
     @Override
     public void terminar() {
-        getControlador().terminar();
+        //getControlador().terminar();
+       controlador.terminar();
     }
 }
