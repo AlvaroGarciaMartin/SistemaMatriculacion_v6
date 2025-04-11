@@ -1,5 +1,6 @@
 package org.iesalandalus.programacion.matriculacion.vista.grafica.controladores;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,7 +17,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import org.iesalandalus.programacion.matriculacion.vista.grafica.recursos.LocalizadorRecursos;
+import org.iesalandalus.programacion.matriculacion.vista.grafica.utilidades.Dialogos;
 
 import java.io.IOException;
 
@@ -96,7 +99,7 @@ public class ControladorVentanaPrincipal {
 
     }
 
-    public void crearAlumnos(){
+    public void crearAlumnos(ActionEvent event){
         try {
         FXMLLoader fxmlLoader = new FXMLLoader(LocalizadorRecursos.class.getResource("vistas/CrearAlumnos.fxml"));
         Parent raiz = null;
@@ -108,10 +111,20 @@ public class ControladorVentanaPrincipal {
         escenarioAlumnos.setTitle("Crear Alumnos");
         escenarioAlumnos.setScene(escena);
         escenarioAlumnos.initModality(Modality.APPLICATION_MODAL);
+        escenarioAlumnos.setOnCloseRequest(e->confirmaCierreAlumnos(escenarioAlumnos,e));
         escenarioAlumnos.showAndWait();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+    private void confirmaCierreAlumnos(Stage escenarioAlumnos, WindowEvent e)
+    {
+        if (Dialogos.mostrarDialogoConfirmacion("Creador de Alumnos", "¿Realmente quieres salir sin guardar el Alumno?"))
+        {
+            escenarioAlumnos.close();
+        }
+        else
+            e.consume();
     }
 
 }

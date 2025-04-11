@@ -53,14 +53,4 @@ public class ControladorCrearAlumnos {
 
 
 
-    private void confirmaCierreVentana(Stage escenarioCerrar, WindowEvent e)
-    {
-        if (Dialogos.mostrarDialogoConfirmacion("Creador de Alumnos", "¿Realmente quieres salir sin guardar el Alumno?"))
-        {
-            escenarioCerrar.close();
-        }
-        else
-            e.consume();
-    }
-
 }
