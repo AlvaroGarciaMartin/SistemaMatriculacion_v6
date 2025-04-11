@@ -2,6 +2,9 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.image.Image?>
@@ -10,21 +13,20 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="667.0" prefWidth="792.0" style="-fx-background-color: #d7eff7;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:id="bdVentanaPrincipal" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="667.0" prefWidth="874.0" style="-fx-background-color: #d7eff7;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <top>
-      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+      <VBox fx:id="vbBotonesPrincipales" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
-            <ToolBar prefHeight="40.0" prefWidth="200.0" styleClass="button" stylesheets="@../estilos/style.css">
+            <ToolBar fx:id="tbBotonesPrincipales" prefHeight="40.0" prefWidth="200.0" styleClass="button" stylesheets="@../estilos/style.css">
               <items>
-                <Button mnemonicParsing="false" text="Alumos">
+                <Button fx:id="btnCrearAlumnos" mnemonicParsing="false" text="Alumos">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
                   </Button>
-                  <Button layoutX="10.0" layoutY="12.0" mnemonicParsing="false" text="Ciclos Formativos" />
-                  <Button layoutX="10.0" layoutY="12.0" mnemonicParsing="false" text="Asignaturas" />
-                  <Button layoutX="66.0" layoutY="12.0" mnemonicParsing="false" stylesheets="@../estilos/style.css" text="Matriculas">
+                  <Button fx:id="btnCrearCiclos" layoutX="10.0" layoutY="12.0" mnemonicParsing="false" text="Ciclos Formativos" />
+                  <Button fx:id="btnCrearAsignaturas" layoutX="10.0" layoutY="12.0" mnemonicParsing="false" text="Asignaturas" />
+                  <Button fx:id="btnCrearMatriculas" layoutX="66.0" layoutY="12.0" mnemonicParsing="false" stylesheets="@../estilos/style.css" text="Matriculas">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
@@ -37,9 +39,9 @@
                   <Insets left="10.0" right="10.0" />
                </padding>
             </ToolBar>
-            <HBox prefHeight="100.0" prefWidth="200.0">
+            <HBox fx:id="hbMenuBusqueda" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <TextField promptText="realiza aqui la busqueda">
+                  <TextField fx:id="tfBusqueda" promptText="realiza aqui la busqueda">
                      <HBox.margin>
                         <Insets left="50.0" top="30.0" />
                      </HBox.margin>
@@ -49,7 +51,7 @@
                         <Insets left="20.0" top="20.0" />
                      </HBox.margin>
                      <graphic>
-                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="btnBusqueda" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../imagenes/lupa.png" />
                            </image>
@@ -61,4 +63,33 @@
          </children>
       </VBox>
    </top>
+   <bottom>
+      <TableView fx:id="tablFiltro" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <columns>
+          <TableColumn fx:id="tablFiltroColum1" prefWidth="75.0" text="Alumno" />
+          <TableColumn fx:id="tablFiltroColum2" prefWidth="206.4000015258789" text="Ciclo Formativo Matriculado" />
+            <TableColumn fx:id="tablFiltroColum3" prefWidth="146.4000244140625" text="Fecha Matriculación" />
+            <TableColumn fx:id="tablFiltroColum4" prefWidth="123.99996948242188" text="Fecha Anulación" />
+        </columns>
+      </TableView>
+   </bottom>
+   <center>
+      <TableView fx:id="tablCentralBusquedas" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <columns>
+          <TableColumn fx:id="tablColum1" prefWidth="105.60001373291016" text="Nombre" />
+          <TableColumn fx:id="tablColum2" prefWidth="83.20001220703125" text="Telefono" />
+            <TableColumn fx:id="tablColum3" prefWidth="75.20001220703125" text="Correo" />
+            <TableColumn fx:id="tablColum4" prefWidth="98.4000244140625" text="Dni" />
+            <TableColumn fx:id="tablColum5" prefWidth="143.99990844726562" text="Fecha de Nacimiento" />
+
+        </columns>
+      </TableView>
+   </center>
+   <left>
+      <VBox fx:id="vbDesplegables" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <ComboBox fx:id="cbSelectorBusqueda" prefWidth="150.0" />
+         </children>
+      </VBox>
+   </left>
 </BorderPane>

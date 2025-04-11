@@ -21,7 +21,7 @@ public class LanzadoraVentanaPrincipal extends Application {
             FXMLLoader fxmlLoader = new FXMLLoader(LocalizadorRecursos.class.getResource("vistas/VentanaPrincipal.fxml"));
             Parent raiz = fxmlLoader.load();
 
-            Scene escena = new Scene(raiz, 600, 600);
+            Scene escena = new Scene(raiz/*, 600, 600*/);
             escenarioPrincipal.setTitle("Sistema de Matriculacion 24-25");
             escenarioPrincipal.setScene(escena);
             escenarioPrincipal.show();
