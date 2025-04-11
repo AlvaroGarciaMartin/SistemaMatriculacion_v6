@@ -5,6 +5,8 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 
+import java.time.LocalDate;
+
 public class ControladorCrearAlumnos {
 
     @FXML
@@ -39,5 +41,11 @@ public class ControladorCrearAlumnos {
 
     @FXML
     private TextField tfTelefonoAlumno;
+
+    @FXML
+   public void initialize()
+    {
+        dpFechaNac.setValue(LocalDate.now());
+    }
 
 }

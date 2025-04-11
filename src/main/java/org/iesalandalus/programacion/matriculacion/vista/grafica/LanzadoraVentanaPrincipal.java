@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import org.iesalandalus.programacion.matriculacion.vista.grafica.recursos.LocalizadorRecursos;
+import org.iesalandalus.programacion.matriculacion.vista.grafica.utilidades.Dialogos;
 
 public class LanzadoraVentanaPrincipal extends Application {
     
@@ -24,12 +25,19 @@ public class LanzadoraVentanaPrincipal extends Application {
             Scene escena = new Scene(raiz/*, 600, 600*/);
             escenarioPrincipal.setTitle("Sistema de Matriculacion 24-25");
             escenarioPrincipal.setScene(escena);
+            escenarioPrincipal.setOnCloseRequest(e->confirmarSalida(escenarioPrincipal,e));
             escenarioPrincipal.show();
         }catch (Exception e) {
             e.printStackTrace();
         }
     }
     private void confirmarSalida( Stage escenarioPrincipal,WindowEvent e) {
-
+        if (Dialogos.mostrarDialogoConfirmacion("Ventana Principal", "¿Realmente quieres salir de la aplicación?"))
+        {
+            escenarioPrincipal.close();
+        }
+        else
+            e.consume();
     }
+
 }
