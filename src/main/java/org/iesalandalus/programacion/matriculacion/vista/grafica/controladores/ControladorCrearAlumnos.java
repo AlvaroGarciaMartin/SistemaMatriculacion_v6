@@ -4,6 +4,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
+import org.iesalandalus.programacion.matriculacion.vista.grafica.utilidades.Dialogos;
 
 import java.time.LocalDate;
 
@@ -46,6 +49,18 @@ public class ControladorCrearAlumnos {
    public void initialize()
     {
         dpFechaNac.setValue(LocalDate.now());
+    }
+
+
+
+    private void confirmaCierreVentana(Stage escenarioCerrar, WindowEvent e)
+    {
+        if (Dialogos.mostrarDialogoConfirmacion("Creador de Alumnos", "¿Realmente quieres salir sin guardar el Alumno?"))
+        {
+            escenarioCerrar.close();
+        }
+        else
+            e.consume();
     }
 
 }
