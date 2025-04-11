@@ -13,13 +13,13 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="bdVentanaPrincipal" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="667.0" prefWidth="874.0" style="-fx-background-color: #d7eff7;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:id="bdVentanaPrincipal" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="667.0" prefWidth="874.0" style="-fx-background-color: #d7eff7;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.iesalandalus.programacion.matriculacion.vista.grafica.controladores.ControladorVentanaPrincipal">
    <top>
       <VBox fx:id="vbBotonesPrincipales" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
             <ToolBar fx:id="tbBotonesPrincipales" prefHeight="40.0" prefWidth="200.0" styleClass="button" stylesheets="@../estilos/style.css">
               <items>
-                <Button fx:id="btnCrearAlumnos" mnemonicParsing="false" text="Alumos">
+                <Button fx:id="btnCrearAlumnos" mnemonicParsing="false" onAction="#crearAlumnos" text="Alumos">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.gluonhq.charm.glisten.control.TextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #d7eff7;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.iesalandalus.programacion.matriculacion.vista.grafica.controladores.ControladorCrearAlumnos">
+   <children>
+      <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+         <children>
+            <Label prefHeight="18.0" prefWidth="114.0" text="Nombre del ALumno" />
+            <TextField>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </TextField>
+         </children>
+         <VBox.margin>
+            <Insets left="20.0" top="10.0" />
+         </VBox.margin>
+      </HBox>
+      <HBox layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+         <children>
+            <Label prefHeight="18.0" prefWidth="117.0" text="Teléfono" />
+            <TextField />
+         </children>
+         <VBox.margin>
+            <Insets left="20.0" top="10.0" />
+         </VBox.margin>
+      </HBox>
+      <HBox layoutX="10.0" layoutY="110.0" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+         <children>
+            <Label prefHeight="18.0" prefWidth="117.0" text="Correo">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </Label>
+            <TextField />
+         </children>
+         <VBox.margin>
+            <Insets left="20.0" top="10.0" />
+         </VBox.margin>
+      </HBox>
+      <HBox layoutX="10.0" layoutY="210.0" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+         <children>
+            <Label prefHeight="18.0" prefWidth="116.0" text="Dni del Alumno" />
+            <TextField />
+         </children>
+         <VBox.margin>
+            <Insets left="20.0" top="10.0" />
+         </VBox.margin>
+      </HBox>
+      <HBox layoutX="10.0" layoutY="310.0" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+         <children>
+            <Label text="Fecha de Nacimiento" />
+            <DatePicker />
+            <Button mnemonicParsing="false" text="Aceptar" />
+         </children>
+         <padding>
+            <Insets bottom="10.0" />
+         </padding>
+         <VBox.margin>
+            <Insets left="20.0" top="10.0" />
+         </VBox.margin>
+      </HBox>
+   </children>
+</VBox>
