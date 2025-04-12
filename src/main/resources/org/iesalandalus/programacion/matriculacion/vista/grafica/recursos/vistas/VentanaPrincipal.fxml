@@ -24,7 +24,7 @@
                         <Insets />
                      </opaqueInsets>
                   </Button>
-                  <Button fx:id="btnCrearCiclos" layoutX="10.0" layoutY="12.0" mnemonicParsing="false" text="Ciclos Formativos" />
+                  <Button fx:id="btnCrearCiclos" layoutX="10.0" layoutY="12.0" mnemonicParsing="false" onAction="#crearCiclos" text="Ciclos Formativos" />
                   <Button fx:id="btnCrearAsignaturas" layoutX="10.0" layoutY="12.0" mnemonicParsing="false" text="Asignaturas" />
                   <Button fx:id="btnCrearMatriculas" layoutX="66.0" layoutY="12.0" mnemonicParsing="false" stylesheets="@../estilos/style.css" text="Matriculas">
                      <opaqueInsets>

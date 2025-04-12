@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import org.iesalandalus.programacion.matriculacion.controlador.Controlador;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.Alumno;
+import org.iesalandalus.programacion.matriculacion.vista.grafica.VistaGrafica;
 import org.iesalandalus.programacion.matriculacion.vista.grafica.utilidades.Dialogos;
 
 import java.time.LocalDate;
@@ -60,7 +61,8 @@ public class ControladorCrearAlumnos {
 
         try{
             Alumno alumno = new Alumno(nombre,telefono,correo,dni,fechaNac);
-            controlador.insertar(alumno);
+            //controlador.insertar(alumno);
+            VistaGrafica.getInstancia().getControlador().insertar(alumno);
             Dialogos.mostrarDialogoTexto("Alumno insertado","Alumno insertado correctamente");
         }catch (Exception e){
             Dialogos.mostrarDialogoError("Error al insertar alumno",e.getMessage());
