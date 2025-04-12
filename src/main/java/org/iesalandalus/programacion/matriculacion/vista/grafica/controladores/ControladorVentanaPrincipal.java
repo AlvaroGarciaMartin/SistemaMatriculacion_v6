@@ -98,7 +98,7 @@ public class ControladorVentanaPrincipal {
     private void initialize() {
 
     }
-
+    @FXML
     public void crearAlumnos(ActionEvent event){
         try {
         FXMLLoader fxmlLoader = new FXMLLoader(LocalizadorRecursos.class.getResource("vistas/CrearAlumnos.fxml"));
@@ -118,6 +118,28 @@ public class ControladorVentanaPrincipal {
             throw new RuntimeException(e);
         }
     }
+
+    @FXML
+    void crearCiclos(ActionEvent event) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(LocalizadorRecursos.class.getResource("vistas/CrearCiclosFormativos.fxml"));
+            Parent raiz = null;
+
+            raiz = fxmlLoader.load();
+
+            Stage escenarioCiclosFormativos = new Stage();
+            Scene escena = new Scene(raiz/*, 600, 600*/);
+            escenarioCiclosFormativos.setTitle("Crear Ciclos Formativos");
+            escenarioCiclosFormativos.setScene(escena);
+            escenarioCiclosFormativos.initModality(Modality.APPLICATION_MODAL);
+            escenarioCiclosFormativos.setOnCloseRequest(e->confirmaCierreAlumnos(escenarioCiclosFormativos,e));
+            escenarioCiclosFormativos.setResizable(false);
+            escenarioCiclosFormativos.showAndWait();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     private void confirmaCierreAlumnos(Stage escenarioAlumnos, WindowEvent e)
     {
         if (Dialogos.mostrarDialogoConfirmacion("Creador de Alumnos", "¿Realmente quieres salir sin guardar el Alumno?"))
@@ -127,6 +149,8 @@ public class ControladorVentanaPrincipal {
         else
             e.consume();
     }
+
+
 
 
 }
