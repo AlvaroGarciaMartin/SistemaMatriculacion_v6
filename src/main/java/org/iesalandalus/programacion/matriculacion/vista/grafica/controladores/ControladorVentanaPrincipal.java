@@ -118,11 +118,20 @@ public class ControladorVentanaPrincipal {
             throw new RuntimeException(e);
         }
     }
+    private void confirmaCierreAlumnos(Stage escenarioAlumnos, WindowEvent e)
+    {
+        if (Dialogos.mostrarDialogoConfirmacion("Creador de Alumnos", "¿Realmente quieres salir sin guardar el Alumno?"))
+        {
+            escenarioAlumnos.close();
+        }
+        else
+            e.consume();
+    }
 
     @FXML
     void crearCiclos(ActionEvent event) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(LocalizadorRecursos.class.getResource("vistas/CrearCiclosFormativos.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(LocalizadorRecursos.class.getResource("vistas/CrearCiclos.fxml"));
             Parent raiz = null;
 
             raiz = fxmlLoader.load();
@@ -132,7 +141,7 @@ public class ControladorVentanaPrincipal {
             escenarioCiclosFormativos.setTitle("Crear Ciclos Formativos");
             escenarioCiclosFormativos.setScene(escena);
             escenarioCiclosFormativos.initModality(Modality.APPLICATION_MODAL);
-            escenarioCiclosFormativos.setOnCloseRequest(e->confirmaCierreAlumnos(escenarioCiclosFormativos,e));
+            escenarioCiclosFormativos.setOnCloseRequest(e->confirmaCierreCiclos(escenarioCiclosFormativos,e));
             escenarioCiclosFormativos.setResizable(false);
             escenarioCiclosFormativos.showAndWait();
         } catch (IOException e) {
@@ -140,11 +149,11 @@ public class ControladorVentanaPrincipal {
         }
     }
 
-    private void confirmaCierreAlumnos(Stage escenarioAlumnos, WindowEvent e)
+    private void confirmaCierreCiclos(Stage escenarioCiclosFormativos, WindowEvent e)
     {
-        if (Dialogos.mostrarDialogoConfirmacion("Creador de Alumnos", "¿Realmente quieres salir sin guardar el Alumno?"))
+        if (Dialogos.mostrarDialogoConfirmacion("Creador de Ciclos Formativos", "¿Realmente quieres salir sin guardar el Ciclo Formativo?"))
         {
-            escenarioAlumnos.close();
+            escenarioCiclosFormativos.close();
         }
         else
             e.consume();
