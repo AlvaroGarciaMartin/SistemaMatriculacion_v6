@@ -169,10 +169,10 @@ public class ControladorVentanaPrincipal {
 
             Stage escenarioAsignaturas = new Stage();
             Scene escena = new Scene(raiz/*, 600, 600*/);
-            escenarioAsignaturas.setTitle("Crear Ciclos Formativos");
+            escenarioAsignaturas.setTitle("Crear Asignaturas");
             escenarioAsignaturas.setScene(escena);
             escenarioAsignaturas.initModality(Modality.APPLICATION_MODAL);
-            escenarioAsignaturas.setOnCloseRequest(e->confirmaCierreCiclos(escenarioAsignaturas,e));
+            escenarioAsignaturas.setOnCloseRequest(e->confirmaCierreAsignaturas(escenarioAsignaturas,e));
             escenarioAsignaturas.setResizable(false);
             escenarioAsignaturas.showAndWait();
         } catch (IOException e) {
@@ -202,7 +202,7 @@ public class ControladorVentanaPrincipal {
             escenarioMatriculas.setTitle("Crear Matriculas");
             escenarioMatriculas.setScene(escena);
             escenarioMatriculas.initModality(Modality.APPLICATION_MODAL);
-            escenarioMatriculas.setOnCloseRequest(e->confirmaCierreCiclos(escenarioMatriculas,e));
+            escenarioMatriculas.setOnCloseRequest(e->confirmaCierreMatriculas(escenarioMatriculas,e));
             escenarioMatriculas.setResizable(false);
             escenarioMatriculas.showAndWait();
         } catch (IOException e) {
