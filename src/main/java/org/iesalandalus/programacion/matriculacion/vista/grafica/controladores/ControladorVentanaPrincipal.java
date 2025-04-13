@@ -167,24 +167,24 @@ public class ControladorVentanaPrincipal {
 
             raiz = fxmlLoader.load();
 
-            Stage escenarioCiclosFormativos = new Stage();
+            Stage escenarioAsignaturas = new Stage();
             Scene escena = new Scene(raiz/*, 600, 600*/);
-            escenarioCiclosFormativos.setTitle("Crear Ciclos Formativos");
-            escenarioCiclosFormativos.setScene(escena);
-            escenarioCiclosFormativos.initModality(Modality.APPLICATION_MODAL);
-            escenarioCiclosFormativos.setOnCloseRequest(e->confirmaCierreCiclos(escenarioCiclosFormativos,e));
-            escenarioCiclosFormativos.setResizable(false);
-            escenarioCiclosFormativos.showAndWait();
+            escenarioAsignaturas.setTitle("Crear Ciclos Formativos");
+            escenarioAsignaturas.setScene(escena);
+            escenarioAsignaturas.initModality(Modality.APPLICATION_MODAL);
+            escenarioAsignaturas.setOnCloseRequest(e->confirmaCierreCiclos(escenarioAsignaturas,e));
+            escenarioAsignaturas.setResizable(false);
+            escenarioAsignaturas.showAndWait();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    private void confirmaCierreAsignaturas(Stage escenarioCiclosFormativos, WindowEvent e)
+    private void confirmaCierreAsignaturas(Stage escenarioAsignaturas, WindowEvent e)
     {
         if (Dialogos.mostrarDialogoConfirmacion("Creador de Asignaturas", "¿Realmente quieres salir sin guardar la Asignatura?"))
         {
-            escenarioCiclosFormativos.close();
+            escenarioAsignaturas.close();
         }
         else
             e.consume();
@@ -197,24 +197,24 @@ public class ControladorVentanaPrincipal {
 
             raiz = fxmlLoader.load();
 
-            Stage escenarioCiclosFormativos = new Stage();
+            Stage escenarioMatriculas = new Stage();
             Scene escena = new Scene(raiz/*, 600, 600*/);
-            escenarioCiclosFormativos.setTitle("Crear Matriculas");
-            escenarioCiclosFormativos.setScene(escena);
-            escenarioCiclosFormativos.initModality(Modality.APPLICATION_MODAL);
-            escenarioCiclosFormativos.setOnCloseRequest(e->confirmaCierreCiclos(escenarioCiclosFormativos,e));
-            escenarioCiclosFormativos.setResizable(false);
-            escenarioCiclosFormativos.showAndWait();
+            escenarioMatriculas.setTitle("Crear Matriculas");
+            escenarioMatriculas.setScene(escena);
+            escenarioMatriculas.initModality(Modality.APPLICATION_MODAL);
+            escenarioMatriculas.setOnCloseRequest(e->confirmaCierreCiclos(escenarioMatriculas,e));
+            escenarioMatriculas.setResizable(false);
+            escenarioMatriculas.showAndWait();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    private void confirmaCierreMatriculas(Stage escenarioCiclosFormativos, WindowEvent e)
+    private void confirmaCierreMatriculas(Stage escenarioMatriculas, WindowEvent e)
     {
         if (Dialogos.mostrarDialogoConfirmacion("Creador de Matriculas", "¿Realmente quieres salir sin guardar la Matricula?"))
         {
-            escenarioCiclosFormativos.close();
+            escenarioMatriculas.close();
         }
         else
             e.consume();
