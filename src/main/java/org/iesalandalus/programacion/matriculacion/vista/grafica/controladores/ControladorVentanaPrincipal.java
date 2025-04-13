@@ -159,6 +159,67 @@ public class ControladorVentanaPrincipal {
             e.consume();
     }
 
+    @FXML
+    void crearAsignaturas(ActionEvent event) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(LocalizadorRecursos.class.getResource("vistas/CrearAsignaturas.fxml"));
+            Parent raiz = null;
+
+            raiz = fxmlLoader.load();
+
+            Stage escenarioCiclosFormativos = new Stage();
+            Scene escena = new Scene(raiz/*, 600, 600*/);
+            escenarioCiclosFormativos.setTitle("Crear Ciclos Formativos");
+            escenarioCiclosFormativos.setScene(escena);
+            escenarioCiclosFormativos.initModality(Modality.APPLICATION_MODAL);
+            escenarioCiclosFormativos.setOnCloseRequest(e->confirmaCierreCiclos(escenarioCiclosFormativos,e));
+            escenarioCiclosFormativos.setResizable(false);
+            escenarioCiclosFormativos.showAndWait();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void confirmaCierreAsignaturas(Stage escenarioCiclosFormativos, WindowEvent e)
+    {
+        if (Dialogos.mostrarDialogoConfirmacion("Creador de Asignaturas", "¿Realmente quieres salir sin guardar la Asignatura?"))
+        {
+            escenarioCiclosFormativos.close();
+        }
+        else
+            e.consume();
+    }
+    @FXML
+    void crearMatriculas(ActionEvent event) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(LocalizadorRecursos.class.getResource("vistas/CrearMatriculas.fxml"));
+            Parent raiz = null;
+
+            raiz = fxmlLoader.load();
+
+            Stage escenarioCiclosFormativos = new Stage();
+            Scene escena = new Scene(raiz/*, 600, 600*/);
+            escenarioCiclosFormativos.setTitle("Crear Matriculas");
+            escenarioCiclosFormativos.setScene(escena);
+            escenarioCiclosFormativos.initModality(Modality.APPLICATION_MODAL);
+            escenarioCiclosFormativos.setOnCloseRequest(e->confirmaCierreCiclos(escenarioCiclosFormativos,e));
+            escenarioCiclosFormativos.setResizable(false);
+            escenarioCiclosFormativos.showAndWait();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void confirmaCierreMatriculas(Stage escenarioCiclosFormativos, WindowEvent e)
+    {
+        if (Dialogos.mostrarDialogoConfirmacion("Creador de Matriculas", "¿Realmente quieres salir sin guardar la Matricula?"))
+        {
+            escenarioCiclosFormativos.close();
+        }
+        else
+            e.consume();
+    }
+
 
 
 

@@ -48,6 +48,9 @@ public class ControladorCrearAlumnos {
     @FXML
     void insertarAlumno(ActionEvent event) {
 
+        Stage escenarioAlumnos = (Stage) btnAceptarAlumno.getScene().getWindow();
+
+        try{
 
         String nombre = tfNombreAlumno.getText();
         String telefono = tfTelefonoAlumno.getText();
@@ -59,11 +62,12 @@ public class ControladorCrearAlumnos {
             return;
         }
 
-        try{
+
             Alumno alumno = new Alumno(nombre,telefono,correo,dni,fechaNac);
             //controlador.insertar(alumno);
             VistaGrafica.getInstancia().getControlador().insertar(alumno);
-            Dialogos.mostrarDialogoTexto("Alumno insertado","Alumno insertado correctamente");
+            Dialogos.mostrarDialogoInformacion("Alumno insertado","Alumno insertado correctamente");
+            escenarioAlumnos.close();
         }catch (Exception e){
             Dialogos.mostrarDialogoError("Error al insertar alumno",e.getMessage());
 
