@@ -17,7 +17,7 @@
             <Label text="El codigo debe ser de 4 digitos" textFill="#a19d9d" />
          </children>
          <VBox.margin>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </VBox.margin>
       </HBox>
       <HBox layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
@@ -29,7 +29,7 @@
                </HBox.margin></TextField>
          </children>
          <VBox.margin>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </VBox.margin>
       </HBox>
       <HBox layoutX="10.0" layoutY="110.0" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
@@ -38,7 +38,7 @@
             <ComboBox fx:id="cbElegirGrado" onAction="#CrearCicloFormativo" prefWidth="150.0" promptText="Selecciona el grado" />
          </children>
          <VBox.margin>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </VBox.margin>
       </HBox>
       <HBox layoutX="10.0" layoutY="210.0" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
@@ -47,7 +47,7 @@
             <TextField fx:id="tfNombreCiclo" />
          </children>
          <VBox.margin>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </VBox.margin>
       </HBox>
       <HBox layoutX="10.0" layoutY="310.0" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
@@ -58,7 +58,7 @@
             <Button fx:id="btnAceptarCrearCiclo" mnemonicParsing="false" text="Aceptar" />
          </children>
          <VBox.margin>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </VBox.margin>
       </HBox>
    </children>

@@ -38,7 +38,9 @@ public class ControladorCrearCiclosFormativos {
 
     @FXML
     public void initialize() {
+
         cargarOpcionesGrados();
+
     }
 
     private ObservableList<TiposGrado> obsListadoOpcionesChoice=
@@ -50,7 +52,7 @@ public class ControladorCrearCiclosFormativos {
 
     @FXML
     void CrearCicloFormativo(ActionEvent event) {
-        /*try {
+        try {
 
             int codigo = Integer.parseInt(tfcodigoCiclo.getText());
             String familia = tfFamiliaCiclo.getText();
@@ -58,7 +60,7 @@ public class ControladorCrearCiclosFormativos {
             String nombre = tfNombreCiclo.getText();
             int horas = Integer.parseInt(tfHorasCiclo.getText());
 
-            if (codigo < 0 || codigo > 9999 || familia.trim().isBlank() || grado.toString().trim().isBlank() || nombre.trim().isBlank() || horas < 0) {
+            if (codigo < 0 || codigo > 9999 || familia.trim().isBlank() || grado == null || nombre.trim().isBlank() || horas < 0) {
                 return;
             }
             CicloFormativo ciclo = new CicloFormativo(codigo, familia, grado, nombre, horas);
@@ -66,7 +68,7 @@ public class ControladorCrearCiclosFormativos {
             Dialogos.mostrarDialogoTexto("Ciclo Formativo insertado","Ciclo Formativo insertado correctamente");
         } catch (Exception e) {
             Dialogos.mostrarDialogoError("Error al insertar Ciclo Formativo",e.getMessage());
-        }*/
+        }
     }
 
 }

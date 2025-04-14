@@ -25,74 +25,29 @@ import java.io.IOException;
 
 public class ControladorVentanaPrincipal {
 
-    @FXML
-    private BorderPane bdVentanaPrincipal;
-
-    @FXML
-    private ImageView btnBusqueda;
-
-    @FXML
-    private Button btnCrearAlumnos;
-
-    @FXML
-    private Button btnCrearAsignaturas;
-
-    @FXML
-    private Button btnCrearCiclos;
-
-    @FXML
-    private Button btnCrearMatriculas;
-
-    @FXML
-    private ComboBox<?> cbSelectorBusqueda;
-
-    @FXML
-    private HBox hbMenuBusqueda;
-
-    @FXML
-    private TableView<?> tablCentralBusquedas;
-
-    @FXML
-    private TableColumn<?, ?> tablColum1;
-
-    @FXML
-    private TableColumn<?, ?> tablColum2;
-
-    @FXML
-    private TableColumn<?, ?> tablColum3;
-
-    @FXML
-    private TableColumn<?, ?> tablColum4;
-
-    @FXML
-    private TableColumn<?, ?> tablColum5;
-
-    @FXML
-    private TableView<?> tablFiltro;
-
-    @FXML
-    private TableColumn<?, ?> tablFiltroColum1;
-
-    @FXML
-    private TableColumn<?, ?> tablFiltroColum2;
-
-    @FXML
-    private TableColumn<?, ?> tablFiltroColum3;
-
-    @FXML
-    private TableColumn<?, ?> tablFiltroColum4;
-
-    @FXML
-    private ToolBar tbBotonesPrincipales;
-
-    @FXML
-    private TextField tfBusqueda;
-
-    @FXML
-    private VBox vbBotonesPrincipales;
-
-    @FXML
-    private VBox vbDesplegables;
+    @FXML private BorderPane bdVentanaPrincipal;
+    @FXML private ImageView btnBusqueda;
+    @FXML private Button btnCrearAlumnos;
+    @FXML private Button btnCrearAsignaturas;
+    @FXML private Button btnCrearCiclos;
+    @FXML private Button btnCrearMatriculas;
+    @FXML private ComboBox<String> cbSelectorBusqueda;
+    @FXML private HBox hbMenuBusqueda;
+    @FXML private TableView<?> tablCentralBusquedas;
+    @FXML private TableColumn<?, ?> tablColum1;
+    @FXML private TableColumn<?, ?> tablColum2;
+    @FXML private TableColumn<?, ?> tablColum3;
+    @FXML private TableColumn<?, ?> tablColum4;
+    @FXML private TableColumn<?, ?> tablColum5;
+    @FXML private TableView<?> tablFiltro;
+    @FXML private TableColumn<?, ?> tablFiltroColum1;
+    @FXML private TableColumn<?, ?> tablFiltroColum2;
+    @FXML private TableColumn<?, ?> tablFiltroColum3;
+    @FXML private TableColumn<?, ?> tablFiltroColum4;
+    @FXML private ToolBar tbBotonesPrincipales;
+    @FXML private TextField tfBusqueda;
+    @FXML private VBox vbBotonesPrincipales;
+    @FXML private VBox vbDesplegables;
 
     @FXML
     private void initialize() {
