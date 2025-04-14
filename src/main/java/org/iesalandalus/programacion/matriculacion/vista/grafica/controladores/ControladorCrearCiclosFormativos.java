@@ -9,9 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import org.iesalandalus.programacion.matriculacion.modelo.dominio.CicloFormativo;
-import org.iesalandalus.programacion.matriculacion.modelo.dominio.Grado;
-import org.iesalandalus.programacion.matriculacion.modelo.dominio.TiposGrado;
+import org.iesalandalus.programacion.matriculacion.modelo.dominio.*;
 import org.iesalandalus.programacion.matriculacion.vista.grafica.VistaGrafica;
 import org.iesalandalus.programacion.matriculacion.vista.grafica.utilidades.Dialogos;
 
@@ -48,6 +46,16 @@ public class ControladorCrearCiclosFormativos {
 
     private void cargarOpcionesGrados() {
         cbElegirGrado.setItems(obsListadoOpcionesChoice);
+        cbElegirGrado.getSelectionModel().selectedItemProperty().addListener((observable,oldValue,newValue)->modificadoComboBoxListadoOpciones(oldValue,newValue));
+    }
+
+    private void modificadoComboBoxListadoOpciones(TiposGrado oldValue, TiposGrado newValue) {
+        System.out.println(oldValue+" -> "+newValue);
+    }
+
+    @FXML
+    void seleccionarGrado(ActionEvent event) {
+        System.out.println(cbElegirGrado.getValue());
     }
 
     @FXML
@@ -62,16 +70,22 @@ public class ControladorCrearCiclosFormativos {
 
             int codigo = Integer.parseInt(tfcodigoCiclo.getText());
             String familia = tfFamiliaCiclo.getText();
-            //Grado grado = cbElegirGrado.getValue();
+            TiposGrado tg = cbElegirGrado.getSelectionModel().getSelectedItem();
+            Grado grado = null;
+            if(tg.toString().equals("Grado D")){
+                 grado = new GradoD("Grado D", 2, Modalidad.PRESENCIAL);
+            }else{
+                grado = new GradoE("Grado E", 1, 1);
+            }
             String nombre = tfNombreCiclo.getText();
             int horas = Integer.parseInt(tfHorasCiclo.getText());
 
-           // if (codigo < 0 || codigo > 9999 || familia.trim().isBlank() || grado == null || nombre.trim().isBlank() || horas < 0) {
-          //     return;
-           // }
-           // CicloFormativo ciclo = new CicloFormativo(codigo, familia, grado, nombre, horas);
-           // VistaGrafica.getInstancia().getControlador().insertar(ciclo);
-            Dialogos.mostrarDialogoTexto("Ciclo Formativo insertado","Ciclo Formativo insertado correctamente");
+            if (codigo < 0 || codigo > 9999 || familia.trim().isBlank() || grado == null || nombre.trim().isBlank() || horas < 0) {
+               return;
+            }
+            CicloFormativo ciclo = new CicloFormativo(codigo, familia, grado, nombre, horas);
+            VistaGrafica.getInstancia().getControlador().insertar(ciclo);
+            Dialogos.mostrarDialogoInformacion("Ciclo Formativo insertado","Ciclo Formativo insertado correctamente");
         } catch (Exception e) {
             Dialogos.mostrarDialogoError("Error al insertar Ciclo Formativo",e.getMessage());
         }

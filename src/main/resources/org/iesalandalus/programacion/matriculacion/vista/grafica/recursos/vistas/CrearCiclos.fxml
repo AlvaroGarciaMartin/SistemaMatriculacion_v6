@@ -35,7 +35,7 @@
       <HBox layoutX="10.0" layoutY="110.0" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
          <children>
             <Label text="Grado" />
-            <ComboBox fx:id="cbElegirGrado" onAction="#CrearCicloFormativo" prefWidth="150.0" promptText="Selecciona el grado" />
+            <ComboBox fx:id="cbElegirGrado" onAction="#seleccionarGrado" prefWidth="150.0" promptText="Selecciona el grado" />
          </children>
          <VBox.margin>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
@@ -55,7 +55,7 @@
             <Label text="Horas de duración del ciclo" />
             <TextField fx:id="tfHorasCiclo" />
             <Label text="debe ser menor a 2000 horas" textFill="#8c8a8a" />
-            <Button fx:id="btnAceptarCrearCiclo" mnemonicParsing="false" onAction="#crearCicloFormativo" text="Aceptar" />
+            <Button fx:id="btnAceptarCrearCiclo" mnemonicParsing="false" onAction="#CrearCicloFormativo" text="Aceptar" />
          </children>
          <VBox.margin>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
