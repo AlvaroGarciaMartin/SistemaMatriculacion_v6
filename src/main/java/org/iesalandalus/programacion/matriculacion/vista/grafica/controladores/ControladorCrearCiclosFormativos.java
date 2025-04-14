@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.*;
 import org.iesalandalus.programacion.matriculacion.vista.grafica.VistaGrafica;
 import org.iesalandalus.programacion.matriculacion.vista.grafica.utilidades.Dialogos;
@@ -60,12 +61,8 @@ public class ControladorCrearCiclosFormativos {
 
     @FXML
     void CrearCicloFormativo(ActionEvent event) {
-        System.out.println(event.getSource());
-        if(event.getSource() == btnAceptarCrearCiclo){
-            System.out.println("Commeme el cighoto");
-        }else{
-            System.out.println("los huevs");
-        }
+
+        Stage escenarioCiclos = (Stage) btnAceptarCrearCiclo.getScene().getWindow();
         try {
 
             int codigo = Integer.parseInt(tfcodigoCiclo.getText());
@@ -86,6 +83,7 @@ public class ControladorCrearCiclosFormativos {
             CicloFormativo ciclo = new CicloFormativo(codigo, familia, grado, nombre, horas);
             VistaGrafica.getInstancia().getControlador().insertar(ciclo);
             Dialogos.mostrarDialogoInformacion("Ciclo Formativo insertado","Ciclo Formativo insertado correctamente");
+            escenarioCiclos.close();
         } catch (Exception e) {
             Dialogos.mostrarDialogoError("Error al insertar Ciclo Formativo",e.getMessage());
         }
