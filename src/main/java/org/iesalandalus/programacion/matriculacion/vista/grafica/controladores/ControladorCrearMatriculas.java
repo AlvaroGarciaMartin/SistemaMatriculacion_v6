@@ -36,26 +36,26 @@ public class ControladorCrearMatriculas {
     @FXML
     void insertarMatriculas(ActionEvent event) {
 
-        Stage escenarioMatriculas = (Stage) btnCrearMatricula.getScene().getWindow();
-
-        try{
-
-            int idMatricula = Integer.parseInt(tfIdMatricula.getText());
-            String cursoAcademico = tfCursoAcademico.getText();
-            LocalDate fechaMatricula = dpFechaMatricula.getValue();
-            String dniAlumno = tfDniAlumno.getText();
-            Alumno alumno = VistaGrafica.getInstancia().getControlador().buscar(parseString(dniAlumno);
-            Asignatura asignatura = cbAsignaturasDisponibles.getValue();
-            Matricula matricula = new Matricula(idMatricula, cursoAcademico, fechaMatricula, alumno, new Asignatura[]{asignatura});
-
-
-            VistaGrafica.getInstancia().getControlador().insertar(matricula);
-            Dialogos.mostrarDialogoInformacion("Matricula insertada","Matricula insertada correctamente");
-            escenarioMatriculas.close();
-        }catch (Exception e){
-            Dialogos.mostrarDialogoError("Error al insertar la matricula",e.getMessage());
-
-        }
+//        Stage escenarioMatriculas = (Stage) btnCrearMatricula.getScene().getWindow();
+//
+//        try{
+//
+//            int idMatricula = Integer.parseInt(tfIdMatricula.getText());
+//            String cursoAcademico = tfCursoAcademico.getText();
+//            LocalDate fechaMatricula = dpFechaMatricula.getValue();
+//            String dniAlumno = tfDniAlumno.getText();
+//            Alumno alumno = VistaGrafica.getInstancia().getControlador().buscar(parseString(dniAlumno);
+//            Asignatura asignatura = cbAsignaturasDisponibles.getValue();
+//            Matricula matricula = new Matricula(idMatricula, cursoAcademico, fechaMatricula, alumno, new Asignatura[]{asignatura});
+//
+//
+//            VistaGrafica.getInstancia().getControlador().insertar(matricula);
+//            Dialogos.mostrarDialogoInformacion("Matricula insertada","Matricula insertada correctamente");
+//            escenarioMatriculas.close();
+//        }catch (Exception e){
+//            Dialogos.mostrarDialogoError("Error al insertar la matricula",e.getMessage());
+//
+//        }
 
     }
 

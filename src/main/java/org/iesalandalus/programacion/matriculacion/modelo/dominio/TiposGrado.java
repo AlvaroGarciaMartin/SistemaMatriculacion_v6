@@ -25,7 +25,7 @@ public enum TiposGrado {
 
     @Override
     public String toString() {
-        return "Grado seleccionado:"  + cadenaAMostrar;
+        return cadenaAMostrar;
     }
 
 }

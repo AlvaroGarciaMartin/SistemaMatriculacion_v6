@@ -52,19 +52,25 @@ public class ControladorCrearCiclosFormativos {
 
     @FXML
     void CrearCicloFormativo(ActionEvent event) {
+        System.out.println(event.getSource());
+        if(event.getSource() == btnAceptarCrearCiclo){
+            System.out.println("Commeme el cighoto");
+        }else{
+            System.out.println("los huevs");
+        }
         try {
 
             int codigo = Integer.parseInt(tfcodigoCiclo.getText());
             String familia = tfFamiliaCiclo.getText();
-            Grado grado = cbElegirGrado.getValue();
+            //Grado grado = cbElegirGrado.getValue();
             String nombre = tfNombreCiclo.getText();
             int horas = Integer.parseInt(tfHorasCiclo.getText());
 
-            if (codigo < 0 || codigo > 9999 || familia.trim().isBlank() || grado == null || nombre.trim().isBlank() || horas < 0) {
-                return;
-            }
-            CicloFormativo ciclo = new CicloFormativo(codigo, familia, grado, nombre, horas);
-            VistaGrafica.getInstancia().getControlador().insertar(ciclo);
+           // if (codigo < 0 || codigo > 9999 || familia.trim().isBlank() || grado == null || nombre.trim().isBlank() || horas < 0) {
+          //     return;
+           // }
+           // CicloFormativo ciclo = new CicloFormativo(codigo, familia, grado, nombre, horas);
+           // VistaGrafica.getInstancia().getControlador().insertar(ciclo);
             Dialogos.mostrarDialogoTexto("Ciclo Formativo insertado","Ciclo Formativo insertado correctamente");
         } catch (Exception e) {
             Dialogos.mostrarDialogoError("Error al insertar Ciclo Formativo",e.getMessage());

@@ -100,6 +100,7 @@ public class ControladorVentanaPrincipal {
             escenarioCiclosFormativos.setResizable(false);
             escenarioCiclosFormativos.showAndWait();
         } catch (IOException e) {
+            e.printStackTrace();
             throw new RuntimeException(e);
         }
     }
