@@ -1,5 +1,8 @@
 package org.iesalandalus.programacion.matriculacion.vista.grafica.controladores;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,6 +14,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToolBar;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -18,10 +22,17 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import org.iesalandalus.programacion.matriculacion.modelo.dominio.Alumno;
+import org.iesalandalus.programacion.matriculacion.vista.grafica.VistaGrafica;
 import org.iesalandalus.programacion.matriculacion.vista.grafica.recursos.LocalizadorRecursos;
 import org.iesalandalus.programacion.matriculacion.vista.grafica.utilidades.Dialogos;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ControladorVentanaPrincipal {
 
@@ -33,12 +44,13 @@ public class ControladorVentanaPrincipal {
     @FXML private Button btnCrearMatriculas;
     @FXML private ComboBox<String> cbSelectorBusqueda;
     @FXML private HBox hbMenuBusqueda;
-    @FXML private TableView<?> tablCentralBusquedas;
-    @FXML private TableColumn<?, ?> tablColum1;
-    @FXML private TableColumn<?, ?> tablColum2;
-    @FXML private TableColumn<?, ?> tablColum3;
-    @FXML private TableColumn<?, ?> tablColum4;
-    @FXML private TableColumn<?, ?> tablColum5;
+    @FXML private TableView<Alumno> tablCentralBusquedasAlumno;
+    @FXML private TableColumn<Alumno, String> tablColum1;
+    @FXML private TableColumn<Alumno, Integer> tablColum2;
+    @FXML private TableColumn<Alumno, String> tablColum3;
+    @FXML private TableColumn<Alumno, String> tablColum4;
+    @FXML private TableColumn<Alumno, String> tablColum5;
+    //@FXML private TableColumn<Alumno, LocalDate> tablColum5;
     @FXML private TableView<?> tablFiltro;
     @FXML private TableColumn<?, ?> tablFiltroColum1;
     @FXML private TableColumn<?, ?> tablFiltroColum2;
@@ -49,8 +61,19 @@ public class ControladorVentanaPrincipal {
     @FXML private VBox vbBotonesPrincipales;
     @FXML private VBox vbDesplegables;
 
+    private List<Alumno> coleccionAlumnos = new ArrayList<>();
+    private ObservableList<Alumno> alumnosObservable = FXCollections.observableArrayList();
+
     @FXML
     private void initialize() {
+        try {
+            mostrarTablaAlumno();
+            mostrarTablaCiclosFormativos();
+            mostrarTablaAsignaturas();
+            mostrarTablaMatriculas();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
     }
     @FXML
@@ -70,7 +93,7 @@ public class ControladorVentanaPrincipal {
         escenarioAlumnos.setResizable(false);
         escenarioAlumnos.showAndWait();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            Dialogos.mostrarDialogoError("Creador de Alumnos", "Error al crear el Alumno");
         }
     }
     private void confirmaCierreAlumnos(Stage escenarioAlumnos, WindowEvent e)
@@ -174,6 +197,83 @@ public class ControladorVentanaPrincipal {
         }
         else
             e.consume();
+    }
+
+    private void mostrarTablaAlumno() {
+        try {
+            alumnosObservable.setAll(VistaGrafica.getInstancia().getControlador().getAlumnos());
+            tablCentralBusquedasAlumno.setItems(alumnosObservable);
+            tablColum1.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+            tablColum2.setCellValueFactory(new PropertyValueFactory<>("telefono"));
+            tablColum3.setCellValueFactory(new PropertyValueFactory<>("correo"));
+            tablColum4.setCellValueFactory(new PropertyValueFactory<>("dni"));
+            //tablColum5.setCellValueFactory(new PropertyValueFactory<Alumno, LocalDate>("fechaNacimiento"));
+
+            tablColum5.setCellValueFactory(alumno -> new SimpleStringProperty(alumno.getValue().getFechaNacimiento().format(DateTimeFormatter.ofPattern(Alumno.FORMATO_FECHA))));
+
+            tablCentralBusquedasAlumno.setItems(alumnosObservable);
+            coleccionAlumnos = new ArrayList<Alumno>(VistaGrafica.getInstancia().getControlador().getAlumnos());
+            alumnosObservable.setAll(coleccionAlumnos);
+
+            tablCentralBusquedasAlumno.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> muestraPersonaSeleccionada(newValue));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void mostrarTablaCiclosFormativos() {
+        try {
+            tablColum1.setCellValueFactory(new PropertyValueFactory<Alumno, String>("nombre"));
+            tablColum2.setCellValueFactory(new PropertyValueFactory<Alumno, Integer>("telefono"));
+            tablColum3.setCellValueFactory(new PropertyValueFactory<Alumno, String>("correo"));
+            tablColum4.setCellValueFactory(new PropertyValueFactory<Alumno, String>("dni"));
+            tablColum4.setCellValueFactory(alumno -> new SimpleStringProperty(alumno.getValue().getFechaNacimiento().format(DateTimeFormatter.ofPattern(Alumno.FORMATO_FECHA))));
+
+            tablCentralBusquedasAlumno.setItems(alumnosObservable);
+            coleccionAlumnos = new ArrayList<Alumno>(VistaGrafica.getInstancia().getControlador().getAlumnos());
+            alumnosObservable.setAll(coleccionAlumnos);
+
+            tablCentralBusquedasAlumno.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> muestraPersonaSeleccionada(newValue));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    private void mostrarTablaAsignaturas() {
+        try {
+            tablColum1.setCellValueFactory(new PropertyValueFactory<Alumno, String>("nombre"));
+            tablColum2.setCellValueFactory(new PropertyValueFactory<Alumno, Integer>("telefono"));
+            tablColum3.setCellValueFactory(new PropertyValueFactory<Alumno, String>("correo"));
+            tablColum4.setCellValueFactory(new PropertyValueFactory<Alumno, String>("dni"));
+            tablColum4.setCellValueFactory(alumno -> new SimpleStringProperty(alumno.getValue().getFechaNacimiento().format(DateTimeFormatter.ofPattern(Alumno.FORMATO_FECHA))));
+
+            tablCentralBusquedasAlumno.setItems(alumnosObservable);
+            coleccionAlumnos = new ArrayList<Alumno>(VistaGrafica.getInstancia().getControlador().getAlumnos());
+            alumnosObservable.setAll(coleccionAlumnos);
+
+            tablCentralBusquedasAlumno.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> muestraPersonaSeleccionada(newValue));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    private void mostrarTablaMatriculas() {
+        try {
+            tablColum1.setCellValueFactory(new PropertyValueFactory<Alumno, String>("nombre"));
+            tablColum2.setCellValueFactory(new PropertyValueFactory<Alumno, Integer>("telefono"));
+            tablColum3.setCellValueFactory(new PropertyValueFactory<Alumno, String>("correo"));
+            tablColum4.setCellValueFactory(new PropertyValueFactory<Alumno, String>("dni"));
+            tablColum4.setCellValueFactory(alumno -> new SimpleStringProperty(alumno.getValue().getFechaNacimiento().format(DateTimeFormatter.ofPattern(Alumno.FORMATO_FECHA))));
+
+            tablCentralBusquedasAlumno.setItems(alumnosObservable);
+            coleccionAlumnos = new ArrayList<Alumno>(VistaGrafica.getInstancia().getControlador().getAlumnos());
+            alumnosObservable.setAll(coleccionAlumnos);
+
+            tablCentralBusquedasAlumno.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> muestraPersonaSeleccionada(newValue));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void muestraPersonaSeleccionada(Object newValue) {
     }
 
 

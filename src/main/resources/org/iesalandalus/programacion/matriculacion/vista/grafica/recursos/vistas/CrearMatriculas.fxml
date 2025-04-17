@@ -1,22 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
-<?import javafx.scene.control.TextField?>
 <VBox fx:id="crearMatriculas" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="531.0" prefWidth="678.0" style="-fx-background-color: #d7eff7;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.iesalandalus.programacion.matriculacion.vista.grafica.controladores.ControladorCrearMatriculas">
    <children>
       <HBox prefHeight="100.0" prefWidth="200.0" spacing="30.0">
          <children>
             <Label text="ID de la Matricula" />
-            <TextField fx:id="tfIdMatricula" prefHeight="66.0" prefWidth="205.0" promptText="Ejem: 1">
+            <TextField fx:id="tfIdMatricula" prefHeight="24.0" prefWidth="206.0" promptText="Ejem: 1">
                <padding>
                   <Insets left="30.0" />
                </padding>
@@ -29,7 +27,7 @@
       <HBox layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
          <children>
             <Label text="Curso Academico" />
-            <TextField fx:id="tfCursoAcademico" prefHeight="66.0" prefWidth="206.0" promptText="Ejem: 24-25">
+            <TextField fx:id="tfCursoAcademico" prefHeight="23.0" prefWidth="206.0" promptText="Ejem: 24-25">
                <padding>
                   <Insets left="30.0" />
                </padding>
@@ -51,7 +49,7 @@
       <HBox layoutX="10.0" layoutY="210.0" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
          <children>
             <Label text="DNI del Alumno" />
-            <TextField fx:id="tfDniAlumno" prefHeight="66.0" prefWidth="222.0" promptText="Ejem: 00000000T">
+            <TextField fx:id="tfDniAlumno" prefHeight="29.0" prefWidth="222.0" promptText="Ejem: 00000000T">
                <padding>
                   <Insets left="30.0" />
                </padding>
@@ -61,10 +59,26 @@
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </VBox.margin>
       </HBox>
+      <HBox layoutX="30.0" layoutY="348.0" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+         <children>
+            <Label text="Codigo del Ciclo Formativo" />
+            <TextField fx:id="tfCodigoCiclo" onInputMethodTextChanged="#filtrarCicloFormativo" prefHeight="29.0" prefWidth="222.0" promptText="Ejem: 00000000T">
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </TextField>
+         </children>
+         <VBox.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </VBox.margin>
+      </HBox>
       <HBox layoutX="10.0" layoutY="310.0" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
          <children>
             <Label text="Elija las asignaturas a matricular" />
-            <ComboBox fx:id="cbAsignaturasDisponibles" prefHeight="26.0" prefWidth="232.0" promptText="Asignaturas disponibles" />
+            <ComboBox fx:id="cbAsignaturasDisponibles" onAction="#listaAsignaturasDisponibles" prefHeight="26.0" prefWidth="232.0" promptText="Asignaturas disponibles" />
             <Button fx:id="btnCrearMatricula" mnemonicParsing="false" onAction="#insertarMatriculas" text="Aceptar">
                <HBox.margin>
                   <Insets left="70.0" />

@@ -2,13 +2,15 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -73,26 +75,77 @@
         </columns>
       </TableView>
    </bottom>
-   <center>
-      <TableView fx:id="tablCentralBusquedas" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-        <columns>
-          <TableColumn fx:id="tablColum1" prefWidth="105.60001373291016" text="Nombre" />
-          <TableColumn fx:id="tablColum2" prefWidth="83.20001220703125" text="Telefono" />
-            <TableColumn fx:id="tablColum3" prefWidth="75.20001220703125" text="Correo" />
-            <TableColumn fx:id="tablColum4" prefWidth="98.4000244140625" text="Dni" />
-            <TableColumn fx:id="tablColum5" prefWidth="143.99990844726562" text="Fecha de Nacimiento" />
-
-        </columns>
-      </TableView>
-   </center>
    <left>
       <VBox fx:id="vbDesplegables" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
-         <children>
-            <ComboBox fx:id="cbSelectorBusqueda" prefWidth="150.0" />
-         </children>
          <BorderPane.margin>
             <Insets left="10.0" />
          </BorderPane.margin>
       </VBox>
    </left>
+   <center>
+      <TabPane prefHeight="267.0" prefWidth="885.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+        <tabs>
+          <Tab text="Alumnos">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="tablCentralBusquedasAlumno" prefHeight="235.0" prefWidth="764.0">
+                           <columns>
+                              <TableColumn fx:id="tablColum1" prefWidth="105.60001373291016" text="Nombre" />
+                              <TableColumn fx:id="tablColum2" prefWidth="83.20001220703125" text="Telefono" />
+                              <TableColumn fx:id="tablColum3" prefWidth="75.20001220703125" text="Correo" />
+                              <TableColumn fx:id="tablColum5" prefWidth="143.99990844726562" text="dni" />
+                              <TableColumn fx:id="tablColum4" prefWidth="98.4000244140625" text="Fecha de Nacimiento" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Ciclos Formativos">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView layoutX="-3.0" prefHeight="238.0" prefWidth="766.0">
+                          <columns>
+                            <TableColumn prefWidth="75.0" text="C1" />
+                            <TableColumn prefWidth="75.0" text="C2" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+            <Tab text="Asignaturas">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView layoutY="-2.0" prefHeight="243.0" prefWidth="762.0">
+                          <columns>
+                            <TableColumn prefWidth="75.0" text="C1" />
+                            <TableColumn prefWidth="75.0" text="C2" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Matriculas">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView prefHeight="238.0" prefWidth="762.0">
+                          <columns>
+                            <TableColumn prefWidth="75.0" text="C1" />
+                            <TableColumn prefWidth="75.0" text="C2" />
+                              <TableColumn prefWidth="75.0" text="Column X" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </center>
 </BorderPane>
