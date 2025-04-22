@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #d7eff7;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.iesalandalus.programacion.matriculacion.vista.grafica.controladores.ControladorCrearAlumnos">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="582.0" prefWidth="690.0" style="-fx-background-color: #d7eff7;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.iesalandalus.programacion.matriculacion.vista.grafica.controladores.ControladorCrearAlumnos">
    <children>
       <HBox fx:id="hbNombreAlumno" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
          <children>
@@ -24,6 +24,9 @@
                <image>
                   <Image url="@../imagenes/agregar-usuario.png" />
                </image>
+               <HBox.margin>
+                  <Insets left="100.0" />
+               </HBox.margin>
             </ImageView>
          </children>
          <VBox.margin>
@@ -45,7 +48,7 @@
             <Insets top="20.0" />
          </padding>
       </HBox>
-      <HBox fx:id="hbCorreoAlumno" layoutX="10.0" layoutY="110.0" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+      <HBox fx:id="hbCorreoAlumno" layoutX="10.0" layoutY="110.0" prefHeight="68.0" prefWidth="670.0" spacing="20.0">
          <children>
             <Label prefHeight="18.0" prefWidth="117.0" text="Correo">
                <HBox.margin>
@@ -61,7 +64,7 @@
             <Insets top="20.0" />
          </padding>
       </HBox>
-      <HBox fx:id="hbDniAlumno" layoutX="10.0" layoutY="210.0" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+      <HBox fx:id="hbDniAlumno" layoutX="10.0" layoutY="210.0" prefHeight="64.0" prefWidth="670.0" spacing="20.0">
          <children>
             <Label prefHeight="18.0" prefWidth="116.0" text="Dni del Alumno" />
             <TextField fx:id="tfDniAlumno" />
@@ -73,7 +76,7 @@
             <Insets top="20.0" />
          </padding>
       </HBox>
-      <HBox fx:id="hbFechaNac" layoutX="10.0" layoutY="310.0" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+      <HBox fx:id="hbFechaNac" layoutX="10.0" layoutY="310.0" prefHeight="32.0" prefWidth="580.0" spacing="20.0">
          <children>
             <Label text="Fecha de Nacimiento" />
             <DatePicker fx:id="dpFechaNac" />

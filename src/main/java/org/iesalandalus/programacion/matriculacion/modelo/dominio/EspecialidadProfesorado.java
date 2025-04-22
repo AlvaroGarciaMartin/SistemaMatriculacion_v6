@@ -22,6 +22,6 @@ public enum EspecialidadProfesorado {
 
     @Override
     public String toString() {
-        return "La especialidad seleccionada:"  + cadenaAMostrar;
+        return cadenaAMostrar;
     }
 }
