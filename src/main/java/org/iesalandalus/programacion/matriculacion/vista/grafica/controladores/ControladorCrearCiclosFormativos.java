@@ -5,10 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.*;
 import org.iesalandalus.programacion.matriculacion.vista.grafica.VistaGrafica;
@@ -16,24 +13,18 @@ import org.iesalandalus.programacion.matriculacion.vista.grafica.utilidades.Dial
 
 public class ControladorCrearCiclosFormativos {
 
-    @FXML
-    private Button btnAceptarCrearCiclo;
+    @FXML private Button btnAceptarCrearCiclo;
+    @FXML private ComboBox <TiposGrado> cbElegirGrado;
+    @FXML private TextField tfFamiliaCiclo;
+    @FXML private TextField tfHorasCiclo;
+    @FXML private TextField tfNombreCiclo;
+    @FXML private TextField tfcodigoCiclo;
+    @FXML private ComboBox<?> cbEdiciones;
+    @FXML private ComboBox<Modalidad> cbModalidad;
+    @FXML private RadioButton check1ano;
+    @FXML private RadioButton check2anos;
+    @FXML private RadioButton check3anos;
 
-    @FXML
-    private ComboBox <TiposGrado> cbElegirGrado;
-
-    @FXML
-    private TextField tfFamiliaCiclo;
-
-
-    @FXML
-    private TextField tfHorasCiclo;
-
-    @FXML
-    private TextField tfNombreCiclo;
-
-    @FXML
-    private TextField tfcodigoCiclo;
 
     @FXML
     public void initialize() {
@@ -68,6 +59,16 @@ public class ControladorCrearCiclosFormativos {
             int codigo = Integer.parseInt(tfcodigoCiclo.getText());
             String familia = tfFamiliaCiclo.getText();
             TiposGrado tg = cbElegirGrado.getSelectionModel().getSelectedItem();
+            int anios;
+            if (check1ano.isSelected()){
+                anios = 1;
+            }
+            if (check2anos.isSelected()){
+                anios = 2;
+            }
+            if (check3anos.isSelected()){
+                anios = 3;
+            }
             Grado grado = null;
             if(tg.toString().equals("Grado D")){
                  grado = new GradoD("Grado D", 2, Modalidad.PRESENCIAL);
@@ -88,5 +89,27 @@ public class ControladorCrearCiclosFormativos {
             Dialogos.mostrarDialogoError("Error al insertar Ciclo Formativo",e.getMessage());
         }
     }
+
+//    `    private void modificadoListaGrados(String oldValue, String newValue)
+//    {
+//        System.out.println("Modificado valor del ListView");
+//        System.out.println("El nuevo valor seleccionado es: " + newValue);
+
+//        if (newValue.equals("Grado D")) {
+//            lbAnios.setVisible(true);
+//            tfAnios.setVisible(true);
+//            lbModaidad.setVisible(true);
+//            cbModalidad.setVisible(true);
+//            lbEdiciones.setVisible(false);
+//            tfEdiciones.setVisible(false);
+//        } else if (newValue.equals("Grado E")) {
+//            lbEdiciones.setVisible(true);
+//            tfEdiciones.setVisible(true);
+//            lbModaidad.setVisible(false);
+//            cbModalidad.setVisible(false);
+//            lbAnios.setVisible(true);
+//            tfAnios.setVisible(true);
+//        }
+//    }
 
 }

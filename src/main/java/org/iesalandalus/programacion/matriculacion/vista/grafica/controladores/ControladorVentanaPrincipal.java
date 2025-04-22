@@ -56,9 +56,49 @@ public class ControladorVentanaPrincipal {
     @FXML private TableColumn<?, ?> tablFiltroColum2;
     @FXML private TableColumn<?, ?> tablFiltroColum3;
     @FXML private TableColumn<?, ?> tablFiltroColum4;
+//    @FXML private ToolBar tbBotonesPrincipales;
+//    @FXML private TextField tfBusqueda;
+//    @FXML private VBox vbBotonesPrincipales;
+//    @FXML private VBox vbDesplegables;
+    // variables tabla ciclo formativo
+    @FXML private TableColumn<?, ?> columCicloAnios;
+    @FXML private TableColumn<?, ?> columCicloCodigo;
+    @FXML private TableColumn<?, ?> columCicloFamPro;
+    @FXML private TableColumn<?, ?> columCicloHoras;
+    @FXML private TableColumn<?, ?> columCicloNombre;
+    @FXML private TableColumn<?, ?> columCicloNombreGrado;
+    @FXML private TableColumn<?, ?> columCicloGrado;
+    @FXML private TableColumn<?, ?> columCicloModalidad;
+    @FXML private TableColumn<?, ?> columCicloNumEdiciones;
+    // fin variables ciclo formativo
+    @FXML private TableColumn<?, ?> ColumNombreAsignatura;
+
+    @FXML private TableColumn<?, ?> cokumCursoAcademico;
+
+    @FXML private TableColumn<?, ?> columCodigoAsignatura;
+
+    @FXML private TableColumn<?, ?> columCodigoCiclo;
+
+    @FXML private TableColumn<?, ?> columCurso;
+
+    @FXML private TableColumn<?, ?> columDniMatricula;
+
+    @FXML private TableColumn<?, ?> columEspecialidad;
+
+    @FXML private TableColumn<?, ?> columFechaMatriculacion;
+
+    @FXML private TableColumn<?, ?> columHorasAnuales;
+
+    @FXML private TableColumn<?, ?> columHorasDesdoble;
+
+    @FXML private TableColumn<?, ?> columIdMatricula;
+
     @FXML private ToolBar tbBotonesPrincipales;
+
     @FXML private TextField tfBusqueda;
+
     @FXML private VBox vbBotonesPrincipales;
+
     @FXML private VBox vbDesplegables;
 
     private List<Alumno> coleccionAlumnos = new ArrayList<>();
@@ -69,8 +109,16 @@ public class ControladorVentanaPrincipal {
         try {
             mostrarTablaAlumno();
             mostrarTablaCiclosFormativos();
-            mostrarTablaAsignaturas();
-            mostrarTablaMatriculas();
+//            mostrarTablaAsignaturas();
+//            mostrarTablaMatriculas();
+
+            tablCentralBusquedasAlumno.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+                if (newSelection != null) {
+                    mostrarFiltrado();
+                } else {
+                    tablFiltro.getItems().clear();
+                }
+            });
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -201,13 +249,16 @@ public class ControladorVentanaPrincipal {
 
     private void mostrarTablaAlumno() {
         try {
-            alumnosObservable.setAll(VistaGrafica.getInstancia().getControlador().getAlumnos());
-            tablCentralBusquedasAlumno.setItems(alumnosObservable);
+           //alumnosObservable.setAll(VistaGrafica.getInstancia().getControlador().getAlumnos());
+            //tablCentralBusquedasAlumno.setItems(alumnosObservable);
+
+
             tablColum1.setCellValueFactory(new PropertyValueFactory<>("nombre"));
             tablColum2.setCellValueFactory(new PropertyValueFactory<>("telefono"));
             tablColum3.setCellValueFactory(new PropertyValueFactory<>("correo"));
             tablColum4.setCellValueFactory(new PropertyValueFactory<>("dni"));
             //tablColum5.setCellValueFactory(new PropertyValueFactory<Alumno, LocalDate>("fechaNacimiento"));
+            //tablColum5.setCellValueFactory(new PropertyValueFactory<>("fechaNacimiento"));
 
             tablColum5.setCellValueFactory(alumno -> new SimpleStringProperty(alumno.getValue().getFechaNacimiento().format(DateTimeFormatter.ofPattern(Alumno.FORMATO_FECHA))));
 
@@ -215,7 +266,7 @@ public class ControladorVentanaPrincipal {
             coleccionAlumnos = new ArrayList<Alumno>(VistaGrafica.getInstancia().getControlador().getAlumnos());
             alumnosObservable.setAll(coleccionAlumnos);
 
-            tablCentralBusquedasAlumno.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> muestraPersonaSeleccionada(newValue));
+           tablCentralBusquedasAlumno.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> muestraPersonaSeleccionada(newValue));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -223,62 +274,75 @@ public class ControladorVentanaPrincipal {
 
     private void mostrarTablaCiclosFormativos() {
         try {
-            tablColum1.setCellValueFactory(new PropertyValueFactory<Alumno, String>("nombre"));
-            tablColum2.setCellValueFactory(new PropertyValueFactory<Alumno, Integer>("telefono"));
-            tablColum3.setCellValueFactory(new PropertyValueFactory<Alumno, String>("correo"));
-            tablColum4.setCellValueFactory(new PropertyValueFactory<Alumno, String>("dni"));
-            tablColum4.setCellValueFactory(alumno -> new SimpleStringProperty(alumno.getValue().getFechaNacimiento().format(DateTimeFormatter.ofPattern(Alumno.FORMATO_FECHA))));
 
-            tablCentralBusquedasAlumno.setItems(alumnosObservable);
-            coleccionAlumnos = new ArrayList<Alumno>(VistaGrafica.getInstancia().getControlador().getAlumnos());
-            alumnosObservable.setAll(coleccionAlumnos);
+            columCicloCodigo.setCellValueFactory(new PropertyValueFactory<>("codigo"));
+            columCicloFamPro.setCellValueFactory(new PropertyValueFactory<>("familiaProfesional"));
+            columCicloGrado.setCellValueFactory(new PropertyValueFactory<>("correo"));
+            columCicloNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+            columCicloHoras.setCellValueFactory(new PropertyValueFactory<>("horas"));
+            columCicloNombreGrado.setCellValueFactory(new PropertyValueFactory<>("nombreGrado"));
+            columCicloAnios.setCellValueFactory(new PropertyValueFactory<>("numAniosGrado"));
+            columCicloModalidad.setCellValueFactory(new PropertyValueFactory<>("modalidad"));
+            columCicloNumEdiciones.setCellValueFactory(new PropertyValueFactory<>("numEdiciones"));
 
-            tablCentralBusquedasAlumno.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> muestraPersonaSeleccionada(newValue));
+
+//            tablCentralBusquedasAlumno.setItems(alumnosObservable);
+//            coleccionAlumnos = new ArrayList<Alumno>(VistaGrafica.getInstancia().getControlador().getAlumnos());
+//            alumnosObservable.setAll(coleccionAlumnos);
+//
+//            tablCentralBusquedasAlumno.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> muestraPersonaSeleccionada(newValue));
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
     private void mostrarTablaAsignaturas() {
-        try {
-            tablColum1.setCellValueFactory(new PropertyValueFactory<Alumno, String>("nombre"));
-            tablColum2.setCellValueFactory(new PropertyValueFactory<Alumno, Integer>("telefono"));
-            tablColum3.setCellValueFactory(new PropertyValueFactory<Alumno, String>("correo"));
-            tablColum4.setCellValueFactory(new PropertyValueFactory<Alumno, String>("dni"));
-            tablColum4.setCellValueFactory(alumno -> new SimpleStringProperty(alumno.getValue().getFechaNacimiento().format(DateTimeFormatter.ofPattern(Alumno.FORMATO_FECHA))));
-
-            tablCentralBusquedasAlumno.setItems(alumnosObservable);
-            coleccionAlumnos = new ArrayList<Alumno>(VistaGrafica.getInstancia().getControlador().getAlumnos());
-            alumnosObservable.setAll(coleccionAlumnos);
-
-            tablCentralBusquedasAlumno.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> muestraPersonaSeleccionada(newValue));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            tablColum1.setCellValueFactory(new PropertyValueFactory<Alumno, String>("nombre"));
+//            tablColum2.setCellValueFactory(new PropertyValueFactory<Alumno, Integer>("telefono"));
+//            tablColum3.setCellValueFactory(new PropertyValueFactory<Alumno, String>("correo"));
+//            tablColum4.setCellValueFactory(new PropertyValueFactory<Alumno, String>("dni"));
+//            tablColum4.setCellValueFactory(alumno -> new SimpleStringProperty(alumno.getValue().getFechaNacimiento().format(DateTimeFormatter.ofPattern(Alumno.FORMATO_FECHA))));
+//
+//            tablCentralBusquedasAlumno.setItems(alumnosObservable);
+//            coleccionAlumnos = new ArrayList<Alumno>(VistaGrafica.getInstancia().getControlador().getAlumnos());
+//            alumnosObservable.setAll(coleccionAlumnos);
+//
+//            tablCentralBusquedasAlumno.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> muestraPersonaSeleccionada(newValue));
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
     private void mostrarTablaMatriculas() {
-        try {
-            tablColum1.setCellValueFactory(new PropertyValueFactory<Alumno, String>("nombre"));
-            tablColum2.setCellValueFactory(new PropertyValueFactory<Alumno, Integer>("telefono"));
-            tablColum3.setCellValueFactory(new PropertyValueFactory<Alumno, String>("correo"));
-            tablColum4.setCellValueFactory(new PropertyValueFactory<Alumno, String>("dni"));
-            tablColum4.setCellValueFactory(alumno -> new SimpleStringProperty(alumno.getValue().getFechaNacimiento().format(DateTimeFormatter.ofPattern(Alumno.FORMATO_FECHA))));
-
-            tablCentralBusquedasAlumno.setItems(alumnosObservable);
-            coleccionAlumnos = new ArrayList<Alumno>(VistaGrafica.getInstancia().getControlador().getAlumnos());
-            alumnosObservable.setAll(coleccionAlumnos);
-
-            tablCentralBusquedasAlumno.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> muestraPersonaSeleccionada(newValue));
-        } catch (Exception e) {
-            e.printStackTrace();
+//        try {
+//            tablColum1.setCellValueFactory(new PropertyValueFactory<Alumno, String>("nombre"));
+//            tablColum2.setCellValueFactory(new PropertyValueFactory<Alumno, Integer>("telefono"));
+//            tablColum3.setCellValueFactory(new PropertyValueFactory<Alumno, String>("correo"));
+//            tablColum4.setCellValueFactory(new PropertyValueFactory<Alumno, String>("dni"));
+//            tablColum4.setCellValueFactory(alumno -> new SimpleStringProperty(alumno.getValue().getFechaNacimiento().format(DateTimeFormatter.ofPattern(Alumno.FORMATO_FECHA))));
+//
+//            tablCentralBusquedasAlumno.setItems(alumnosObservable);
+//            coleccionAlumnos = new ArrayList<Alumno>(VistaGrafica.getInstancia().getControlador().getAlumnos());
+//            alumnosObservable.setAll(coleccionAlumnos);
+//
+//            tablCentralBusquedasAlumno.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> muestraPersonaSeleccionada(newValue));
+//        } catch (Exception e) {
+//            e.printStackTrace();
         }
-    }
-
-    private void muestraPersonaSeleccionada(Object newValue) {
-    }
 
 
+  private void muestraPersonaSeleccionada(Object newValue) {
 
+  }
+
+  private void mostrarFiltrado(){
+        Alumno alumnoSeleccion = tablCentralBusquedasAlumno.getSelectionModel().getSelectedItem();
+
+
+  }
 
 }
+
+
+
 
 

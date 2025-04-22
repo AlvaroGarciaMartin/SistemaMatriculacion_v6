@@ -44,22 +44,22 @@
                         <Insets bottom="10.0" />
                      </VBox.margin>
                   </Label>
-                  <ComboBox prefHeight="28.0" prefWidth="178.0">
+                  <ComboBox fx:id="cbEdiciones" prefHeight="28.0" prefWidth="178.0">
                      <VBox.margin>
                         <Insets bottom="30.0" left="20.0" />
                      </VBox.margin>
                   </ComboBox>
-                  <RadioButton mnemonicParsing="false" text="1 año">
+                  <RadioButton fx:id="check1ano" mnemonicParsing="false" text="1 año">
                      <VBox.margin>
                         <Insets bottom="5.0" />
                      </VBox.margin>
                   </RadioButton>
-                  <RadioButton mnemonicParsing="false" text="2 años">
+                  <RadioButton fx:id="check2anos" mnemonicParsing="false" text="2 años">
                      <VBox.margin>
                         <Insets bottom="5.0" />
                      </VBox.margin>
                   </RadioButton>
-                  <RadioButton mnemonicParsing="false" text="3 años" />
+                  <RadioButton fx:id="check3anos" mnemonicParsing="false" text="3 años" />
                </children>
             </VBox>
             <VBox prefHeight="54.0" prefWidth="228.0">
@@ -69,7 +69,7 @@
                         <Insets bottom="10.0" />
                      </VBox.margin>
                   </Label>
-                  <ComboBox prefHeight="28.0" prefWidth="194.0" />
+                  <ComboBox fx:id="cbModalidad" prefHeight="28.0" prefWidth="194.0" />
                </children>
                <HBox.margin>
                   <Insets left="30.0" />
