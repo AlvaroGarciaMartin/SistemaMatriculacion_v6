@@ -46,19 +46,19 @@
       <HBox layoutX="10.0" layoutY="110.0" prefHeight="154.0" prefWidth="771.0" spacing="30.0">
          <children>
             <Label text="Grado" />
-            <ComboBox fx:id="cbElegirGrado" onAction="#seleccionarGrado" prefHeight="29.0" prefWidth="181.0" promptText="Selecciona el grado" />
+            <ComboBox fx:id="cbElegirGrado" onAction="#seleccionarGrado" prefHeight="29.0" prefWidth="181.0" />
             <VBox prefHeight="54.0" prefWidth="157.0">
                <children>
-                  <Label text="Ediciones">
+                  <Label fx:id="lbEdiciones" text="Ediciones">
                      <VBox.margin>
                         <Insets bottom="10.0" />
                      </VBox.margin>
                   </Label>
-                  <ComboBox fx:id="cbEdiciones" prefHeight="28.0" prefWidth="178.0">
+                  <TextField fx:id="tfEdicionesCiclo">
                      <VBox.margin>
-                        <Insets bottom="30.0" left="20.0" />
+                        <Insets bottom="20.0" />
                      </VBox.margin>
-                  </ComboBox>
+                  </TextField>
                   <RadioButton fx:id="check1ano" mnemonicParsing="false" text="1 año">
                      <VBox.margin>
                         <Insets bottom="5.0" />
@@ -74,12 +74,12 @@
             </VBox>
             <VBox prefHeight="54.0" prefWidth="228.0">
                <children>
-                  <Label text="Modalidad">
+                  <Label fx:id="lbModalidad" text="Modalidad">
                      <VBox.margin>
                         <Insets bottom="10.0" />
                      </VBox.margin>
                   </Label>
-                  <ComboBox fx:id="cbModalidad" prefHeight="28.0" prefWidth="194.0" />
+                  <ComboBox fx:id="cbModalidad" onAction="#seleccionarModalidad" prefHeight="28.0" prefWidth="194.0" />
                </children>
                <HBox.margin>
                   <Insets left="30.0" />

@@ -28,7 +28,7 @@ public class GradoD extends Grado {
     }
     @Override
     public String toString(){
-        return super.toString() + " - " + modalidad;
+        return super.toString() + " - "+ numAnios + "año(s) - " + modalidad;
     }
 
 }

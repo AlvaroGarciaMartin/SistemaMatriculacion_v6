@@ -20,7 +20,7 @@ public class Alumno {
   private String telefono;
   private String correo;
   private String dni;
-  private static LocalDate fechaNacimiento;
+  private LocalDate fechaNacimiento;
   private String nia;
 
 //constructor Alumno CON PARAMETROS
@@ -240,7 +240,7 @@ public Alumno(String nombre, String telefono, String correo, String dni, LocalDa
     }
   }
 
-  public static LocalDate getFechaNacimiento() {
+  public LocalDate getFechaNacimiento() {
 
     return fechaNacimiento;
   }

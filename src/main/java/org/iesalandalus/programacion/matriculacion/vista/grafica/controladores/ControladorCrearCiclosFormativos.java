@@ -19,20 +19,24 @@ public class ControladorCrearCiclosFormativos {
     @FXML private TextField tfHorasCiclo;
     @FXML private TextField tfNombreCiclo;
     @FXML private TextField tfcodigoCiclo;
-    @FXML private ComboBox<?> cbEdiciones;
+    @FXML private TextField tfEdicionesCiclo;
     @FXML private ComboBox<Modalidad> cbModalidad;
     @FXML private RadioButton check1ano;
     @FXML private RadioButton check2anos;
     @FXML private RadioButton check3anos;
+    @FXML private Label lbEdiciones;
+    @FXML private Label lbModalidad;
 
 
     @FXML
     public void initialize() {
 
         cargarOpcionesGrados();
+        cargarModalidad();
+
 
     }
-
+// Opciones tipos de grado
     private ObservableList<TiposGrado> obsListadoOpcionesChoice=
             FXCollections.observableArrayList(TiposGrado.values());
 
@@ -44,11 +48,32 @@ public class ControladorCrearCiclosFormativos {
     private void modificadoComboBoxListadoOpciones(TiposGrado oldValue, TiposGrado newValue) {
         System.out.println(oldValue+" -> "+newValue);
     }
-
     @FXML
     void seleccionarGrado(ActionEvent event) {
         System.out.println(cbElegirGrado.getValue());
     }
+
+    //fin opciones tipos de grado
+    //Opciones modalidad
+
+    private ObservableList<Modalidad> obsListadoModalidadChoice=
+            FXCollections.observableArrayList(Modalidad.values());
+
+    private void cargarModalidad() {
+        cbModalidad.setItems(obsListadoModalidadChoice);
+        cbModalidad.getSelectionModel().selectedItemProperty().addListener((observable,oldValue,newValue)->modificadoComboBoxListadoOpciones(oldValue,newValue));
+    }
+
+    private void modificadoComboBoxListadoOpciones(Modalidad oldValue, Modalidad newValue) {
+        System.out.println(oldValue+" -> "+newValue);
+    }
+
+    @FXML
+    void seleccionarModalidad(ActionEvent event) {
+        System.out.println(cbModalidad.getValue());
+    }
+
+    //fin opciones modalidad
 
     @FXML
     void CrearCicloFormativo(ActionEvent event) {
@@ -59,7 +84,12 @@ public class ControladorCrearCiclosFormativos {
             int codigo = Integer.parseInt(tfcodigoCiclo.getText());
             String familia = tfFamiliaCiclo.getText();
             TiposGrado tg = cbElegirGrado.getSelectionModel().getSelectedItem();
-            int anios;
+            String nombre = tfNombreCiclo.getText();
+            int ediciones = Integer.parseInt(tfEdicionesCiclo.getText());
+            Modalidad modalidad = cbModalidad.getSelectionModel().getSelectedItem();
+            Grado grado = null;
+
+            int anios = 0;
             if (check1ano.isSelected()){
                 anios = 1;
             }
@@ -69,16 +99,17 @@ public class ControladorCrearCiclosFormativos {
             if (check3anos.isSelected()){
                 anios = 3;
             }
-            Grado grado = null;
+
+
             if(tg.toString().equals("Grado D")){
-                 grado = new GradoD("Grado D", 2, Modalidad.PRESENCIAL);
+                 grado = new GradoD(nombre, anios, modalidad);
             }else{
-                grado = new GradoE("Grado E", 1, 1);
+                grado = new GradoE(nombre, anios, ediciones);
             }
-            String nombre = tfNombreCiclo.getText();
+
             int horas = Integer.parseInt(tfHorasCiclo.getText());
 
-            if (codigo < 0 || codigo > 9999 || familia.trim().isBlank() || grado == null || nombre.trim().isBlank() || horas < 0) {
+            if (codigo < 0 || codigo > 9999 || familia.trim().isBlank() || modalidad == null || ediciones < 1 || anios == 0 || grado == null || nombre.trim().isBlank() || horas < 0) {
                return;
             }
             CicloFormativo ciclo = new CicloFormativo(codigo, familia, grado, nombre, horas);
@@ -90,26 +121,30 @@ public class ControladorCrearCiclosFormativos {
         }
     }
 
-//    `    private void modificadoListaGrados(String oldValue, String newValue)
+//        private void modificadoListaGrados(String oldValue, String newValue)
 //    {
 //        System.out.println("Modificado valor del ListView");
 //        System.out.println("El nuevo valor seleccionado es: " + newValue);
-
+//
 //        if (newValue.equals("Grado D")) {
-//            lbAnios.setVisible(true);
-//            tfAnios.setVisible(true);
-//            lbModaidad.setVisible(true);
+//            lbModalidad.setVisible(true);
 //            cbModalidad.setVisible(true);
 //            lbEdiciones.setVisible(false);
-//            tfEdiciones.setVisible(false);
+//            tfEdicionesCiclo.setVisible(false);
+//              check1ano.setVisible(false);
+//              check2anos.setVisible(true);
+//              check3anos.setVisible(true);
 //        } else if (newValue.equals("Grado E")) {
 //            lbEdiciones.setVisible(true);
-//            tfEdiciones.setVisible(true);
-//            lbModaidad.setVisible(false);
+//            tfEdicionesCiclo.setVisible(true);
+//            lbModalidad.setVisible(false);
 //            cbModalidad.setVisible(false);
-//            lbAnios.setVisible(true);
-//            tfAnios.setVisible(true);
+//            check1ano.setVisible(true);
+//            check2anos.setVisible(false);
+//            check3anos.setVisible(false);
 //        }
 //    }
+
+
 
 }

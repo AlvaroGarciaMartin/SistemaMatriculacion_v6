@@ -6,7 +6,9 @@ import org.iesalandalus.programacion.matriculacion.modelo.negocio.mysql.utilidad
 
 import javax.naming.OperationNotSupportedException;
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 
@@ -40,6 +42,7 @@ public class Alumnos implements IAlumnos {
         MySQL.cerrarConexion();
     }
 
+    @Override
     public ArrayList<Alumno> get() throws SQLException {
         ArrayList<Alumno> auxiliar = new ArrayList<>();
         String consulta = """
@@ -48,19 +51,31 @@ public class Alumnos implements IAlumnos {
                  , correo
                  , dni
                  , fechaNacimiento 
-                 FROM alumno""";
+                 FROM alumno
+                 ORDER BY dni DESC""";
 
         Statement sentencia = conexion.createStatement();
         ResultSet resultado = sentencia.executeQuery(consulta);
 
         while (resultado.next()) {
+            String nombre = resultado.getString("nombre");
+            String telefono = resultado.getString("telefono");
+            String correo = resultado.getString("correo");
+            String dni = resultado.getString("dni");
+            LocalDate fechaNacimiento = resultado.getDate("fechaNacimiento").toLocalDate();
             Alumno a = new Alumno(
-                    resultado.getString("nombre"),
-                    resultado.getString("telefono"),
-                    resultado.getString("correo"),
-                    resultado.getString("dni"),
-                    resultado.getDate("fechaNacimiento").toLocalDate()
+                    nombre,
+                    telefono,
+                    correo,
+                    dni,
+                    fechaNacimiento
+//                    resultado.getString("nombre"),
+//                    resultado.getString("telefono"),
+//                    resultado.getString("correo"),
+//                    resultado.getString("dni"),
+//                    resultado.getDate("fechaNacimiento").toLocalDate()
             );
+            System.out.println(a);
             auxiliar.add(a);
         }
         //return copiaProfundaAlumnos();

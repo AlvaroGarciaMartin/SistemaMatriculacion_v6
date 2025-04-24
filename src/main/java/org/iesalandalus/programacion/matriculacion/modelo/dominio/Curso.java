@@ -20,6 +20,6 @@ public enum Curso {
 
     @Override
     public String toString() {
-        return "Curso seleccionado:" + cadenaAMostrar;
+        return cadenaAMostrar;
     }
 }

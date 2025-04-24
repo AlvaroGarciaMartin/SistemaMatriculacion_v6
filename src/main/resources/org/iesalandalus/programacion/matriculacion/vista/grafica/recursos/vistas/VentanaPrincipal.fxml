@@ -117,13 +117,13 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="238.0" prefWidth="797.0">
                      <children>
-                        <TableView fx:id="tablCentralBusquedasAlumno" prefHeight="235.0" prefWidth="863.0">
+                        <TableView fx:id="tablCentralBusquedasAlumno" prefHeight="294.0" prefWidth="863.0">
                            <columns>
-                              <TableColumn fx:id="tablColum1" prefWidth="105.60001373291016" text="Nombre" />
-                              <TableColumn fx:id="tablColum2" prefWidth="83.20001220703125" text="Telefono" />
-                              <TableColumn fx:id="tablColum3" prefWidth="75.20001220703125" text="Correo" />
-                              <TableColumn fx:id="tablColum4" prefWidth="98.4000244140625" text="Dni" />
-                              <TableColumn fx:id="tablColum5" prefWidth="143.99990844726562" text="Fecha de Nacimiento" />
+                              <TableColumn fx:id="tablColum1" prefWidth="222.39997518062592" text="Nombre" />
+                              <TableColumn fx:id="tablColum2" prefWidth="132.80001831054688" text="Telefono" />
+                              <TableColumn fx:id="tablColum3" prefWidth="167.99993896484375" text="Correo" />
+                              <TableColumn fx:id="tablColum4" prefWidth="145.5999755859375" text="Dni" />
+                              <TableColumn fx:id="tablColum5" prefWidth="194.39996337890625" text="Fecha de Nacimiento" />
                            </columns>
                         </TableView>
                      </children>
@@ -134,17 +134,13 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView layoutX="-3.0" prefHeight="238.0" prefWidth="866.0">
+                        <TableView fx:id="tablCiclosFormativos" layoutX="-3.0" prefHeight="294.0" prefWidth="866.0">
                           <columns>
                             <TableColumn fx:id="columCicloCodigo" prefWidth="57.59998178482056" text="Codigo" />
                             <TableColumn fx:id="columCicloFamPro" prefWidth="174.40003967285156" text="Familia Profesional" />
-                              <TableColumn fx:id="columCicloGrado" prefWidth="83.199951171875" text="Tipo Grado" />
-                              <TableColumn fx:id="columCicloNombre" prefWidth="96.0" text="Nombre Ciclo" />
-                              <TableColumn fx:id="columCicloHoras" prefWidth="57.60003662109375" text="Horas" />
-                              <TableColumn fx:id="columCicloNombreGrado" prefWidth="117.59991455078125" text="Nombre Grado" />
-                              <TableColumn fx:id="columCicloAnios" prefWidth="77.5999755859375" text="Años Grado" />
-                              <TableColumn fx:id="columCicloModalidad" prefWidth="78.39990234375" text="Modalidad" />
-                              <TableColumn fx:id="columCicloNumEdiciones" prefWidth="126.40008544921875" text="Numero Ediciones" />
+                              <TableColumn fx:id="columCicloGrado" prefWidth="280.7999267578125" text="Información del Grado" />
+                              <TableColumn fx:id="columCicloNombre" prefWidth="230.39996337890625" text="Nombre Ciclo" />
+                              <TableColumn fx:id="columCicloHoras" prefWidth="121.60007324218748" text="Horas" />
                           </columns>
                         </TableView>
                      </children>
@@ -177,9 +173,9 @@
                         <TableView prefHeight="297.0" prefWidth="862.0">
                           <columns>
                             <TableColumn fx:id="columIdMatricula" prefWidth="75.0" text="Id Matricula" />
-                            <TableColumn fx:id="cokumCursoAcademico" prefWidth="120.80003356933594" text="Curso Academico" />
+                            <TableColumn fx:id="columCursoAcademico" prefWidth="120.80003356933594" text="Curso Academico" />
                               <TableColumn fx:id="columFechaMatriculacion" prefWidth="132.0" text="Fecha Matriculacion" />
-                              <TableColumn fx:id="columDniMatricula" prefWidth="113.5999755859375" text="Fecha Anulacion" />
+                              <TableColumn fx:id="columFechaAnulacion" prefWidth="113.5999755859375" text="Fecha Anulacion" />
                               <TableColumn fx:id="columDniMatricula" prefWidth="122.39996337890625" text="DNI" />
                           </columns>
                         </TableView>

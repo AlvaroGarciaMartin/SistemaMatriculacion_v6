@@ -29,6 +29,6 @@ public class GradoE extends Grado{
     }
     @Override
     public String toString(){
-        return super.toString() + " - " + numEdiciones + "ediciones";
+        return super.toString() + " - "+ numAnios + "año(s) - " + numEdiciones + "ediciones";
     }
 }

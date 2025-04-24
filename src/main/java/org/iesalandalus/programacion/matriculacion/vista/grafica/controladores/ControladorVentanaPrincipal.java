@@ -8,12 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToolBar;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -22,7 +17,8 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import org.iesalandalus.programacion.matriculacion.modelo.dominio.Alumno;
+import org.iesalandalus.programacion.matriculacion.modelo.dominio.*;
+import org.iesalandalus.programacion.matriculacion.modelo.negocio.mysql.Alumnos;
 import org.iesalandalus.programacion.matriculacion.vista.grafica.VistaGrafica;
 import org.iesalandalus.programacion.matriculacion.vista.grafica.recursos.LocalizadorRecursos;
 import org.iesalandalus.programacion.matriculacion.vista.grafica.utilidades.Dialogos;
@@ -33,6 +29,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CyclicBarrier;
 
 public class ControladorVentanaPrincipal {
 
@@ -45,12 +42,17 @@ public class ControladorVentanaPrincipal {
     @FXML private ComboBox<String> cbSelectorBusqueda;
     @FXML private HBox hbMenuBusqueda;
     @FXML private TableView<Alumno> tablCentralBusquedasAlumno;
+    @FXML private TableView<CicloFormativo> tablCiclosFormativos;
+    @FXML private TableView<Asignatura> tablAsignaturasMostrar;
+    @FXML private TableView<Matricula> tablMatriculasMostrar;
+    // variables tabla alumno
     @FXML private TableColumn<Alumno, String> tablColum1;
     @FXML private TableColumn<Alumno, Integer> tablColum2;
     @FXML private TableColumn<Alumno, String> tablColum3;
     @FXML private TableColumn<Alumno, String> tablColum4;
-    @FXML private TableColumn<Alumno, String> tablColum5;
-    //@FXML private TableColumn<Alumno, LocalDate> tablColum5;
+    @FXML private TableColumn<Alumno, LocalDate> tablColum5;
+    // fin variables tabla alumno
+
     @FXML private TableView<?> tablFiltro;
     @FXML private TableColumn<?, ?> tablFiltroColum1;
     @FXML private TableColumn<?, ?> tablFiltroColum2;
@@ -61,55 +63,57 @@ public class ControladorVentanaPrincipal {
 //    @FXML private VBox vbBotonesPrincipales;
 //    @FXML private VBox vbDesplegables;
     // variables tabla ciclo formativo
-    @FXML private TableColumn<?, ?> columCicloAnios;
-    @FXML private TableColumn<?, ?> columCicloCodigo;
-    @FXML private TableColumn<?, ?> columCicloFamPro;
-    @FXML private TableColumn<?, ?> columCicloHoras;
-    @FXML private TableColumn<?, ?> columCicloNombre;
-    @FXML private TableColumn<?, ?> columCicloNombreGrado;
-    @FXML private TableColumn<?, ?> columCicloGrado;
-    @FXML private TableColumn<?, ?> columCicloModalidad;
-    @FXML private TableColumn<?, ?> columCicloNumEdiciones;
-    // fin variables ciclo formativo
-    @FXML private TableColumn<?, ?> ColumNombreAsignatura;
-
-    @FXML private TableColumn<?, ?> cokumCursoAcademico;
-
-    @FXML private TableColumn<?, ?> columCodigoAsignatura;
-
-    @FXML private TableColumn<?, ?> columCodigoCiclo;
-
-    @FXML private TableColumn<?, ?> columCurso;
-
-    @FXML private TableColumn<?, ?> columDniMatricula;
-
-    @FXML private TableColumn<?, ?> columEspecialidad;
-
-    @FXML private TableColumn<?, ?> columFechaMatriculacion;
-
-    @FXML private TableColumn<?, ?> columHorasAnuales;
-
-    @FXML private TableColumn<?, ?> columHorasDesdoble;
-
-    @FXML private TableColumn<?, ?> columIdMatricula;
+//    @FXML private TableColumn<CicloFormativo, Integer> columCicloAnios;
+    @FXML private TableColumn<CicloFormativo, Integer> columCicloCodigo;
+    @FXML private TableColumn<CicloFormativo, String> columCicloFamPro;
+    @FXML private TableColumn<CicloFormativo, Integer> columCicloHoras;
+    @FXML private TableColumn<CicloFormativo, String> columCicloNombre;
+//    @FXML private TableColumn<CicloFormativo, String> columCicloNombreGrado;
+    @FXML private TableColumn<CicloFormativo, String> columCicloGrado;
+//    @FXML private TableColumn<CicloFormativo, String> columCicloModalidad;
+//    @FXML private TableColumn<CicloFormativo, Integer> columCicloNumEdiciones;
+// fin variables ciclo formativo
+// variables tabla asignatura
+    @FXML private TableColumn<Asignatura, String> columCodigoAsignatura;
+    @FXML private TableColumn<Asignatura, String> ColumNombreAsignatura;
+    @FXML private TableColumn<Asignatura, Integer> columHorasAnuales;
+    @FXML private TableColumn<Curso, String> columCurso;
+    @FXML private TableColumn<Asignatura, Integer> columHorasDesdoble;
+    @FXML private TableColumn<EspecialidadProfesorado, String> columEspecialidad;
+    @FXML private TableColumn<Asignatura, Integer> columCodigoCiclo;
+ // fin variables tabla asignatura
+// variables tabla matricula
+    @FXML private TableColumn<Matricula, Integer> columIdMatricula;
+    @FXML private TableColumn<Matricula, String> columCursoAcademico;
+    @FXML private TableColumn<Matricula, LocalDate> columFechaMatriculacion;
+    @FXML private TableColumn<Matricula, LocalDate> columFechaAnulacion;
+    @FXML private TableColumn<Matricula, String> columDniMatricula;
+// fin variables tabla matricula
 
     @FXML private ToolBar tbBotonesPrincipales;
-
     @FXML private TextField tfBusqueda;
-
     @FXML private VBox vbBotonesPrincipales;
-
     @FXML private VBox vbDesplegables;
 
+//observable alumnos
     private List<Alumno> coleccionAlumnos = new ArrayList<>();
     private ObservableList<Alumno> alumnosObservable = FXCollections.observableArrayList();
+//observable ciclo formativo
+    private List<CicloFormativo> coleccionCicloFormativo = new ArrayList<>();
+    private ObservableList<CicloFormativo> cicloFormativoObservable = FXCollections.observableArrayList();
+//observable asignatura
+    private List<Asignatura> coleccionAsignaturas = new ArrayList<>();
+    private ObservableList<Asignatura> asignaturasObservable = FXCollections.observableArrayList();
+//observable matricula
+    private List<Matricula> coleccionMatriculas = new ArrayList<>();
+    private ObservableList<Matricula> matriculasObservable = FXCollections.observableArrayList();
 
     @FXML
     private void initialize() {
         try {
             mostrarTablaAlumno();
             mostrarTablaCiclosFormativos();
-//            mostrarTablaAsignaturas();
+            mostrarTablaAsignaturas();
 //            mostrarTablaMatriculas();
 
             tablCentralBusquedasAlumno.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
@@ -258,10 +262,21 @@ public class ControladorVentanaPrincipal {
             tablColum3.setCellValueFactory(new PropertyValueFactory<>("correo"));
             tablColum4.setCellValueFactory(new PropertyValueFactory<>("dni"));
             //tablColum5.setCellValueFactory(new PropertyValueFactory<Alumno, LocalDate>("fechaNacimiento"));
-            //tablColum5.setCellValueFactory(new PropertyValueFactory<>("fechaNacimiento"));
+            tablColum5.setCellValueFactory(new PropertyValueFactory<>("fechaNacimiento"));
 
-            tablColum5.setCellValueFactory(alumno -> new SimpleStringProperty(alumno.getValue().getFechaNacimiento().format(DateTimeFormatter.ofPattern(Alumno.FORMATO_FECHA))));
+            // Configurar la fecha en formato español
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            tablColum5.setCellFactory(column -> new TableCell<Alumno, LocalDate>() {
+                @Override
+                protected void updateItem(LocalDate date, boolean empty) {
+                    super.updateItem(date, empty);
+                    setText(empty || date == null ? "" : date.format(formatter));
+                }
+            });
 
+            //tablColum5.setCellValueFactory(alumno -> new SimpleStringProperty(alumno.getValue().getFechaNacimiento().format(DateTimeFormatter.ofPattern(Alumno.FORMATO_FECHA))));
+            // Cargar los datos en la tabla Alumnos
+            tablCentralBusquedasAlumno.setItems(FXCollections.observableArrayList(obtenerListaAlumnos()));
             tablCentralBusquedasAlumno.setItems(alumnosObservable);
             coleccionAlumnos = new ArrayList<Alumno>(VistaGrafica.getInstancia().getControlador().getAlumnos());
             alumnosObservable.setAll(coleccionAlumnos);
@@ -277,58 +292,62 @@ public class ControladorVentanaPrincipal {
 
             columCicloCodigo.setCellValueFactory(new PropertyValueFactory<>("codigo"));
             columCicloFamPro.setCellValueFactory(new PropertyValueFactory<>("familiaProfesional"));
-            columCicloGrado.setCellValueFactory(new PropertyValueFactory<>("correo"));
+            columCicloGrado.setCellValueFactory(new PropertyValueFactory<>("grado"));
             columCicloNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
             columCicloHoras.setCellValueFactory(new PropertyValueFactory<>("horas"));
-            columCicloNombreGrado.setCellValueFactory(new PropertyValueFactory<>("nombreGrado"));
-            columCicloAnios.setCellValueFactory(new PropertyValueFactory<>("numAniosGrado"));
-            columCicloModalidad.setCellValueFactory(new PropertyValueFactory<>("modalidad"));
-            columCicloNumEdiciones.setCellValueFactory(new PropertyValueFactory<>("numEdiciones"));
+//            columCicloNombreGrado.setCellValueFactory(new PropertyValueFactory<>("nombreGrado"));
+//            columCicloAnios.setCellValueFactory(new PropertyValueFactory<>("numAniosGrado"));
+//            columCicloModalidad.setCellValueFactory(new PropertyValueFactory<>("modalidad"));
+//            columCicloNumEdiciones.setCellValueFactory(new PropertyValueFactory<>("numEdiciones"));
 
 
-//            tablCentralBusquedasAlumno.setItems(alumnosObservable);
-//            coleccionAlumnos = new ArrayList<Alumno>(VistaGrafica.getInstancia().getControlador().getAlumnos());
-//            alumnosObservable.setAll(coleccionAlumnos);
+            tablCiclosFormativos.setItems(cicloFormativoObservable);
+            coleccionCicloFormativo = new ArrayList<CicloFormativo>(VistaGrafica.getInstancia().getControlador().getCicloFormativos());
+            cicloFormativoObservable.setAll(coleccionCicloFormativo);
 //
-//            tablCentralBusquedasAlumno.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> muestraPersonaSeleccionada(newValue));
+//            tablCiclosFormativos.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> muestraPersonaSeleccionada(newValue));
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
     private void mostrarTablaAsignaturas() {
-//        try {
-//            tablColum1.setCellValueFactory(new PropertyValueFactory<Alumno, String>("nombre"));
-//            tablColum2.setCellValueFactory(new PropertyValueFactory<Alumno, Integer>("telefono"));
-//            tablColum3.setCellValueFactory(new PropertyValueFactory<Alumno, String>("correo"));
-//            tablColum4.setCellValueFactory(new PropertyValueFactory<Alumno, String>("dni"));
-//            tablColum4.setCellValueFactory(alumno -> new SimpleStringProperty(alumno.getValue().getFechaNacimiento().format(DateTimeFormatter.ofPattern(Alumno.FORMATO_FECHA))));
-//
-//            tablCentralBusquedasAlumno.setItems(alumnosObservable);
-//            coleccionAlumnos = new ArrayList<Alumno>(VistaGrafica.getInstancia().getControlador().getAlumnos());
-//            alumnosObservable.setAll(coleccionAlumnos);
-//
-//            tablCentralBusquedasAlumno.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> muestraPersonaSeleccionada(newValue));
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+        try {
+            columCodigoAsignatura.setCellValueFactory(new PropertyValueFactory<Asignatura, String>("codigo"));
+            ColumNombreAsignatura.setCellValueFactory(new PropertyValueFactory<Asignatura, String>("nombre"));
+            columHorasAnuales.setCellValueFactory(new PropertyValueFactory<Asignatura, Integer>("horasAnuales"));
+            columCurso.setCellValueFactory(new PropertyValueFactory<Curso, String>("curso"));
+            columHorasDesdoble.setCellValueFactory(new PropertyValueFactory<Asignatura, Integer>("horasDesdoble"));
+            columEspecialidad.setCellValueFactory(new PropertyValueFactory<EspecialidadProfesorado, String>("especialidadProfesorado"));
+            columCodigoCiclo.setCellValueFactory(new PropertyValueFactory<Asignatura, Integer>("codigoCicloFormativo"));
+
+            tablAsignaturasMostrar.setItems(asignaturasObservable);
+            coleccionAsignaturas = new ArrayList<Asignatura>(VistaGrafica.getInstancia().getControlador().getAsignaturas());
+            asignaturasObservable.setAll(coleccionAsignaturas);
+
+           // tablCentralBusquedasAlumno.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> muestraPersonaSeleccionada(newValue));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     private void mostrarTablaMatriculas() {
-//        try {
-//            tablColum1.setCellValueFactory(new PropertyValueFactory<Alumno, String>("nombre"));
-//            tablColum2.setCellValueFactory(new PropertyValueFactory<Alumno, Integer>("telefono"));
-//            tablColum3.setCellValueFactory(new PropertyValueFactory<Alumno, String>("correo"));
-//            tablColum4.setCellValueFactory(new PropertyValueFactory<Alumno, String>("dni"));
-//            tablColum4.setCellValueFactory(alumno -> new SimpleStringProperty(alumno.getValue().getFechaNacimiento().format(DateTimeFormatter.ofPattern(Alumno.FORMATO_FECHA))));
-//
-//            tablCentralBusquedasAlumno.setItems(alumnosObservable);
-//            coleccionAlumnos = new ArrayList<Alumno>(VistaGrafica.getInstancia().getControlador().getAlumnos());
-//            alumnosObservable.setAll(coleccionAlumnos);
-//
-//            tablCentralBusquedasAlumno.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> muestraPersonaSeleccionada(newValue));
-//        } catch (Exception e) {
-//            e.printStackTrace();
-        }
+        try {
+            columIdMatricula.setCellValueFactory(new PropertyValueFactory<Matricula, Integer>("idMatricula"));
+            columCursoAcademico.setCellValueFactory(new PropertyValueFactory<Matricula, String>("cursoAcademico"));
+            columFechaMatriculacion.setCellValueFactory(new PropertyValueFactory<Matricula, LocalDate>("fechaMatriculacion"));
+            //columFechaAnulacion.setCellValueFactory(matricula -> new SimpleStringProperty(matricula.getValue().getFechaMatriculacion().format(DateTimeFormatter.ofPattern(Matricula.FORMATO_FECHA))));
+            columFechaAnulacion.setCellValueFactory(new PropertyValueFactory<Matricula, LocalDate>("fechaAnulacion"));
+            columDniMatricula.setCellValueFactory(new PropertyValueFactory<Matricula, String>("dni"));
 
+
+            tablMatriculasMostrar.setItems(matriculasObservable);
+            coleccionMatriculas = new ArrayList<Matricula>(VistaGrafica.getInstancia().getControlador().getMatriculas());
+            matriculasObservable.setAll(coleccionMatriculas);
+
+//           tablCentralBusquedasAlumno.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> muestraPersonaSeleccionada(newValue));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
   private void muestraPersonaSeleccionada(Object newValue) {
 
@@ -339,7 +358,16 @@ public class ControladorVentanaPrincipal {
 
 
   }
-
+    // Métodos para obtener listas de objetos desde la base de datos
+    List<Alumno> obtenerListaAlumnos() {
+        Alumnos alumnosBD = Alumnos.getInstancia();
+        try {
+            return alumnosBD.get(); // Obtiene la lista de alumnos desde la base de datos
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return List.of(); // Devuelve una lista vacía en caso de error
+        }
+    }
 }
 
 

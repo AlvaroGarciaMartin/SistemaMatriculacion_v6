@@ -10,56 +10,69 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
-import org.iesalandalus.programacion.matriculacion.modelo.dominio.EspecialidadProfesorado;
-import org.iesalandalus.programacion.matriculacion.modelo.dominio.TiposGrado;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import org.iesalandalus.programacion.matriculacion.modelo.dominio.*;
+import org.iesalandalus.programacion.matriculacion.vista.grafica.VistaGrafica;
+import org.iesalandalus.programacion.matriculacion.vista.grafica.utilidades.Dialogos;
 
 public class ControladorCrearAsignaturas {
 
-    @FXML
-    private Button btnCrearAsignatura;
+    @FXML private Button btnCrearAsignatura;
+    @FXML private ComboBox<EspecialidadProfesorado> cbEspecialidadProfesor;
+    @FXML private HBox crearAsignaturas;
+    @FXML private TextField tfCodigoAsignatura;
+    @FXML private TextField tfHorasAnuales;
+    @FXML private TextField tfHorasDesdoble;
+    @FXML private TextField tfNombreAsignatura;
+    @FXML private TextField tfCodigoCicloAsignatura;
+    @FXML private ComboBox<Curso> cbCursoAsignatura;
+    @FXML private TextField tfNhorasDesdoble;
 
-    @FXML
-    private ComboBox<EspecialidadProfesorado> cbEspecialidadProfesor;
 
-    @FXML
-    private HBox crearAsignaturas;
 
-    @FXML
-    private TextField tfCodigoAsignatura;
 
-    @FXML
-    private Label tfCodigoCicloAsignatura;
 
-    @FXML
-    private TextField tfCurso;
+    private ObservableList<EspecialidadProfesorado> obsListadoOpcionesChoice=
+            FXCollections.observableArrayList(EspecialidadProfesorado.values());
+    private ObservableList<Curso> obsListadoCursoChoice=
+            FXCollections.observableArrayList(Curso.values());
 
-    @FXML
-    private TextField tfHorasAnuales;
 
-    @FXML
-    private TextField tfHorasDesdoble;
-
-    @FXML
-    private TextField tfNombreAsignatura;
-
-    @FXML
-    void seleccionarEspecialidad(ActionEvent event) {
-        System.out.println(cbEspecialidadProfesor.getValue());
-    }
-
-//    @FXML
-//    void crearAsignaturas(ActionEvent event) {
-//
-//    }
 
     public void initialize() {
 
         cargarEspecialidadProfesor();
+        cargarCurso();
+
 
     }
-    private ObservableList<EspecialidadProfesorado> obsListadoOpcionesChoice=
-            FXCollections.observableArrayList(EspecialidadProfesorado.values());
+    @FXML
+    void crearAsignaturas(ActionEvent event) {
+        Stage escenarioAsignaturas = (Stage) btnCrearAsignatura.getScene().getWindow();
+        try{
+            String codigoAsignatura = tfCodigoAsignatura.getText();
+            String nombreAsignatura = tfNombreAsignatura.getText();
+            int horasAnuales = Integer.parseInt(tfHorasAnuales.getText());
+            int horasDesdoble = Integer.parseInt(tfHorasDesdoble.getText());
+            CicloFormativo codigoCicloAsignatura = VistaGrafica.getInstancia().getControlador().buscar(new CicloFormativo(Integer.parseInt(tfCodigoCicloAsignatura.getText()), "null", new GradoD("null", 2, Modalidad.PRESENCIAL), "null", 120));
+            Curso cursoAsignatura = cbCursoAsignatura.getValue();
+            EspecialidadProfesorado especialidadProfesorado = cbEspecialidadProfesor.getValue();
+            Asignatura asignatura = new Asignatura(codigoAsignatura,nombreAsignatura,horasAnuales,cursoAsignatura,horasDesdoble,especialidadProfesorado,codigoCicloAsignatura);
+            //controlador.insertar(alumno);
+            VistaGrafica.getInstancia().getControlador().insertar(asignatura);
+            Dialogos.mostrarDialogoInformacion("Asignatura insertada","Asignatura insertada correctamente");
+            escenarioAsignaturas.close();
 
+        }catch (Exception e) {
+            Dialogos.mostrarDialogoError("Error al insertar Asignatura",e.getMessage());
+        }
+
+    }
+
+    @FXML void seleccionarEspecialidad(ActionEvent event) {
+        System.out.println(cbEspecialidadProfesor.getValue());
+    }
     private void cargarEspecialidadProfesor() {
         cbEspecialidadProfesor.setItems(obsListadoOpcionesChoice);
         cbEspecialidadProfesor.getSelectionModel().selectedItemProperty().addListener((observable,oldValue,newValue)->modificadoComboBoxListadoOpciones(oldValue,newValue));
@@ -67,5 +80,17 @@ public class ControladorCrearAsignaturas {
     private void modificadoComboBoxListadoOpciones(EspecialidadProfesorado oldValue, EspecialidadProfesorado newValue) {
         System.out.println(oldValue+" -> "+newValue);
     }
+
+    @FXML void seleccionarCurso(ActionEvent event) {
+        System.out.println(cbCursoAsignatura.getValue());
+    }
+    private void cargarCurso() {
+        cbCursoAsignatura.setItems(obsListadoCursoChoice);
+        cbCursoAsignatura.getSelectionModel().selectedItemProperty().addListener((observable,oldValue,newValue)->modificadoComboBoxListadoCurso(oldValue,newValue));
+    }
+    private void modificadoComboBoxListadoCurso(Curso oldValue, Curso newValue) {
+        System.out.println(oldValue+" -> "+newValue);
+    }
+
 
 }
