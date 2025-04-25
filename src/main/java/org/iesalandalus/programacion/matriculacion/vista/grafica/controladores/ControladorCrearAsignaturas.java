@@ -13,6 +13,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.*;
+import org.iesalandalus.programacion.matriculacion.modelo.negocio.mysql.CiclosFormativos;
 import org.iesalandalus.programacion.matriculacion.vista.grafica.VistaGrafica;
 import org.iesalandalus.programacion.matriculacion.vista.grafica.utilidades.Dialogos;
 
@@ -54,10 +55,21 @@ public class ControladorCrearAsignaturas {
             String codigoAsignatura = tfCodigoAsignatura.getText();
             String nombreAsignatura = tfNombreAsignatura.getText();
             int horasAnuales = Integer.parseInt(tfHorasAnuales.getText());
-            int horasDesdoble = Integer.parseInt(tfHorasDesdoble.getText());
+            int horasDesdoble = Integer.parseInt(tfNhorasDesdoble.getText());
             CicloFormativo codigoCicloAsignatura = VistaGrafica.getInstancia().getControlador().buscar(new CicloFormativo(Integer.parseInt(tfCodigoCicloAsignatura.getText()), "null", new GradoD("null", 2, Modalidad.PRESENCIAL), "null", 120));
             Curso cursoAsignatura = cbCursoAsignatura.getValue();
             EspecialidadProfesorado especialidadProfesorado = cbEspecialidadProfesor.getValue();
+            if (horasAnuales<0 || horasAnuales>300){
+                Dialogos.mostrarDialogoError("Error al insertar Asignatura","Horas anuales incorrectas");
+                return;
+            }
+            if(horasDesdoble<0 || horasDesdoble>6){
+                Dialogos.mostrarDialogoError("Error al insertar Asignatura","Horas desdoble incorrectas");
+                return;
+            }
+
+
+
             Asignatura asignatura = new Asignatura(codigoAsignatura,nombreAsignatura,horasAnuales,cursoAsignatura,horasDesdoble,especialidadProfesorado,codigoCicloAsignatura);
             //controlador.insertar(alumno);
             VistaGrafica.getInstancia().getControlador().insertar(asignatura);

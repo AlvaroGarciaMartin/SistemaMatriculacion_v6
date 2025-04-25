@@ -125,7 +125,7 @@ public class Asignatura {
 
     public void setCicloFormativo(CicloFormativo cicloFormativo) {
         if (cicloFormativo == null) {
-            throw new NullPointerException("ERROR: El ciclo formativo de una asignatura no puede ser nulo.");
+            throw new NullPointerException("ERROR: El ciclo formativo de una asignatura no puede ser nulo o distinto a los existentes.");
         }
         this.cicloFormativo = cicloFormativo;
     }

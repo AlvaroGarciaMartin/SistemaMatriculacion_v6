@@ -147,11 +147,11 @@
                   </AnchorPane>
             </content>
           </Tab>
-            <Tab text="Asignaturas">
+            <Tab fx:id="tabAsignaturas" text="Asignaturas">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView layoutY="-2.0" prefHeight="243.0" prefWidth="865.0">
+                        <TableView fx:id="tablAsignaturasMostrar" layoutY="-2.0" prefHeight="243.0" prefWidth="865.0">
                           <columns>
                             <TableColumn fx:id="columCodigoAsignatura" prefWidth="75.0" text="Codigo" />
                             <TableColumn fx:id="ColumNombreAsignatura" prefWidth="75.0" text="Nombre" />
@@ -170,7 +170,7 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView prefHeight="297.0" prefWidth="862.0">
+                        <TableView fx:id="tablMatriculasMostrar" prefHeight="297.0" prefWidth="862.0">
                           <columns>
                             <TableColumn fx:id="columIdMatricula" prefWidth="75.0" text="Id Matricula" />
                             <TableColumn fx:id="columCursoAcademico" prefWidth="120.80003356933594" text="Curso Academico" />

@@ -58,40 +58,29 @@ public class Alumnos implements IAlumnos {
         ResultSet resultado = sentencia.executeQuery(consulta);
 
         while (resultado.next()) {
-            String nombre = resultado.getString("nombre");
-            String telefono = resultado.getString("telefono");
-            String correo = resultado.getString("correo");
-            String dni = resultado.getString("dni");
-            LocalDate fechaNacimiento = resultado.getDate("fechaNacimiento").toLocalDate();
+//            String nombre = resultado.getString("nombre");
+//            String telefono = resultado.getString("telefono");
+//            String correo = resultado.getString("correo");
+//            String dni = resultado.getString("dni");
+//            LocalDate fechaNacimiento = resultado.getDate("fechaNacimiento").toLocalDate();
             Alumno a = new Alumno(
-                    nombre,
-                    telefono,
-                    correo,
-                    dni,
-                    fechaNacimiento
-//                    resultado.getString("nombre"),
-//                    resultado.getString("telefono"),
-//                    resultado.getString("correo"),
-//                    resultado.getString("dni"),
-//                    resultado.getDate("fechaNacimiento").toLocalDate()
+//                    nombre,
+//                    telefono,
+//                    correo,
+//                    dni,
+//                    fechaNacimiento
+                    resultado.getString("nombre"),
+                    resultado.getString("telefono"),
+                    resultado.getString("correo"),
+                    resultado.getString("dni"),
+                    resultado.getDate("fechaNacimiento").toLocalDate()
             );
-            System.out.println(a);
             auxiliar.add(a);
         }
         //return copiaProfundaAlumnos();
 
         return auxiliar;
     }
-
-    /*private ArrayList<Alumno> copiaProfundaAlumnos() {
-
-        //Alumno[] copiaAlumnos = new Alumno[capacidad];
-        ArrayList<Alumno> copiaAlumnos = new ArrayList<>();
-        for (Alumno alumno:coleccionAlumnos) {
-            copiaAlumnos.add(new Alumno(alumno));
-        }
-        return copiaAlumnos;
-    }*/
 
 
     //Insertar Alumno
