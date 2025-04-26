@@ -15,9 +15,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="bdVentanaPrincipal" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="667.0" prefWidth="874.0" style="-fx-background-color: #d7eff7;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.iesalandalus.programacion.matriculacion.vista.grafica.controladores.ControladorVentanaPrincipal">
+<BorderPane fx:id="bdVentanaPrincipal" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="796.0" prefWidth="1517.0" style="-fx-background-color: #d7eff7;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.iesalandalus.programacion.matriculacion.vista.grafica.controladores.ControladorVentanaPrincipal">
    <top>
-      <VBox fx:id="vbBotonesPrincipales" prefHeight="139.0" prefWidth="874.0" BorderPane.alignment="CENTER">
+      <VBox fx:id="vbBotonesPrincipales" prefHeight="73.0" prefWidth="865.0" BorderPane.alignment="CENTER">
          <children>
             <ToolBar fx:id="tbBotonesPrincipales" prefHeight="40.0" prefWidth="200.0" styleClass="button" stylesheets="@../estilos/style.css">
               <items>
@@ -69,27 +69,7 @@
                   <Insets left="10.0" right="10.0" />
                </padding>
             </ToolBar>
-            <HBox fx:id="hbMenuBusqueda" prefHeight="60.0" prefWidth="874.0">
-               <children>
-                  <TextField fx:id="tfBusqueda" prefHeight="26.0" prefWidth="398.0" promptText="realiza aqui la busqueda">
-                     <HBox.margin>
-                        <Insets left="50.0" top="20.0" />
-                     </HBox.margin>
-                  </TextField>
-                  <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0">
-                     <HBox.margin>
-                        <Insets left="20.0" top="10.0" />
-                     </HBox.margin>
-                     <graphic>
-                        <ImageView fx:id="btnBusqueda" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../imagenes/lupa.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-               </children>
-            </HBox>
+            <HBox fx:id="hbMenuBusqueda" prefHeight="60.0" prefWidth="874.0" />
          </children>
       </VBox>
    </top>
@@ -111,79 +91,143 @@
       </VBox>
    </left>
    <center>
-      <TabPane prefHeight="296.0" prefWidth="763.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
-        <tabs>
-          <Tab text="Alumnos">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="238.0" prefWidth="797.0">
-                     <children>
-                        <TableView fx:id="tablCentralBusquedasAlumno" prefHeight="294.0" prefWidth="863.0">
-                           <columns>
-                              <TableColumn fx:id="tablColum1" prefWidth="222.39997518062592" text="Nombre" />
-                              <TableColumn fx:id="tablColum2" prefWidth="132.80001831054688" text="Telefono" />
-                              <TableColumn fx:id="tablColum3" prefWidth="167.99993896484375" text="Correo" />
-                              <TableColumn fx:id="tablColum4" prefWidth="145.5999755859375" text="Dni" />
-                              <TableColumn fx:id="tablColum5" prefWidth="194.39996337890625" text="Fecha de Nacimiento" />
-                           </columns>
-                        </TableView>
-                     </children>
-                  </AnchorPane>
-            </content>
-          </Tab>
-          <Tab text="Ciclos Formativos">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <TableView fx:id="tablCiclosFormativos" layoutX="-3.0" prefHeight="294.0" prefWidth="866.0">
-                          <columns>
-                            <TableColumn fx:id="columCicloCodigo" prefWidth="57.59998178482056" text="Codigo" />
-                            <TableColumn fx:id="columCicloFamPro" prefWidth="174.40003967285156" text="Familia Profesional" />
-                              <TableColumn fx:id="columCicloGrado" prefWidth="280.7999267578125" text="Información del Grado" />
-                              <TableColumn fx:id="columCicloNombre" prefWidth="230.39996337890625" text="Nombre Ciclo" />
-                              <TableColumn fx:id="columCicloHoras" prefWidth="121.60007324218748" text="Horas" />
-                          </columns>
-                        </TableView>
-                     </children>
-                  </AnchorPane>
-            </content>
-          </Tab>
-            <Tab fx:id="tabAsignaturas" text="Asignaturas">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <TableView fx:id="tablAsignaturasMostrar" layoutY="-2.0" prefHeight="243.0" prefWidth="865.0">
-                          <columns>
-                            <TableColumn fx:id="columCodigoAsignatura" prefWidth="75.0" text="Codigo" />
-                            <TableColumn fx:id="ColumNombreAsignatura" prefWidth="75.0" text="Nombre" />
-                              <TableColumn fx:id="columHorasAnuales" prefWidth="135.20001220703125" text="Horas Anuales" />
-                              <TableColumn fx:id="columCurso" prefWidth="76.0" text="Curso" />
-                              <TableColumn fx:id="columHorasDesdoble" prefWidth="140.800048828125" text="Horas Desdoble" />
-                              <TableColumn fx:id="columEspecialidad" prefWidth="148.79986572265625" text="Especialidad Profesorado" />
-                              <TableColumn fx:id="columCodigoCiclo" prefWidth="110.4000244140625" text="Codigo Ciclo" />
-                          </columns>
-                        </TableView>
-                     </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
-            <Tab text="Matriculas">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <TableView fx:id="tablMatriculasMostrar" prefHeight="297.0" prefWidth="862.0">
-                          <columns>
-                            <TableColumn fx:id="columIdMatricula" prefWidth="75.0" text="Id Matricula" />
-                            <TableColumn fx:id="columCursoAcademico" prefWidth="120.80003356933594" text="Curso Academico" />
-                              <TableColumn fx:id="columFechaMatriculacion" prefWidth="132.0" text="Fecha Matriculacion" />
-                              <TableColumn fx:id="columFechaAnulacion" prefWidth="113.5999755859375" text="Fecha Anulacion" />
-                              <TableColumn fx:id="columDniMatricula" prefWidth="122.39996337890625" text="DNI" />
-                          </columns>
-                        </TableView>
-                     </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
-        </tabs>
-      </TabPane>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <TabPane prefHeight="344.0" prefWidth="864.0" tabClosingPolicy="UNAVAILABLE">
+               <tabs>
+                  <Tab fx:id="tabAlumnos" text="Alumnos">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="238.0" prefWidth="797.0">
+                           <children>
+                              <TableView fx:id="tablCentralBusquedasAlumno" layoutY="54.0" prefHeight="240.0" prefWidth="1338.0">
+                                 <columns>
+                                    <TableColumn fx:id="tablColum1" prefWidth="392.0000184774399" text="Nombre" />
+                                    <TableColumn fx:id="tablColum2" prefWidth="127.99996948242188" text="Telefono" />
+                                    <TableColumn fx:id="tablColum3" prefWidth="363.199951171875" text="Correo" />
+                                    <TableColumn fx:id="tablColum4" prefWidth="237.5999755859375" text="Dni" />
+                                    <TableColumn fx:id="tablColum5" prefWidth="217.60009765625" text="Fecha de Nacimiento" />
+                                 </columns>
+                              </TableView>
+                              <TextField fx:id="tfBusqueda" layoutX="14.0" layoutY="14.0" prefHeight="20.0" prefWidth="577.0" promptText="realiza aqui la busqueda" />
+                              <ImageView fx:id="btnBusqueda" fitHeight="32.0" fitWidth="32.0" layoutX="609.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../imagenes/lupa.png" />
+                                 </image>
+                              </ImageView>
+                              <Button fx:id="btnBorrarAlumno" layoutX="668.0" layoutY="4.0" mnemonicParsing="false" onAction="#borrarAlumno" prefHeight="39.0" prefWidth="195.0" text="Borrar Alumno">
+                                 <graphic>
+                                    <ImageView fitHeight="34.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../imagenes/borrarUsuario.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+                  <Tab fx:id="tabCiclos" text="Ciclos Formativos">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <TableView fx:id="tablCiclosFormativos" layoutX="-3.0" layoutY="54.0" prefHeight="278.0" prefWidth="1347.0">
+                                 <columns>
+                                    <TableColumn fx:id="columCicloCodigo" prefWidth="57.59998178482056" text="Codigo" />
+                                    <TableColumn fx:id="columCicloFamPro" prefWidth="174.40003967285156" text="Familia Profesional" />
+                                    <TableColumn fx:id="columCicloGrado" prefWidth="711.9999694824219" text="Información del Grado" />
+                                    <TableColumn fx:id="columCicloNombre" prefWidth="249.5999755859375" text="Nombre Ciclo" />
+                                    <TableColumn fx:id="columCicloHoras" prefWidth="152.80010986328125" text="Horas" />
+                                 </columns>
+                              </TableView>
+                              <ImageView fx:id="btnBusqueda1" fitHeight="32.0" fitWidth="32.0" layoutX="615.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../imagenes/lupa.png" />
+                                 </image>
+                              </ImageView>
+                              <TextField fx:id="buscarCiclos" layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="579.0" />
+                              <Button fx:id="btnBorrarCiclo" layoutX="659.0" layoutY="6.0" mnemonicParsing="false" onAction="#borrarCiclo" prefHeight="40.0" prefWidth="199.0" text="Borrar Ciclo Formativo">
+                                 <graphic>
+                                    <ImageView fitHeight="39.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../imagenes/borrarCiclo.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+                  <Tab fx:id="tabAsignaturas" text="Asignaturas">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <TableView fx:id="tablAsignaturasMostrar" layoutY="50.0" prefHeight="262.0" prefWidth="1462.0">
+                                 <columns>
+                                    <TableColumn fx:id="columCodigoAsignatura" prefWidth="78.0" text="Codigo" />
+                                    <TableColumn fx:id="ColumNombreAsignatura" prefWidth="155.9999771118164" text="Nombre" />
+                                    <TableColumn fx:id="columHorasAnuales" prefWidth="89.59999084472656" text="Horas Anuales" />
+                                    <TableColumn fx:id="columCurso" prefWidth="81.60003662109375" text="Curso" />
+                                    <TableColumn fx:id="columHorasDesdoble" prefWidth="102.4000244140625" text="Horas Desdoble" />
+                                    <TableColumn fx:id="columEspecialidad" prefWidth="175.20004272460938" text="Especialidad Profesorado" />
+                                    <TableColumn fx:id="columCodigoCiclo" prefWidth="904.8000366210938" text="Ciclo Formativo" />
+                                 </columns>
+                              </TableView>
+                              <ImageView fx:id="btnBusqueda11" fitHeight="32.0" fitWidth="32.0" layoutX="599.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../imagenes/lupa.png" />
+                                 </image>
+                              </ImageView>
+                              <TextField fx:id="BuscarAsignaturas" layoutX="9.0" layoutY="14.0" prefHeight="25.0" prefWidth="582.0" promptText="Busca aquí las asignaturas" />
+                              <Button fx:id="btnBorrarAsignatura" layoutX="668.0" layoutY="5.0" mnemonicParsing="false" onAction="#borrarAsignatura" prefHeight="38.0" prefWidth="175.0" text="   Borrar Asignatura">
+                                 <graphic>
+                                    <ImageView fitHeight="35.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../imagenes/borrarAsignatura.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+                  <Tab fx:id="tabMatriculas" text="Matriculas">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <TableView fx:id="tablMatriculasMostrar" layoutY="55.0" prefHeight="258.0" prefWidth="1339.0">
+                                 <columns>
+                                    <TableColumn fx:id="columIdMatricula" prefWidth="75.0" text="Id Matricula" />
+                                    <TableColumn fx:id="columCursoAcademico" prefWidth="120.80003356933594" text="Curso Academico" />
+                                    <TableColumn fx:id="columFechaMatriculacion" prefWidth="132.0" text="Fecha Matriculacion" />
+                                    <TableColumn fx:id="columFechaAnulacion" prefWidth="113.5999755859375" text="Fecha Anulacion" />
+                                    <TableColumn fx:id="columDniMatricula" prefWidth="893.5999145507812" text="Alumno" />
+                                 </columns>
+                              </TableView>
+                              <TextField fx:id="buscarMatriculas" layoutX="15.0" layoutY="14.0" prefHeight="25.0" prefWidth="574.0" promptText="Busque aquí las matriculas" />
+                              <ImageView fx:id="btnBusqueda2" fitHeight="32.0" fitWidth="32.0" layoutX="606.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../imagenes/lupa.png" />
+                                 </image>
+                              </ImageView>
+                              <Button fx:id="btnBorrarMatricula" layoutX="660.0" layoutY="5.0" mnemonicParsing="false" onAction="#anularMatricula" prefHeight="48.0" prefWidth="190.0" text="  Anular Matricula">
+                                 <graphic>
+                                    <ImageView fitHeight="40.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../imagenes/borrarMatricula.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+               </tabs>
+            </TabPane>
+         </children>
+      </VBox>
    </center>
 </BorderPane>

@@ -278,7 +278,8 @@ public Alumno(String nombre, String telefono, String correo, String dni, LocalDa
   @Override
   public String toString() {
     // return String.format("Número de Identificación del Alumnado (NIA)=%s " + "nombre=%s (%s) , DNI=%s, correo=%s, teléfono=%s, fecha nacimiento=%s", this.getNia(), imprimir());
-    return String.format("Número de Identificación del Alumnado (NIA)=%s " + "nombre=%s (%s), DNI=%s, correo=%s, teléfono=%s, fecha nacimiento=%s",this.getNia(), this.getNombre(), this.getIniciales(), this.getDni(), this.getCorreo(), this.getTelefono(),this.getFechaNacimiento().format(DateTimeFormatter.ofPattern(FORMATO_FECHA)));
+    //return String.format("Número de Identificación del Alumnado (NIA)=%s " + "nombre=%s (%s), DNI=%s, correo=%s, teléfono=%s, fecha nacimiento=%s",this.getNia(), this.getNombre(), this.getIniciales(), this.getDni(), this.getCorreo(), this.getTelefono(),this.getFechaNacimiento().format(DateTimeFormatter.ofPattern(FORMATO_FECHA)));
+    return String.format("(NIA)=%s " + "nombre=%s (%s), DNI=%s, correo=%s, teléfono=%s, fecha nacimiento=%s",this.getNia(), this.getNombre(), this.getIniciales(), this.getDni(), this.getCorreo(), this.getTelefono(),this.getFechaNacimiento().format(DateTimeFormatter.ofPattern(FORMATO_FECHA)));
   }
 
 

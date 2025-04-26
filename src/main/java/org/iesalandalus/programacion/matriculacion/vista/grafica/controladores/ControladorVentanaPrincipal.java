@@ -21,10 +21,14 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.*;
 import org.iesalandalus.programacion.matriculacion.modelo.negocio.mysql.Alumnos;
+import org.iesalandalus.programacion.matriculacion.modelo.negocio.mysql.Asignaturas;
+import org.iesalandalus.programacion.matriculacion.modelo.negocio.mysql.CiclosFormativos;
+import org.iesalandalus.programacion.matriculacion.modelo.negocio.mysql.Matriculas;
 import org.iesalandalus.programacion.matriculacion.vista.grafica.VistaGrafica;
 import org.iesalandalus.programacion.matriculacion.vista.grafica.recursos.LocalizadorRecursos;
 import org.iesalandalus.programacion.matriculacion.vista.grafica.utilidades.Dialogos;
 
+import javax.naming.OperationNotSupportedException;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -34,6 +38,13 @@ import java.util.List;
 import java.util.concurrent.CyclicBarrier;
 
 public class ControladorVentanaPrincipal {
+    @FXML private Button btnBorrarAlumno;
+    @FXML private Button btnBorrarAsignatura;
+    @FXML private Button btnBorrarCiclo;
+    @FXML private Button btnBorrarMatricula;
+    @FXML private Tab tabAlumnos;
+    @FXML private Tab tabCiclos;
+    @FXML private Tab tabMatriculas;
     @FXML private Tab tabAsignaturas;
     @FXML private BorderPane bdVentanaPrincipal;
     @FXML private ImageView btnBusqueda;
@@ -89,7 +100,7 @@ public class ControladorVentanaPrincipal {
     @FXML private TableColumn<Matricula, String> columCursoAcademico;
     @FXML private TableColumn<Matricula, LocalDate> columFechaMatriculacion;
     @FXML private TableColumn<Matricula, LocalDate> columFechaAnulacion;
-    @FXML private TableColumn<Matricula, String> columDniMatricula;
+    @FXML private TableColumn<Matricula, Alumno> columDniMatricula;
 // fin variables tabla matricula
 
     @FXML private ToolBar tbBotonesPrincipales;
@@ -332,7 +343,7 @@ private List<Asignatura> coleccionAsignaturas = new ArrayList<>();
             columCurso.setCellValueFactory(new PropertyValueFactory<>("curso"));
             columHorasDesdoble.setCellValueFactory(new PropertyValueFactory<>("horasDesdoble"));
             columEspecialidad.setCellValueFactory(new PropertyValueFactory<>("especialidadProfesorado"));
-            columCodigoCiclo.setCellValueFactory(new PropertyValueFactory<>("codigoCicloFormativo"));
+            columCodigoCiclo.setCellValueFactory(new PropertyValueFactory<>("cicloFormativo"));
 
             tablAsignaturasMostrar.setItems(asignaturasObservable);
             coleccionAsignaturas = new ArrayList<>(VistaGrafica.getInstancia().getControlador().getAsignaturas());
@@ -353,11 +364,11 @@ private List<Asignatura> coleccionAsignaturas = new ArrayList<>();
             columFechaMatriculacion.setCellValueFactory(new PropertyValueFactory<>("fechaMatriculacion"));
             //columFechaAnulacion.setCellValueFactory(matricula -> new SimpleStringProperty(matricula.getValue().getFechaMatriculacion().format(DateTimeFormatter.ofPattern(Matricula.FORMATO_FECHA))));
             columFechaAnulacion.setCellValueFactory(new PropertyValueFactory<>("fechaAnulacion"));
-            columDniMatricula.setCellValueFactory(new PropertyValueFactory<>("dni"));
+            columDniMatricula.setCellValueFactory(new PropertyValueFactory<>("alumno"));
 
 
             tablMatriculasMostrar.setItems(matriculasObservable);
-            coleccionMatriculas = new ArrayList<Matricula>(VistaGrafica.getInstancia().getControlador().getMatriculas());
+            coleccionMatriculas = new ArrayList<>(VistaGrafica.getInstancia().getControlador().getMatriculas());
             matriculasObservable.setAll(coleccionMatriculas);
 
 //           tablCentralBusquedasAlumno.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> muestraPersonaSeleccionada(newValue));
@@ -383,6 +394,42 @@ private List<Asignatura> coleccionAsignaturas = new ArrayList<>();
         } catch (SQLException e) {
             e.printStackTrace();
             return List.of(); // Devuelve una lista vacía en caso de error
+        }
+    }
+
+    // METODOS BORRAR Y ANULAR
+    public void borrarAlumno() throws OperationNotSupportedException, SQLException {
+        Alumno alumnoSeleccion = tablCentralBusquedasAlumno.getSelectionModel().getSelectedItem();
+        if (alumnoSeleccion != null) {
+            Dialogos.mostrarDialogoConfirmacion("Borrar Alumno", "¿Realmente quieres borrar el Alumno?");
+            Alumnos.getInstancia().borrar(alumnoSeleccion);
+            mostrarTablaAlumno();
+        }
+    }
+
+    public void borrarCiclo() throws OperationNotSupportedException, SQLException {
+        CicloFormativo cicloFormativoSeleccion = tablCiclosFormativos.getSelectionModel().getSelectedItem();
+        if (cicloFormativoSeleccion != null) {
+            Dialogos.mostrarDialogoConfirmacion("Borrar Ciclo", "¿Realmente quieres borrar el Ciclo?");
+            CiclosFormativos.getInstancia().borrar(cicloFormativoSeleccion);
+            mostrarTablaCiclosFormativos();
+        }
+    }
+    public void borrarAsignatura() throws OperationNotSupportedException, SQLException {
+        Asignatura asignaturaSeleccion = tablAsignaturasMostrar.getSelectionModel().getSelectedItem();
+        if (asignaturaSeleccion != null) {
+            Dialogos.mostrarDialogoConfirmacion("Borrar Asignatura", "¿Realmente quieres borrar la Asignatura?");
+            Asignaturas.getInstancia().borrar(asignaturaSeleccion);
+            mostrarTablaAsignaturas();
+        }
+    }
+    public void anularMatricula() throws OperationNotSupportedException, SQLException {
+        Matricula matriculaSeleccion = tablMatriculasMostrar.getSelectionModel().getSelectedItem();
+        if (matriculaSeleccion != null) {
+            Dialogos.mostrarDialogoConfirmacion("Anular Matricula", "¿Realmente quieres anular la matricula?");
+            matriculaSeleccion.setFechaAnulacion(LocalDate.now());
+            Matriculas.getInstancia().borrar(matriculaSeleccion);
+            mostrarTablaMatriculas();
         }
     }
 }
