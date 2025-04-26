@@ -73,16 +73,6 @@
          </children>
       </VBox>
    </top>
-   <bottom>
-      <TableView fx:id="tablFiltro" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-        <columns>
-          <TableColumn fx:id="tablFiltroColum1" prefWidth="75.0" text="Alumno" />
-          <TableColumn fx:id="tablFiltroColum2" prefWidth="206.4000015258789" text="Ciclo Formativo Matriculado" />
-            <TableColumn fx:id="tablFiltroColum3" prefWidth="146.4000244140625" text="Fecha Matriculación" />
-            <TableColumn fx:id="tablFiltroColum4" prefWidth="123.99996948242188" text="Fecha Anulación" />
-        </columns>
-      </TableView>
-   </bottom>
    <left>
       <VBox fx:id="vbDesplegables" prefHeight="267.0" prefWidth="0.0" BorderPane.alignment="CENTER">
          <BorderPane.margin>
@@ -131,7 +121,7 @@
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <TableView fx:id="tablCiclosFormativos" layoutX="-3.0" layoutY="54.0" prefHeight="278.0" prefWidth="1347.0">
+                              <TableView fx:id="tablCiclosFormativos" layoutX="-3.0" layoutY="58.0" prefHeight="260.0" prefWidth="1347.0">
                                  <columns>
                                     <TableColumn fx:id="columCicloCodigo" prefWidth="57.59998178482056" text="Codigo" />
                                     <TableColumn fx:id="columCicloFamPro" prefWidth="174.40003967285156" text="Familia Profesional" />
@@ -146,7 +136,7 @@
                                  </image>
                               </ImageView>
                               <TextField fx:id="buscarCiclos" layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="579.0" />
-                              <Button fx:id="btnBorrarCiclo" layoutX="659.0" layoutY="6.0" mnemonicParsing="false" onAction="#borrarCiclo" prefHeight="40.0" prefWidth="199.0" text="Borrar Ciclo Formativo">
+                              <Button fx:id="btnBorrarCiclo" layoutX="659.0" layoutY="6.0" mnemonicParsing="false" onAction="#borrarCiclo" prefHeight="38.0" prefWidth="199.0" text="Borrar Ciclo Formativo">
                                  <graphic>
                                     <ImageView fitHeight="39.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -230,4 +220,14 @@
          </children>
       </VBox>
    </center>
+   <bottom>
+      <TableView fx:id="tablFiltro" prefHeight="308.0" prefWidth="1507.0" BorderPane.alignment="CENTER">
+        <columns>
+          <TableColumn fx:id="tablFiltroColum1" prefWidth="75.0" text="Alumno" />
+          <TableColumn fx:id="tablFiltroColum2" prefWidth="206.4000015258789" text="Ciclo Formativo Matriculado" />
+            <TableColumn fx:id="tablFiltroColum3" prefWidth="146.4000244140625" text="Fecha Matriculación" />
+            <TableColumn fx:id="tablFiltroColum4" prefWidth="123.99996948242188" text="Fecha Anulación" />
+        </columns>
+      </TableView>
+   </bottom>
 </BorderPane>

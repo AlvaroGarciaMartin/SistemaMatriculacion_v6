@@ -1,10 +1,8 @@
 package org.iesalandalus.programacion.matriculacion.vista.grafica.controladores;
 
-import javafx.application.Platform;
-import javafx.beans.property.SimpleStringProperty;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -35,7 +33,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.CyclicBarrier;
+
 
 public class ControladorVentanaPrincipal {
     @FXML private Button btnBorrarAlumno;
@@ -115,8 +113,6 @@ public class ControladorVentanaPrincipal {
     private List<CicloFormativo> coleccionCicloFormativo = new ArrayList<>();
     private ObservableList<CicloFormativo> cicloFormativoObservable = FXCollections.observableArrayList();
 //observable asignatura
-//    private List<Asignatura> coleccionAsignaturas = new ArrayList<>();
-//    private ObservableList<Asignatura> asignaturasObservable = FXCollections.observableArrayList();
 private final ObservableList<Asignatura> asignaturasObservable = FXCollections.observableArrayList();
 private List<Asignatura> coleccionAsignaturas = new ArrayList<>();
 //observable matricula
@@ -401,35 +397,39 @@ private List<Asignatura> coleccionAsignaturas = new ArrayList<>();
     public void borrarAlumno() throws OperationNotSupportedException, SQLException {
         Alumno alumnoSeleccion = tablCentralBusquedasAlumno.getSelectionModel().getSelectedItem();
         if (alumnoSeleccion != null) {
-            Dialogos.mostrarDialogoConfirmacion("Borrar Alumno", "¿Realmente quieres borrar el Alumno?");
-            Alumnos.getInstancia().borrar(alumnoSeleccion);
-            mostrarTablaAlumno();
+            if (Dialogos.mostrarDialogoConfirmacion("Borrar Alumno", "¿Realmente quieres borrar el Alumno?")) {
+                Alumnos.getInstancia().borrar(alumnoSeleccion);
+                mostrarTablaAlumno();
+            }
         }
     }
 
     public void borrarCiclo() throws OperationNotSupportedException, SQLException {
         CicloFormativo cicloFormativoSeleccion = tablCiclosFormativos.getSelectionModel().getSelectedItem();
         if (cicloFormativoSeleccion != null) {
-            Dialogos.mostrarDialogoConfirmacion("Borrar Ciclo", "¿Realmente quieres borrar el Ciclo?");
-            CiclosFormativos.getInstancia().borrar(cicloFormativoSeleccion);
-            mostrarTablaCiclosFormativos();
+            if (Dialogos.mostrarDialogoConfirmacion("Borrar Ciclo", "¿Realmente quieres borrar el Ciclo?")) {
+                CiclosFormativos.getInstancia().borrar(cicloFormativoSeleccion);
+                mostrarTablaCiclosFormativos();
+            }
         }
     }
     public void borrarAsignatura() throws OperationNotSupportedException, SQLException {
         Asignatura asignaturaSeleccion = tablAsignaturasMostrar.getSelectionModel().getSelectedItem();
         if (asignaturaSeleccion != null) {
-            Dialogos.mostrarDialogoConfirmacion("Borrar Asignatura", "¿Realmente quieres borrar la Asignatura?");
-            Asignaturas.getInstancia().borrar(asignaturaSeleccion);
-            mostrarTablaAsignaturas();
+            if (Dialogos.mostrarDialogoConfirmacion("Borrar Asignatura", "¿Realmente quieres borrar la Asignatura?")) {
+                Asignaturas.getInstancia().borrar(asignaturaSeleccion);
+                mostrarTablaAsignaturas();
+            }
         }
     }
     public void anularMatricula() throws OperationNotSupportedException, SQLException {
         Matricula matriculaSeleccion = tablMatriculasMostrar.getSelectionModel().getSelectedItem();
         if (matriculaSeleccion != null) {
-            Dialogos.mostrarDialogoConfirmacion("Anular Matricula", "¿Realmente quieres anular la matricula?");
-            matriculaSeleccion.setFechaAnulacion(LocalDate.now());
-            Matriculas.getInstancia().borrar(matriculaSeleccion);
-            mostrarTablaMatriculas();
+           if (Dialogos.mostrarDialogoConfirmacion("Anular Matricula", "¿Realmente quieres anular la matricula?")) {
+               matriculaSeleccion.setFechaAnulacion(LocalDate.now());
+               Matriculas.getInstancia().borrar(matriculaSeleccion);
+               mostrarTablaMatriculas();
+           }
         }
     }
 }
