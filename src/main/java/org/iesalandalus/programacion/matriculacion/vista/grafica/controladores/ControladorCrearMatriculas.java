@@ -10,15 +10,17 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.InputMethodEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import org.iesalandalus.programacion.matriculacion.modelo.dominio.Alumno;
-import org.iesalandalus.programacion.matriculacion.modelo.dominio.Asignatura;
-import org.iesalandalus.programacion.matriculacion.modelo.dominio.Matricula;
+import org.iesalandalus.programacion.matriculacion.modelo.dominio.*;
+import org.iesalandalus.programacion.matriculacion.modelo.negocio.mysql.CiclosFormativos;
 import org.iesalandalus.programacion.matriculacion.vista.grafica.VistaGrafica;
 import org.iesalandalus.programacion.matriculacion.vista.grafica.utilidades.Dialogos;
+import org.iesalandalus.programacion.matriculacion.vista.texto.Consola;
+import org.iesalandalus.programacion.utilidades.Entrada;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ControladorCrearMatriculas {
 
@@ -80,24 +82,24 @@ public class ControladorCrearMatriculas {
     @FXML
     void filtrarCicloFormativo(InputMethodEvent event) {
         String codigoCiclo = tfCodigoCiclo.getText();
-        if(codigoCiclo.length() < 4) {
+        if (codigoCiclo.length() < 4) {
             return;
         }
-       try {
+        try {
 
 
-           ArrayList<Asignatura> asignaturas = VistaGrafica.getInstancia().getControlador().getAsignaturas();
-           for (Asignatura asignatura : asignaturas) {
-               if (asignatura.getCicloFormativo().equals(codigoCiclo)) {
-                   asignaturasfiltradas.add(asignatura);
-               }
-           }
+            ArrayList<Asignatura> asignaturas = VistaGrafica.getInstancia().getControlador().getAsignaturas();
+            for (Asignatura asignatura : asignaturas) {
+                if (asignatura.getCicloFormativo().equals(codigoCiclo)) {
+                    asignaturasfiltradas.add(asignatura);
+                }
+            }
 
-       }catch (Exception e){
-           Dialogos.mostrarDialogoError("Error al filtrar las asignaturas",e.getMessage());
+        } catch (Exception e) {
+            Dialogos.mostrarDialogoError("Error al filtrar las asignaturas", e.getMessage());
+        }
+
     }
-
-    }
-
-
 }
+
+

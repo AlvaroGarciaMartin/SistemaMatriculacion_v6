@@ -80,7 +80,7 @@
                   <Insets />
                </HBox.margin>
             </TextField>
-            <Button mnemonicParsing="false" onAction="#filtrarCicloFormativo" text="Comprobar ciclo" />
+            <Button mnemonicParsing="false" text="Comprobar ciclo" />
          </children>
          <VBox.margin>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
