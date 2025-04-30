@@ -1,8 +1,11 @@
 package org.iesalandalus.programacion.matriculacion.vista.grafica.controladores;
 
 
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,9 +13,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -33,25 +33,15 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 public class ControladorVentanaPrincipal {
-    @FXML private Button btnBorrarAlumno;
-    @FXML private Button btnBorrarAsignatura;
-    @FXML private Button btnBorrarCiclo;
-    @FXML private Button btnBorrarMatricula;
+
     @FXML private Tab tabAlumnos;
     @FXML private Tab tabCiclos;
     @FXML private Tab tabMatriculas;
     @FXML private Tab tabAsignaturas;
-    @FXML private BorderPane bdVentanaPrincipal;
-    @FXML private ImageView btnBusqueda;
-    @FXML private Button btnCrearAlumnos;
-    @FXML private Button btnCrearAsignaturas;
-    @FXML private Button btnCrearCiclos;
-    @FXML private Button btnCrearMatriculas;
-    @FXML private ComboBox<String> cbSelectorBusqueda;
-    @FXML private HBox hbMenuBusqueda;
     @FXML private TableView<Alumno> tablCentralBusquedasAlumno;
     @FXML private TableView<CicloFormativo> tablCiclosFormativos;
     @FXML private TableView<Asignatura> tablAsignaturasMostrar;
@@ -64,15 +54,22 @@ public class ControladorVentanaPrincipal {
     @FXML private TableColumn<Alumno, LocalDate> tablColum5;
     // fin variables tabla alumno
 
-    @FXML private TableView<?> tablFiltro;
-    @FXML private TableColumn<?, ?> tablFiltroColum1;
-    @FXML private TableColumn<?, ?> tablFiltroColum2;
-    @FXML private TableColumn<?, ?> tablFiltroColum3;
-    @FXML private TableColumn<?, ?> tablFiltroColum4;
-//    @FXML private ToolBar tbBotonesPrincipales;
-//    @FXML private TextField tfBusqueda;
-//    @FXML private VBox vbBotonesPrincipales;
-//    @FXML private VBox vbDesplegables;
+    @FXML private TableView<Matricula> tablFiltro;
+    @FXML private TableColumn<Matricula, String> nombreAlumno;
+    @FXML private TableColumn<Matricula, String> cicloFormativoAlumno;
+    @FXML private TableColumn<Matricula, String> FechaMatriculacionAlumno;
+    @FXML private TableColumn<Matricula, String> FechaAnulacionAlumno;
+    @FXML private TableColumn<Matricula, String> asignaturasAlumno;
+    @FXML private TableColumn<Matricula, String> cursoAcademico;
+    //busquedas
+    @FXML private TextField tfbuscarAsignaturas;
+    @FXML private TextField tfBusquedaAlumno;
+    @FXML private TextField buscarCiclos;
+    @FXML private TextField buscarMatriculas;
+
+
+
+
     // variables tabla ciclo formativo
 //    @FXML private TableColumn<CicloFormativo, Integer> columCicloAnios;
     @FXML private TableColumn<CicloFormativo, Integer> columCicloCodigo;
@@ -101,10 +98,26 @@ public class ControladorVentanaPrincipal {
     @FXML private TableColumn<Matricula, Alumno> columDniMatricula;
 // fin variables tabla matricula
 
-    @FXML private ToolBar tbBotonesPrincipales;
-    @FXML private TextField tfBusqueda;
-    @FXML private VBox vbBotonesPrincipales;
-    @FXML private VBox vbDesplegables;
+    @FXML private TableView<Matricula> tabFiltroCiclo;
+    @FXML private TableColumn<Matricula, String> cicloAlumnos;
+    @FXML private TableColumn<Matricula, String> cicloAsignaturas;
+    @FXML private TableColumn<Matricula, Integer> cicloCodigo;
+    @FXML private TableColumn<Matricula, String> cicloCurso;
+    @FXML private TableColumn<Matricula, Integer> cicloIdMatricula;
+    @FXML private TableColumn<Matricula, String> cicloNombre;
+
+
+
+    @FXML private TableView<Matricula> tablFiltroCursoAcademico;
+    @FXML private TableColumn<Matricula, String> matriculaAlumno;
+    @FXML private TableColumn<Matricula, String> matriculaAnulacionFecha;
+    @FXML private TableColumn<Matricula, String> matriculaAsignaturas;
+    @FXML private TableColumn<Matricula, String> matriculaCursoAcademico;
+    @FXML private TableColumn<Matricula, String> matriculaDniAlumno;
+    @FXML private TableColumn<Matricula, Integer> matriculaId;
+    @FXML private TableColumn<Matricula, String> matriculaMatriculacionFecha;
+    @FXML private TabPane tabPanePrincipal;
+    @FXML private TabPane tabPaneMatriculas;
 
 //observable alumnos
     private List<Alumno> coleccionAlumnos = new ArrayList<>();
@@ -126,12 +139,50 @@ private List<Asignatura> coleccionAsignaturas = new ArrayList<>();
             mostrarTablaCiclosFormativos();
             mostrarTablaAsignaturas();
             mostrarTablaMatriculas();
+            tfBusquedaAlumno.textProperty().addListener((obs, oldVal, newVal) -> filtraAlumnos(newVal));
+            buscarCiclos.textProperty().addListener((obs, oldVal, newVal) -> filtraCiclos(newVal));
+            tfbuscarAsignaturas.textProperty().addListener((obs, oldVal, newVal) -> filtraAsignaturas(newVal));
+            buscarMatriculas.textProperty().addListener((obs, oldVal, newVal) -> filtraMatriculas(newVal));
+
+            tablCentralBusquedasAlumno.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+                if (newSelection != null) {
+                    mostrarMatriculaAlumno();
+                } else {
+                    tablFiltro.getItems().clear();
+                }
+            });
+            tablCiclosFormativos.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+                if (newSelection != null) {
+                    mostrarMatriculaCiclos();
+                } else {
+                    tabFiltroCiclo.getItems().clear();
+                }
+            });
+            tablMatriculasMostrar.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+                if (newSelection != null) {
+                    mostrarMatriculaCursoAcademico();
+                } else {
+                    tablFiltroCursoAcademico.getItems().clear();
+                }
+            });
 
             tablCentralBusquedasAlumno.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
                 if (newSelection != null) {
                     mostrarFiltrado();
                 } else {
                     tablFiltro.getItems().clear();
+                }
+            });
+
+            tabPanePrincipal.getSelectionModel().selectedItemProperty().addListener((obs, oldTab, newTab) -> {
+                if (newTab == tabAlumnos) {
+                    tabPaneMatriculas.getSelectionModel().select(tabAlumnos);
+                }
+                if (newTab == tabCiclos) {
+                    tabPaneMatriculas.getSelectionModel().select(tabCiclos);
+                }
+                if (newTab == tabMatriculas) {
+                    tabPaneMatriculas.getSelectionModel().select(tabMatriculas);
                 }
             });
         }catch (Exception e){
@@ -432,7 +483,351 @@ private List<Asignatura> coleccionAsignaturas = new ArrayList<>();
            }
         }
     }
+
+    @FXML
+    void buscarAlumno(ActionEvent event) {
+        try {
+            String alumnoBuscar = tfBusquedaAlumno.getText().toLowerCase();
+            if (alumnoBuscar.isBlank()) {
+                coleccionAlumnos = new ArrayList<>(VistaGrafica.getInstancia().getControlador().getAlumnos());
+                alumnosObservable.setAll(coleccionAlumnos);
+            } else {
+                List<Alumno> coleccionAlumnos = new ArrayList<>();
+
+                for (Alumno alumno : VistaGrafica.getInstancia().getControlador().getAlumnos()) {
+                    if (alumno.getNombre().toLowerCase().contains(alumnoBuscar)) {
+                        coleccionAlumnos.add(alumno);
+                    }
+                }
+                alumnosObservable.setAll(coleccionAlumnos);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void filtraAlumnos(String newValue) {
+        FilteredList<Alumno> alumnosBusqueda = new FilteredList<>(alumnosObservable, alumno -> true);
+
+        alumnosBusqueda.setPredicate(alumno -> {
+
+            if (newValue.isBlank())
+                return true;
+
+            String alumnoFiltrado = newValue.toLowerCase();
+
+            return alumno.getNombre().toLowerCase().contains(alumnoFiltrado);
+
+        });
+
+        tablCentralBusquedasAlumno.setItems(alumnosBusqueda);
+    }
+    @FXML
+    void buscarCiclos(ActionEvent event) {
+        try {
+            String ciclosBuscar = buscarCiclos.getText().toLowerCase();
+            if (ciclosBuscar.isBlank()) {
+                coleccionCicloFormativo = new ArrayList<>(VistaGrafica.getInstancia().getControlador().getCicloFormativos());
+                cicloFormativoObservable.setAll(coleccionCicloFormativo);
+            } else {
+                List<CicloFormativo> coleccionCicloFormativo = new ArrayList<>();
+
+                for (CicloFormativo cicloFormativo : VistaGrafica.getInstancia().getControlador().getCicloFormativos()) {
+                    if (cicloFormativo.getNombre().toLowerCase().contains(ciclosBuscar)) {
+                        coleccionCicloFormativo.add(cicloFormativo);
+                    }
+                }
+                cicloFormativoObservable.setAll(coleccionCicloFormativo);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void filtraCiclos(String newValue) {
+        FilteredList<CicloFormativo> ciclosBusqueda = new FilteredList<>(cicloFormativoObservable, cicloFormativo -> true);
+
+        ciclosBusqueda.setPredicate(cicloFormativo -> {
+
+            if (newValue.isBlank())
+                return true;
+
+            String cicloFiltrado = newValue.toLowerCase();
+
+            return cicloFormativo.getNombre().toLowerCase().contains(cicloFiltrado);
+
+        });
+
+        tablCiclosFormativos.setItems(ciclosBusqueda);
+    }
+//    @FXML
+//    public void buscarAsignaturas() {
+//        String textoBuscar = txtBuscarAsignatura.getText();
+//        filtraAsignaturas(textoBuscar);
+//    }
+
+    @FXML
+    public void buscarAsignaturas (ActionEvent event) {
+        try{
+            String asignaturaBuscar = tfbuscarAsignaturas.getText().toLowerCase();
+            if (asignaturaBuscar.isBlank()) {
+                coleccionAsignaturas = new ArrayList<>(VistaGrafica.getInstancia().getControlador().getAsignaturas());
+                asignaturasObservable.setAll(coleccionAsignaturas);
+            } else {
+                List<Asignatura> coleccionAsignaturas = new ArrayList<>();
+
+                for (Asignatura asignatura : VistaGrafica.getInstancia().getControlador().getAsignaturas()) {
+                    if (asignatura.getNombre().toLowerCase().contains(asignaturaBuscar)) {
+                        coleccionAsignaturas.add(asignatura);
+                    }
+                }
+                asignaturasObservable.setAll(coleccionAsignaturas);
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void filtraAsignaturas(String newValue) {
+        FilteredList<Asignatura> asignaturasBusqueda = new FilteredList<>(asignaturasObservable, asignatura -> true);
+
+        asignaturasBusqueda.setPredicate(asignatura-> {
+
+            if (newValue.isBlank())
+                return true;
+
+            String asignaturaFiltrada = newValue.toLowerCase();
+
+            return asignatura.getNombre().toLowerCase().contains(asignaturaFiltrada);
+
+        });
+
+        tablAsignaturasMostrar.setItems(asignaturasBusqueda);
+    }
+
+    @FXML
+    void buscarMatricula(ActionEvent event) {
+        try {
+            String matriculaBuscar = buscarMatriculas.getText().toLowerCase();
+            if (matriculaBuscar.isBlank()) {
+                coleccionMatriculas = new ArrayList<>(VistaGrafica.getInstancia().getControlador().getMatriculas());
+                matriculasObservable.setAll(coleccionMatriculas);
+            } else {
+                List<Matricula> coleccionMatriculas = new ArrayList<>();
+
+                for (Matricula matricula : VistaGrafica.getInstancia().getControlador().getMatriculas()) {
+                    if ((matricula.getIdMatricula() + "").toLowerCase().contains(matriculaBuscar)) {
+                        coleccionMatriculas.add(matricula);
+                    }
+                }
+                matriculasObservable.setAll(coleccionMatriculas);
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void filtraMatriculas(String newValue) {
+        FilteredList<Matricula> matriculasBusqueda = new FilteredList<>(matriculasObservable, matricula -> true);
+
+        matriculasBusqueda.setPredicate(matricula-> {
+
+            if (newValue.isBlank())
+                return true;
+
+            String matriculaFiltrada = newValue.toLowerCase();
+            return (matricula.getIdMatricula()+ "").toLowerCase().contains(matriculaFiltrada);
+
+        });
+
+        tablMatriculasMostrar.setItems(matriculasBusqueda);
+    }
+
+
+
+    private void mostrarMatriculaAlumno() {
+        try {
+            Alumno alumnoSeleccionado = tablCentralBusquedasAlumno.getSelectionModel().getSelectedItem();
+
+            List<Matricula> matriculasAlumno = VistaGrafica.getInstancia().getControlador().getMatriculas()
+                    .stream()
+                    .filter(m -> m.getAlumno().equals(alumnoSeleccionado))
+                    .toList();
+
+            ObservableList<Matricula> matriculasAlumnoObservable = FXCollections.observableArrayList(matriculasAlumno);
+            tablFiltro.setItems(matriculasAlumnoObservable);
+
+            nombreAlumno.setCellValueFactory(celda ->
+                    new SimpleStringProperty(celda.getValue().getAlumno().getNombre()));
+
+            cicloFormativoAlumno.setCellValueFactory(nombreCiclo -> {
+                List<Asignatura> asignaturas = nombreCiclo.getValue().getColeccionAsignaturas();
+                String nombreCicloF = "Sin Ciclo Formativo";
+
+                if (asignaturas != null && !asignaturas.isEmpty() && asignaturas.get(0).getCicloFormativo() != null) {
+                    nombreCicloF = asignaturas.get(0).getCicloFormativo().getNombre();
+                }
+
+                return new SimpleStringProperty(nombreCicloF);
+            });
+
+
+            FechaMatriculacionAlumno.setCellValueFactory(celda -> {
+                LocalDate fecha = celda.getValue().getFechaMatriculacion();
+                return new SimpleStringProperty(
+                        fecha != null ? fecha.format(DateTimeFormatter.ofPattern(Matricula.FORMATO_FECHA)) : "Sin fecha"
+                );
+            });
+
+            FechaAnulacionAlumno.setCellValueFactory(celda -> {
+                LocalDate fecha = celda.getValue().getFechaAnulacion();
+                return new SimpleStringProperty(
+                        fecha != null ? fecha.format(DateTimeFormatter.ofPattern(Matricula.FORMATO_FECHA)) : "No anulada"
+                );
+            });
+
+            cursoAcademico.setCellValueFactory(celda ->
+                    new SimpleStringProperty(celda.getValue().getCursoAcademico()));
+
+            asignaturasAlumno.setCellValueFactory(celda -> {
+                List<Asignatura> listaAsignaturas = celda.getValue().getColeccionAsignaturas();
+                String nombres = listaAsignaturas.stream()
+                        .map(Asignatura::getNombre)
+                        .collect(Collectors.joining(", "));
+                return new SimpleStringProperty(nombres);
+            });
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    private void mostrarMatriculaCiclos() {
+        try {
+            CicloFormativo cicloSeleccionado = tablCiclosFormativos.getSelectionModel().getSelectedItem();
+
+            if (cicloSeleccionado == null) {
+                return;
+            }
+
+            List<Matricula> matriculasCiclos = VistaGrafica.getInstancia().getControlador().getMatriculas()
+                    .stream()
+                    .filter(m -> m.getColeccionAsignaturas().stream()
+                            .anyMatch(a -> a.getCicloFormativo().equals(cicloSeleccionado)))
+                    .toList();
+
+            ObservableList<Matricula> matriculasCicloObservable = FXCollections.observableArrayList(matriculasCiclos);
+            tabFiltroCiclo.setItems(matriculasCicloObservable);
+
+            cicloCodigo.setCellValueFactory(cCiclo -> {
+                List<Asignatura> asignaturas = cCiclo.getValue().getColeccionAsignaturas();
+                int codigo = (asignaturas != null && !asignaturas.isEmpty())
+                        ? asignaturas.get(0).getCicloFormativo().getCodigo()
+                        : 0;
+                return new SimpleIntegerProperty(codigo).asObject();
+            });
+            cicloNombre.setCellValueFactory(nombreCiclo -> {
+                List<Asignatura> lista = nombreCiclo.getValue().getColeccionAsignaturas();
+                String nombres = lista.stream()
+                        .map(Asignatura::getNombre)
+                        .collect(Collectors.joining(", "));
+                return new SimpleStringProperty(nombres);
+            });
+
+            cicloAsignaturas.setCellValueFactory(nombreAsignatura -> {
+                List<Asignatura> asignaturas = nombreAsignatura.getValue().getColeccionAsignaturas();
+                String nombre = (asignaturas != null && !asignaturas.isEmpty())
+                        ? asignaturas.get(0).getCicloFormativo().getNombre()
+                        : "Sin asignaturas";
+                return new SimpleStringProperty(nombre);
+            });
+
+
+
+            cicloIdMatricula.setCellValueFactory(celda ->
+                    new SimpleIntegerProperty(celda.getValue().getIdMatricula()).asObject());
+
+            cicloCurso.setCellValueFactory(celda ->
+                    new SimpleStringProperty(celda.getValue().getCursoAcademico()));
+
+            cicloAlumnos.setCellValueFactory(celda ->
+                    new SimpleStringProperty(celda.getValue().getAlumno().getNombre()));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void mostrarMatriculaCursoAcademico() {
+        try {
+            Matricula cursoSeleccionado = tablMatriculasMostrar.getSelectionModel().getSelectedItem();
+            if (cursoSeleccionado == null) {
+                tablMatriculasMostrar.getItems().clear();
+                return;
+            }
+
+            List<Matricula> matriculasFiltradas = VistaGrafica.getInstancia().getControlador().getMatriculas()
+                    .stream()
+                    .filter(m -> m.getCursoAcademico().equalsIgnoreCase(cursoSeleccionado.getCursoAcademico()))
+                    .toList();
+
+            ObservableList<Matricula> matriculasObservable = FXCollections.observableArrayList(matriculasFiltradas);
+            tablFiltroCursoAcademico.setItems(matriculasObservable);
+
+            matriculaAlumno.setCellValueFactory(celda ->
+                    new SimpleStringProperty(celda.getValue().getAlumno().getNombre()));
+
+            matriculaDniAlumno.setCellValueFactory(celda ->
+                    new SimpleStringProperty(celda.getValue().getAlumno().getDni()));
+
+            matriculaCursoAcademico.setCellValueFactory(celda ->
+                    new SimpleStringProperty(celda.getValue().getCursoAcademico()));
+
+            matriculaAsignaturas.setCellValueFactory(asignaturas -> {
+                List<Asignatura> listaAsignaturas = asignaturas.getValue().getColeccionAsignaturas();
+                StringBuilder nombres = new StringBuilder();
+                for (int i = 0; i < listaAsignaturas.size(); i++) {
+                    nombres.append(listaAsignaturas.get(i).getNombre());
+                    if (i < listaAsignaturas.size() - 1) {
+                        nombres.append(", ");
+                    }
+                }
+                return new SimpleStringProperty(nombres.toString());
+            });
+
+            matriculaId.setCellValueFactory(celda ->
+                    new SimpleIntegerProperty(celda.getValue().getIdMatricula()).asObject());
+
+            matriculaMatriculacionFecha.setCellValueFactory(celda -> {
+                LocalDate fecha = celda.getValue().getFechaMatriculacion();
+                return new SimpleStringProperty(
+                        fecha != null ? fecha.format(DateTimeFormatter.ofPattern(Matricula.FORMATO_FECHA)) : "Sin fecha"
+                );
+            });
+
+            matriculaAnulacionFecha.setCellValueFactory(celda -> {
+                LocalDate fecha = celda.getValue().getFechaAnulacion();
+                return new SimpleStringProperty(
+                        fecha != null ? fecha.format(DateTimeFormatter.ofPattern(Matricula.FORMATO_FECHA)) : "No anulada"
+                );
+            });
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
 }
+
+
+
+
 
 
 
