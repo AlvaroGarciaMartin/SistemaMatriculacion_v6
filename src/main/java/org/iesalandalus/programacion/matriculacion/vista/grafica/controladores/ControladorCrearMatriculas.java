@@ -1,12 +1,11 @@
 package org.iesalandalus.programacion.matriculacion.vista.grafica.controladores;
 
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.InputMethodEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -32,6 +31,8 @@ public class ControladorCrearMatriculas {
     @FXML private TextField tfDniAlumno;
     @FXML private TextField tfIdMatricula;
     @FXML private TextField tfCodigoCiclo;
+    @FXML private ListView<Asignatura> listaAsignaturas;
+    private final ObservableList<Asignatura> obsListadoAsignaturas = FXCollections.observableArrayList();
 
     ArrayList<Asignatura> asignaturasfiltradas = new ArrayList<>();
 
@@ -41,6 +42,7 @@ public class ControladorCrearMatriculas {
     public void initialize()
     {
         dpFechaMatricula.setValue(LocalDate.now());
+        setAsignaturasMatriculas();
     }
     @FXML
     void insertarMatriculas(ActionEvent event) {
@@ -54,14 +56,15 @@ public class ControladorCrearMatriculas {
             String cursoAcademico = tfCursoAcademico.getText();
             LocalDate fechaMatricula = dpFechaMatricula.getValue();
             String dniAlumno = tfDniAlumno.getText();
-            ArrayList<Asignatura> asignaturas = new ArrayList<>();
+//            ArrayList<Asignatura> asignaturas = new ArrayList<>();
             Alumno alumno = VistaGrafica.getInstancia().getControlador().buscar(new Alumno("ficticio", "666666666", "ficticio@inventado.es",  dniAlumno, LocalDate.of(1991, 12, 12)));
             if (alumno == null) {
                 Dialogos.mostrarDialogoInformacion("Alumno no encontrado", "El alumno con DNI " + dniAlumno + " no existe");
             }else {
-                Asignatura asignatura = cbAsignaturasDisponibles.getValue();
-                asignaturas.add(asignatura);
-                Matricula matricula = new Matricula(idMatricula, cursoAcademico, fechaMatricula, alumno, asignaturas);
+                ArrayList<Asignatura> asignatura = new ArrayList<>(listaAsignaturas.getSelectionModel().getSelectedItems());
+//                Asignatura asignatura = cbAsignaturasDisponibles.getValue();
+//                asignaturas.add(asignatura);
+                Matricula matricula = new Matricula(idMatricula, cursoAcademico, fechaMatricula, alumno, asignatura);
                 
                 VistaGrafica.getInstancia().getControlador().insertar(matricula);
                 Dialogos.mostrarDialogoInformacion("Matricula insertada", "Matricula insertada correctamente");
@@ -99,6 +102,23 @@ public class ControladorCrearMatriculas {
             Dialogos.mostrarDialogoError("Error al filtrar las asignaturas", e.getMessage());
         }
 
+    }
+    public void setAsignaturasMatriculas() {
+        try {
+            List<Asignatura> asignaturas = VistaGrafica.getInstancia().getControlador().getAsignaturas();
+            obsListadoAsignaturas.addAll(asignaturas);
+            listaAsignaturas.setItems(obsListadoAsignaturas);
+            listaAsignaturas.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+            listaAsignaturas.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> listViewActualizaAsignaturas(oldValue, newValue));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void listViewActualizaAsignaturas(Asignatura oldValue, Asignatura newValue) {
+        System.out.println("Modificado valor del ChoiceBox");
+        System.out.println("El valor anteriormente seleccionado era: " + oldValue);
+        System.out.println("El nuevo valor seleccionado es: " + newValue);
     }
 }
 

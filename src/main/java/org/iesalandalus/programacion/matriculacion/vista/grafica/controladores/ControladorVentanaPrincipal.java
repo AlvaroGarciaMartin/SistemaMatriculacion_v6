@@ -367,10 +367,6 @@ private List<Asignatura> coleccionAsignaturas = new ArrayList<>();
             columCicloGrado.setCellValueFactory(new PropertyValueFactory<>("grado"));
             columCicloNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
             columCicloHoras.setCellValueFactory(new PropertyValueFactory<>("horas"));
-//            columCicloNombreGrado.setCellValueFactory(new PropertyValueFactory<>("nombreGrado"));
-//            columCicloAnios.setCellValueFactory(new PropertyValueFactory<>("numAniosGrado"));
-//            columCicloModalidad.setCellValueFactory(new PropertyValueFactory<>("modalidad"));
-//            columCicloNumEdiciones.setCellValueFactory(new PropertyValueFactory<>("numEdiciones"));
 
 
             tablCiclosFormativos.setItems(cicloFormativoObservable);
@@ -673,6 +669,7 @@ private List<Asignatura> coleccionAsignaturas = new ArrayList<>();
 
                 return new SimpleStringProperty(nombreCicloF);
             });
+
 
 
             FechaMatriculacionAlumno.setCellValueFactory(celda -> {

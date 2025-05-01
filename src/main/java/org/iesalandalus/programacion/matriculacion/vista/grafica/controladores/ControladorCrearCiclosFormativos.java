@@ -33,7 +33,7 @@ public class ControladorCrearCiclosFormativos {
 
         cargarOpcionesGrados();
         cargarModalidad();
-
+        //obsListadoOpcionesChoice.addAll(TiposGrado.values());
 
     }
 // Opciones tipos de grado
@@ -42,6 +42,7 @@ public class ControladorCrearCiclosFormativos {
 
     private void cargarOpcionesGrados() {
         cbElegirGrado.setItems(obsListadoOpcionesChoice);
+        cbElegirGrado.getSelectionModel().selectedItemProperty().addListener((observable,oldValue,newValue)->modificadoListaGrados(oldValue,newValue));
         cbElegirGrado.getSelectionModel().selectedItemProperty().addListener((observable,oldValue,newValue)->modificadoComboBoxListadoOpciones(oldValue,newValue));
     }
 
@@ -121,29 +122,29 @@ public class ControladorCrearCiclosFormativos {
         }
     }
 
-//        private void modificadoListaGrados(String oldValue, String newValue)
-//    {
-//        System.out.println("Modificado valor del ListView");
-//        System.out.println("El nuevo valor seleccionado es: " + newValue);
-//
-//        if (newValue.equals("Grado D")) {
-//            lbModalidad.setVisible(true);
-//            cbModalidad.setVisible(true);
-//            lbEdiciones.setVisible(false);
-//            tfEdicionesCiclo.setVisible(false);
-//              check1ano.setVisible(false);
-//              check2anos.setVisible(true);
-//              check3anos.setVisible(true);
-//        } else if (newValue.equals("Grado E")) {
-//            lbEdiciones.setVisible(true);
-//            tfEdicionesCiclo.setVisible(true);
-//            lbModalidad.setVisible(false);
-//            cbModalidad.setVisible(false);
-//            check1ano.setVisible(true);
-//            check2anos.setVisible(false);
-//            check3anos.setVisible(false);
-//        }
-//    }
+        private void modificadoListaGrados(TiposGrado oldValue, TiposGrado newValue)
+    {
+        System.out.println("Modificado valor del ListView");
+        System.out.println("El nuevo valor seleccionado es: " + newValue);
+
+        if (newValue.equals(TiposGrado.GRADOD)) {
+            lbModalidad.setVisible(true);
+            cbModalidad.setVisible(true);
+            lbEdiciones.setVisible(false);
+            tfEdicionesCiclo.setVisible(false);
+              check1ano.setVisible(false);
+              check2anos.setVisible(true);
+              check3anos.setVisible(true);
+        } else if (newValue.equals(TiposGrado.GRADOE)) {
+            lbEdiciones.setVisible(true);
+            tfEdicionesCiclo.setVisible(true);
+            lbModalidad.setVisible(false);
+            cbModalidad.setVisible(false);
+            check1ano.setVisible(true);
+            check2anos.setVisible(false);
+            check3anos.setVisible(false);
+        }
+    }
 
 
 
