@@ -118,6 +118,9 @@ public class ControladorVentanaPrincipal {
     @FXML private TableColumn<Matricula, String> matriculaMatriculacionFecha;
     @FXML private TabPane tabPanePrincipal;
     @FXML private TabPane tabPaneMatriculas;
+    @FXML private Tab filtradoAlumnos;
+    @FXML private Tab filtradoCiclos;
+    @FXML private Tab filtradoMatriculas;
 
 //observable alumnos
     private List<Alumno> coleccionAlumnos = new ArrayList<>();
@@ -139,6 +142,10 @@ private List<Asignatura> coleccionAsignaturas = new ArrayList<>();
             mostrarTablaCiclosFormativos();
             mostrarTablaAsignaturas();
             mostrarTablaMatriculas();
+            mostrarTablas();
+//            tabPaneMatriculas.getSelectionModel().selectedItemProperty().addListener((obs, oldTab, newTab) -> {
+//                mostrarTablas();
+//            });
             tfBusquedaAlumno.textProperty().addListener((obs, oldVal, newVal) -> filtraAlumnos(newVal));
             buscarCiclos.textProperty().addListener((obs, oldVal, newVal) -> filtraCiclos(newVal));
             tfbuscarAsignaturas.textProperty().addListener((obs, oldVal, newVal) -> filtraAsignaturas(newVal));
@@ -174,17 +181,17 @@ private List<Asignatura> coleccionAsignaturas = new ArrayList<>();
                 }
             });
 
-            tabPanePrincipal.getSelectionModel().selectedItemProperty().addListener((obs, oldTab, newTab) -> {
-                if (newTab == tabAlumnos) {
-                    tabPaneMatriculas.getSelectionModel().select(tabAlumnos);
-                }
-                if (newTab == tabCiclos) {
-                    tabPaneMatriculas.getSelectionModel().select(tabCiclos);
-                }
-                if (newTab == tabMatriculas) {
-                    tabPaneMatriculas.getSelectionModel().select(tabMatriculas);
-                }
-            });
+//            tabPanePrincipal.getSelectionModel().selectedItemProperty().addListener((obs, oldTab, newTab) -> {
+//                if (newTab == tabAlumnos) {
+//                    tabPaneMatriculas.getSelectionModel().select(tabAlumnos);
+//                }
+//                if (newTab == tabCiclos) {
+//                    tabPaneMatriculas.getSelectionModel().select(tabCiclos);
+//                }
+//                if (newTab == tabMatriculas) {
+//                    tabPaneMatriculas.getSelectionModel().select(tabMatriculas);
+//                }
+//            });
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -816,6 +823,56 @@ private List<Asignatura> coleccionAsignaturas = new ArrayList<>();
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    private void mostrarTablas(){
+
+//        if(tabAlumnos.isSelected()){
+//            tablFiltro.setVisible(true);
+//            tabFiltroCiclo.setVisible(false);
+//            tablFiltroCursoAcademico.setVisible(false);
+//        }
+//        if(tabCiclos.isSelected()){
+//            tablFiltro.setVisible(false);
+//            tabFiltroCiclo.setVisible(true);
+//            tablFiltroCursoAcademico.setVisible(false);
+//        }
+//        if(tabMatriculas.isSelected()){
+//            tablFiltro.setVisible(false);
+//            tabFiltroCiclo.setVisible(false);
+//            tablFiltroCursoAcademico.setVisible(true);
+//        }
+//        if(tabAsignaturas.isSelected()){
+//            tablFiltro.setVisible(false);
+//            tabFiltroCiclo.setVisible(false);
+//            tablFiltroCursoAcademico.setVisible(false);
+//        }
+
+//
+//        if(tabAlumnos.isSelected()){
+//            filtradoAlumnos.setDisable(false);
+//            filtradoAlumnos.getTabPane().getSelectionModel().select(0);
+//            filtradoCiclos.setDisable(true);
+//            filtradoMatriculas.setDisable(true);
+//        }
+//        if(tabCiclos.isSelected()){
+//            filtradoAlumnos.setDisable(true);
+//            filtradoCiclos.setDisable(false);
+//            filtradoCiclos.getTabPane().getSelectionModel().select(1);
+//            filtradoMatriculas.setDisable(true);
+//        }
+//        if(tabMatriculas.isSelected()){
+//            filtradoAlumnos.setDisable(true);
+//            filtradoCiclos.setDisable(true);
+//            filtradoMatriculas.setDisable(false);
+//            filtradoMatriculas.getTabPane().getSelectionModel().select(2);
+//        }
+//        if (tabAsignaturas.isSelected()){
+//            filtradoAlumnos.setDisable(true);
+//            filtradoCiclos.setDisable(true);
+//            filtradoMatriculas.setDisable(true);
+//        }
+
+
     }
 
 

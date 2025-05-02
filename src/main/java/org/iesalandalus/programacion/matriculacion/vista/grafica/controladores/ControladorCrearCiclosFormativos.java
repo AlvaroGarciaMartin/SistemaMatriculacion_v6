@@ -81,12 +81,12 @@ public class ControladorCrearCiclosFormativos {
 
         Stage escenarioCiclos = (Stage) btnAceptarCrearCiclo.getScene().getWindow();
         try {
-
+            int ediciones = 0;
             int codigo = Integer.parseInt(tfcodigoCiclo.getText());
             String familia = tfFamiliaCiclo.getText();
             TiposGrado tg = cbElegirGrado.getSelectionModel().getSelectedItem();
             String nombre = tfNombreCiclo.getText();
-            int ediciones = Integer.parseInt(tfEdicionesCiclo.getText());
+
             Modalidad modalidad = cbModalidad.getSelectionModel().getSelectedItem();
             Grado grado = null;
 
@@ -105,12 +105,13 @@ public class ControladorCrearCiclosFormativos {
             if(tg.toString().equals("Grado D")){
                  grado = new GradoD(nombre, anios, modalidad);
             }else{
+                ediciones = Integer.parseInt(tfEdicionesCiclo.getText());
                 grado = new GradoE(nombre, anios, ediciones);
             }
 
             int horas = Integer.parseInt(tfHorasCiclo.getText());
 
-            if (codigo < 0 || codigo > 9999 || familia.trim().isBlank() || modalidad == null || ediciones < 1 || anios == 0 || grado == null || nombre.trim().isBlank() || horas < 0) {
+            if (codigo < 0 || codigo > 9999 || familia.trim().isBlank() || (grado instanceof  GradoD && modalidad == null ) || (grado instanceof  GradoE && ediciones < 1) || anios == 0 || grado == null || nombre.trim().isBlank() || horas < 0) {
                return;
             }
             CicloFormativo ciclo = new CicloFormativo(codigo, familia, grado, nombre, horas);
