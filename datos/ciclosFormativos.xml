@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CiclosFormativos>
+    <CicloFormativo Codigo="1234">
+       <Nombre>Informatica</Nombre>
+       <FamiliaProfesional>Informatica</FamiliaProfesional>
+        <Horas>1000</Horas>
+       <Grado Tipo="GRADO_D">
+           <Nombre>CDCFGM</Nombre>
+           <NumAnios>2</NumAnios>
+           <Modalidad>PRESENCIAL</Modalidad>
+       </Grado>
+    </CicloFormativo>
+</CiclosFormativos>
