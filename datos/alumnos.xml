@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<alumnos>
+    <alumno>
+        <nombre dni="70419935F">Alvaro</nombre>
+        <telefono>676352480</telefono>
+        <correo>gam.roalva@hotmail.com</correo>
+        <fechaNacimiento>01/01/2000</fechaNacimiento>
+    </alumno>
+</alumnos>
