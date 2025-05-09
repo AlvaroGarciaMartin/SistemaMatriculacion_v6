@@ -36,6 +36,13 @@ public class CiclosFormativos implements ICiclosFormativos {
     private ArrayList<CicloFormativo> coleccionCiclosFormativos;
     private static CiclosFormativos instancia=null;
 
+    public static CiclosFormativos getInstancia() {
+        if (instancia==null) {
+            instancia=new CiclosFormativos();
+        }
+        return instancia;
+    }
+
     public CiclosFormativos() {
         this.coleccionCiclosFormativos = new ArrayList<>();
         comenzar();
@@ -48,8 +55,8 @@ public class CiclosFormativos implements ICiclosFormativos {
 
     private void leerXML() {
         Document document;
-        NodeList alumnos;
-        Node alumnoNodo;
+        NodeList ciclosFormativos;
+        Node cicloNodo;
 
         try{
             document = UtilidadesXML.xmlToDom(RUTA_FICHERO);
@@ -57,13 +64,13 @@ public class CiclosFormativos implements ICiclosFormativos {
                 document = UtilidadesXML.crearDomVacio(RAIZ);
             }
             document.getDocumentElement().normalize();
-            alumnos = document.getElementsByTagName(CICLOFORMATIVO);
+            ciclosFormativos = document.getElementsByTagName(CICLOFORMATIVO);
 
-            for(int i=0;i<alumnos.getLength();i++) {
-                alumnoNodo = alumnos.item(i);
+            for(int i=0;i<ciclosFormativos.getLength();i++) {
+                cicloNodo = ciclosFormativos.item(i);
 
-                if(alumnoNodo.getNodeType() == Node.ELEMENT_NODE) {
-                    Element elemento = (Element) alumnoNodo;
+                if(cicloNodo.getNodeType() == Node.ELEMENT_NODE) {
+                    Element elemento = (Element) cicloNodo;
                     CicloFormativo c = elementToCicloFormativo(elemento);
                     this.coleccionCiclosFormativos.add(c);
                 }
