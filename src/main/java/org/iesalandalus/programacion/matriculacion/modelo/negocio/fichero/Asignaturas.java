@@ -38,10 +38,17 @@ public class Asignaturas implements IAsignaturas {
         comenzar();
     }
 
+
     @Override
     public void comenzar() {
        leerXML(); 
 
+    }
+    public static Asignaturas getInstancia() {
+        if (instancia==null) {
+            instancia=new Asignaturas();
+        }
+        return instancia;
     }
 
     private void leerXML() {
@@ -81,7 +88,7 @@ public class Asignaturas implements IAsignaturas {
         String horasAnuales = elemento.getElementsByTagName(HORASANUALES).item(0).getTextContent();
         String horasDesdoble = elemento.getElementsByTagName(HORASDESDOBLE).item(0).getTextContent();
         CiclosFormativos cf = CiclosFormativos.getInstancia();
-        CicloFormativo ciclo = cf.buscar(new CicloFormativo(Integer.parseInt(codigo), "ficticio", new GradoE("Grado E", 4, 2), "ficticio",300));
+        CicloFormativo ciclo = cf.buscar(new CicloFormativo(Integer.parseInt(codigo), "ficticio", new GradoE("Grado E", 1, 2), "ficticio",300));
 
         return new Asignatura(codigo,nombre,Integer.parseInt(horasAnuales),Curso.valueOf(curso),Integer.parseInt(horasDesdoble), EspecialidadProfesorado.valueOf(especialidadProfesorado),ciclo);
     }
