@@ -27,6 +27,7 @@ public class LanzadoraVentanaPrincipal extends Application {
             escenarioPrincipal.setTitle("Sistema de Matriculacion 24-25");
             escenarioPrincipal.setScene(escena);
             escenarioPrincipal.setOnCloseRequest(e->confirmarSalida(escenarioPrincipal,e));
+            escenarioPrincipal.setResizable(false);
             escenarioPrincipal.show();
         }catch (Exception e) {
             e.printStackTrace();

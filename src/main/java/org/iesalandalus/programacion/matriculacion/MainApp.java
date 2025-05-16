@@ -37,6 +37,8 @@ public class MainApp {
                 return new Modelo(FactoriaFuenteDatos.MYSQL);
             } else if (arg.equalsIgnoreCase("-fdmemoria")) {
                 return new Modelo(FactoriaFuenteDatos.MEMORIA);
+            }else if(arg.equalsIgnoreCase("-fdmfichero")) {
+                return new Modelo(FactoriaFuenteDatos.FICHEROS);
             }
         }
         System.out.println("Fuente de datos no reconocida, Usando memoria por defecto.");
